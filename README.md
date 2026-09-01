@@ -46,8 +46,7 @@ PMO-Solutions/
 │       ├── partials/
 │       │   ├── navbar.php           # Barra de navegación responsive
 │       │   ├── footer.php           # Pie de página y selector WhatsApp por país
-│       │   ├── toast.php            # Toast emergente de Matrículas 2026 (CRO)
-│       │   └── payment-modal.php    # Pasarela Niubiz / Transferencia B2B
+│       │   └── toast.php            # Toast emergente de Matrículas 2026 (CRO)
 │       └── pages/
 │           ├── home.php             # Vista de portada
 │           ├── capacitaciones.php   # Catálogo interactivo de cursos

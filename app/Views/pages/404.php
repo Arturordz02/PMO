@@ -1,4 +1,4 @@
-<style>
+﻿<style>
   /* Estilos Específicos para la Escena 404 */
   body.error-page-body {
     background: radial-gradient(circle at 50% 20%, #0d2847 0%, #061527 100%);

@@ -63,9 +63,6 @@ use App\Core\View;
     <?= $content ?>
   </main>
 
-  <!-- Modal de Pagos Niubiz / Transferencia -->
-  <?php View::partial('payment-modal'); ?>
-
   <!-- Toast Emergente de Matrículas 2026 -->
   <?php View::partial('toast'); ?>
 

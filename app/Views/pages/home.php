@@ -1396,7 +1396,7 @@
               </h3>
               <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordionIndex">
                 <div class="accordion-body">
-                  Aceptamos pagos 100% seguros y encriptados a través de la pasarela oficial de <strong>Niubiz</strong> con tarjetas de crédito y débito (Visa, Mastercard, American Express y Diners Club), así como billeteras móviles (<strong>Yape y Plin</strong>). También recibimos transferencias bancarias directas (BCP, BBVA, Interbank) y pagos internacionales.
+                  Aceptamos pagos 100% seguros y encriptados a través de transferencia bancaria directa (BCP, BBVA, Interbank), billeteras móviles (<strong>Yape y Plin</strong>), transferencias bancarias directas (BCP, BBVA, Interbank) y pagos internacionales.
                 </div>
               </div>
             </div>

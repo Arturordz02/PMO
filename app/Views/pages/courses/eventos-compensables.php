@@ -369,9 +369,7 @@
       <!-- Botones de Acción -->
       <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
         
-        <button type="button" class="btn enrollment-btn-niubiz btn-lg px-4 py-3 shadow w-100 w-md-auto hvr-grow btn-trigger-niubiz" data-bs-toggle="modal" data-bs-target="#niubizCheckoutModal">
-          <i class="fas fa-credit-card me-2"></i> Pagar Matrícula en Línea (Niubiz / Yape)
-        </button>
+        
 
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdPOpAucuZBS-Tu97Nusr-E9pGhRVRmAOwPyNgF-ryInobyKw/viewform" target="_blank" rel="noopener noreferrer" class="btn enrollment-btn-brochure btn-lg px-4 py-3 shadow w-100 w-md-auto hvr-grow">
           <i class="fas fa-file-pdf me-2"></i> Descargar Brochure & Temario
@@ -387,7 +385,7 @@
       <div class="enrollment-trust-strip">
         <div class="enrollment-trust-item">
           <i class="fas fa-shield-alt text-warning"></i>
-          <span>Procesamiento 100% seguro por Niubiz</span>
+          <span>Inscripción y facturación corporativa oficial</span>
         </div>
         <div class="enrollment-trust-item">
           <i class="fas fa-credit-card text-info"></i>

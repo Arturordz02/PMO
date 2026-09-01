@@ -103,27 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Niubiz Pago Web / Checkout Gateway Listener
-  document.addEventListener('click', (e) => {
-    const niubizBtn = e.target.closest('#btn-pagar-niubiz') || (e.target.id === 'btn-pagar-niubiz') || e.target.closest('.btn-trigger-niubiz');
-    if (niubizBtn) {
-      // If clicking from an external page button, open modal or invoke SDK
-      const modalEl = document.getElementById('niubizCheckoutModal');
-      if (modalEl && !e.target.closest('#niubizCheckoutModal')) {
-        const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
-        modal.show();
-        return;
-      }
-      
-      // Inside modal checkout button invocation
-      if (typeof VisanetCheckout !== 'undefined') {
-        VisanetCheckout.open();
-      } else {
-        alert('Abriendo pasarela de pago segura y tokenizada de Niubiz...\n\nProcesamiento 100% seguro certificado con PCI-DSS y CyberSource (Visa, Mastercard, Amex, Diners y Yape).');
-      }
-    }
-  });
-
   // ── ANIMATED STATS COUNTER ─────────────────────────────────────────────────
   // Counts up numbers when the stats band enters the viewport
   const statNumbers = document.querySelectorAll('.stat-number[data-target]');
