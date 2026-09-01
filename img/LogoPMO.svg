@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="gradPmo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d2340"/>
+      <stop offset="100%" stop-color="#0a192f"/>
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF7A00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="30" fill="url(#gradPmo)"/>
+  <circle cx="100" cy="100" r="75" stroke="#1e3a8a" stroke-width="3" fill="none" opacity="0.4"/>
+  <!-- PMO Network nodes -->
+  <line x1="70" y1="130" x2="100" y2="60" stroke="url(#orangeGrad)" stroke-width="6" stroke-linecap="round"/>
+  <line x1="100" y1="60" x2="130" y2="130" stroke="url(#orangeGrad)" stroke-width="6" stroke-linecap="round"/>
+  <line x1="70" y1="130" x2="130" y2="130" stroke="url(#orangeGrad)" stroke-width="6" stroke-linecap="round"/>
+  <line x1="100" y1="60" x2="100" y2="110" stroke="#ffffff" stroke-width="4" stroke-dasharray="4,4"/>
+  
+  <circle cx="100" cy="60" r="14" fill="#FF7A00" stroke="#ffffff" stroke-width="3"/>
+  <circle cx="70" cy="130" r="14" fill="#0D2340" stroke="#FF7A00" stroke-width="4"/>
+  <circle cx="130" cy="130" r="14" fill="#0D2340" stroke="#FF7A00" stroke-width="4"/>
+  <circle cx="100" cy="110" r="8" fill="#ffffff"/>
+  
+  <text x="100" y="172" text-anchor="middle" font-family="'Segoe UI', 'Montserrat', sans-serif" font-weight="900" font-size="22" fill="#ffffff" letter-spacing="3">PMO</text>
+</svg>
+
