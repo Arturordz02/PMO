@@ -66,6 +66,9 @@ use App\Core\View;
   <!-- Toast Emergente de Matrículas 2026 -->
   <?php View::partial('toast'); ?>
 
+  <!-- Modal Obligatorio de Términos y Condiciones -->
+  <?php View::partial('terms-modal'); ?>
+
   <!-- Pie de Página Global -->
   <?php View::partial('footer'); ?>
 
