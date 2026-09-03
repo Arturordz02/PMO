@@ -1,0 +1,5 @@
+# Entorno y archivos locales
+.env
+release/
+storage/logs/*.log
+pmo_temp/

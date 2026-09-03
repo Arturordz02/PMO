@@ -23,6 +23,19 @@ if (!defined('PMO_APP_ACCESS')) {
 require_once __DIR__ . '/app/Core/Autoloader.php';
 App\Core\Autoloader::register();
 
+// Manejador Global de Excepciones para Producción
+set_exception_handler(function (\Throwable $e) {
+    App\Core\Logger::error("Excepción no controlada: " . $e->getMessage(), [
+        'file' => $e->getFile(),
+        'line' => $e->getLine()
+    ]);
+
+    if (php_sapi_name() !== 'cli') {
+        $errorController = new App\Controllers\ErrorController();
+        $errorController->serverError();
+    }
+});
+
 // 3. Inicialización del Enrutador
 $router = new App\Core\Router();
 

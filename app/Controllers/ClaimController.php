@@ -44,10 +44,24 @@ class ClaimController extends Controller {
         }
 
         $input = Security::getRequestData();
+
+        // Verificación de Token CSRF (si fue provisto desde web o sesión activa)
+        $csrfToken = $input['csrf_token'] ?? $_SERVER['HTTP_X_CSRF_TOKEN'] ?? null;
+        if (!empty($csrfToken) && !Security::validateCsrfToken($csrfToken)) {
+            Logger::warning('Intento de registro de reclamo con token CSRF inválido', ['input' => $input]);
+            $this->json(
+                false,
+                'La sesión del formulario expiró o el token de seguridad es inválido. Por favor, recarga la página.',
+                [],
+                403
+            );
+        }
+
         $claimModel = new ClaimModel();
         $validation = $claimModel->validateAndSanitize($input);
 
         if (!empty($validation['errors'])) {
+            Logger::info('Reclamación rechazada por validación', ['errors' => $validation['errors']]);
             $this->json(
                 false,
                 'Por favor completa todos los campos obligatorios del Libro de Reclamaciones.',
@@ -59,7 +73,10 @@ class ClaimController extends Controller {
         $data = $validation['data'];
 
         // Guardar en MySQL
-        $claimModel->save($data);
+        $saved = $claimModel->save($data);
+        if ($saved) {
+            Logger::info("Hoja de reclamación registrada exitosamente: {$data['codigo_reclamacion']} ({$data['nombre_completo']})");
+        }
 
         // Enviar correos (Administración y Constancia al Usuario)
         $claimModel->sendEmails($data);

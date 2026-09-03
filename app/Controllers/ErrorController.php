@@ -19,5 +19,17 @@ class ErrorController extends Controller {
             'activeNav'       => ''
         ], 'error');
     }
+
+    /**
+     * Muestra la página 500 para errores internos o excepciones capturadas
+     */
+    public function serverError(): void {
+        http_response_code(500);
+        $this->render('500', [
+            'pageTitle'       => '500: Evento Imprevisto en la Obra | PMO Solutions',
+            'metaDescription' => 'Error 500 - Error interno del servidor.',
+            'activeNav'       => ''
+        ], 'error');
+    }
 }
 

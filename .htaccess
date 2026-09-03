@@ -1,0 +1,121 @@
+# ==============================================================================
+# PMO SOLUTIONS - CONFIGURACIÓN DEL SERVIDOR APACHE (.htaccess)
+# Arquitectura MVC, URLs Limpias, Seguridad y Rendimiento para GoDaddy cPanel
+# ==============================================================================
+
+# Deshabilitar listado de directorios
+Options -Indexes -MultiViews
+
+# Codificación UTF-8 por defecto
+AddDefaultCharset UTF-8
+
+# Priorizar index.php como Front Controller
+<IfModule mod_dir.c>
+    DirectoryIndex index.php index.html
+</IfModule>
+
+# ==============================================================================
+# 1. PÁGINAS DE ERROR PERSONALIZADAS
+# ==============================================================================
+ErrorDocument 404 /index.php
+ErrorDocument 403 /index.php
+ErrorDocument 500 /index.php
+
+# ==============================================================================
+# 2. MOTOR DE REESCRITURA MVC & HTTPS
+# ==============================================================================
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Forzar redirección HTTPS en GoDaddy
+    RewriteCond %{HTTPS} off [OR]
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteCond %{HTTP_HOST} ^(?:www\.)?(.*)$ [NC]
+    RewriteRule ^(.*)$ https://%1/$1 [L,R=301,NE]
+
+    # Redireccionar URLs con extensión .html a URLs amigables
+    RewriteCond %{THE_REQUEST} /([^\s?]+)\.html[\s?] [NC]
+    RewriteRule ^ %1 [R=301,L,NE]
+
+    # Bloquear patrones comunes de inyección y escaneo malicioso
+    RewriteCond %{QUERY_STRING} (eval\(|base64_decode|globals|mosconfig|concat\(|<script) [NC]
+    RewriteRule .* - [F,L]
+
+    # Si el archivo o directorio solicitado existe físicamente (css, js, img), servirlo directamente
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Enrutar todas las peticiones dinámicas a través del Front Controller
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+
+# ==============================================================================
+# 3. SEGURIDAD: BLOQUEO DE ARCHIVOS SENSIBLES
+# ==============================================================================
+<FilesMatch "(^\.env|^\.git|^\.htaccess|^\.antigravityrules|schema\.sql|\.sql$|config\.php|\.log$|\.json$|\.md$)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Bloquear acceso web directo a carpetas internas del MVC y logs
+RedirectMatch 403 ^/app/Config(/.*)?$
+RedirectMatch 403 ^/app/Core(/.*)?$
+RedirectMatch 403 ^/app/Models(/.*)?$
+RedirectMatch 403 ^/app/Views(/.*)?$
+RedirectMatch 403 ^/storage(/.*)?$
+RedirectMatch 403 ^/tests(/.*)?$
+RedirectMatch 403 ^/\.agent(/.*)?$
+RedirectMatch 403 ^/\.git(/.*)?$
+
+# ==============================================================================
+# 4. CABECERAS DE SEGURIDAD HTTP
+# ==============================================================================
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+# ==============================================================================
+# 5. COMPRESIÓN GZIP / DEFLATE
+# ==============================================================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json
+    AddOutputFilterByType DEFLATE application/xml application/xhtml+xml application/rss+xml
+    AddOutputFilterByType DEFLATE image/svg+xml image/x-icon
+    AddOutputFilterByType DEFLATE font/ttf font/otf font/woff font/woff2 application/font-woff
+</IfModule>
+
+# ==============================================================================
+# 6. CACHÉ DE NAVEGADOR (EXPIRES HEADERS)
+# ==============================================================================
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+
+    ExpiresByType text/html "access plus 1 hour"
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>

@@ -224,6 +224,32 @@ class Security {
     }
 
     /**
+     * Genera u obtiene un token CSRF seguro en la sesión actual
+     */
+    public static function generateCsrfToken(): string {
+        if (session_status() === PHP_SESSION_NONE) {
+            @session_start();
+        }
+        if (empty($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+        return $_SESSION['csrf_token'];
+    }
+
+    /**
+     * Valida si el token CSRF recibido coincide con el de la sesión
+     */
+    public static function validateCsrfToken(?string $token): bool {
+        if (session_status() === PHP_SESSION_NONE) {
+            @session_start();
+        }
+        if (empty($_SESSION['csrf_token']) || empty($token)) {
+            return false;
+        }
+        return hash_equals($_SESSION['csrf_token'], $token);
+    }
+
+    /**
      * Emite una respuesta JSON estándar y termina la ejecución
      */
     public static function sendJson(bool $success, string $message, array $extraData = [], int $statusCode = 200): void {

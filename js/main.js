@@ -410,6 +410,55 @@ document.addEventListener('DOMContentLoaded', () => {
     return div.innerHTML;
   }
 
+  // ── VALIDACIÓN EN TIEMPO REAL (UX FORMS) ──────────────────────────────────
+  const liveInputs = document.querySelectorAll('input[required], textarea[required], select[required]');
+  liveInputs.forEach(input => {
+    input.addEventListener('blur', () => {
+      validateInputField(input);
+    });
+    input.addEventListener('input', () => {
+      if (input.classList.contains('is-invalid')) {
+        validateInputField(input);
+      }
+    });
+  });
+
+  function validateInputField(input) {
+    const val = input.value.trim();
+    if (!val) {
+      input.classList.add('is-invalid');
+      input.classList.remove('is-valid');
+      return false;
+    }
+
+    if (input.type === 'email') {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(val)) {
+        input.classList.add('is-invalid');
+        input.classList.remove('is-valid');
+        return false;
+      }
+    }
+
+    if (input.name === 'numero_documento') {
+      const docType = input.form ? input.form.querySelector('[name="tipo_documento"]')?.value : 'DNI';
+      if (docType === 'DNI' && !/^\d{8}$/.test(val)) {
+        input.classList.add('is-invalid');
+        input.classList.remove('is-valid');
+        return false;
+      }
+      if (docType === 'RUC' && !/^\d{11}$/.test(val)) {
+        input.classList.add('is-invalid');
+        input.classList.remove('is-valid');
+        return false;
+      }
+    }
+
+    input.classList.remove('is-invalid');
+    input.classList.add('is-valid');
+    return true;
+  }
+
   // ── TOAST NOTIFICACIÓN AUTOMÁTICA: MATRÍCULAS 2026 ────────────────────────
   // Aparece de forma no intrusiva a los 4 segundos tras cargar la página
   setTimeout(() => {

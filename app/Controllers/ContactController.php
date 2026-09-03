@@ -44,10 +44,24 @@ class ContactController extends Controller {
         }
 
         $input = Security::getRequestData();
+
+        // Verificación de Token CSRF (si fue provisto desde web o sesión activa)
+        $csrfToken = $input['csrf_token'] ?? $_SERVER['HTTP_X_CSRF_TOKEN'] ?? null;
+        if (!empty($csrfToken) && !Security::validateCsrfToken($csrfToken)) {
+            Logger::warning('Intento de envío de formulario de contacto con token CSRF inválido', ['input' => $input]);
+            $this->json(
+                false,
+                'La sesión del formulario expiró o el token de seguridad es inválido. Por favor, recarga la página.',
+                [],
+                403
+            );
+        }
+
         $contactModel = new ContactModel();
         $validation = $contactModel->validateAndSanitize($input);
 
         if (!empty($validation['errors'])) {
+            Logger::info('Formulario de contacto rechazado por validación', ['errors' => $validation['errors']]);
             $this->json(
                 false,
                 'Por favor verifica los campos obligatorios del formulario.',
@@ -59,7 +73,10 @@ class ContactController extends Controller {
         $data = $validation['data'];
 
         // Guardar en base de datos si está habilitada
-        $contactModel->save($data);
+        $saved = $contactModel->save($data);
+        if ($saved) {
+            Logger::info("Nuevo mensaje de contacto registrado para: {$data['nombre']} ({$data['email']})");
+        }
 
         // Enviar correo de notificación
         $emailSent = $contactModel->sendEmail($data);

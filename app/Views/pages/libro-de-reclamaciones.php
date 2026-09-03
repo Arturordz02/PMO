@@ -1,4 +1,4 @@
-﻿<!-- A. Header e Identificación Legal del Proveedor -->
+<!-- A. Header e Identificación Legal del Proveedor -->
   <header class="py-5" style="background: linear-gradient(135deg, #0A192F 0%, #00509E 60%, #0A3663 100%); color: #ffffff;">
     <div class="container text-center py-2">
       <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-2 shadow-sm animate__animated animate__fadeInDown">
@@ -48,6 +48,9 @@
         <div id="claimFormFeedback" class="mb-4" style="display:none;"></div>
 
         <form id="claimForm" action="backend/submit-claim.php" method="POST" novalidate>
+          <!-- Token de Seguridad CSRF -->
+          <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCsrfToken() ?>">
+
           <!-- Honeypot anti-spam (invisible para usuarios reales) -->
           <div class="d-none" aria-hidden="true">
             <input type="text" name="website_hp" tabindex="-1" autocomplete="off">

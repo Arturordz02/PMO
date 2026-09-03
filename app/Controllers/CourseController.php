@@ -45,6 +45,8 @@ class CourseController extends Controller {
         $this->render("courses/{$slug}", [
             'pageTitle'       => $course['title'] . ' | PMO Solutions',
             'metaDescription' => $course['description'],
+            'canonicalUrl'    => 'https://pmo-solutions.com/' . $slug,
+            'ogImage'         => 'https://pmo-solutions.com/img/LogoPMO.png',
             'activeNav'       => 'capacitaciones',
             'course'          => $course
         ]);

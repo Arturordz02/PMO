@@ -1,4 +1,4 @@
-﻿<!-- 1. Encabezado Hero Estilizado (Corporate Helpdesk Style) -->
+<!-- 1. Encabezado Hero Estilizado (Corporate Helpdesk Style) -->
   <header class="contact-hero-section">
     <div class="hero-grid-overlay"></div>
     <div class="container position-relative">
@@ -102,6 +102,9 @@
             <div id="contactFormFeedback" class="mb-3" style="display:none;"></div>
 
             <form id="contactForm" action="backend/send-contact.php" method="POST" novalidate>
+              <!-- Token de Seguridad CSRF -->
+              <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCsrfToken() ?>">
+
               <!-- Honeypot anti-spam (invisible para usuarios reales) -->
               <div class="d-none" aria-hidden="true">
                 <input type="text" name="website_hp" tabindex="-1" autocomplete="off">
