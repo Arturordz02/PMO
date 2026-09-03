@@ -419,5 +419,108 @@ document.addEventListener('DOMContentLoaded', () => {
       promoToast.show();
     }
   }, 4000);
+
+  // ── SISTEMA DE CONSENTIMIENTO DISCRETO: TÉRMINOS Y CONDICIONES ────────────
+  const PMO_TERMS_CONFIG = {
+    version: '1.0',                     // Modificar este valor (ej. '2.0') para solicitar nueva aceptación tras cambios legales
+    storageKey: 'pmo_terms_accepted',
+    versionKey: 'pmo_terms_version',
+    rejectedKey: 'pmo_terms_rejected',
+    cookieAccepted: 'pmo_terms_accepted',
+    cookieVersion: 'pmo_terms_version'
+  };
+
+  const termsBanner = document.getElementById('pmoTermsBanner');
+  const termsMainView = document.getElementById('pmoTermsMainView');
+  const termsRejectConfirm = document.getElementById('pmoTermsRejectConfirm');
+  const termsAcceptBtn = document.getElementById('pmoTermsAcceptBtn');
+  const termsDeclineBtn = document.getElementById('pmoTermsDeclineBtn');
+  const termsBackBtn = document.getElementById('pmoTermsBackBtn');
+  const termsConfirmRejectBtn = document.getElementById('pmoTermsConfirmRejectBtn');
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  }
+
+  function hasAcceptedTerms() {
+    try {
+      const localAccepted = localStorage.getItem(PMO_TERMS_CONFIG.storageKey);
+      const localVersion = localStorage.getItem(PMO_TERMS_CONFIG.versionKey);
+      if (localAccepted === 'true' && localVersion === PMO_TERMS_CONFIG.version) {
+        return true;
+      }
+    } catch (e) {
+      // En caso de modo privado o almacenamiento restringido, verificar cookie
+    }
+
+    const cookieAccepted = getCookie(PMO_TERMS_CONFIG.cookieAccepted);
+    const cookieVersion = getCookie(PMO_TERMS_CONFIG.cookieVersion);
+    return cookieAccepted === 'true' && cookieVersion === PMO_TERMS_CONFIG.version;
+  }
+
+  function saveTermsAcceptance() {
+    try {
+      localStorage.setItem(PMO_TERMS_CONFIG.storageKey, 'true');
+      localStorage.setItem(PMO_TERMS_CONFIG.versionKey, PMO_TERMS_CONFIG.version);
+      localStorage.removeItem(PMO_TERMS_CONFIG.rejectedKey);
+    } catch (e) {
+      // Ignorar restricciones de almacenamiento local
+    }
+    // Respaldo en cookie con 1 año de duración
+    const maxAge = 60 * 60 * 24 * 365;
+    document.cookie = `${PMO_TERMS_CONFIG.cookieAccepted}=true; max-age=${maxAge}; path=/; SameSite=Lax`;
+    document.cookie = `${PMO_TERMS_CONFIG.cookieVersion}=${PMO_TERMS_CONFIG.version}; max-age=${maxAge}; path=/; SameSite=Lax`;
+  }
+
+  if (termsBanner) {
+    if (!hasAcceptedTerms()) {
+      // Mostrar tarjeta suavemente con animación de entrada
+      setTimeout(() => {
+        termsBanner.classList.remove('d-none');
+        termsBanner.classList.add('pmo-terms-in');
+      }, 300);
+    }
+
+    // Botón Aceptar: Guarda aceptación y oculta la tarjeta
+    if (termsAcceptBtn) {
+      termsAcceptBtn.addEventListener('click', () => {
+        saveTermsAcceptance();
+        termsBanner.classList.remove('pmo-terms-in');
+        termsBanner.classList.add('pmo-terms-out');
+        setTimeout(() => {
+          termsBanner.classList.add('d-none');
+        }, 350);
+      });
+    }
+
+    // Botón Rechazar: Muestra la pantalla de confirmación dentro de la tarjeta
+    if (termsDeclineBtn) {
+      termsDeclineBtn.addEventListener('click', () => {
+        if (termsMainView) termsMainView.classList.add('d-none');
+        if (termsRejectConfirm) termsRejectConfirm.classList.remove('d-none');
+      });
+    }
+
+    // Botón Volver: Regresa al aviso principal
+    if (termsBackBtn) {
+      termsBackBtn.addEventListener('click', () => {
+        if (termsRejectConfirm) termsRejectConfirm.classList.add('d-none');
+        if (termsMainView) termsMainView.classList.remove('d-none');
+      });
+    }
+
+    // Botón Confirmar Rechazo: Guarda rechazo (sin aceptar) y redirige fuera del sitio
+    if (termsConfirmRejectBtn) {
+      termsConfirmRejectBtn.addEventListener('click', () => {
+        try {
+          localStorage.setItem(PMO_TERMS_CONFIG.rejectedKey, 'true');
+        } catch (e) {}
+        window.location.replace('https://www.google.com/');
+      });
+    }
+  }
 });
 

@@ -39,8 +39,14 @@ use App\Core\View;
 
   <?= $content ?>
 
+  <!-- Modal Obligatorio de Términos y Condiciones -->
+  <?php View::partial('terms-modal'); ?>
+
   <!-- Bootstrap 5 JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Custom JavaScript -->
+  <script src="js/main.js"></script>
 </body>
 </html>
 

@@ -66,8 +66,8 @@
         <ul class="list-unstyled footer-links">
           <li><a href="contacto"><i class="fas fa-chevron-right me-1 text-warning"></i> Contacto y Sedes</a></li>
           <li><a href="compliance"><i class="fas fa-chevron-right me-1 text-warning"></i> Compliance Técnico</a></li>
-          <li><a href="eventos-compensables"><i class="fas fa-chevron-right me-1 text-warning"></i> Claims Contractuales</a></li>
-          <li><a href="riesgos-pmi"><i class="fas fa-chevron-right me-1 text-warning"></i> Gestión de Riesgos PMI</a></li>
+          <li><a href="terminos-y-condiciones"><i class="fas fa-chevron-right me-1 text-warning"></i> Términos y Condiciones</a></li>
+          <li><a href="politica-de-privacidad"><i class="fas fa-chevron-right me-1 text-warning"></i> Política de Privacidad</a></li>
           <li>
             <a href="libro-de-reclamaciones" class="d-inline-flex align-items-center text-warning mt-2 fw-semibold">
               <i class="fas fa-book-open me-2 fs-5"></i> Libro de Reclamaciones
@@ -98,13 +98,20 @@
 
     <!-- Barra Inferior de Copyright & Métodos de Pago -->
     <div class="row pt-4 border-top border-white border-opacity-10 align-items-center text-center text-md-start">
-      <div class="col-12 col-md-6 mb-3 mb-md-0">
-        <small class="text-white-50">
+      <div class="col-12 col-md-7 mb-3 mb-md-0">
+        <div class="text-white-50 small mb-1">
           &copy; <?= date('Y') ?> <strong>PMO Solutions S.A.C.</strong> Todos los derechos reservados.
-        </small>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-2 gap-md-3 small">
+          <a href="terminos-y-condiciones" class="text-white-50 text-decoration-none">Términos y Condiciones</a>
+          <span class="text-white-50 opacity-50">|</span>
+          <a href="politica-de-privacidad" class="text-white-50 text-decoration-none">Política de Privacidad</a>
+          <span class="text-white-50 opacity-50">|</span>
+          <a href="libro-de-reclamaciones" class="text-white-50 text-decoration-none">Libro de Reclamaciones</a>
+        </div>
       </div>
-      <div class="col-12 col-md-6 text-md-end">
-        <span class="text-white-50 small me-2">Pagos Seguros:</span>
+      <div class="col-12 col-md-5 text-center text-md-end">
+        <span class="text-white-50 small me-2 d-inline-block mb-1 mb-md-0">Pagos Seguros:</span>
         <img src="img/logo-visa.png" alt="Visa" height="20" class="me-1 bg-white p-1 rounded">
         <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" height="20" class="me-1 bg-white p-1 rounded">
         <img src="img/IconoYape.png" alt="Yape" height="20" class="me-1 bg-white p-1 rounded">

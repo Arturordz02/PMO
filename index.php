@@ -63,6 +63,12 @@ $router->post('/api/submit-claim', [App\Controllers\ClaimController::class, 'sub
 $router->post('/backend/submit-claim.php', [App\Controllers\ClaimController::class, 'submit']); // Retrocompatibilidad
 
 // -----------------------------------------------------------------------------
+// RUTAS LEGALES & NORMATIVAS
+// -----------------------------------------------------------------------------
+$router->get('/terminos-y-condiciones', [App\Controllers\LegalController::class, 'terms']);
+$router->get('/terminos', [App\Controllers\LegalController::class, 'terms']); // Alias amigable
+
+// -----------------------------------------------------------------------------
 // MANEJADOR DE RUTAS NO ENCONTRADAS (ERROR 404)
 // -----------------------------------------------------------------------------
 $router->setNotFoundHandler([App\Controllers\ErrorController::class, 'notFound']);

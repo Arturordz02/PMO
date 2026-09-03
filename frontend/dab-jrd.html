@@ -546,14 +546,58 @@
         </div>
         <div class="d-flex flex-wrap justify-content-center gap-3 gap-md-4 small">
           <a href="contacto.html" class="text-white-50 text-decoration-none">Políticas de Privacidad</a>
-          <a href="contacto.html" class="text-white-50 text-decoration-none">Términos de Servicio</a>
+          <a href="terminos-y-condiciones.html" class="text-white-50 text-decoration-none">Términos de Servicio</a>
           <a href="libro-de-reclamaciones.html" class="text-white-50 text-decoration-none">Libro de Reclamaciones Virtual</a>
         </div>
       </div>
     </div>
   </footer>
+  <!-- Tarjeta Flotante Discreta de Términos y Condiciones -->
+  <aside id="pmoTermsBanner" class="pmo-terms-banner d-none" role="region" aria-label="Aviso de Términos y Condiciones">
+    <!-- Vista 1: Aviso Principal -->
+    <div id="pmoTermsMainView" class="pmo-terms-banner-content">
+      <div class="d-flex align-items-center gap-2 mb-2">
+        <span class="pmo-terms-badge"><i class="fas fa-shield-alt text-warning"></i></span>
+        <span class="fw-bold text-dark small" style="letter-spacing: 0.3px;">Términos y Condiciones</span>
+      </div>
+      <p class="pmo-terms-banner-text mb-2">
+        Antes de continuar, revisa nuestros Términos y Condiciones.
+      </p>
+      <div class="mb-3">
+        <a href="terminos-y-condiciones.html" target="_blank" rel="noopener noreferrer" class="pmo-terms-banner-link">
+          Ver Términos y Condiciones <i class="fas fa-external-link-alt ms-1 small"></i>
+        </a>
+      </div>
+      <div class="d-flex align-items-center justify-content-end gap-2 pt-1">
+        <button type="button" id="pmoTermsDeclineBtn" class="btn btn-outline-secondary btn-sm fw-semibold px-3 py-2 rounded-pill">
+          Rechazar
+        </button>
+        <button type="button" id="pmoTermsAcceptBtn" class="btn btn-warning btn-sm fw-bold text-white px-4 py-2 rounded-pill shadow-sm">
+          Aceptar
+        </button>
+      </div>
+    </div>
 
-  <!-- Floating WhatsApp Quick Button -->
+    <!-- Vista 2: Confirmación de Rechazo -->
+    <div id="pmoTermsRejectConfirm" class="pmo-terms-banner-content d-none">
+      <div class="d-flex align-items-center gap-2 mb-2 text-danger">
+        <span class="pmo-terms-badge bg-danger bg-opacity-10"><i class="fas fa-exclamation-triangle text-danger"></i></span>
+        <span class="fw-bold small" style="letter-spacing: 0.3px;">Confirmar Rechazo</span>
+      </div>
+      <p class="pmo-terms-banner-text mb-3 text-secondary">
+        Si rechazas los Términos y Condiciones no podrás continuar utilizando este sitio.
+      </p>
+      <div class="d-flex align-items-center justify-content-end gap-2 pt-1">
+        <button type="button" id="pmoTermsBackBtn" class="btn btn-outline-secondary btn-sm fw-semibold px-3 py-2 rounded-pill">
+          Volver
+        </button>
+        <button type="button" id="pmoTermsConfirmRejectBtn" class="btn btn-danger btn-sm fw-bold text-white px-3 py-2 rounded-pill shadow-sm">
+          Confirmar rechazo
+        </button>
+      </div>
+    </div>
+  </aside>
+<!-- Floating WhatsApp Quick Button -->
   <div class="floating-wa-container">
     <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n%20sobre%20el%20curso%20Junta%20de%20Resoluci%C3%B3n%20de%20Disputas%20DAB%20-%20JRD" target="_blank" rel="noopener noreferrer" class="floating-wa-btn animate__animated animate__pulse animate__infinite hvr-grow" title="Chatear por WhatsApp con PMO Solutions">
       <i class="fab fa-whatsapp"></i>
