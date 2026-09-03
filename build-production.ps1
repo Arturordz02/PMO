@@ -65,3 +65,4 @@ Write-Host " 1. Entra al cPanel de GoDaddy -> Administrador de Archivos." -Foreg
 Write-Host " 2. Abre la carpeta 'public_html'." -ForegroundColor White
 Write-Host " 3. Sube este archivo ZIP y dale clic en 'Extraer'." -ForegroundColor White
 Write-Host "======================================================================`n" -ForegroundColor Green
+

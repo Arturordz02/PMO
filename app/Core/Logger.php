@@ -51,3 +51,4 @@ class Logger {
         @file_put_contents($logFile, $logLine, FILE_APPEND | LOCK_EX);
     }
 }
+

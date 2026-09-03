@@ -153,3 +153,4 @@ class HealthCheck {
 
 $checker = new HealthCheck();
 $checker->run();
+
