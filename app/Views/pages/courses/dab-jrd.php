@@ -1,4 +1,4 @@
-﻿<!-- 1. Encabezado Hero Estilizado (Dispute Avoidance & ICC Board Style) -->
+<!-- 1. Encabezado Hero Estilizado (Dispute Avoidance & ICC Board Style) -->
   <header class="dab-hero-section">
     <div class="hero-grid-overlay"></div>
     <div class="container position-relative">
@@ -33,8 +33,8 @@
               <span class="text-white small fw-semibold">Experiencia en Acuerdos G2G y ARCC</span>
             </div>
             <div class="d-flex align-items-center gap-2">
-              <i class="fas fa-award text-success fs-5"></i>
-              <span class="text-white small fw-semibold">Certificación Oficial PMO Solutions</span>
+              <i class="fas fa-briefcase text-success fs-5"></i>
+              <span class="text-white small fw-semibold">Casos Reales de Infraestructura</span>
             </div>
           </div>
         </div>
@@ -148,7 +148,7 @@
                 </p>
                 
                 <div class="d-flex flex-wrap gap-2 mt-2">
-                  <span class="badge bg-white text-dark border"><i class="fas fa-award text-warning me-1"></i> Acreditación Oficial</span>
+                  <span class="badge bg-white text-dark border"><i class="fas fa-gavel text-warning me-1"></i> Experto Dispute Boards</span>
                   <span class="badge bg-white text-dark border"><i class="fas fa-briefcase text-info me-1"></i> Casuística Real en Obra</span>
                 </div>
               </div>
@@ -229,8 +229,6 @@
 
       <!-- Botones de Acción -->
       <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
-        
-        
 
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSehW88_KPBJ8OIQsGReXkiwCgnhKEtVujT3Nh_Q_ABpuxryTQ/viewform" target="_blank" rel="noopener noreferrer" class="btn enrollment-btn-brochure btn-lg px-4 py-3 shadow w-100 w-md-auto hvr-grow">
           <i class="fas fa-file-pdf me-2"></i> Descargar Brochure & Temario
@@ -245,12 +243,12 @@
       <!-- Franja de Confianza & Seguridad -->
       <div class="enrollment-trust-strip">
         <div class="enrollment-trust-item">
-          <i class="fas fa-shield-alt text-warning"></i>
-          <span>Inscripción y facturación corporativa oficial</span>
+          <i class="fas fa-laptop-code text-warning"></i>
+          <span>Clases Grabadas con Acceso Flexible</span>
         </div>
         <div class="enrollment-trust-item">
-          <i class="fas fa-credit-card text-info"></i>
-          <span>Visa, Mastercard, Amex, Diners, Yape y Plin</span>
+          <i class="fas fa-university text-info"></i>
+          <span>Transferencia Bancaria, Yape y Plin</span>
         </div>
         <div class="enrollment-trust-item">
           <i class="fas fa-file-invoice text-success"></i>

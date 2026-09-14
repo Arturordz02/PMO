@@ -22,6 +22,17 @@ abstract class Controller {
      * Renderiza una vista pasando datos
      */
     protected function render(string $view, array $data = [], ?string $layout = 'main'): void {
+        if (!headers_sent()) {
+            header('Content-Type: text/html; charset=utf-8');
+            header('X-Content-Type-Options: nosniff');
+            header('X-Frame-Options: SAMEORIGIN');
+            header('X-XSS-Protection: 1; mode=block');
+            header('Referrer-Policy: strict-origin-when-cross-origin');
+            header("Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net data:; img-src 'self' data: https:; connect-src 'self'; frame-src 'self' https://www.google.com https://maps.google.com; frame-ancestors 'self'; form-action 'self'; base-uri 'self'; object-src 'none';");
+            header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0, private');
+            header('Pragma: no-cache');
+        }
+
         // Inyectar automáticamente información global de la aplicación
         $data['app'] = $this->config['app'] ?? [];
         View::render($view, $data, $layout);

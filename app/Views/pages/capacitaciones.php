@@ -1,4 +1,4 @@
-﻿<!-- 1. Encabezado Hero Estilizado (Ed-Tech Catalog Style) -->
+<!-- 1. Encabezado Hero Estilizado (Ed-Tech Catalog Style) -->
   <header class="hero-section text-center text-lg-start">
     <div class="hero-grid-overlay"></div>
     <div class="container position-relative">
@@ -34,13 +34,13 @@
               <div class="col-6">
                 <div class="bg-dark bg-opacity-50 p-2 rounded border border-white border-opacity-10 text-center">
                   <div class="text-warning fw-bold fs-5">100%</div>
-                  <div class="text-white-50" style="font-size: 0.72rem;">Online en Vivo</div>
+                  <div class="text-white-50" style="font-size: 0.72rem;">Virtual Online</div>
                 </div>
               </div>
               <div class="col-6">
                 <div class="bg-dark bg-opacity-50 p-2 rounded border border-white border-opacity-10 text-center">
                   <div class="text-info fw-bold fs-5">24/7</div>
-                  <div class="text-white-50" style="font-size: 0.72rem;">Aula Virtual</div>
+                  <div class="text-white-50" style="font-size: 0.72rem;">Acceso Online</div>
                 </div>
               </div>
             </div>
@@ -58,7 +58,7 @@
         <span class="section-badge">Oferta Académica 2026</span>
         <h2 class="section-title">Programas Especializados de Ingeniería y Contratos</h2>
         <p class="section-subtitle">
-          Selecciona una categoría para explorar temarios detallados, plana docente, cronogramas de clases y opciones de certificación oficial.
+          Selecciona una categoría para explorar temarios detallados, plana docente, metodologías de estudio y casos prácticos de aplicación real.
         </p>
       </div>
 
@@ -363,41 +363,41 @@
       </div>
 
       <div class="row g-4">
-        <!-- Pilar 1: Clases en Vivo 100% Interactivas -->
+        <!-- Pilar 1: Clases Grabadas en HD -->
         <div class="col-lg-4 col-md-6">
           <div class="guarantee-card hvr-box-shadow-outset">
             <div class="guarantee-icon-box bg-primary bg-opacity-10 text-primary">
-              <i class="fas fa-video text-primary fs-2"></i>
+              <i class="fas fa-laptop-code text-primary fs-2"></i>
             </div>
-            <h4 class="fw-bold mb-3">Clases en Vivo 100% Interactivas</h4>
+            <h4 class="fw-bold mb-3">Clases Grabadas en HD</h4>
             <p class="text-muted mb-0">
-              Sesiones sincrónicas con docentes de amplia trayectoria internacional, propiciando el debate técnico y la resolución de dudas en tiempo real.
+              Lecciones estructuradas paso a paso en video HD, preparadas por especialistas de amplia trayectoria internacional para su aplicación directa en proyectos.
             </p>
           </div>
         </div>
 
-        <!-- Pilar 2: Acceso a Grabaciones 24/7 -->
+        <!-- Pilar 2: Acceso Digital Flexible 24/7 -->
         <div class="col-lg-4 col-md-6">
           <div class="guarantee-card hvr-box-shadow-outset">
             <div class="guarantee-icon-box bg-success bg-opacity-10 text-success">
               <i class="fas fa-play-circle text-success fs-2"></i>
             </div>
-            <h4 class="fw-bold mb-3">Acceso a Grabaciones 24/7</h4>
+            <h4 class="fw-bold mb-3">Acceso Digital Flexible 24/7</h4>
             <p class="text-muted mb-0">
-              Revisa las sesiones y materiales académicos en cualquier momento a través de nuestra plataforma virtual en alta definición.
+              Estudia a tu propio ritmo, repite las lecciones cuando lo necesites y accede a plantillas y materiales descargables en cualquier momento sin horarios fijos.
             </p>
           </div>
         </div>
 
-        <!-- Pilar 3: Certificación Institucional -->
+        <!-- Pilar 3: Plantillas y Herramientas Editables -->
         <div class="col-lg-4 col-md-12">
           <div class="guarantee-card hvr-box-shadow-outset">
             <div class="guarantee-icon-box bg-warning bg-opacity-10 text-warning">
-              <i class="fas fa-certificate text-warning fs-2"></i>
+              <i class="fas fa-file-excel text-warning fs-2"></i>
             </div>
-            <h4 class="fw-bold mb-3">Certificación Institucional</h4>
+            <h4 class="fw-bold mb-3">Plantillas y Herramientas Editables</h4>
             <p class="text-muted mb-0">
-              Acreditación de participación emitida por PMO Solutions, con código de verificación QR y horas lectivas válidas para tu CV profesional.
+              Modelos de contratos, matrices de riesgos, hojas de cálculo y documentación técnica listos para implementar de inmediato en obra o gabinete.
             </p>
           </div>
         </div>

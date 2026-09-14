@@ -101,9 +101,9 @@
 
             <div id="contactFormFeedback" class="mb-3" style="display:none;"></div>
 
-            <form id="contactForm" action="backend/send-contact.php" method="POST" novalidate>
-              <!-- Token de Seguridad CSRF -->
-              <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCsrfToken() ?>">
+            <form id="contactForm" action="/contacto/submit" method="POST" novalidate>
+              <!-- CSRF Token de Seguridad -->
+              <input type="hidden" name="csrf_token" value="<?= \App\Core\View::e(\App\Core\Csrf::getToken()) ?>">
 
               <!-- Honeypot anti-spam (invisible para usuarios reales) -->
               <div class="d-none" aria-hidden="true">
@@ -220,12 +220,19 @@
         <span class="section-badge">Ubicación Estratégica</span>
         <h2 class="section-title">NUESTRA UBICACIÓN CORPORATIVA</h2>
         <p class="section-subtitle">
-          Av. Javier Prado 757, piso 10 Magdalena, Lima 17, Perú.
+          Av. Javier Prado Oeste 757, piso 10, Magdalena del Mar, Lima, Perú
         </p>
       </div>
 
-      <div class="ratio ratio-21x9 shadow-lg rounded-4 overflow-hidden my-4 border">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.365448381531!2d-77.0698142!3d-12.0905096!2m3!1f0!1f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8e22c365b21%3A0x600b651030e46b0!2sAv.%20Javier%20Prado%20Oeste%20757%2C%20Magdalena%20del%20Mar%2015076!5e0!3m2!1ses!2spe!4v1700000000000!5m2!1ses!2spe" title="Ubicación de PMO Solutions en Magdalena, Lima" loading="lazy" allowfullscreen></iframe>
+      <div class="shadow-lg rounded-4 overflow-hidden my-4 border">
+        <iframe
+          class="contact-map-iframe"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.365448381531!2d-77.0698142!3d-12.0905096!2m3!1f0!1f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8e22c365b21%3A0x600b651030e46b0!2sAv.%20Javier%20Prado%20Oeste%20757%2C%20Magdalena%20del%20Mar%2015076!5e0!3m2!1ses!2spe!4v1700000000000!5m2!1ses!2spe"
+          title="Mapa de ubicación corporativa de PMO Solutions - Av. Javier Prado Oeste 757, piso 10, Magdalena del Mar, Lima, Perú"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
     </div>
   </section>

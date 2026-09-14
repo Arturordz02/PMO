@@ -1,6 +1,15 @@
-# Entorno y archivos locales
+# Entorno y credenciales locales
 .env
-release/
-storage/logs/*.log
-pmo_temp/
 
+# Paquetes y releases locales
+release/
+pmo_temp/
+*.zip
+
+# Archivos de caché y logs en runtime
+storage/logs/*.log
+storage/logs/archive/*.log.gz
+storage/cache/*.cache
+storage/reports/*.json
+storage/reports/*.txt
+!storage/**/.gitkeep

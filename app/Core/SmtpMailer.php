@@ -13,6 +13,7 @@ class SmtpMailer {
     private array $config;
     private array $appConfig;
     private ?string $lastError = null;
+    public static ?\Closure $mockHandler = null;
 
     public function __construct(?array $smtpConfig = null, ?array $appConfig = null) {
         if ($smtpConfig === null || $appConfig === null) {
@@ -42,7 +43,17 @@ class SmtpMailer {
         string $replyToEmail = '',
         string $replyToName = ''
     ): bool {
-        $host       = $this->config['host'] ?? 'localhost';
+        if (self::$mockHandler !== null) {
+            $mockResult = (self::$mockHandler)($toEmail, $toName, $subject, $htmlBody, $textBody, $replyToEmail, $replyToName);
+            if ($mockResult === true) {
+                return true;
+            }
+            if ($mockResult === false) {
+                $this->lastError = 'Mock SMTP delivery simulated failure';
+                return false;
+            }
+        }
+        $host       = $this->config['host'] ?? '';
         $port       = (int)($this->config['port'] ?? 587);
         $encryption = strtolower($this->config['encryption'] ?? 'tls');
         $auth       = !empty($this->config['auth']);
@@ -51,6 +62,12 @@ class SmtpMailer {
         $fromEmail  = $this->config['from_email'] ?? $username;
         $fromName   = $this->config['from_name'] ?? 'PMO Solutions';
         $timeout    = (int)($this->config['timeout'] ?? 15);
+
+        // Si faltan parámetros esenciales o contraseña cuando auth está habilitado
+        if (empty($host) || ($auth && (empty($username) || empty($password)))) {
+            $this->lastError = "Credenciales o configuración SMTP incompleta.";
+            return false;
+        }
 
         if (empty($textBody)) {
             $textBody = strip_tags(str_replace(['<br>', '<br/>', '<br />', '</p>'], "\n", $htmlBody));
@@ -235,7 +252,7 @@ class SmtpMailer {
         return $response;
     }
 
-    public function sendContactNotification(array $data): bool {
+    public function buildContactNotification(array $data): array {
         $adminEmail = $this->config['admin_email'] ?? 'comercial@pmo-solutions.com';
         $adminName  = $this->config['admin_name'] ?? 'Administración PMO Solutions';
         $siteUrl    = $this->appConfig['site_url'] ?? 'https://pmo-solutions.com';
@@ -272,14 +289,14 @@ class SmtpMailer {
       
       <div class='field-row'>
         <div class='field-label'>Nombre Completo</div>
-        <div class='field-value'>" . htmlspecialchars($data['nombre']) . "</div>
+        <div class='field-value'>" . htmlspecialchars($data['nombre'] ?? '') . "</div>
       </div>
 
       <div class='field-row'>
         <div class='field-label'>Teléfono / WhatsApp</div>
         <div class='field-value'>
-          <a href='https://wa.me/" . preg_replace('/\D/', '', $data['telefono']) . "' style='color: #00509E; text-decoration: none;'>
-            " . htmlspecialchars($data['telefono']) . "
+          <a href='https://wa.me/" . preg_replace('/\D/', '', $data['telefono'] ?? '') . "' style='color: #00509E; text-decoration: none;'>
+            " . htmlspecialchars($data['telefono'] ?? '') . "
           </a>
         </div>
       </div>
@@ -287,24 +304,24 @@ class SmtpMailer {
       <div class='field-row'>
         <div class='field-label'>Correo Electrónico</div>
         <div class='field-value'>
-          <a href='mailto:" . htmlspecialchars($data['email']) . "' style='color: #00509E; text-decoration: none;'>
-            " . htmlspecialchars($data['email']) . "
+          <a href='mailto:" . htmlspecialchars($data['email'] ?? '') . "' style='color: #00509E; text-decoration: none;'>
+            " . htmlspecialchars($data['email'] ?? '') . "
           </a>
         </div>
       </div>
 
       <div class='field-row'>
         <div class='field-label'>Servicio o Capacitación de Interés</div>
-        <div class='field-value' style='color: #00509E;'>" . htmlspecialchars($data['servicio']) . "</div>
+        <div class='field-value' style='color: #00509E;'>" . htmlspecialchars($data['servicio'] ?? '') . "</div>
       </div>
 
       <div class='field-row' style='border-bottom: none;'>
         <div class='field-label'>Detalle de la Consulta / Comentario</div>
-        <div class='message-box'>" . nl2br(htmlspecialchars($data['mensaje'])) . "</div>
+        <div class='message-box'>" . nl2br(htmlspecialchars($data['mensaje'] ?? '')) . "</div>
       </div>
 
       <div style='text-align: center; margin-top: 25px;'>
-        <a href='https://wa.me/" . preg_replace('/\D/', '', $data['telefono']) . "?text=Hola%20" . urlencode($data['nombre']) . ",%20te%20saludamos%20de%20PMO%20Solutions' class='btn-action' target='_blank'>
+        <a href='https://wa.me/" . preg_replace('/\D/', '', $data['telefono'] ?? '') . "?text=Hola%20" . urlencode($data['nombre'] ?? '') . ",%20te%20saludamos%20de%20PMO%20Solutions' class='btn-action' target='_blank'>
           Contactar por WhatsApp
         </a>
       </div>
@@ -317,18 +334,31 @@ class SmtpMailer {
 </body>
 </html>";
 
+        return [
+            'to_email'       => $adminEmail,
+            'to_name'        => $adminName,
+            'subject'        => $subject,
+            'html_body'      => $html,
+            'text_body'      => '',
+            'reply_to_email' => $data['email'] ?? '',
+            'reply_to_name'  => $data['nombre'] ?? ''
+        ];
+    }
+
+    public function sendContactNotification(array $data): bool {
+        $mailData = $this->buildContactNotification($data);
         return $this->send(
-            $adminEmail,
-            $adminName,
-            $subject,
-            $html,
-            '',
-            $data['email'],
-            $data['nombre']
+            $mailData['to_email'],
+            $mailData['to_name'],
+            $mailData['subject'],
+            $mailData['html_body'],
+            $mailData['text_body'],
+            $mailData['reply_to_email'],
+            $mailData['reply_to_name']
         );
     }
 
-    public function sendClaimAdminNotification(array $data): bool {
+    public function buildClaimAdminNotification(array $data): array {
         $adminEmail = $this->config['admin_email'] ?? 'comercial@pmo-solutions.com';
         $adminName  = $this->config['admin_name'] ?? 'Administración PMO Solutions';
         $code       = $data['codigo_reclamacion'] ?? 'REC-2026';
@@ -370,26 +400,26 @@ class SmtpMailer {
 
       <div class='section-title'>1. Datos del Reclamante</div>
       <table class='grid'>
-        <tr><td class='label'>Tipo y N° Documento:</td><td class='val'>" . htmlspecialchars($data['tipo_documento']) . ": " . htmlspecialchars($data['numero_documento']) . "</td></tr>
-        <tr><td class='label'>Nombres / Razón Social:</td><td class='val'>" . htmlspecialchars($data['nombre_completo']) . "</td></tr>
-        <tr><td class='label'>Teléfono / WhatsApp:</td><td class='val'>" . htmlspecialchars($data['telefono']) . "</td></tr>
-        <tr><td class='label'>Correo Electrónico:</td><td class='val'><a href='mailto:" . htmlspecialchars($data['email']) . "'>" . htmlspecialchars($data['email']) . "</a></td></tr>
-        <tr><td class='label'>Domicilio:</td><td class='val'>" . htmlspecialchars($data['domicilio']) . "</td></tr>
+        <tr><td class='label'>Tipo y N° Documento:</td><td class='val'>" . htmlspecialchars($data['tipo_documento'] ?? '') . ": " . htmlspecialchars($data['numero_documento'] ?? '') . "</td></tr>
+        <tr><td class='label'>Nombres / Razón Social:</td><td class='val'>" . htmlspecialchars($data['nombre_completo'] ?? '') . "</td></tr>
+        <tr><td class='label'>Teléfono / WhatsApp:</td><td class='val'>" . htmlspecialchars($data['telefono'] ?? '') . "</td></tr>
+        <tr><td class='label'>Correo Electrónico:</td><td class='val'><a href='mailto:" . htmlspecialchars($data['email'] ?? '') . "'>" . htmlspecialchars($data['email'] ?? '') . "</a></td></tr>
+        <tr><td class='label'>Domicilio:</td><td class='val'>" . htmlspecialchars($data['domicilio'] ?? '') . "</td></tr>
       </table>
 
       <div class='section-title'>2. Identificación del Servicio Contratado</div>
       <table class='grid'>
-        <tr><td class='label'>Tipo de Contratación:</td><td class='val'>" . htmlspecialchars($data['tipo_servicio']) . "</td></tr>
-        <tr><td class='label'>Nombre del Servicio/Curso:</td><td class='val'>" . htmlspecialchars($data['nombre_servicio']) . "</td></tr>
+        <tr><td class='label'>Tipo de Contratación:</td><td class='val'>" . htmlspecialchars($data['tipo_servicio'] ?? '') . "</td></tr>
+        <tr><td class='label'>Nombre del Servicio/Curso:</td><td class='val'>" . htmlspecialchars($data['nombre_servicio'] ?? '') . "</td></tr>
         <tr><td class='label'>Detalles / Matrícula:</td><td class='val'>" . (!empty($data['detalle_servicio']) ? htmlspecialchars($data['detalle_servicio']) : 'No especificado') . "</td></tr>
       </table>
 
       <div class='section-title'>3. Detalle de la Reclamación</div>
       <p style='margin: 0 0 6px 0; font-weight: 700; color: #475569; font-size: 13px;'>Hechos Ocurridos:</p>
-      <div class='box'>" . nl2br(htmlspecialchars($data['detalle_reclamacion'])) . "</div>
+      <div class='box'>" . nl2br(htmlspecialchars($data['detalle_reclamacion'] ?? '')) . "</div>
 
       <p style='margin: 12px 0 6px 0; font-weight: 700; color: #475569; font-size: 13px;'>Pedido Concreto del Consumidor:</p>
-      <div class='box' style='border-left: 4px solid #FF5722;'>" . nl2br(htmlspecialchars($data['pedido_consumidor'])) . "</div>
+      <div class='box' style='border-left: 4px solid #FF5722;'>" . nl2br(htmlspecialchars($data['pedido_consumidor'] ?? '')) . "</div>
     </div>
     <div class='footer'>
       <p style='margin: 0;'>PMO SOLUTIONS S.A.C. - Sistema de Gestión del Libro de Reclamaciones Virtual</p>
@@ -399,18 +429,31 @@ class SmtpMailer {
 </body>
 </html>";
 
+        return [
+            'to_email'       => $adminEmail,
+            'to_name'        => $adminName,
+            'subject'        => $subject,
+            'html_body'      => $html,
+            'text_body'      => '',
+            'reply_to_email' => $data['email'] ?? '',
+            'reply_to_name'  => $data['nombre_completo'] ?? ''
+        ];
+    }
+
+    public function sendClaimAdminNotification(array $data): bool {
+        $mailData = $this->buildClaimAdminNotification($data);
         return $this->send(
-            $adminEmail,
-            $adminName,
-            $subject,
-            $html,
-            '',
-            $data['email'],
-            $data['nombre_completo']
+            $mailData['to_email'],
+            $mailData['to_name'],
+            $mailData['subject'],
+            $mailData['html_body'],
+            $mailData['text_body'],
+            $mailData['reply_to_email'],
+            $mailData['reply_to_name']
         );
     }
 
-    public function sendClaimUserReceipt(array $data): bool {
+    public function buildClaimUserReceipt(array $data): array {
         $code     = $data['codigo_reclamacion'] ?? 'REC-2026';
         $tipoReg  = $data['tipo_registro'] ?? 'Reclamo';
         $subject  = "Constancia de {$tipoReg} Virtual - PMO Solutions [{$code}]";
@@ -449,7 +492,7 @@ class SmtpMailer {
     </div>
     
     <div class='v-body'>
-      <p style='font-size: 15px; margin-top: 0;'>Estimado(a) <strong>" . htmlspecialchars($data['nombre_completo']) . "</strong>,</p>
+      <p style='font-size: 15px; margin-top: 0;'>Estimado(a) <strong>" . htmlspecialchars($data['nombre_completo'] ?? '') . "</strong>,</p>
       <p style='font-size: 14px; line-height: 1.6;'>Confirmamos la recepción de su <strong>{$tipoReg}</strong> en nuestro Libro de Reclamaciones Virtual. A continuación, le remitimos la constancia con el resumen de los datos registrados:</p>
 
       <div class='notice'>
@@ -460,28 +503,28 @@ class SmtpMailer {
       <div class='v-section'>
         <div class='v-section-title'>Datos del Consumidor Reclamante</div>
         <table class='v-grid'>
-          <tr><td class='lbl'>Documento de Identidad:</td><td class='txt'>" . htmlspecialchars($data['tipo_documento']) . " - " . htmlspecialchars($data['numero_documento']) . "</td></tr>
-          <tr><td class='lbl'>Nombres y Apellidos / Razón:</td><td class='txt'>" . htmlspecialchars($data['nombre_completo']) . "</td></tr>
-          <tr><td class='lbl'>Teléfono / Celular:</td><td class='txt'>" . htmlspecialchars($data['telefono']) . "</td></tr>
-          <tr><td class='lbl'>Domicilio:</td><td class='txt'>" . htmlspecialchars($data['domicilio']) . "</td></tr>
+          <tr><td class='lbl'>Documento de Identidad:</td><td class='txt'>" . htmlspecialchars($data['tipo_documento'] ?? '') . " - " . htmlspecialchars($data['numero_documento'] ?? '') . "</td></tr>
+          <tr><td class='lbl'>Nombres y Apellidos / Razón:</td><td class='txt'>" . htmlspecialchars($data['nombre_completo'] ?? '') . "</td></tr>
+          <tr><td class='lbl'>Teléfono / Celular:</td><td class='txt'>" . htmlspecialchars($data['telefono'] ?? '') . "</td></tr>
+          <tr><td class='lbl'>Domicilio:</td><td class='txt'>" . htmlspecialchars($data['domicilio'] ?? '') . "</td></tr>
         </table>
       </div>
 
       <div class='v-section'>
         <div class='v-section-title'>Identificación del Servicio</div>
         <table class='v-grid'>
-          <tr><td class='lbl'>Tipo de Contratación:</td><td class='txt'>" . htmlspecialchars($data['tipo_servicio']) . "</td></tr>
-          <tr><td class='lbl'>Servicio / Capacitación:</td><td class='txt'>" . htmlspecialchars($data['nombre_servicio']) . "</td></tr>
+          <tr><td class='lbl'>Tipo de Contratación:</td><td class='txt'>" . htmlspecialchars($data['tipo_servicio'] ?? '') . "</td></tr>
+          <tr><td class='lbl'>Servicio / Capacitación:</td><td class='txt'>" . htmlspecialchars($data['nombre_servicio'] ?? '') . "</td></tr>
         </table>
       </div>
 
       <div class='v-section'>
         <div class='v-section-title'>Detalle de los Hechos y Pedido</div>
         <p style='margin: 4px 0; font-size: 12px; font-weight: 700; color: #475569;'>Descripción del Reclamo/Queja:</p>
-        <div class='detail-box'>" . nl2br(htmlspecialchars($data['detalle_reclamacion'])) . "</div>
+        <div class='detail-box'>" . nl2br(htmlspecialchars($data['detalle_reclamacion'] ?? '')) . "</div>
 
         <p style='margin: 10px 0 4px 0; font-size: 12px; font-weight: 700; color: #475569;'>Pedido Concreto:</p>
-        <div class='detail-box'>" . nl2br(htmlspecialchars($data['pedido_consumidor'])) . "</div>
+        <div class='detail-box'>" . nl2br(htmlspecialchars($data['pedido_consumidor'] ?? '')) . "</div>
       </div>
 
       <p style='font-size: 13px; color: #64748b; margin-bottom: 0;'>Guarde este correo como constancia de su reclamación con el código <strong>{$code}</strong>.</p>
@@ -497,11 +540,25 @@ class SmtpMailer {
 </body>
 </html>";
 
+        return [
+            'to_email'       => $data['email'] ?? '',
+            'to_name'        => $data['nombre_completo'] ?? '',
+            'subject'        => $subject,
+            'html_body'      => $html,
+            'text_body'      => '',
+            'reply_to_email' => '',
+            'reply_to_name'  => ''
+        ];
+    }
+
+    public function sendClaimUserReceipt(array $data): bool {
+        $mailData = $this->buildClaimUserReceipt($data);
         return $this->send(
-            $data['email'],
-            $data['nombre_completo'],
-            $subject,
-            $html
+            $mailData['to_email'],
+            $mailData['to_name'],
+            $mailData['subject'],
+            $mailData['html_body'],
+            $mailData['text_body']
         );
     }
 }

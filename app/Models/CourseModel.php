@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Core\Model;
+use App\Core\Cache;
 
 /**
  * PMO SOLUTIONS - Modelo de Cursos y Especializaciones (CourseModel)
@@ -11,9 +12,27 @@ use App\Core\Model;
 class CourseModel extends Model {
 
     /**
-     * Catálogo estructurado de programas de formación
+     * Catálogo estructurado de programas de formación.
+     * Cacheado por 1 hora (el catálogo rara vez cambia en producción).
      */
     public function getAll(): array {
+        return Cache::remember('courses_catalog_v1', 3600, function () {
+            return $this->buildCatalog();
+        });
+    }
+
+    /**
+     * Obtiene un curso por su identificador slug.
+     */
+    public function getBySlug(string $slug): ?array {
+        $courses = $this->getAll();
+        return $courses[$slug] ?? null;
+    }
+
+    /**
+     * Construye el catálogo completo (llamado internamente o al limpiar caché).
+     */
+    private function buildCatalog(): array {
         return [
             'dab-jrd' => [
                 'slug'        => 'dab-jrd',
@@ -21,7 +40,7 @@ class CourseModel extends Model {
                 'category'    => 'legal',
                 'category_label' => 'Legal & Arbitraje',
                 'icon'        => 'fas fa-gavel',
-                'badge'       => 'Certificación OSCE / FIDIC',
+                'badge'       => 'Enfoque OSCE / FIDIC',
                 'badge_class' => 'bg-danger text-white',
                 'hours'       => '36 Horas Lectivas',
                 'description' => 'Prevención y resolución técnica de controversias en obras públicas y contratos internacionales bajo enfoque Dispute Boards.',
@@ -147,13 +166,4 @@ class CourseModel extends Model {
             ]
         ];
     }
-
-    /**
-     * Obtiene un curso por su identificador slug
-     */
-    public function getBySlug(string $slug): ?array {
-        $courses = $this->getAll();
-        return $courses[$slug] ?? null;
-    }
 }
-

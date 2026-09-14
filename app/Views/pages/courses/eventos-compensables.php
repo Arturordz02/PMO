@@ -1,4 +1,4 @@
-﻿<!-- 1. Encabezado Hero Estilizado (NEC4 Contract Governance & Early Warning Style) -->
+<!-- 1. Encabezado Hero Estilizado (NEC4 Contract Governance & Early Warning Style) -->
   <header class="nec-hero-section">
     <div class="hero-grid-overlay"></div>
     <div class="container position-relative">
@@ -33,8 +33,8 @@
               <span class="text-white small fw-semibold">Procedimiento de Disputas W1, W2, W3</span>
             </div>
             <div class="d-flex align-items-center gap-2">
-              <i class="fas fa-award text-success fs-5"></i>
-              <span class="text-white small fw-semibold">Certificación Oficial PMO Solutions</span>
+              <i class="fas fa-briefcase text-success fs-5"></i>
+              <span class="text-white small fw-semibold">Casos Reales de Infraestructura</span>
             </div>
           </div>
         </div>
@@ -140,7 +140,7 @@
                 </p>
                 
                 <div class="d-flex flex-wrap gap-2 mt-2">
-                  <span class="badge bg-white text-dark border"><i class="fas fa-award text-warning me-1"></i> Acreditación Oficial</span>
+                  <span class="badge bg-white text-dark border"><i class="fas fa-file-contract text-warning me-1"></i> Especialista Contractual NEC</span>
                   <span class="badge bg-white text-dark border"><i class="fas fa-briefcase text-info me-1"></i> Casuística Real en Obra</span>
                 </div>
               </div>
@@ -267,19 +267,19 @@
         <div class="col-12 col-md-4" data-aos="fade-right" data-aos-delay="100">
           <div class="card h-100 border-0 shadow-sm rounded-4 p-4 text-center bg-white hvr-box-shadow-outset">
             <div class="p-3 rounded-circle bg-primary bg-opacity-10 text-primary mx-auto mb-3" style="width:60px;height:60px;display:flex;align-items:center;justify-content:center;">
-              <i class="fas fa-video fs-3"></i>
+              <i class="fas fa-play-circle fs-3"></i>
             </div>
-            <h5 class="fw-bold text-primary mb-2">Clases en Vivo + Grabaciones 24/7</h5>
-            <p class="text-muted small mb-0">Sesiones interactivas en vivo con docentes y acceso permanente de por vida a las grabaciones en el Campus Virtual.</p>
+            <h5 class="fw-bold text-primary mb-2">Clases Grabadas / Virtual Online 24/7</h5>
+            <p class="text-muted small mb-0">Aprende a tu propio ritmo con lecciones grabadas en HD y acceso digital permanente de por vida a los contenidos.</p>
           </div>
         </div>
         <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="200">
           <div class="card h-100 border-0 shadow-sm rounded-4 p-4 text-center bg-white hvr-box-shadow-outset">
             <div class="p-3 rounded-circle bg-warning bg-opacity-15 text-warning mx-auto mb-3" style="width:60px;height:60px;display:flex;align-items:center;justify-content:center;">
-              <i class="fas fa-certificate fs-3"></i>
+              <i class="fas fa-file-contract fs-3"></i>
             </div>
-            <h5 class="fw-bold text-primary mb-2">Certificación Oficial con Horas Lectivas</h5>
-            <p class="text-muted small mb-0">Certificado oficial con código QR emitido por PMO Solutions, válido para licitaciones públicas (OSCE / G2G) y CV.</p>
+            <h5 class="fw-bold text-primary mb-2">Gestión de Notificaciones & Plazos Clave</h5>
+            <p class="text-muted small mb-0">Estructuración de alertas tempranas, notificaciones de eventos compensables y cotizaciones bajo cláusula 60 y 61.</p>
           </div>
         </div>
         <div class="col-12 col-md-4" data-aos="fade-left" data-aos-delay="300">
@@ -368,8 +368,6 @@
 
       <!-- Botones de Acción -->
       <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
-        
-        
 
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdPOpAucuZBS-Tu97Nusr-E9pGhRVRmAOwPyNgF-ryInobyKw/viewform" target="_blank" rel="noopener noreferrer" class="btn enrollment-btn-brochure btn-lg px-4 py-3 shadow w-100 w-md-auto hvr-grow">
           <i class="fas fa-file-pdf me-2"></i> Descargar Brochure & Temario
@@ -384,12 +382,12 @@
       <!-- Franja de Confianza & Seguridad -->
       <div class="enrollment-trust-strip">
         <div class="enrollment-trust-item">
-          <i class="fas fa-shield-alt text-warning"></i>
-          <span>Inscripción y facturación corporativa oficial</span>
+          <i class="fas fa-laptop-code text-warning"></i>
+          <span>Clases Grabadas con Acceso Flexible</span>
         </div>
         <div class="enrollment-trust-item">
-          <i class="fas fa-credit-card text-info"></i>
-          <span>Visa, Mastercard, Amex, Diners, Yape y Plin</span>
+          <i class="fas fa-university text-info"></i>
+          <span>Transferencia Bancaria, Yape y Plin</span>
         </div>
         <div class="enrollment-trust-item">
           <i class="fas fa-file-invoice text-success"></i>

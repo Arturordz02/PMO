@@ -972,21 +972,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.6;
 }
 
-.enrollment-btn-niubiz {
-  background: linear-gradient(135deg, #FFB300 0%, #F36F21 100%);
-  color: #000000 !important;
-  font-weight: 900;
-  border: none;
-  box-shadow: 0 8px 24px rgba(243, 111, 33, 0.4);
-  transition: all 0.3s ease;
-  border-radius: 50px;
-}
 
-.enrollment-btn-niubiz:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(243, 111, 33, 0.6);
-  color: #000000 !important;
-}
 
 .enrollment-btn-brochure {
   background: rgba(255, 255, 255, 0.08);
@@ -1096,80 +1082,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   NIUBIZ CHECKOUT & PAYMENT GATEWAY STYLES
+   BANK TRANSFER & DIRECT PAYMENT STYLES
    ========================================================================== */
-
-
-/* Restricción estricta para logos dentro del modal de Niubiz */
-#niubizCheckoutModal .modal-body img {
-  max-height: 28px !important; /* Ningún logo puede medir más de 28px de alto */
-  width: auto !important;     /* Mantiene la proporción sin deformarse */
-  max-width: 60px !important;  /* Límite de ancho */
-  object-fit: contain !important;
-  display: inline-block !important;
-  margin: 2px 6px !important;
-}
-
-/* Contenedor de logos flexible y centrado */
-.payment-brand-logos {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  margin: 15px 0 !important;
-  padding: 10px !important;
-  background-color: #f8f9fa !important;
-  border-radius: 12px !important;
-}
-
-.niubiz-badge-bar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.transition-zoom {
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
-}
-
-.transition-zoom:hover {
-  transform: translateY(-3px) scale(1.08);
-}
-
-.niubiz-card-logo {
-  height: 28px;
-  max-width: 50px;
-  object-fit: contain;
-  background: #ffffff;
-  padding: 3px 6px;
-  border-radius: 6px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-  transition: transform 0.2s ease;
-}
-
-.niubiz-card-logo:hover {
-  transform: translateY(-2px);
-}
-
-.payment-method-nav .nav-link {
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: #475569;
-  border-radius: 12px;
-  padding: 0.75rem 1.25rem;
-  transition: all 0.25s ease;
-  border: 1px solid transparent;
-}
-
-.payment-method-nav .nav-link.active {
-  background: linear-gradient(135deg, var(--pmo-primary) 0%, var(--pmo-primary-dark) 100%);
-  color: #ffffff !important;
-  box-shadow: 0 4px 15px rgba(0, 80, 158, 0.25);
-}
 
 .bank-card-box {
   background: #f8fafc;
@@ -1212,6 +1126,33 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 4.5rem;
   font-size: 0.92rem;
   border-top: 4px solid var(--pmo-accent);
+}
+
+.footer-corporate img {
+  width: auto;
+  max-width: 100%;
+}
+
+.footer-brand-circle {
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.footer-brand-circle img {
+  width: 44px !important;
+  height: 44px !important;
+  max-width: 44px !important;
+  max-height: 44px !important;
+  object-fit: contain;
+  border-radius: 50%;
 }
 
 .footer-corporate h5 {
@@ -1262,52 +1203,26 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateX(4px);
 }
 
-/* Multi-Country WhatsApp Selector */
-.country-selector-box {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 1.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.country-select-dropdown {
-  background-color: #0f2746;
-  border: 1px solid #234975;
-  color: #ffffff;
-  border-radius: 8px;
-  padding: 0.6rem 0.9rem;
-  font-size: 0.9rem;
-  width: 100%;
-}
-
-.country-select-dropdown:focus {
-  outline: none;
-  border-color: var(--pmo-accent);
-  box-shadow: 0 0 0 2px rgba(255, 122, 0, 0.25);
-  background-color: #0f2746;
-  color: #ffffff;
-}
-
-.country-wa-btn {
-  display: flex;
+/* Social buttons in footer */
+.footer-social-links .btn-social {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  background: #25d366;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
   color: #ffffff;
-  font-weight: 700;
-  font-size: 0.95rem;
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   text-decoration: none;
-  margin-top: 0.85rem;
   transition: var(--transition-smooth);
 }
 
-.country-wa-btn:hover {
-  background: #20ba59;
+.footer-social-links .btn-social:hover {
+  background: var(--pmo-accent);
+  border-color: var(--pmo-accent);
   color: #ffffff;
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  transform: translateY(-3px);
 }
 
 /* Libro de Reclamaciones Button */
@@ -1363,11 +1278,50 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   transition: var(--transition-smooth);
   border: none;
+  text-decoration: none;
+  position: relative;
 }
 
 .floating-wa-btn:hover {
   transform: scale(1.08) rotate(6deg);
   background: #20ba59;
+  color: #ffffff;
+}
+
+.floating-wa-tooltip {
+  position: absolute;
+  right: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1e293b;
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.floating-wa-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -6px;
+  transform: translateY(-50%);
+  border-width: 6px 0 6px 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent #1e293b;
+}
+
+.floating-wa-btn:hover .floating-wa-tooltip {
+  opacity: 1;
+  visibility: visible;
+  right: 75px;
 }
 
 .floating-wa-badge {
@@ -1388,7 +1342,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Back to Top Button */
-.back-to-top {
+.back-to-top,
+.back-to-top-btn {
   position: fixed;
   bottom: 95px;
   right: 32px;
@@ -1409,12 +1364,14 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1040;
 }
 
-.back-to-top.show {
+.back-to-top.show,
+.back-to-top-btn.show {
   opacity: 1;
   visibility: visible;
 }
 
-.back-to-top:hover {
+.back-to-top:hover,
+.back-to-top-btn:hover {
   background: var(--pmo-accent);
   color: #ffffff;
   transform: translateY(-4px);
@@ -3010,136 +2967,19 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* ==========================================================================
-   PMO TERMS & CONDITIONS FLOATING BANNER (DISCREET & MODERN)
-   ========================================================================== */
-.pmo-terms-banner {
-  position: fixed;
-  bottom: 25px;
-  left: 25px;
-  max-width: 480px;
-  width: calc(100% - 50px);
-  background: #ffffff;
-  border-radius: 18px;
-  border: 1px solid rgba(0, 80, 158, 0.08);
-  border-left: 5px solid var(--pmo-accent);
-  box-shadow: 0 15px 40px -8px rgba(10, 54, 99, 0.22), 0 2px 10px rgba(0, 0, 0, 0.04);
-  padding: 1.35rem 1.5rem;
-  z-index: 1060;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+/* ==============================================================================
+ * MAPA DE UBICACIÓN CORPORATIVA (/contacto)
+ * ============================================================================== */
+.contact-map-iframe {
+  width: 100%;
+  height: 420px;
+  border: 0;
+  display: block;
 }
 
-.pmo-terms-banner.pmo-terms-in {
-  animation: pmoTermsBannerSlideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.pmo-terms-banner.pmo-terms-out {
-  animation: pmoTermsBannerSlideDown 0.35s ease forwards;
-}
-
-.pmo-terms-badge {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(255, 87, 34, 0.12);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-}
-
-.pmo-terms-banner-text {
-  font-size: 0.88rem;
-  line-height: 1.55;
-  color: #475569;
-}
-
-.pmo-terms-banner-link {
-  font-size: 0.85rem;
-  color: var(--pmo-primary);
-  text-decoration: underline;
-  font-weight: 600;
-  transition: var(--transition-smooth);
-}
-
-.pmo-terms-banner-link:hover {
-  color: var(--pmo-accent);
-}
-
-#pmoTermsAcceptBtn {
-  background: linear-gradient(135deg, #FF5722 0%, #F36F21 100%);
-  border: none;
-  font-size: 0.85rem;
-  padding: 0.45rem 1.35rem;
-  transition: var(--transition-smooth);
-}
-
-#pmoTermsAcceptBtn:hover {
-  background: linear-gradient(135deg, #E64A19 0%, #E65100 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(255, 87, 34, 0.35);
-}
-
-#pmoTermsDeclineBtn,
-#pmoTermsBackBtn {
-  border: 1px solid #cbd5e1;
-  color: #475569;
-  font-size: 0.85rem;
-  padding: 0.45rem 1.15rem;
-  transition: var(--transition-smooth);
-}
-
-#pmoTermsDeclineBtn:hover,
-#pmoTermsBackBtn:hover {
-  background-color: #f1f5f9;
-  color: #1e293b;
-  border-color: #94a3b8;
-}
-
-#pmoTermsConfirmRejectBtn {
-  background: #dc2626;
-  border: none;
-  font-size: 0.85rem;
-  padding: 0.45rem 1.15rem;
-  transition: var(--transition-smooth);
-}
-
-#pmoTermsConfirmRejectBtn:hover {
-  background: #b91c1c;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
-}
-
-@keyframes pmoTermsBannerSlideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
+@media (max-width: 768px) {
+  .contact-map-iframe {
+    height: 320px;
   }
 }
 
-@keyframes pmoTermsBannerSlideDown {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-}
-
-@media (max-width: 576px) {
-  .pmo-terms-banner {
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
-    width: calc(100% - 30px);
-    max-width: 100%;
-    padding: 1.15rem 1.25rem;
-    border-radius: 16px;
-  }
-}

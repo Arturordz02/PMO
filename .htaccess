@@ -1,60 +1,76 @@
 # ==============================================================================
-# PMO SOLUTIONS - CONFIGURACIÓN DEL SERVIDOR APACHE (.htaccess)
-# Arquitectura MVC, URLs Limpias, Seguridad y Rendimiento para GoDaddy cPanel
+# PMO SOLUTIONS - APACHE SERVER CONFIGURATION (.htaccess) v2.0
+# Arquitectura MVC | Alta Disponibilidad | Compresión | Seguridad | Caché
+# Optimizaciones: Gzip + Brotli, Browser Cache, CSP, WebP/AVIF, Storage protect
 # ==============================================================================
 
 # Deshabilitar listado de directorios
 Options -Indexes -MultiViews
 
-# Codificación UTF-8 por defecto
+# Establecer codificación UTF-8 por defecto
 AddDefaultCharset UTF-8
 
-# Priorizar index.php como Front Controller
-<IfModule mod_dir.c>
-    DirectoryIndex index.php index.html
-</IfModule>
+# Registrar tipos MIME modernos
+AddType image/webp                .webp
+AddType image/avif                .avif
+AddType application/wasm          .wasm
+AddType font/woff2                .woff2
 
 # ==============================================================================
-# 1. PÁGINAS DE ERROR PERSONALIZADAS
+# 1. PÁGINAS DE ERROR PERSONALIZADAS (FRONT CONTROLLER)
 # ==============================================================================
 ErrorDocument 404 /index.php
 ErrorDocument 403 /index.php
 ErrorDocument 500 /index.php
 
 # ==============================================================================
-# 2. MOTOR DE REESCRITURA MVC & HTTPS
+# 2. MOTOR DE REESCRITURA MVC & FORZAR HTTPS (SSL)
 # ==============================================================================
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
 
-    # Forzar redirección HTTPS en GoDaddy
-    RewriteCond %{HTTPS} off [OR]
+    # Pasar cabecera de Autorización a PHP (para cPanel / FastCGI / Apache)
+    RewriteCond %{HTTP:Authorization} .+
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Forzar redirección HTTPS obligatoria
+    RewriteCond %{HTTPS} off
     RewriteCond %{HTTP:X-Forwarded-Proto} !https
     RewriteCond %{HTTP_HOST} ^(?:www\.)?(.*)$ [NC]
     RewriteRule ^(.*)$ https://%1/$1 [L,R=301,NE]
 
-    # Redireccionar URLs con extensión .html a URLs amigables
-    RewriteCond %{THE_REQUEST} /([^\s?]+)\.html[\s?] [NC]
-    RewriteRule ^ %1 [R=301,L,NE]
-
-    # Bloquear patrones comunes de inyección y escaneo malicioso
+    # Prevenir ataques de inyección en Query String y URLs maliciosas
     RewriteCond %{QUERY_STRING} (eval\(|base64_decode|globals|mosconfig|concat\(|<script) [NC]
     RewriteRule .* - [F,L]
 
-    # Si el archivo o directorio solicitado existe físicamente (css, js, img), servirlo directamente
+    # Bloquear acceso a directorios de almacenamiento interno
+    RewriteCond %{REQUEST_URI} ^/storage/ [NC]
+    RewriteRule ^ - [F,L]
+
+    # Redireccionar URLs con .html a URLs limpias (SEO 301)
+    RewriteCond %{THE_REQUEST} /([^\s?]+)\.html[\s?] [NC]
+    RewriteRule ^ %1 [R=301,L,NE]
+
+    # Servir WebP automáticamente si el navegador lo soporta y existe la versión WebP
+    RewriteCond %{HTTP_ACCEPT} image/webp
+    RewriteCond %{REQUEST_FILENAME} \.(jpe?g|png)$
+    RewriteCond %{REQUEST_FILENAME}\.webp -f
+    RewriteRule ^(.+)\.(jpe?g|png)$ $1.$2.webp [T=image/webp,L]
+
+    # Si el archivo o directorio existe físicamente, servirlo directamente
     RewriteCond %{REQUEST_FILENAME} -f [OR]
     RewriteCond %{REQUEST_FILENAME} -d
     RewriteRule ^ - [L]
 
-    # Enrutar todas las peticiones dinámicas a través del Front Controller
+    # Enrutar todas las demás peticiones al Front Controller MVC
     RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>
 
 # ==============================================================================
-# 3. SEGURIDAD: BLOQUEO DE ARCHIVOS SENSIBLES
+# 3. SEGURIDAD Y BLOQUEO DE ARCHIVOS SENSIBLES
 # ==============================================================================
-<FilesMatch "(^\.env|^\.git|^\.htaccess|^\.antigravityrules|schema\.sql|\.sql$|config\.php|\.log$|\.json$|\.md$)">
+<FilesMatch "(^\.env|\.env(\..+)?$|^\.git|^\.htaccess|^\.antigravityrules|schema.*\.sql|\.sql$|\.bak$|\.backup$|\.dump$|config.*\.php|SecurityTest\.php|\.log$|\.json$|\.md$|\.cache$)">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>
@@ -64,18 +80,16 @@ ErrorDocument 500 /index.php
     </IfModule>
 </FilesMatch>
 
-# Bloquear acceso web directo a carpetas internas del MVC y logs
-RedirectMatch 403 ^/app/Config(/.*)?$
-RedirectMatch 403 ^/app/Core(/.*)?$
-RedirectMatch 403 ^/app/Models(/.*)?$
-RedirectMatch 403 ^/app/Views(/.*)?$
-RedirectMatch 403 ^/storage(/.*)?$
+# Bloquear acceso web directo a directorios internos del patrón MVC
+RedirectMatch 403 ^/app(/.*)?$
 RedirectMatch 403 ^/tests(/.*)?$
+RedirectMatch 403 ^/storage(/.*)?$
+RedirectMatch 403 ^/backend(/.*)?$
 RedirectMatch 403 ^/\.agent(/.*)?$
 RedirectMatch 403 ^/\.git(/.*)?$
 
 # ==============================================================================
-# 4. CABECERAS DE SEGURIDAD HTTP
+# 4. CABECERAS DE SEGURIDAD HTTP (SECURITY HARDENING)
 # ==============================================================================
 <IfModule mod_headers.c>
     Header always set X-Content-Type-Options "nosniff"
@@ -83,40 +97,146 @@ RedirectMatch 403 ^/\.git(/.*)?$
     Header always set X-XSS-Protection "1; mode=block"
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
     Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+    # Content Security Policy (CSP) — Política Canónica Unificada
+    Header onsuccess unset Content-Security-Policy
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net data:; img-src 'self' data: https:; connect-src 'self'; frame-src 'self' https://www.google.com https://maps.google.com; frame-ancestors 'self'; form-action 'self'; base-uri 'self'; object-src 'none';"
+
+    # Strict-Transport-Security (HSTS) — 1 año con includeSubDomains
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+
+    # Soporte de ETags para cache busting eficiente
+    Header unset Pragma
+    FileETag MTime Size
+
+    # Indicar soporte WebP para negociación de contenido
+    Header append Vary "Accept"
+
+    # Identificador de servidor PMO (ocultar Apache version)
+    Header always set X-Powered-By "PMO Solutions"
+    Header unset Server
 </IfModule>
 
 # ==============================================================================
-# 5. COMPRESIÓN GZIP / DEFLATE
+# 5. COMPRESIÓN BROTLI (si disponible — mejor ratio que Gzip: ~15-25%)
+# ==============================================================================
+<IfModule mod_brotli.c>
+    AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css
+    AddOutputFilterByType BROTLI_COMPRESS text/javascript application/javascript application/x-javascript
+    AddOutputFilterByType BROTLI_COMPRESS application/json application/xml application/xhtml+xml
+    AddOutputFilterByType BROTLI_COMPRESS application/rss+xml application/atom+xml
+    AddOutputFilterByType BROTLI_COMPRESS image/svg+xml image/x-icon
+    AddOutputFilterByType BROTLI_COMPRESS font/ttf font/otf font/woff font/woff2
+    AddOutputFilterByType BROTLI_COMPRESS application/font-woff application/font-woff2
+    # Nivel 6: balance velocidad/compresión (1=rápido, 11=máximo)
+    BrotliCompressionQuality 6
+</IfModule>
+
+# ==============================================================================
+# 6. COMPRESIÓN GZIP / DEFLATE (Fallback universal)
 # ==============================================================================
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
-    AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json
-    AddOutputFilterByType DEFLATE application/xml application/xhtml+xml application/rss+xml
-    AddOutputFilterByType DEFLATE image/svg+xml image/x-icon
-    AddOutputFilterByType DEFLATE font/ttf font/otf font/woff font/woff2 application/font-woff
+    # Activar solo si Brotli no está disponible
+    <IfModule !mod_brotli.c>
+        AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+        AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript
+        AddOutputFilterByType DEFLATE application/json application/xml application/xhtml+xml
+        AddOutputFilterByType DEFLATE application/rss+xml application/atom+xml
+        AddOutputFilterByType DEFLATE image/svg+xml image/x-icon
+        AddOutputFilterByType DEFLATE font/ttf font/otf font/woff font/woff2
+        AddOutputFilterByType DEFLATE application/font-woff application/font-woff2
+    </IfModule>
+
+    # Siempre comprimir con Gzip si el módulo existe (para clientes sin Accept-Encoding Brotli)
+    <IfModule mod_brotli.c>
+        AddOutputFilterByType DEFLATE text/html text/plain text/css
+        AddOutputFilterByType DEFLATE application/javascript application/json
+        AddOutputFilterByType DEFLATE image/svg+xml font/woff2
+    </IfModule>
+
+    # Excluir agentes que no soportan Gzip
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+    Header append Vary Accept-Encoding
 </IfModule>
 
 # ==============================================================================
-# 6. CACHÉ DE NAVEGADOR (EXPIRES HEADERS)
+# 7. CACHÉ DE NAVEGADOR (BROWSER CACHING / EXPIRES HEADERS)
+# Estrategia: assets con hash = 1 año | HTML = no-cache | JSON API = sin caché
 # ==============================================================================
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresDefault "access plus 1 month"
 
-    ExpiresByType text/html "access plus 1 hour"
-    ExpiresByType text/css "access plus 1 year"
-    ExpiresByType text/javascript "access plus 1 year"
-    ExpiresByType application/javascript "access plus 1 year"
-    ExpiresByType image/jpeg "access plus 1 year"
-    ExpiresByType image/jpg "access plus 1 year"
-    ExpiresByType image/png "access plus 1 year"
-    ExpiresByType image/webp "access plus 1 year"
-    ExpiresByType image/gif "access plus 1 year"
+    # HTML: sin caché (contenido dinámico)
+    ExpiresByType text/html "access plus 0 seconds"
+
+    # CSS y JS: 1 año (usa fingerprint/hash en el nombre para cache busting)
+    ExpiresByType text/css                  "access plus 1 year"
+    ExpiresByType text/javascript           "access plus 1 year"
+    ExpiresByType application/javascript    "access plus 1 year"
+    ExpiresByType application/x-javascript "access plus 1 year"
+
+    # Imágenes: 1 año (inmutables en producción)
+    ExpiresByType image/jpeg    "access plus 1 year"
+    ExpiresByType image/jpg     "access plus 1 year"
+    ExpiresByType image/png     "access plus 1 year"
+    ExpiresByType image/webp    "access plus 1 year"
+    ExpiresByType image/avif    "access plus 1 year"
+    ExpiresByType image/gif     "access plus 1 year"
     ExpiresByType image/svg+xml "access plus 1 year"
-    ExpiresByType image/x-icon "access plus 1 year"
-    ExpiresByType font/ttf "access plus 1 year"
-    ExpiresByType font/otf "access plus 1 year"
-    ExpiresByType font/woff "access plus 1 year"
-    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType image/x-icon  "access plus 1 year"
+
+    # Fuentes: 1 año
+    ExpiresByType font/ttf      "access plus 1 year"
+    ExpiresByType font/otf      "access plus 1 year"
+    ExpiresByType font/woff     "access plus 1 year"
+    ExpiresByType font/woff2    "access plus 1 year"
+
+    # JSON/XML API: sin caché
+    ExpiresByType application/json "access plus 0 seconds"
+    ExpiresByType application/xml  "access plus 0 seconds"
 </IfModule>
 
+# ==============================================================================
+# 8. CACHE-CONTROL HEADERS ESPECÍFICOS (INMUTABLE PARA ?v= Y REVALIDABLE SIN VERSIÓN)
+# ==============================================================================
+<IfModule mod_headers.c>
+    <IfModule mod_setenvif.c>
+        # Detectar assets con parámetro de versionado ?v=...
+        SetEnvIfExpr "%{QUERY_STRING} =~ /v=[0-9a-zA-Z_.-]+/" HAS_ASSET_VERSION
+    </IfModule>
+
+    # Assets estáticos: inmutable si tiene versión (?v=), revalidable corta si no tiene versión
+    <FilesMatch "\.(css|js|woff2?|ttf|otf|eot|jpg|jpeg|png|gif|webp|avif|svg|ico)$">
+        Header set Cache-Control "public, max-age=31536000, immutable" env=HAS_ASSET_VERSION
+        Header set Cache-Control "public, max-age=3600, must-revalidate" env=!HAS_ASSET_VERSION
+    </FilesMatch>
+
+    # HTML y páginas dinámicas: sin almacenamiento en caché para proteger CSRF y datos
+    <FilesMatch "\.(html|php)$">
+        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0, private"
+        Header set Pragma "no-cache"
+    </FilesMatch>
+</IfModule>
+
+# ==============================================================================
+# 9. RESOURCE HINTS — HTTP/2 Server Push (si mod_http2 disponible)
+# ==============================================================================
+<IfModule mod_headers.c>
+    <FilesMatch "index\.php$">
+        # Precargar fuente principal y CSS crítico real
+        Header add Link "</css/styles.css>; rel=preload; as=style"
+        Header add Link "<https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css>; rel=preload; as=style; crossorigin"
+    </FilesMatch>
+</IfModule>
+
+# ==============================================================================
+# 10. PROTECCIÓN ADICIONAL DE ARCHIVOS PHP INTERNOS
+# ==============================================================================
+<FilesMatch "^(Autoloader|Database|Security|Router|Controller|Model|View|Cache|CircuitBreaker|RetryHandler|ErrorHandler|QueryBuilder|LogArchiver|ImageOptimizer|SoftSkillsModel|SoftSkillsController)\.php$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+</FilesMatch>

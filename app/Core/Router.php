@@ -90,7 +90,7 @@ class Router {
             }
         }
 
-        // Si no se encontró ninguna ruta coincidente, invocar el manejador 404
+        // Si no se encontró ninguna ruta coincidente para el método y path, invocar el manejador 404
         if ($this->notFoundHandler) {
             $this->executeHandler($this->notFoundHandler, []);
         } else {

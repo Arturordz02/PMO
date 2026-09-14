@@ -9,25 +9,30 @@ use App\Core\Controller;
 class ErrorController extends Controller {
 
     /**
-     * Muestra la página 404 interactiva con temática de ingeniería y construcción
+     * Muestra la página 404 interactiva o emite respuesta JSON para endpoints de API
      */
     public function notFound(): void {
         http_response_code(404);
+
+        $uri = $_SERVER['REQUEST_URI'] ?? '';
+        $accept = $_SERVER['HTTP_ACCEPT'] ?? '';
+        $isAjax = strtolower($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'xmlhttprequest';
+
+        $isApi = str_starts_with($uri, '/api/') || $isAjax;
+        $wantsJson = stripos($accept, 'application/json') !== false && stripos($accept, 'text/html') === false;
+
+        if ($isApi || $wantsJson) {
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode([
+                'success' => false,
+                'message' => 'Ruta o recurso no encontrado (404).'
+            ], JSON_UNESCAPED_UNICODE);
+            return;
+        }
+
         $this->render('404', [
             'pageTitle'       => '404: Desvío en la Ruta Crítica | PMO Solutions',
             'metaDescription' => 'Error 404 - Página no encontrada. Ocurrió un desvío no planificado en la obra.',
-            'activeNav'       => ''
-        ], 'error');
-    }
-
-    /**
-     * Muestra la página 500 para errores internos o excepciones capturadas
-     */
-    public function serverError(): void {
-        http_response_code(500);
-        $this->render('500', [
-            'pageTitle'       => '500: Evento Imprevisto en la Obra | PMO Solutions',
-            'metaDescription' => 'Error 500 - Error interno del servidor.',
             'activeNav'       => ''
         ], 'error');
     }

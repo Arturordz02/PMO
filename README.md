@@ -46,8 +46,11 @@ PMO-Solutions/
 │       ├── partials/
 │       │   ├── navbar.php           # Barra de navegación responsive
 │       │   ├── footer.php           # Pie de página y selector WhatsApp por país
+│       │   ├── toast.php            # Toast emergente de Matrículas 2026 (CRO)
+│       │   └── payment-modal.php    # Modal de Pago y Matrícula (a implementar)
 │       │   └── toast.php            # Toast emergente de Matrículas 2026 (CRO)
 │       └── pages/
+│           ├── home.php             # Vista de portada
 │           ├── capacitaciones.php   # Catálogo interactivo de cursos
 │           ├── courses/             # Vistas individuales de cursos
 │           │   ├── nec4.php
@@ -93,6 +96,7 @@ PMO-Solutions/
 5. **Vista (View):**
    - Renderiza `app/Views/pages/courses/nec4.php` dentro del layout `app/Views/layouts/main.php`.
    - Incluye los partials (`navbar.php`, `footer.php`, `toast.php`, `payment-modal.php`).
+   - Incluye los partials (`navbar.php`, `footer.php`, `toast.php`).
 6. **Respuesta:** Se devuelve el HTML5 completo y compilado al navegador.
 
 ---
@@ -116,5 +120,8 @@ php tests/route_test.php
 ## 🚀 Despliegue en Servidores (GoDaddy / cPanel)
 
 1. Sube todo el contenido de la carpeta `PMO-Solutions/` directamente al directorio `public_html/` de tu hosting.
-2. Crea la base de datos MySQL en cPanel e importa `backend/schema.sql`.
-3. Configura tus credenciales reales en `app/Config/config.php` y activa `'enabled' => true` en la sección de base de datos.
+2. Crea la base de datos MySQL en cPanel:
+   - **Instalación nueva**: Importa directamente `backend/schema_v2.sql`.
+   - **Actualización desde v1.0**: Aplica en orden las migraciones en `backend/migrations/`.
+3. Configura tus credenciales reales en `.env` (o `app/Config/config.php`) y activa `'enabled' => true` en la sección de base de datos.
+

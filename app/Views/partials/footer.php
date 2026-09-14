@@ -1,124 +1,108 @@
 <?php
 /**
- * PMO SOLUTIONS - Componente Parcial: Footer & Multi-Country WhatsApp Selector
+ * PMO SOLUTIONS - Componente Parcial: Footer Corporativo
  */
 ?>
 <!-- Footer Principal -->
-<footer class="footer-custom pt-5 pb-4">
+<footer class="footer-corporate">
   <div class="container">
-    <div class="row g-4 justify-content-between mb-5">
+    <div class="row g-4 g-lg-5">
       
-      <!-- Columna 1: Identidad & Propósito -->
-      <div class="col-12 col-lg-4">
-        <div class="footer-brand mb-3">
-          <a href="./" class="d-inline-flex align-items-center text-decoration-none">
-            <img src="img/LogoPMO.png" alt="PMO Solutions" height="42" class="me-2" style="mix-blend-mode: multiply;">
-            <div class="brand-text-wrapper text-white">
-              <span class="brand-title text-white">PMO <span class="text-warning">SOLUTIONS</span></span>
-              <span class="brand-subtitle text-white-50">Construimos Soluciones</span>
-            </div>
+      <!-- Columna 1: Identidad PMO Solutions -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <div class="footer-brand-circle me-2">
+            <img src="/img/LogoPMO.png" alt="Logo PMO Solutions" width="44" height="44" class="d-block" style="object-fit: contain;">
+          </div>
+          <div>
+            <span class="fs-4 fw-bold text-white">PMO <span class="text-warning">SOLUTIONS</span></span>
+            <span class="d-block small text-warning fw-bold" style="letter-spacing: 0.8px;">"Construimos Soluciones."</span>
+          </div>
+        </div>
+        <p class="text-secondary small mb-4">
+          Tu socio para crear soluciones en gestión de proyectos de construcción. Consultoría estratégica, peritaje técnico y capacitación ejecutiva.
+        </p>
+        <div class="d-flex gap-3">
+          <a href="https://www.facebook.com/people/PMO-Solutions/100070284155015/#" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-secondary rounded-circle text-white d-inline-flex align-items-center justify-content-center" style="width:36px; height:36px;" title="Facebook PMO Solutions">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.youtube.com/@pmosolutions/videos" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-secondary rounded-circle text-white d-inline-flex align-items-center justify-content-center" style="width:36px; height:36px;" title="YouTube PMO Solutions">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-secondary rounded-circle text-white d-inline-flex align-items-center justify-content-center" style="width:36px; height:36px;" title="WhatsApp PMO Solutions">
+            <i class="fab fa-whatsapp"></i>
           </a>
         </div>
-        <p class="text-white-50 small mb-4" style="line-height: 1.7;">
-          Consultora y centro de alta formación ejecutiva especializado en dirección de proyectos de construcción, administración contractual NEC4/FIDIC, Dispute Boards (DAB-JRD) y peritajes forenses.
+      </div>
+
+      <!-- Columna 2: Navegación & Servicios -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <h5>Navegación & Servicios</h5>
+        <ul class="footer-links mb-4">
+          <li><a href="/"><i class="fas fa-chevron-right"></i> Inicio (Home)</a></li>
+          <li><a href="/capacitaciones"><i class="fas fa-chevron-right"></i> Catálogo de Capacitaciones</a></li>
+          <li><a href="/dab-jrd"><i class="fas fa-chevron-right"></i> Dispute Boards (DAB NEC)</a></li>
+          <li><a href="/analisis-forense"><i class="fas fa-chevron-right"></i> Análisis Forense de Atrasos</a></li>
+          <li><a href="/nec4"><i class="fas fa-chevron-right"></i> Contratos NEC4</a></li>
+          <li><a href="/contacto"><i class="fas fa-chevron-right"></i> Contacto y Asesoría</a></li>
+        </ul>
+        <div class="mt-2">
+          <a href="/libro-de-reclamaciones" class="text-white-50 text-decoration-none small d-inline-flex align-items-center opacity-75 opacity-100-hover" style="font-size: 0.85rem;">
+            <i class="fas fa-book-open me-1 text-warning"></i> Libro de Reclamaciones
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna 3: Contacto Directo Confirmado -->
+      <div class="col-12 col-md-12 col-lg-4">
+        <h5>Contacto Directo</h5>
+        <p class="small text-secondary mb-3">
+          <i class="fas fa-map-marker-alt text-warning me-2 fs-6"></i>
+          <strong>Av. Javier Prado 757, piso 10 Magdalena, Lima 17</strong>, Perú.
         </p>
-
-        <!-- Selector de WhatsApp Multi-País -->
-        <div class="footer-whatsapp-selector p-3 rounded-3 mb-3">
-          <label for="footerCountrySelect" class="form-label text-warning small fw-bold mb-2">
-            <i class="fab fa-whatsapp me-1"></i> Línea Comercial WhatsApp por País:
-          </label>
-          <div class="input-group input-group-sm mb-2">
-            <select class="form-select bg-dark text-white border-secondary" id="footerCountrySelect" aria-label="Seleccionar País">
-              <option value="pe" selected>🇵🇪 Perú (+51 944 276 649)</option>
-              <option value="cl">🇨🇱 Chile (+56 9 8765 4321)</option>
-              <option value="ec">🇪🇨 Ecuador (+593 9 8765 4321)</option>
-              <option value="pa">🇵🇦 Panamá (+507 6123 4567)</option>
-              <option value="mx">🇲🇽 México (+52 55 1234 5678)</option>
-            </select>
-          </div>
-          <div class="d-flex align-items-center justify-content-between">
-            <span class="text-white-50 small" id="footerWaDisplay">🇵🇪 +51 944 276 649</span>
-            <a href="https://wa.me/51944276649" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm fw-bold px-3 rounded-pill" id="footerWaBtn">
-              Chatear <i class="fas fa-arrow-right ms-1"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Columna 2: Programas de Formación -->
-      <div class="col-6 col-lg-3">
-        <h5 class="text-white fw-bold mb-3 footer-heading">Especializaciones</h5>
-        <ul class="list-unstyled footer-links">
-          <li><a href="dab-jrd"><i class="fas fa-chevron-right me-1 text-warning"></i> Dispute Boards & DAB-JRD</a></li>
-          <li><a href="analisis-forense"><i class="fas fa-chevron-right me-1 text-warning"></i> Análisis Forense de Atrasos</a></li>
-          <li><a href="nec4"><i class="fas fa-chevron-right me-1 text-warning"></i> Contratos NEC4 (ECC/PSC)</a></li>
-          <li><a href="vdc-bim"><i class="fas fa-chevron-right me-1 text-warning"></i> VDC - BIM Management</a></li>
-          <li><a href="contratos-estado"><i class="fas fa-chevron-right me-1 text-warning"></i> Ley 30225 & Contrataciones</a></li>
-          <li><a href="primavera-p6"><i class="fas fa-chevron-right me-1 text-warning"></i> Oracle Primavera P6</a></li>
-          <li><a href="capacitaciones" class="text-warning fw-bold"><i class="fas fa-th-large me-1"></i> Ver Catálogo Completo</a></li>
-        </ul>
-      </div>
-
-      <!-- Columna 3: Servicios & Legal -->
-      <div class="col-6 col-lg-2">
-        <h5 class="text-white fw-bold mb-3 footer-heading">Institucional</h5>
-        <ul class="list-unstyled footer-links">
-          <li><a href="contacto"><i class="fas fa-chevron-right me-1 text-warning"></i> Contacto y Sedes</a></li>
-          <li><a href="compliance"><i class="fas fa-chevron-right me-1 text-warning"></i> Compliance Técnico</a></li>
-          <li><a href="terminos-y-condiciones"><i class="fas fa-chevron-right me-1 text-warning"></i> Términos y Condiciones</a></li>
-          <li><a href="politica-de-privacidad"><i class="fas fa-chevron-right me-1 text-warning"></i> Política de Privacidad</a></li>
-          <li>
-            <a href="libro-de-reclamaciones" class="d-inline-flex align-items-center text-warning mt-2 fw-semibold">
-              <i class="fas fa-book-open me-2 fs-5"></i> Libro de Reclamaciones
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Columna 4: Contacto Central -->
-      <div class="col-12 col-lg-3">
-        <h5 class="text-white fw-bold mb-3 footer-heading">Contacto Central</h5>
-        <ul class="list-unstyled text-white-50 small mb-4" style="line-height: 1.9;">
-          <li><i class="fas fa-map-marker-alt text-warning me-2"></i> Av. Javier Prado 757, piso 10, Magdalena, Lima 17, Perú</li>
-          <li><i class="fas fa-envelope text-warning me-2"></i> <a href="mailto:comercial@pmo-solutions.com" class="text-white-50 text-decoration-none">comercial@pmo-solutions.com</a></li>
-          <li><i class="fas fa-phone-alt text-warning me-2"></i> +51 944 276 649</li>
-          <li><i class="fas fa-id-card text-warning me-2"></i> RUC: 20600000000</li>
-        </ul>
-
-        <!-- Redes Sociales -->
-        <div class="footer-social-links d-flex gap-2">
-          <a href="https://www.facebook.com/people/PMO-Solutions/100070284155015/#" target="_blank" rel="noopener noreferrer" class="btn-social" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.youtube.com/@pmosolutions/videos" target="_blank" rel="noopener noreferrer" class="btn-social" title="YouTube"><i class="fab fa-youtube"></i></a>
-          <a href="https://api.whatsapp.com/send?phone=51944276649" target="_blank" rel="noopener noreferrer" class="btn-social" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <p class="small text-secondary mb-3">
+          <i class="fas fa-envelope text-warning me-2 fs-6"></i>
+          <a href="mailto:comercial@pmo-solutions.com" class="text-white fw-semibold text-decoration-none">comercial@pmo-solutions.com</a>
+        </p>
+        <p class="small text-secondary mb-4">
+          <i class="fab fa-whatsapp text-success me-2 fs-5"></i>
+          <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" class="text-white fw-bold text-decoration-none">
+            +51 944 276 649
+          </a>
+        </p>
+        <div class="p-3 bg-dark bg-opacity-50 rounded-3 border border-white border-opacity-10">
+          <span class="small text-white-50 d-block mb-1">Horario de Atención Comercial:</span>
+          <span class="small text-white fw-semibold">Lunes a Viernes: 8:30 AM - 6:30 PM (PET)</span>
         </div>
       </div>
 
     </div>
+  </div>
 
-    <!-- Barra Inferior de Copyright & Métodos de Pago -->
-    <div class="row pt-4 border-top border-white border-opacity-10 align-items-center text-center text-md-start">
-      <div class="col-12 col-md-7 mb-3 mb-md-0">
-        <div class="text-white-50 small mb-1">
-          &copy; <?= date('Y') ?> <strong>PMO Solutions S.A.C.</strong> Todos los derechos reservados.
-        </div>
-        <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-2 gap-md-3 small">
-          <a href="terminos-y-condiciones" class="text-white-50 text-decoration-none">Términos y Condiciones</a>
-          <span class="text-white-50 opacity-50">|</span>
-          <a href="politica-de-privacidad" class="text-white-50 text-decoration-none">Política de Privacidad</a>
-          <span class="text-white-50 opacity-50">|</span>
-          <a href="libro-de-reclamaciones" class="text-white-50 text-decoration-none">Libro de Reclamaciones</a>
-        </div>
+  <!-- Copyright Subfooter -->
+  <div class="footer-bottom">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+      <div class="text-white-50 small text-center text-md-start">
+        &copy; <?= date('Y') ?> <strong>PMO Solutions S.A.C.</strong> Todos los derechos reservados.
       </div>
-      <div class="col-12 col-md-5 text-center text-md-end">
-        <span class="text-white-50 small me-2 d-inline-block mb-1 mb-md-0">Pagos Seguros:</span>
-        <img src="img/logo-visa.png" alt="Visa" height="20" class="me-1 bg-white p-1 rounded">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" height="20" class="me-1 bg-white p-1 rounded">
-        <img src="img/IconoYape.png" alt="Yape" height="20" class="me-1 bg-white p-1 rounded">
-        <img src="img/IconoPlin.png" alt="Plin" height="20" class="bg-white p-1 rounded">
+      <div class="d-flex flex-wrap justify-content-center gap-3 gap-md-4 small">
+        <a href="/contacto" class="text-white-50 text-decoration-none">Políticas de Privacidad</a>
+        <a href="/contacto" class="text-white-50 text-decoration-none">Términos de Servicio</a>
+        <a href="/libro-de-reclamaciones" class="text-white-50 text-decoration-none">Libro de Reclamaciones Virtual</a>
       </div>
     </div>
-
   </div>
 </footer>
 
+<!-- Botón Flotante de WhatsApp -->
+<div class="floating-wa-container">
+  <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" class="floating-wa-btn shadow-lg" title="Consultar por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="floating-wa-tooltip">¿Consultas? Escríbenos</span>
+  </a>
+</div>
+
+<!-- Botón Volver Arriba -->
+<button type="button" id="backToTop" class="back-to-top-btn" title="Volver arriba" aria-label="Volver arriba">
+  <i class="fas fa-chevron-up"></i>
+</button>

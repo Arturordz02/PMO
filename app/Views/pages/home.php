@@ -1,4 +1,4 @@
-﻿<!-- B. Hero de Alto Impacto (Branded & Responsive) -->
+<!-- B. Hero de Alto Impacto (Branded & Responsive) -->
   <header class="hero-section">
     <div class="hero-grid-overlay"></div>
     <div class="container position-relative">
@@ -34,8 +34,8 @@
               <span class="text-white small fw-semibold">Enfoque 100% Práctico en Obras Reales</span>
             </div>
             <div class="d-flex align-items-center gap-2">
-              <i class="fas fa-certificate text-success fs-5"></i>
-              <span class="text-white small fw-semibold">Acreditación y Certificación Oficial</span>
+              <i class="fas fa-briefcase text-success fs-5"></i>
+              <span class="text-white small fw-semibold">Casos Reales de Infraestructura</span>
             </div>
           </div>
         </div>
@@ -535,7 +535,7 @@
             <ul class="service-features">
               <li><i class="fas fa-check-circle"></i> Talleres prácticos con casos propios</li>
               <li><i class="fas fa-check-circle"></i> Docentes internacionales de amplia trayectoria</li>
-              <li><i class="fas fa-check-circle"></i> Certificación institucional de alto impacto</li>
+              <li><i class="fas fa-check-circle"></i> Plantillas y herramientas de aplicación inmediata</li>
             </ul>
             <div class="mt-auto">
               <a href="contacto" class="btn-service-action hvr-grow">
@@ -1336,7 +1336,7 @@
         <span class="section-badge">Resolvemos tus Dudas</span>
         <h2 class="section-title">Preguntas Frecuentes</h2>
         <p class="section-subtitle">
-          Todo lo que necesitas saber sobre nuestras modalidades de estudio, certificación oficial, facturación empresarial y formas de pago.
+          Todo lo que necesitas saber sobre nuestras modalidades de estudio, temarios técnicos, facturación empresarial y formas de pago.
         </p>
       </div>
 
@@ -1349,26 +1349,26 @@
             <div class="accordion-item">
               <h3 class="accordion-header" id="headingOne">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <i class="fas fa-laptop-code faq-icon-bullet"></i> ¿Cuál es la modalidad de las clases y qué ocurre si no puedo conectarme en vivo?
+                  <i class="fas fa-laptop-code faq-icon-bullet"></i> ¿Cuál es la modalidad de las clases y cómo accedo a los contenidos?
                 </button>
               </h3>
               <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordionIndex">
                 <div class="accordion-body">
-                  Nuestras capacitaciones se transmiten <strong>en vivo online</strong> con interacción directa con los docentes para resolución de casos reales. Si por motivos laborales no puedes conectarte en vivo, <strong>todas las sesiones quedan grabadas en alta definición</strong> y disponibles 24/7 en el Campus Virtual, junto a las diapositivas, plantillas y materiales descargables.
+                  Nuestras capacitaciones son en modalidad <strong>100% virtual online con clases grabadas en alta definición</strong>, permitiéndote avanzar a tu propio ritmo sin horarios fijos ni restricciones de tiempo. Todas las lecciones, diapositivas, plantillas editables y materiales descargables están disponibles 24/7 con acceso digital permanente para descarga y visualización flexible.
                 </div>
               </div>
             </div>
 
-            <!-- Item 2: Certificados -->
+            <!-- Item 2: Materiales y Herramientas -->
             <div class="accordion-item">
               <h3 class="accordion-header" id="headingTwo">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  <i class="fas fa-award faq-icon-bullet"></i> ¿Los certificados emitidos son válidos para concursos públicos y postulación a cargos técnicos?
+                  <i class="fas fa-tools faq-icon-bullet"></i> ¿Qué materiales y herramientas prácticas se incluyen en cada capacitación?
                 </button>
               </h3>
               <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordionIndex">
                 <div class="accordion-body">
-                  <strong>Sí.</strong> Los certificados emitidos por PMO Solutions acreditan horas lectivas oficiales válidas para sustentar capacitación técnica en licitaciones públicas (OSCE / Ley de Contrataciones), proyectos de infraestructura bajo acuerdos G2G (Reino Unido, Francia), comités de arbitraje y actualización curricular para el ejercicio profesional.
+                  Cada programa incluye <strong>acceso completo e inmediato a diapositivas en alta resolución, plantillas editables en Excel, modelos reales de contratos y casos prácticos</strong> de proyectos de infraestructura para que puedas aplicarlos directamente en obra o en tu ejercicio profesional.
                 </div>
               </div>
             </div>
@@ -1396,7 +1396,7 @@
               </h3>
               <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordionIndex">
                 <div class="accordion-body">
-                  Aceptamos pagos 100% seguros y encriptados a través de transferencia bancaria directa (BCP, BBVA, Interbank), billeteras móviles (<strong>Yape y Plin</strong>), transferencias bancarias directas (BCP, BBVA, Interbank) y pagos internacionales.
+                  Aceptamos transferencias bancarias directas (BCP, BBVA, Interbank), transferencias interbancarias (CCI), billeteras móviles (<strong>Yape y Plin</strong>) y pagos internacionales. Para coordinar tu inscripción y solicitar datos de cuenta bancaria o emisión de Factura Electrónica B2B con RUC, comunícate directamente con nuestro <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20coordinar%20el%20pago%20de%20mi%20matr%C3%ADcula" target="_blank" rel="noopener noreferrer" class="text-success fw-bold"><i class="fab fa-whatsapp me-1"></i>WhatsApp Comercial</a>.
                 </div>
               </div>
             </div>

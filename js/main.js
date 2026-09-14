@@ -4,76 +4,6 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Multi-country WhatsApp configuration
-  const whatsappConfig = {
-    pe: {
-      name: 'Perú',
-      code: '+51',
-      number: '51944276649',
-      display: '+51 944 276 649',
-      flag: '🇵🇪',
-      defaultMsg: 'Hola PMO Solutions Perú, deseo solicitar información sobre sus programas y consultoría.'
-    },
-    cl: {
-      name: 'Chile',
-      code: '+56',
-      number: '56987654321',
-      display: '+56 9 8765 4321',
-      flag: '🇨🇱',
-      defaultMsg: 'Hola PMO Solutions Chile, deseo consultar por capacitaciones y asesorías de proyectos.'
-    },
-    ec: {
-      name: 'Ecuador',
-      code: '+593',
-      number: '593987654321',
-      display: '+593 9 8765 4321',
-      flag: '🇪🇨',
-      defaultMsg: 'Hola PMO Solutions Ecuador, requiero información de sus cursos especializados.'
-    },
-    pa: {
-      name: 'Panamá',
-      code: '+507',
-      number: '50761234567',
-      display: '+507 6123 4567',
-      flag: '🇵🇦',
-      defaultMsg: 'Hola PMO Solutions Panamá, solicito asesoría en gestión contractual y proyectos.'
-    },
-    mx: {
-      name: 'México',
-      code: '+52',
-      number: '525512345678',
-      display: '+52 55 1234 5678',
-      flag: '🇲🇽',
-      defaultMsg: 'Hola PMO Solutions México, deseo informes sobre sus programas de especialización.'
-    }
-  };
-
-  // Setup Footer WhatsApp Selector
-  const countrySelect = document.getElementById('footerCountrySelect');
-  const footerWaBtn = document.getElementById('footerWaBtn');
-  const footerWaDisplay = document.getElementById('footerWaDisplay');
-
-  function updateFooterWhatsApp(countryKey) {
-    const data = whatsappConfig[countryKey] || whatsappConfig['pe'];
-    const encodedMsg = encodeURIComponent(data.defaultMsg);
-    const waUrl = `https://wa.me/${data.number}?text=${encodedMsg}`;
-    
-    if (footerWaBtn) {
-      footerWaBtn.href = waUrl;
-    }
-    if (footerWaDisplay) {
-      footerWaDisplay.textContent = `${data.flag} ${data.display}`;
-    }
-  }
-
-  if (countrySelect) {
-    countrySelect.addEventListener('change', (e) => {
-      updateFooterWhatsApp(e.target.value);
-    });
-    // Initialize with Peru
-    updateFooterWhatsApp('pe');
-  }
-
   // Back to Top Button
   const backToTopBtn = document.getElementById('backToTop');
   window.addEventListener('scroll', () => {
@@ -102,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
 
   // ── ANIMATED STATS COUNTER ─────────────────────────────────────────────────
   // Counts up numbers when the stats band enters the viewport
@@ -165,6 +96,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /**
+   * Genera una clave de idempotencia de alta entropía (32-48 caracteres) usando Web Crypto API exclusivamente
+   */
+  function generateIdempotencyKey() {
+    if (typeof window !== 'undefined' && window.crypto) {
+      if (typeof window.crypto.randomUUID === 'function') {
+        return (window.crypto.randomUUID().replace(/-/g, '') + Date.now().toString(36)).substring(0, 48);
+      }
+      if (typeof window.crypto.getRandomValues === 'function') {
+        const arr = new Uint8Array(16);
+        window.crypto.getRandomValues(arr);
+        const hex = Array.from(arr, b => b.toString(16).padStart(2, '0')).join('');
+        return ('idemp_' + hex + Date.now().toString(36)).substring(0, 48);
+      }
+    }
+    const ts = Date.now().toString(36);
+    const perf = (typeof performance !== 'undefined' ? performance.now().toString(36).replace('.', '') : '00');
+    return ('idemp_pmo_' + ts + perf).padEnd(24, '0').substring(0, 48);
+  }
+
   // ===========================================================================
   // ── BACKEND INTEGRATION: FORMULARIO DE CONTACTO (contacto.html) ────────────
   // ===========================================================================
@@ -202,6 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      // Clave de idempotencia (reutilizada si es reintento por fallo de conexión)
+      contactForm._idempotencyKey = contactForm._idempotencyKey || generateIdempotencyKey();
+
       // Estado de carga en el botón
       const originalBtnHtml = contactSubmitBtn.innerHTML;
       contactSubmitBtn.disabled = true;
@@ -210,13 +164,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
         const formData = new FormData(contactForm);
-        const endpoint = contactForm.getAttribute('action') || 'backend/send-contact.php';
+        formData.append('idempotency_key', contactForm._idempotencyKey);
+        const endpoint = contactForm.getAttribute('action') || '/contacto/submit';
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || formData.get('csrf_token') || '';
 
         const response = await fetch(endpoint, {
           method: 'POST',
           body: formData,
           headers: {
-            'X-Requested-With': 'XMLHttpRequest'
+            'X-Requested-With': 'XMLHttpRequest',
+            'Idempotency-Key': contactForm._idempotencyKey,
+            ...(csrfToken ? { 'X-CSRF-Token': csrfToken } : {})
           }
         });
 
@@ -234,7 +193,8 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
             </div>`
           );
-          // Limpiar formulario únicamente cuando el servidor confirme recepción exitosa
+          // Limpiar clave de idempotencia y formulario tras confirmación exitosa del servidor
+          contactForm._idempotencyKey = null;
           contactForm.reset();
         } else {
           let errorMsg = data.message || 'Ocurrió un error al enviar el formulario. Por favor, verifica tus datos e inténtalo nuevamente.';
@@ -298,6 +258,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      // Clave de idempotencia (reutilizada si es reintento)
+      claimForm._idempotencyKey = claimForm._idempotencyKey || generateIdempotencyKey();
+
       // Estado de carga en el botón
       const originalBtnHtml = claimSubmitBtn ? claimSubmitBtn.innerHTML : '';
       if (claimSubmitBtn) {
@@ -308,22 +271,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
         const formData = new FormData(claimForm);
-        const endpoint = claimForm.getAttribute('action') || 'backend/submit-claim.php';
+        formData.append('idempotency_key', claimForm._idempotencyKey);
+        const endpoint = claimForm.getAttribute('action') || '/reclamaciones/submit';
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || formData.get('csrf_token') || '';
 
         const response = await fetch(endpoint, {
           method: 'POST',
           body: formData,
           headers: {
-            'X-Requested-With': 'XMLHttpRequest'
+            'X-Requested-With': 'XMLHttpRequest',
+            'Idempotency-Key': claimForm._idempotencyKey,
+            ...(csrfToken ? { 'X-CSRF-Token': csrfToken } : {})
           }
         });
 
         const data = await response.json();
 
         if (response.ok && data.success) {
-          const codigo = escapeHtml(data.codigo_reclamacion || 'REC-2026');
-          const email = escapeHtml(data.email || 'su correo');
-          const tipo = escapeHtml(data.tipo_registro || 'Reclamación');
+          const codigo = escapeHtml(data.data?.codigo_reclamacion || data.codigo_reclamacion || 'REC-2026');
+          const email = escapeHtml(data.data?.email || data.email || 'su correo');
+          const tipo = escapeHtml(data.data?.tipo_registro || data.tipo_registro || 'Reclamación');
 
           showFeedback(
             claimFeedback,
@@ -351,7 +319,8 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>`
           );
 
-          // Ocultar formulario para evitar duplicados accidentales
+          // Limpiar clave y ocultar formulario para evitar duplicados accidentales
+          claimForm._idempotencyKey = null;
           claimForm.style.display = 'none';
         } else {
           let errorMsg = data.message || 'Ocurrió un error al registrar la reclamación.';
@@ -410,53 +379,13 @@ document.addEventListener('DOMContentLoaded', () => {
     return div.innerHTML;
   }
 
-  // ── VALIDACIÓN EN TIEMPO REAL (UX FORMS) ──────────────────────────────────
-  const liveInputs = document.querySelectorAll('input[required], textarea[required], select[required]');
-  liveInputs.forEach(input => {
-    input.addEventListener('blur', () => {
-      validateInputField(input);
+  // ── AOS - Animate On Scroll Initialization ────────────────────────────────
+  if (typeof AOS !== 'undefined') {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 80
     });
-    input.addEventListener('input', () => {
-      if (input.classList.contains('is-invalid')) {
-        validateInputField(input);
-      }
-    });
-  });
-
-  function validateInputField(input) {
-    const val = input.value.trim();
-    if (!val) {
-      input.classList.add('is-invalid');
-      input.classList.remove('is-valid');
-      return false;
-    }
-
-    if (input.type === 'email') {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(val)) {
-        input.classList.add('is-invalid');
-        input.classList.remove('is-valid');
-        return false;
-      }
-    }
-
-    if (input.name === 'numero_documento') {
-      const docType = input.form ? input.form.querySelector('[name="tipo_documento"]')?.value : 'DNI';
-      if (docType === 'DNI' && !/^\d{8}$/.test(val)) {
-        input.classList.add('is-invalid');
-        input.classList.remove('is-valid');
-        return false;
-      }
-      if (docType === 'RUC' && !/^\d{11}$/.test(val)) {
-        input.classList.add('is-invalid');
-        input.classList.remove('is-valid');
-        return false;
-      }
-    }
-
-    input.classList.remove('is-invalid');
-    input.classList.add('is-valid');
-    return true;
   }
 
   // ── TOAST NOTIFICACIÓN AUTOMÁTICA: MATRÍCULAS 2026 ────────────────────────
@@ -468,108 +397,5 @@ document.addEventListener('DOMContentLoaded', () => {
       promoToast.show();
     }
   }, 4000);
-
-  // ── SISTEMA DE CONSENTIMIENTO DISCRETO: TÉRMINOS Y CONDICIONES ────────────
-  const PMO_TERMS_CONFIG = {
-    version: '1.0',                     // Modificar este valor (ej. '2.0') para solicitar nueva aceptación tras cambios legales
-    storageKey: 'pmo_terms_accepted',
-    versionKey: 'pmo_terms_version',
-    rejectedKey: 'pmo_terms_rejected',
-    cookieAccepted: 'pmo_terms_accepted',
-    cookieVersion: 'pmo_terms_version'
-  };
-
-  const termsBanner = document.getElementById('pmoTermsBanner');
-  const termsMainView = document.getElementById('pmoTermsMainView');
-  const termsRejectConfirm = document.getElementById('pmoTermsRejectConfirm');
-  const termsAcceptBtn = document.getElementById('pmoTermsAcceptBtn');
-  const termsDeclineBtn = document.getElementById('pmoTermsDeclineBtn');
-  const termsBackBtn = document.getElementById('pmoTermsBackBtn');
-  const termsConfirmRejectBtn = document.getElementById('pmoTermsConfirmRejectBtn');
-
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-    return null;
-  }
-
-  function hasAcceptedTerms() {
-    try {
-      const localAccepted = localStorage.getItem(PMO_TERMS_CONFIG.storageKey);
-      const localVersion = localStorage.getItem(PMO_TERMS_CONFIG.versionKey);
-      if (localAccepted === 'true' && localVersion === PMO_TERMS_CONFIG.version) {
-        return true;
-      }
-    } catch (e) {
-      // En caso de modo privado o almacenamiento restringido, verificar cookie
-    }
-
-    const cookieAccepted = getCookie(PMO_TERMS_CONFIG.cookieAccepted);
-    const cookieVersion = getCookie(PMO_TERMS_CONFIG.cookieVersion);
-    return cookieAccepted === 'true' && cookieVersion === PMO_TERMS_CONFIG.version;
-  }
-
-  function saveTermsAcceptance() {
-    try {
-      localStorage.setItem(PMO_TERMS_CONFIG.storageKey, 'true');
-      localStorage.setItem(PMO_TERMS_CONFIG.versionKey, PMO_TERMS_CONFIG.version);
-      localStorage.removeItem(PMO_TERMS_CONFIG.rejectedKey);
-    } catch (e) {
-      // Ignorar restricciones de almacenamiento local
-    }
-    // Respaldo en cookie con 1 año de duración
-    const maxAge = 60 * 60 * 24 * 365;
-    document.cookie = `${PMO_TERMS_CONFIG.cookieAccepted}=true; max-age=${maxAge}; path=/; SameSite=Lax`;
-    document.cookie = `${PMO_TERMS_CONFIG.cookieVersion}=${PMO_TERMS_CONFIG.version}; max-age=${maxAge}; path=/; SameSite=Lax`;
-  }
-
-  if (termsBanner) {
-    if (!hasAcceptedTerms()) {
-      // Mostrar tarjeta suavemente con animación de entrada
-      setTimeout(() => {
-        termsBanner.classList.remove('d-none');
-        termsBanner.classList.add('pmo-terms-in');
-      }, 300);
-    }
-
-    // Botón Aceptar: Guarda aceptación y oculta la tarjeta
-    if (termsAcceptBtn) {
-      termsAcceptBtn.addEventListener('click', () => {
-        saveTermsAcceptance();
-        termsBanner.classList.remove('pmo-terms-in');
-        termsBanner.classList.add('pmo-terms-out');
-        setTimeout(() => {
-          termsBanner.classList.add('d-none');
-        }, 350);
-      });
-    }
-
-    // Botón Rechazar: Muestra la pantalla de confirmación dentro de la tarjeta
-    if (termsDeclineBtn) {
-      termsDeclineBtn.addEventListener('click', () => {
-        if (termsMainView) termsMainView.classList.add('d-none');
-        if (termsRejectConfirm) termsRejectConfirm.classList.remove('d-none');
-      });
-    }
-
-    // Botón Volver: Regresa al aviso principal
-    if (termsBackBtn) {
-      termsBackBtn.addEventListener('click', () => {
-        if (termsRejectConfirm) termsRejectConfirm.classList.add('d-none');
-        if (termsMainView) termsMainView.classList.remove('d-none');
-      });
-    }
-
-    // Botón Confirmar Rechazo: Guarda rechazo (sin aceptar) y redirige fuera del sitio
-    if (termsConfirmRejectBtn) {
-      termsConfirmRejectBtn.addEventListener('click', () => {
-        try {
-          localStorage.setItem(PMO_TERMS_CONFIG.rejectedKey, 'true');
-        } catch (e) {}
-        window.location.replace('https://www.google.com/');
-      });
-    }
-  }
 });
 

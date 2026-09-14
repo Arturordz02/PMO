@@ -35,8 +35,8 @@ class Database {
             $config = $globalConfig['database'] ?? [];
         }
 
-        // Si la base de datos está explícitamente deshabilitada
-        if (empty($config['enabled'])) {
+        // Si la base de datos está explícitamente deshabilitada o faltan credenciales requeridas
+        if (empty($config['enabled']) || empty($config['name']) || empty($config['user']) || empty($config['password'])) {
             return null;
         }
 
@@ -63,10 +63,25 @@ class Database {
             self::$instance = new PDO($dsn, $user, $pass, $options);
             return self::$instance;
         } catch (PDOException $e) {
-            self::$lastError = $e->getMessage();
-            error_log("[PMO Database Error] " . $e->getMessage());
+            $sanitized = EmailOutbox::sanitizeError($e->getMessage());
+            self::$lastError = $sanitized;
+            error_log("[PMO Database Error] " . $sanitized);
             return null;
         }
+    }
+
+    /**
+     * Retorna si la conexión a base de datos está actualmente activa
+     */
+    public static function isConnected(): bool {
+        return self::$instance !== null || self::getConnection() !== null;
+    }
+
+    /**
+     * Alias estático para obtener la conexión PDO
+     */
+    public static function getInstance(?array $config = null): ?PDO {
+        return self::getConnection($config);
     }
 
     /**
@@ -75,5 +90,13 @@ class Database {
     public static function getLastError(): ?string {
         return self::$lastError;
     }
-}
 
+    /**
+     * Resetea la conexión para pruebas unitarias
+     */
+    public static function resetConnection(): void {
+        self::$instance = null;
+        self::$connectionAttempted = false;
+        self::$lastError = null;
+    }
+}

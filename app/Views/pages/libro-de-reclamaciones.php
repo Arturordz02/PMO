@@ -47,9 +47,9 @@
         
         <div id="claimFormFeedback" class="mb-4" style="display:none;"></div>
 
-        <form id="claimForm" action="backend/submit-claim.php" method="POST" novalidate>
-          <!-- Token de Seguridad CSRF -->
-          <input type="hidden" name="csrf_token" value="<?= \App\Core\Security::generateCsrfToken() ?>">
+        <form id="claimForm" action="/reclamaciones/submit" method="POST" novalidate>
+          <!-- CSRF Token de Seguridad -->
+          <input type="hidden" name="csrf_token" value="<?= \App\Core\View::e(\App\Core\Csrf::getToken()) ?>">
 
           <!-- Honeypot anti-spam (invisible para usuarios reales) -->
           <div class="d-none" aria-hidden="true">

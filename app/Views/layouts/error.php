@@ -16,37 +16,31 @@ use App\Core\View;
   <meta name="robots" content="noindex, follow">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="img/LogoPMO.png">
+  <link rel="icon" type="image/png" href="<?= View::asset('/img/LogoPMO.png') ?>">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <!-- Bootstrap 5 CSS -->
+  <!-- Bootstrap 5 CSS (Fixed v5.3.3) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   
-  <!-- FontAwesome 6 Icons -->
+  <!-- FontAwesome 6 Icons (Fixed v6.5.1) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
-  <!-- Animate.css -->
+  <!-- Animate.css (Fixed v4.1.1) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   
-  <!-- Custom Corporate CSS -->
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- Custom Corporate CSS (Versioned) -->
+  <link rel="stylesheet" href="<?= View::asset('/css/styles.css') ?>">
 </head>
 <body class="error-page-body">
 
   <?= $content ?>
 
-  <!-- Modal Obligatorio de Términos y Condiciones -->
-  <?php View::partial('terms-modal'); ?>
-
-  <!-- Bootstrap 5 JS Bundle -->
+  <!-- Bootstrap 5 JS Bundle (Fixed v5.3.3) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <!-- Custom JavaScript -->
-  <script src="js/main.js"></script>
 </body>
 </html>
 
