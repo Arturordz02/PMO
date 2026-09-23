@@ -1,0 +1,30 @@
+# Entorno y credenciales locales
+.env
+.env.*
+!.env.example
+
+# Control de versiones e IDEs locales
+.git/
+.vscode/
+.idea/
+
+# Archivos comprimidos y temporales
+*.log
+*.zip
+*.rar
+*.7z
+release/
+pmo_temp/
+
+# Almacenamiento y runtime
+storage/logs/*
+storage/cache/*
+storage/reports/*
+storage/outbox/*
+storage/sessions/*
+
+# Conservar marcadores de estructura y seguridad
+!storage/**/
+!storage/**/.gitkeep
+!storage/**/.htaccess
+

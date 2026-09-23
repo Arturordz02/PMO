@@ -1,0 +1,26 @@
+# ==============================================================================
+# PMO SOLUTIONS - ROBOTS.TXT (Directivas de Indexación y Rastreo)
+# ==============================================================================
+
+User-agent: *
+Allow: /
+Allow: /css/
+Allow: /js/
+Allow: /img/
+
+# Bloquear indexación de archivos backend, pruebas y configuración
+Disallow: /backend/
+Disallow: /backend/*
+Disallow: /.agent/
+Disallow: /.git/
+
+# Bots de motores de búsqueda principales
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Ubicación del Sitemap oficial
+Sitemap: https://pmo-solutions.com/sitemap.xml
+
