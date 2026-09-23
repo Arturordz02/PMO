@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf-token" content="4a109c3814a27ec41448e543c8fc16318c9cdf85873f8833fc01db580b2736d3">
+  <title>Libro de Reclamaciones Virtual | PMO Solutions</title>
+  <meta name="description" content="Libro de Reclamaciones Virtual de PMO Solutions conforme a la Ley N° 29571 (Código de Protección y Defensa del Consumidor) y directivas de INDECOPI.">
+  <link rel="canonical" href="https://pmo-solutions.com/libro-de-reclamaciones">
+  
+  <!-- Open Graph / Meta Tags para Redes Sociales & WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pmo-solutions.com/libro-de-reclamaciones">
+  <meta property="og:title" content="Libro de Reclamaciones Virtual | PMO Solutions">
+  <meta property="og:description" content="Libro de Reclamaciones Virtual de PMO Solutions conforme a la Ley N° 29571 (Código de Protección y Defensa del Consumidor) y directivas de INDECOPI.">
+  <meta property="og:image" content="/PMO/img/LogoPMO.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Libro de Reclamaciones Virtual | PMO Solutions">
+  <meta name="twitter:description" content="Libro de Reclamaciones Virtual de PMO Solutions conforme a la Ley N° 29571 (Código de Protección y Defensa del Consumidor) y directivas de INDECOPI.">
+  <meta name="twitter:image" content="/PMO/img/LogoPMO.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/PMO/img/LogoPMO.png?v=1789411020">
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5 CSS (Fixed v5.3.3) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- FontAwesome 6 Icons (Fixed v6.5.1) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Animate.css (Fixed v4.1.1) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  
+  <!-- AOS - Animate On Scroll (Fixed v2.3.4) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+  
+  <!-- Hover.css (Fixed v2.3.1) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css"/>
+  
+  <!-- Custom Corporate CSS (Versioned) -->
+  <link rel="stylesheet" href="/PMO/css/styles.css?v=1789411020">
+
+  <!-- Versioned Asset Metadata for Dynamic Module & Library Loaders -->
+  <meta name="asset-utils" content="/PMO/js/core/utils.js?v=1789411020">
+  <meta name="asset-chartjs" content="/PMO/js/vendor/chart.umd.min.js?v=1789411020">
+  <meta name="asset-jspdf" content="/PMO/js/vendor/jspdf.umd.min.js?v=1789411022">
+  <meta name="asset-styles" content="/PMO/css/styles.css?v=1789411020">
+
+  </head>
+<body>
+
+  <!-- Aviso Discreto de Vista Previa Técnica -->
+  <div id="pmo-preview-banner" class="pmo-preview-banner" style="background:#0f172a; color:#e2e8f0; font-size:13px; text-align:center; padding:8px 16px; border-bottom:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; gap:8px; z-index:99999; position:relative; font-family:'Plus Jakarta Sans',sans-serif; width:100%; box-sizing:border-box;">
+    <i class="fas fa-info-circle text-warning" aria-hidden="true" style="color:#f59e0b;"></i>
+    <span><strong>Vista previa técnica.</strong> Algunas funciones estarán disponibles en el <a href="https://pmo-solutions.com" target="_blank" rel="noopener" style="color:#38bdf8; font-weight:600; text-decoration:underline;">sitio oficial</a>.</span>
+  </div>
+
+
+  <!-- Barra de Anuncios y Navegación Principal -->
+  <!-- Top Announcement Notification Bar -->
+<div class="announcement-bar">
+  <div class="container d-flex flex-wrap align-items-center justify-content-center">
+    <span class="announcement-badge"><i class="fas fa-bullhorn me-1"></i> Convocatoria 2026</span>
+    <span>Inscripciones abiertas en Programas de Alta Especialización Contractual & Forense.</span>
+    <a href="/PMO/capacitaciones/" class="hvr-grow"><i class="fas fa-arrow-right me-1"></i> Ver Catálogo y Beneficios</a>
+  </div>
+</div>
+
+<!-- Top Utility Bar -->
+<div class="top-bar py-2 d-none d-md-block">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-4">
+      <span><i class="fas fa-map-marker-alt text-warning me-2"></i>Av. Javier Prado 757, piso 10 Magdalena, Lima 17</span>
+      <a href="mailto:comercial@pmo-solutions.com"><i class="fas fa-envelope text-warning me-2"></i>comercial@pmo-solutions.com</a>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp text-success me-1"></i> +51 944 276 649
+      </a>
+      <span class="text-white-50">|</span>
+      <a href="https://www.facebook.com/people/PMO-Solutions/100070284155015/#" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.youtube.com/@pmosolutions/videos" target="_blank" rel="noopener noreferrer" title="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- Header & Navigation -->
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container">
+    <a class="navbar-brand" href="/PMO/">
+      <img src="/PMO/img/LogoPMO.png" alt="PMO Solutions Logo" class="brand-logo-img animate__animated animate__bounceIn" width="44" height="44" style="mix-blend-mode: multiply;">
+      <div class="brand-text-wrapper">
+        <span class="brand-title">PMO <span>SOLUTIONS</span></span>
+        <span class="brand-subtitle">Construimos Soluciones</span>
+      </div>
+    </a>
+
+    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPmoNav" aria-controls="navbarPmoNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarPmoNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item">
+          <a class="nav-link  hvr-underline-from-left" href="/PMO/">
+            <i class="fas fa-home me-1 d-lg-none"></i> HOME
+          </a>
+        </li>
+
+        <!-- Capacitaciones Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle  hvr-underline-from-left" href="/PMO/capacitaciones/" id="navbarDropdownCapacitaciones" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-graduation-cap me-1 d-lg-none"></i> CAPACITACIONES
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownCapacitaciones">
+            <li><a class="dropdown-item fw-bold text-primary border-bottom pb-2 mb-1" href="/PMO/capacitaciones/"><i class="fas fa-th-large me-2"></i> Ver Todo el Catálogo</a></li>
+            <li><a class="dropdown-item" href="/PMO/dab-jrd/"><i class="fas fa-gavel me-2"></i> Dispute Boards & DAB-JRD</a></li>
+            <li><a class="dropdown-item" href="/PMO/analisis-forense/"><i class="fas fa-search-plus me-2"></i> Análisis Forense de Atrasos</a></li>
+            <li><a class="dropdown-item" href="/PMO/nec4/"><i class="fas fa-file-contract me-2"></i> Contratos NEC4 (ECC / PSC)</a></li>
+            <li><a class="dropdown-item" href="/PMO/vdc-bim/"><i class="fas fa-cubes me-2"></i> VDC - BIM Management</a></li>
+            <li><a class="dropdown-item" href="/PMO/contratos-estado/"><i class="fas fa-landmark me-2"></i> Gestión del Cambio & Contratos Estado</a></li>
+            <li><a class="dropdown-item" href="/PMO/compliance/"><i class="fas fa-balance-scale me-2"></i> Compliance en la Construcción</a></li>
+            <li><a class="dropdown-item" href="/PMO/primavera-p6/"><i class="fas fa-chart-line me-2"></i> Primavera P6 & Power BI</a></li>
+            <li><a class="dropdown-item" href="/PMO/riesgos-pmi/"><i class="fas fa-shield-alt me-2"></i> Gestión Integral de Riesgos (PMI®)</a></li>
+            <li><a class="dropdown-item" href="/PMO/analisis-cuantitativo/"><i class="fas fa-calculator me-2"></i> Análisis Cuantitativo de Riesgos</a></li>
+            <li><a class="dropdown-item" href="/PMO/eventos-compensables/"><i class="fas fa-file-invoice-dollar me-2"></i> Eventos Compensables</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link  hvr-underline-from-left" href="/PMO/contacto/">
+            <i class="fas fa-envelope me-1 d-lg-none"></i> CONTACTO
+          </a>
+        </li>
+
+        <li class="nav-item ms-lg-2 mt-3 mt-lg-0">
+          <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n%20sobre%20sus%20servicios%20y%20cursos" target="_blank" rel="noopener noreferrer" class="btn btn-pmo-warning fw-bold px-3 py-2 text-white d-inline-flex align-items-center justify-content-center w-100 w-lg-auto shadow-sm hvr-grow">
+            <i class="fab fa-whatsapp me-2 fs-5"></i> Contactar Asesor
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+  <!-- Contenido Dinámico de la Página -->
+  <main id="main-content">
+    <!-- A. Header e Identificación Legal del Proveedor -->
+  <header class="py-5" style="background: linear-gradient(135deg, #0A192F 0%, #00509E 60%, #0A3663 100%); color: #ffffff;">
+    <div class="container text-center py-2">
+      <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-2 shadow-sm animate__animated animate__fadeInDown">
+        <i class="fas fa-gavel me-2"></i> CONFORME A LA LEY N° 29571 / D.S. 011-2011-PCM
+      </span>
+      <h1 class="hero-title mb-2 text-white animate__animated animate__fadeInDown">LIBRO DE RECLAMACIONES VIRTUAL</h1>
+      <p class="text-white-50 mx-auto mb-4 animate__animated animate__fadeInUp animate__delay-1s" style="max-width: 760px; font-size: 1.05rem;">
+        Conforme a lo establecido en el Código de Protección y Defensa del Consumidor, PMO Solutions pone a disposición de sus clientes corporativos y profesionales el Libro de Reclamaciones Virtual.
+      </p>
+
+      <!-- Tarjeta de Identificación del Proveedor -->
+      <div data-aos="fade-right" data-aos-delay="100" class="card border-0 rounded-4 shadow p-4 text-start mx-auto hvr-float-shadow hvr-box-shadow-outset" data-aos-duration="800" data-aos-delay="100" style="max-width: 860px; background: rgba(255, 255, 255, 0.96); color: #1e293b;">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-md-6">
+            <div class="d-flex align-items-center gap-3">
+              <div class="bg-white p-2 rounded-circle shadow-sm border">
+                <img src="/PMO/img/LogoPMO.png" alt="Logo PMO Solutions" width="45" height="45" style="object-fit: contain;">
+              </div>
+              <div>
+                <span class="fw-bold fs-5 text-primary d-block">PMO SOLUTIONS</span>
+                <span class="text-muted small">Proveedor: PMO SOLUTIONS</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 border-start-md ps-md-4">
+            <div class="small mb-1">
+              <i class="fas fa-map-marker-alt text-warning me-2"></i> <strong>Dirección Física:</strong> Av. Javier Prado 757, piso 10, Magdalena, Lima 17, Perú
+            </div>
+            <div class="small mb-1">
+              <i class="fas fa-envelope text-warning me-2"></i> <strong>Correo Electrónico Comercial:</strong> comercial@pmo-solutions.com
+            </div>
+            <div class="small">
+              <i class="fab fa-whatsapp text-success me-2"></i> <strong>Atención al Cliente / WhatsApp:</strong> +51 944 276 649
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- B. Formulario Simplificado en 3 Bloques (B2B / Ejecutivo) -->
+  <main class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10">
+        
+        <div id="claimFormFeedback" class="mb-4" style="display:none;"></div>
+
+        <form id="claimForm" action="#" onsubmit="return false;" method="POST" novalidate>
+          <!-- CSRF Token de Seguridad -->
+          <input type="hidden" name="csrf_token" value="4a109c3814a27ec41448e543c8fc16318c9cdf85873f8833fc01db580b2736d3">
+
+          <!-- Honeypot anti-spam (invisible para usuarios reales) -->
+          <div class="d-none" aria-hidden="true">
+            <input type="text" name="website_hp" tabindex="-1" autocomplete="off">
+          </div>
+
+          <!-- 1. SECCIÓN 1: DATOS DEL CONSUMIDOR / CLIENTE (Profesional / Empresa) -->
+          <div data-aos="fade-up" data-aos-delay="200" class="card border-0 rounded-4 shadow-sm p-4 p-md-5 mb-4 bg-white border-top border-4 border-primary hvr-box-shadow-outset" data-aos-delay="200">
+            <div class="d-flex align-items-center gap-3 mb-4 pb-2 border-bottom">
+              <div class="p-3 bg-primary bg-opacity-10 text-primary rounded-circle fs-4">
+                <i class="fas fa-user-tie"></i>
+              </div>
+              <div>
+                <span class="badge bg-primary text-white mb-1">SECCIÓN 1</span>
+                <h4 class="fw-bold text-dark mb-0">DATOS DEL CONSUMIDOR / CLIENTE</h4>
+                <small class="text-muted">Información del profesional o razón social reclamante</small>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-md-4">
+                <label class="form-label fw-bold small text-secondary">Tipo de Documento <span class="text-danger">*</span></label>
+                <select class="form-select" name="tipo_documento" required>
+                  <option value="DNI" selected>DNI</option>
+                  <option value="Carnet de Extranjería">Carnet de Extranjería</option>
+                  <option value="Pasaporte">Pasaporte</option>
+                  <option value="RUC">RUC</option>
+                </select>
+              </div>
+
+              <div class="col-12 col-md-8">
+                <label class="form-label fw-bold small text-secondary">Número de Documento <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="numero_documento" placeholder="Ingresa tu número de documento" required>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label fw-bold small text-secondary">Nombres y Apellidos / Razón Social <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="nombre_completo" placeholder="Ingresa tu nombre completo o razón social de la empresa" required>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold small text-secondary">Teléfono / WhatsApp <span class="text-danger">*</span></label>
+                <input type="tel" class="form-control" name="telefono" placeholder="+51 999 999 999" required>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold small text-secondary">Correo Electrónico <span class="text-danger">*</span></label>
+                <input type="email" class="form-control" name="email" placeholder="tu_correo@empresa.com" required>
+                <div class="form-text small">Obligatorio para recibir constancia y respuesta formal.</div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label fw-bold small text-secondary">Domicilio / Dirección <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="domicilio" placeholder="Av. / Jr. / Calle, Número, Distrito, Provincia, Departamento" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. SECCIÓN 2: IDENTIFICACIÓN DEL SERVICIO O CAPACITACIÓN CONTRATADA -->
+          <div data-aos="fade-up" data-aos-delay="200" class="card border-0 rounded-4 shadow-sm p-4 p-md-5 mb-4 bg-white border-top border-4 border-info hvr-box-shadow-outset" data-aos-delay="300">
+            <div class="d-flex align-items-center gap-3 mb-4 pb-2 border-bottom">
+              <div class="p-3 bg-info bg-opacity-10 text-info rounded-circle fs-4">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <div>
+                <span class="badge bg-info text-dark mb-1">SECCIÓN 2</span>
+                <h4 class="fw-bold text-dark mb-0">IDENTIFICACIÓN DEL SERVICIO O CAPACITACIÓN CONTRATADA</h4>
+                <small class="text-muted">Detalles del programa o asesoría contratada</small>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label fw-bold small text-secondary d-block">Tipo de Contratación <span class="text-danger">*</span></label>
+                <div class="d-flex flex-wrap gap-4 pt-1">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="tipo_servicio" id="servCapacitacion" value="Servicio de Capacitación / Curso" checked>
+                    <label class="form-check-label fw-semibold" for="servCapacitacion">Servicio de Capacitación / Curso / Programa Especializado</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="tipo_servicio" id="servConsultoria" value="Consultoría Corporativa">
+                    <label class="form-check-label fw-semibold" for="servConsultoria">Consultoría Corporativa / Asesoría Técnica</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label fw-bold small text-secondary">Nombre del Curso, Taller o Servicio de Consultoría Contratado <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="nombre_servicio" placeholder="Ej. Control de Proyectos con Primavera P6 / Asesoría en JRD / Curso VDC-BIM" required>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label fw-bold small text-secondary">Detalle del Servicio o Código de Matrícula (Opcional)</label>
+                <textarea class="form-control" rows="2" name="detalle_servicio" placeholder="Código de matrícula, comprobante de pago, fecha de inicio o modalidad contratada..."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. SECCIÓN 3: DETALLE DE LA RECLAMACIÓN Y SOLICITUD -->
+          <div data-aos="fade-up" data-aos-delay="200" class="card border-0 rounded-4 shadow-sm p-4 p-md-5 mb-4 bg-white border-top border-4 border-warning hvr-box-shadow-outset" data-aos-delay="100">
+            <div class="d-flex align-items-center gap-3 mb-4 pb-2 border-bottom">
+              <div class="p-3 bg-warning bg-opacity-10 text-warning rounded-circle fs-4">
+                <i class="fas fa-file-signature"></i>
+              </div>
+              <div>
+                <span class="badge bg-warning text-dark mb-1">SECCIÓN 3</span>
+                <h4 class="fw-bold text-dark mb-0">DETALLE DE LA RECLAMACIÓN Y SOLICITUD</h4>
+                <small class="text-muted">Clasificación y fundamentación de los hechos</small>
+              </div>
+            </div>
+
+            <!-- Selección del Tipo de Hoja: Reclamo / Queja -->
+            <div class="p-3 rounded-4 bg-light mb-4 border">
+              <label class="form-label fw-bold text-dark d-block mb-3">Selecciona el Tipo de Registro <span class="text-danger">*</span></label>
+              
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <div class="form-check p-3 bg-white rounded-3 border h-100 hvr-box-shadow-outset">
+                    <input class="form-check-input ms-0 me-2" type="radio" name="tipo_registro" id="regReclamo" value="Reclamo" checked required>
+                    <label class="form-check-label fw-bold text-primary d-block" for="regReclamo">
+                      <i class="fas fa-exclamation-triangle text-danger me-1"></i> RECLAMO
+                    </label>
+                    <span class="small text-muted d-block mt-1">Disconformidad relacionada directamente con los cursos, materiales o servicios contratados.</span>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <div class="form-check p-3 bg-white rounded-3 border h-100 hvr-box-shadow-outset">
+                    <input class="form-check-input ms-0 me-2" type="radio" name="tipo_registro" id="regQueja" value="Queja" required>
+                    <label class="form-check-label fw-bold text-warning d-block" for="regQueja">
+                      <i class="fas fa-comment-dots text-warning me-1"></i> QUEJA
+                    </label>
+                    <span class="small text-muted d-block mt-1">Disconformidad respecto a la atención al cliente, tiempos de respuesta o procesos administrativos.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-bold small text-secondary">Detalle del Reclamo o Queja <span class="text-danger">*</span></label>
+              <textarea class="form-control" rows="5" name="detalle_reclamacion" placeholder="Describa con claridad y precisión los hechos ocurridos..." required></textarea>
+            </div>
+
+            <div class="mb-2">
+              <label class="form-label fw-bold small text-secondary">Pedido Concreto del Consumidor <span class="text-danger">*</span></label>
+              <textarea class="form-control" rows="3" name="pedido_consumidor" placeholder="¿Qué solución o medida correctiva solicita formalmente a PMO Solutions?..." required></textarea>
+            </div>
+          </div>
+
+          <!-- 4. CONFIRMACIÓN, AVISO LEGAL Y ENVÍO AUTOMÁTICO -->
+          <div data-aos="fade-up" data-aos-delay="200" class="card border-0 rounded-4 shadow-sm p-4 p-md-5 mb-4 bg-white border-top border-4 border-success hvr-box-shadow-outset" data-aos-delay="200">
+            <div class="d-flex align-items-center gap-3 mb-4 pb-2 border-bottom">
+              <div class="p-3 bg-success bg-opacity-10 text-success rounded-circle fs-4">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div>
+                <span class="badge bg-success text-white mb-1">CONFIRMACIÓN</span>
+                <h4 class="fw-bold text-dark mb-0">DECLARACIÓN JURADA Y REGISTRO</h4>
+              </div>
+            </div>
+
+            <div class="alert alert-info py-3 small mb-4">
+              <i class="fas fa-info-circle me-2 fs-5 align-middle"></i>
+              <strong>Aviso Legal INDECOPI:</strong> La respuesta a la presente Hoja de Reclamación será enviada a la dirección de correo electrónico consignada en un plazo máximo de <strong>15 días hábiles</strong> conforme a ley (D.S. N° 011-2011-PCM).
+            </div>
+
+            <div class="form-check mb-4">
+              <input class="form-check-input" type="checkbox" name="declaracion_jurada" id="declaracionJurada" required>
+              <label class="form-check-label small text-secondary" for="declaracionJurada">
+                Declaro que los datos consignados son verdaderos y acepto recibir la respuesta formal a través de mi correo electrónico conforme a la Ley N° 29571.
+              </label>
+            </div>
+
+            
+      <div class="alert alert-info py-2 px-3 mb-3 text-center" style="font-size:14px; border-radius:8px;">
+        <i class="fas fa-info-circle me-2"></i>Función disponible únicamente en el <a href="https://pmo-solutions.com/libro-de-reclamaciones" target="_blank" rel="noopener" class="alert-link text-decoration-underline fw-bold">sitio oficial</a>.
+      </div>
+    
+<button type="submit" id="claimSubmitBtn" disabled class="btn btn-warning btn-lg w-100 py-3 fw-bold rounded-pill shadow text-white hvr-grow">
+              <i class="fas fa-paper-plane me-2"></i> REGISTRAR HOJA DE RECLAMACIÓN
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Corporativo de PMO Solutions -->  </main>
+
+  <!-- Toast Emergente de Matrículas 2026 -->
+  <!-- Toast / Notificación Emergente: Matrículas 2026 (PMO Solutions) -->
+<div class="toast-container position-fixed bottom-0 start-0 p-3" style="z-index: 1095;">
+  <div id="promoToast" class="toast align-items-center text-white border-0 shadow-lg" role="alert" aria-live="polite" aria-atomic="true" data-bs-autohide="false" style="background-color: #0A3663; border-left: 5px solid #FF5722 !important; border-radius: 12px; max-width: 380px;">
+    <div class="toast-header bg-transparent text-white border-bottom-0 pb-0 pt-3 px-3 d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-2">
+        <span class="badge rounded-pill bg-warning text-dark fw-bold px-2 py-1" style="font-size: 0.75rem; letter-spacing: 0.5px;">
+          <i class="fas fa-fire me-1 text-danger"></i>VACANTES LIMITADAS
+        </span>
+        <small class="text-white-50" style="font-size: 0.75rem;">PMO Solutions</small>
+      </div>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+    </div>
+    <div class="toast-body pt-2 pb-3 px-3">
+      <h6 class="fw-bold mb-1 text-white" style="font-size: 0.95rem;">
+        🔥 ¡Matrículas 2026 Abiertas!
+      </h6>
+      <p class="mb-3 text-light opacity-90" style="font-size: 0.82rem; line-height: 1.4;">
+        Reserva tu cupo antes del inicio de grupo y asegura tarifa preferencial.
+      </p>
+      <div class="d-flex align-items-center gap-2">
+        <a href="https://wa.me/51944276649?text=Hola%20PMO%20Solutions,%20deseo%20reservar%20mi%20cupo%20para%20las%20Matr%C3%ADculas%202026" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="btn btn-warning btn-sm fw-bold px-3 py-1 rounded-pill shadow-sm d-inline-flex align-items-center gap-1 text-dark text-nowrap" 
+           style="font-size: 0.8rem;">
+          <i class="fab fa-whatsapp text-dark fs-6"></i> Reservar por WhatsApp
+        </a>
+        <button type="button" class="btn btn-outline-light btn-sm px-2 py-1 rounded-pill opacity-75" data-bs-dismiss="toast" style="font-size: 0.75rem;">
+          Después
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Pie de Página Global -->
+  <!-- Footer Principal -->
+<footer class="footer-corporate">
+  <div class="container">
+    <div class="row g-4 g-lg-5">
+      
+      <!-- Columna 1: Identidad PMO Solutions -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <div class="footer-brand-circle me-2">
+            <img src="/PMO/img/LogoPMO.png" alt="Logo PMO Solutions" width="44" height="44" class="d-block" style="object-fit: contain;">
+          </div>
+          <div>
+            <span class="fs-4 fw-bold text-white">PMO <span class="text-warning">SOLUTIONS</span></span>
+            <span class="d-block small text-warning fw-bold" style="letter-spacing: 0.8px;">"Construimos Soluciones."</span>
+          </div>
+        </div>
+        <p class="text-secondary small mb-4">
+          Tu socio para crear soluciones en gestión de proyectos de construcción. Consultoría estratégica, peritaje técnico y capacitación ejecutiva.
+        </p>
+        <div class="d-flex gap-3">
+          <a href="https://www.facebook.com/people/PMO-Solutions/100070284155015/#" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-secondary rounded-circle text-white d-inline-flex align-items-center justify-content-center" style="width:36px; height:36px;" title="Facebook PMO Solutions">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.youtube.com/@pmosolutions/videos" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-secondary rounded-circle text-white d-inline-flex align-items-center justify-content-center" style="width:36px; height:36px;" title="YouTube PMO Solutions">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-secondary rounded-circle text-white d-inline-flex align-items-center justify-content-center" style="width:36px; height:36px;" title="WhatsApp PMO Solutions">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna 2: Navegación & Servicios -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <h5>Navegación & Servicios</h5>
+        <ul class="footer-links mb-4">
+          <li><a href="/PMO/"><i class="fas fa-chevron-right"></i> Inicio (Home)</a></li>
+          <li><a href="/PMO/capacitaciones/"><i class="fas fa-chevron-right"></i> Catálogo de Capacitaciones</a></li>
+          <li><a href="/PMO/dab-jrd/"><i class="fas fa-chevron-right"></i> Dispute Boards (DAB NEC)</a></li>
+          <li><a href="/PMO/analisis-forense/"><i class="fas fa-chevron-right"></i> Análisis Forense de Atrasos</a></li>
+          <li><a href="/PMO/nec4/"><i class="fas fa-chevron-right"></i> Contratos NEC4</a></li>
+          <li><a href="/PMO/contacto/"><i class="fas fa-chevron-right"></i> Contacto y Asesoría</a></li>
+        </ul>
+        <div class="mt-2">
+          <a href="/PMO/libro-de-reclamaciones/" class="text-white-50 text-decoration-none small d-inline-flex align-items-center opacity-75 opacity-100-hover" style="font-size: 0.85rem;">
+            <i class="fas fa-book-open me-1 text-warning"></i> Libro de Reclamaciones
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna 3: Contacto Directo Confirmado -->
+      <div class="col-12 col-md-12 col-lg-4">
+        <h5>Contacto Directo</h5>
+        <p class="small text-secondary mb-3">
+          <i class="fas fa-map-marker-alt text-warning me-2 fs-6"></i>
+          <strong>Av. Javier Prado 757, piso 10 Magdalena, Lima 17</strong>, Perú.
+        </p>
+        <p class="small text-secondary mb-3">
+          <i class="fas fa-envelope text-warning me-2 fs-6"></i>
+          <a href="mailto:comercial@pmo-solutions.com" class="text-white fw-semibold text-decoration-none">comercial@pmo-solutions.com</a>
+        </p>
+        <p class="small text-secondary mb-4">
+          <i class="fab fa-whatsapp text-success me-2 fs-5"></i>
+          <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" class="text-white fw-bold text-decoration-none">
+            +51 944 276 649
+          </a>
+        </p>
+        <div class="p-3 bg-dark bg-opacity-50 rounded-3 border border-white border-opacity-10">
+          <span class="small text-white-50 d-block mb-1">Horario de Atención Comercial:</span>
+          <span class="small text-white fw-semibold">Lunes a Viernes: 8:30 AM - 6:30 PM (PET)</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Copyright Subfooter -->
+  <div class="footer-bottom">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+      <div class="text-white-50 small text-center text-md-start">
+        &copy; 2026 <strong>PMO Solutions</strong> Todos los derechos reservados.
+      </div>
+      <div class="d-flex flex-wrap justify-content-center gap-3 gap-md-4 small">
+        <a href="/PMO/politica-de-privacidad/" class="text-white-50 text-decoration-none">Políticas de Privacidad</a>
+        <a href="/PMO/terminos-y-condiciones/" class="text-white-50 text-decoration-none">Términos de Servicio</a>
+        <a href="/PMO/libro-de-reclamaciones/" class="text-white-50 text-decoration-none">Libro de Reclamaciones Virtual</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Botón Flotante de WhatsApp -->
+<div class="floating-wa-container">
+  <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" class="floating-wa-btn shadow-lg" title="Consultar por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="floating-wa-tooltip">¿Consultas? Escríbenos</span>
+  </a>
+</div>
+
+<!-- Botón Volver Arriba -->
+<button type="button" id="backToTop" class="back-to-top-btn" title="Volver arriba" aria-label="Volver arriba">
+  <i class="fas fa-chevron-up"></i>
+</button>
+  <!-- Chatbot Guiado PMO Solutions (Módulo Aislado) -->
+  
+<!-- Hoja de estilos del Chatbot Guiado PMO Solutions (Versionada) -->
+<link rel="stylesheet" href="/PMO/modules/chatbot/chatbot.css?v=1789411022">
+
+<!-- Contenedor Principal del Chatbot (Esquina Inferior Izquierda) -->
+<div id="pmo-chatbot-root" class="pmo-chatbot-container" data-knowledge="{
+  &quot;bot_info&quot;: {
+    &quot;name&quot;: &quot;Asistente PMO Solutions&quot;,
+    &quot;description&quot;: &quot;Asistente virtual guiado para orientación en programas de capacitación, servicios de consultoría y canales de atención de PMO Solutions.&quot;
+  },
+  &quot;nodes&quot;: {
+    &quot;main_menu&quot;: {
+      &quot;message&quot;: &quot;¡Hola! Bienvenido a **PMO Solutions**. Soy tu asistente virtual guiado. ¿En qué podemos ayudarte hoy?&quot;,
+      &quot;options&quot;: [
+        {
+          &quot;label&quot;: &quot;🎓 Capacitaciones Ejecutivas&quot;,
+          &quot;next_node&quot;: &quot;capacitaciones_menu&quot;
+        },
+        {
+          &quot;label&quot;: &quot;💼 Servicios de Consultoría&quot;,
+          &quot;next_node&quot;: &quot;servicios_menu&quot;
+        },
+        {
+          &quot;label&quot;: &quot;📊 Evaluación de Habilidades&quot;,
+          &quot;next_node&quot;: &quot;evaluacion_habilidades&quot;
+        },
+        {
+          &quot;label&quot;: &quot;💬 Asesor por WhatsApp&quot;,
+          &quot;next_node&quot;: &quot;asesor_whatsapp&quot;
+        },
+        {
+          &quot;label&quot;: &quot;📖 Libro de Reclamaciones&quot;,
+          &quot;next_node&quot;: &quot;libro_reclamaciones&quot;
+        },
+        {
+          &quot;label&quot;: &quot;📍 Ubicación y Horarios&quot;,
+          &quot;next_node&quot;: &quot;ubicacion_horarios&quot;
+        }
+      ]
+    },
+    &quot;capacitaciones_menu&quot;: {
+      &quot;message&quot;: &quot;En **PMO Solutions** brindamos formación de alta especialización técnica y legal en gestión de proyectos de construcción. Selecciona un área de interés o explora los programas:&quot;,
+      &quot;options&quot;: [
+        {
+          &quot;label&quot;: &quot;📋 Catálogo Completo 2026&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/capacitaciones/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;📜 Contratos NEC4&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/nec4/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;⚖️ Dispute Boards (DAB-JRD)&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/dab-jrd/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;🔍 Análisis Forense de Atrasos&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/analisis-forense/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;📅 Oracle Primavera P6&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/primavera-p6/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;🏗️ Virtual Design &amp; Construction (BIM)&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/vdc-bim/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;🏛️ Contrataciones del Estado (Ley 30225)&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/contratos-estado/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;🛡️ Gestión de Riesgos PMI®&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/riesgos-pmi/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;📈 Análisis Cuantitativo de Riesgos&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/analisis-cuantitativo/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;💵 Eventos Compensables NEC4&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/eventos-compensables/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;🤝 Compliance en Construcción&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/compliance/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;↩️ Volver al Menú Principal&quot;,
+          &quot;next_node&quot;: &quot;main_menu&quot;
+        }
+      ]
+    },
+    &quot;servicios_menu&quot;: {
+      &quot;message&quot;: &quot;Nuestros servicios profesionales abarcan asesoría integral, peritaje técnico y resolución colaborativa de controversias en megaproyectos:&quot;,
+      &quot;options&quot;: [
+        {
+          &quot;label&quot;: &quot;⚖️ Juntas de Resolución de Disputas (DAB-JRD)&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/dab-jrd/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;🔍 Peritajes Técnicos y Reclamos de Plazo&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/analisis-forense/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;📜 Consultoría en Contratos NEC4&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/nec4/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;✉️ Contactar a Consultoría Corporativa&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/contacto/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;↩️ Volver al Menú Principal&quot;,
+          &quot;next_node&quot;: &quot;main_menu&quot;
+        }
+      ]
+    },
+    &quot;evaluacion_habilidades&quot;: {
+      &quot;message&quot;: &quot;Contamos con una **Evaluación de Habilidades Blandas** interactiva para profesionales de la construcción. Permite diagnosticar competencias de Liderazgo, Comunicación, Negociación y Gestión de Conflictos con retroalimentación inmediata.&quot;,
+      &quot;options&quot;: [
+        {
+          &quot;label&quot;: &quot;🚀 Realizar Evaluación Gratuita&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/evaluacion-habilidades/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;↩️ Volver al Menú Principal&quot;,
+          &quot;next_node&quot;: &quot;main_menu&quot;
+        }
+      ]
+    },
+    &quot;asesor_whatsapp&quot;: {
+      &quot;message&quot;: &quot;Puedes comunicarte directamente con nuestro equipo de atención y coordinaciones académicas a través del canal oficial de WhatsApp:&quot;,
+      &quot;options&quot;: [
+        {
+          &quot;label&quot;: &quot;💬 Chatear con Asesor (+51 944 276 649)&quot;,
+          &quot;type&quot;: &quot;external_link&quot;,
+          &quot;url&quot;: &quot;https://api.whatsapp.com/send?phone=51944276649&quot;
+        },
+        {
+          &quot;label&quot;: &quot;↩️ Volver al Menú Principal&quot;,
+          &quot;next_node&quot;: &quot;main_menu&quot;
+        }
+      ]
+    },
+    &quot;libro_reclamaciones&quot;: {
+      &quot;message&quot;: &quot;Conforme a lo establecido en el Código de Protección y Defensa del Consumidor (Ley N° 29571), ponemos a tu disposición nuestro Libro de Reclamaciones Virtual para registrar quejas o reclamos.&quot;,
+      &quot;options&quot;: [
+        {
+          &quot;label&quot;: &quot;📖 Acceder al Libro de Reclamaciones&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/libro-de-reclamaciones/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;↩️ Volver al Menú Principal&quot;,
+          &quot;next_node&quot;: &quot;main_menu&quot;
+        }
+      ]
+    },
+    &quot;ubicacion_horarios&quot;: {
+      &quot;message&quot;: &quot;**Sede Corporativa:**\nAv. Javier Prado 757, piso 10 Magdalena, Lima 17, Perú.\n\n**Horario de Atención Comercial:**\nLunes a Viernes: 8:30 AM - 6:30 PM (PET)\n\n**Correo Electrónico:**\ncomercial@pmo-solutions.com\n\n**Teléfono / WhatsApp:**\n+51 944 276 649&quot;,
+      &quot;options&quot;: [
+        {
+          &quot;label&quot;: &quot;✉️ Formulario de Contacto&quot;,
+          &quot;type&quot;: &quot;link&quot;,
+          &quot;url&quot;: &quot;/PMO/contacto/&quot;
+        },
+        {
+          &quot;label&quot;: &quot;💬 Escribir por WhatsApp&quot;,
+          &quot;type&quot;: &quot;external_link&quot;,
+          &quot;url&quot;: &quot;https://api.whatsapp.com/send?phone=51944276649&quot;
+        },
+        {
+          &quot;label&quot;: &quot;↩️ Volver al Menú Principal&quot;,
+          &quot;next_node&quot;: &quot;main_menu&quot;
+        }
+      ]
+    }
+  }
+}
+
+">
+
+  <!-- Botón Flotante Disparador -->
+  <button type="button" class="pmo-chatbot-trigger" aria-label="Abrir asistente virtual PMO Solutions" aria-expanded="false" aria-controls="pmo-chatbot-window">
+    <i class="fas fa-comments pmo-chatbot-trigger-icon-open" aria-hidden="true"></i>
+    <i class="fas fa-times pmo-chatbot-trigger-icon-close" aria-hidden="true"></i>
+    <span class="pmo-chatbot-tooltip">¿Deseas orientación? Consúltanos</span>
+  </button>
+
+  <!-- Ventana / Panel del Asistente Virtual -->
+  <section id="pmo-chatbot-window" class="pmo-chatbot-window" role="dialog" aria-modal="false" aria-labelledby="pmo-chatbot-title" aria-hidden="true">
+    
+    <!-- Encabezado del Asistente -->
+    <header class="pmo-chatbot-header">
+      <div class="pmo-chatbot-header-info">
+        <div class="pmo-chatbot-avatar" aria-hidden="true">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="pmo-chatbot-header-text">
+          <h2 id="pmo-chatbot-title" class="pmo-chatbot-title">Asistente PMO</h2>
+          <span class="pmo-chatbot-status">
+            <span class="pmo-chatbot-status-indicator" aria-hidden="true"></span>
+            En línea
+          </span>
+        </div>
+      </div>
+      <button type="button" class="pmo-chatbot-close-btn" aria-label="Cerrar asistente virtual">
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
+    </header>
+
+    <!-- Cuerpo del Diálogo / Mensajes -->
+    <div class="pmo-chatbot-body" role="log" aria-live="polite">
+      <!-- El contenido interactivo y opciones guiadas son inyectados dinámicamente por chatbot.js -->
+    </div>
+
+    <!-- Pie de Página / Acciones Globales -->
+    <footer class="pmo-chatbot-footer">
+      <button type="button" class="pmo-chatbot-reset-btn" aria-label="Reiniciar conversación">
+        <i class="fas fa-redo-alt" aria-hidden="true"></i>
+        <span>Inicio</span>
+      </button>
+      <p class="pmo-chatbot-disclaimer">
+        Orientación guiada • Sin recolección de datos
+      </p>
+    </footer>
+
+  </section>
+
+</div>
+
+<!-- Script del Chatbot Guiado PMO Solutions (Versionado y diferido) -->
+<script src="/PMO/modules/chatbot/chatbot.js?v=1789411022" defer></script>
+
+
+  <!-- Bootstrap 5 JS Bundle (Fixed v5.3.3) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- AOS JS Script (Fixed v2.3.4) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  
+  <!-- Custom JavaScript (Versioned) -->
+  <script src="/PMO/js/main.js?v=1790117490"></script>
+
+  </body>
+</html>
+

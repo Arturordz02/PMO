@@ -1,0 +1,192 @@
+{
+  "bot_info": {
+    "name": "Asistente PMO Solutions",
+    "description": "Asistente virtual guiado para orientación en programas de capacitación, servicios de consultoría y canales de atención de PMO Solutions."
+  },
+  "nodes": {
+    "main_menu": {
+      "message": "¡Hola! Bienvenido a **PMO Solutions**. Soy tu asistente virtual guiado. ¿En qué podemos ayudarte hoy?",
+      "options": [
+        {
+          "label": "🎓 Capacitaciones Ejecutivas",
+          "next_node": "capacitaciones_menu"
+        },
+        {
+          "label": "💼 Servicios de Consultoría",
+          "next_node": "servicios_menu"
+        },
+        {
+          "label": "📊 Evaluación de Habilidades",
+          "next_node": "evaluacion_habilidades"
+        },
+        {
+          "label": "💬 Asesor por WhatsApp",
+          "next_node": "asesor_whatsapp"
+        },
+        {
+          "label": "📖 Libro de Reclamaciones",
+          "next_node": "libro_reclamaciones"
+        },
+        {
+          "label": "📍 Ubicación y Horarios",
+          "next_node": "ubicacion_horarios"
+        }
+      ]
+    },
+    "capacitaciones_menu": {
+      "message": "En **PMO Solutions** brindamos formación de alta especialización técnica y legal en gestión de proyectos de construcción. Selecciona un área de interés o explora los programas:",
+      "options": [
+        {
+          "label": "📋 Catálogo Completo 2026",
+          "type": "link",
+          "url": "/PMO/capacitaciones/"
+        },
+        {
+          "label": "📜 Contratos NEC4",
+          "type": "link",
+          "url": "/PMO/nec4/"
+        },
+        {
+          "label": "⚖️ Dispute Boards (DAB-JRD)",
+          "type": "link",
+          "url": "/PMO/dab-jrd/"
+        },
+        {
+          "label": "🔍 Análisis Forense de Atrasos",
+          "type": "link",
+          "url": "/PMO/analisis-forense/"
+        },
+        {
+          "label": "📅 Oracle Primavera P6",
+          "type": "link",
+          "url": "/PMO/primavera-p6/"
+        },
+        {
+          "label": "🏗️ Virtual Design & Construction (BIM)",
+          "type": "link",
+          "url": "/PMO/vdc-bim/"
+        },
+        {
+          "label": "🏛️ Contrataciones del Estado (Ley 30225)",
+          "type": "link",
+          "url": "/PMO/contratos-estado/"
+        },
+        {
+          "label": "🛡️ Gestión de Riesgos PMI®",
+          "type": "link",
+          "url": "/PMO/riesgos-pmi/"
+        },
+        {
+          "label": "📈 Análisis Cuantitativo de Riesgos",
+          "type": "link",
+          "url": "/PMO/analisis-cuantitativo/"
+        },
+        {
+          "label": "💵 Eventos Compensables NEC4",
+          "type": "link",
+          "url": "/PMO/eventos-compensables/"
+        },
+        {
+          "label": "🤝 Compliance en Construcción",
+          "type": "link",
+          "url": "/PMO/compliance/"
+        },
+        {
+          "label": "↩️ Volver al Menú Principal",
+          "next_node": "main_menu"
+        }
+      ]
+    },
+    "servicios_menu": {
+      "message": "Nuestros servicios profesionales abarcan asesoría integral, peritaje técnico y resolución colaborativa de controversias en megaproyectos:",
+      "options": [
+        {
+          "label": "⚖️ Juntas de Resolución de Disputas (DAB-JRD)",
+          "type": "link",
+          "url": "/PMO/dab-jrd/"
+        },
+        {
+          "label": "🔍 Peritajes Técnicos y Reclamos de Plazo",
+          "type": "link",
+          "url": "/PMO/analisis-forense/"
+        },
+        {
+          "label": "📜 Consultoría en Contratos NEC4",
+          "type": "link",
+          "url": "/PMO/nec4/"
+        },
+        {
+          "label": "✉️ Contactar a Consultoría Corporativa",
+          "type": "link",
+          "url": "/PMO/contacto/"
+        },
+        {
+          "label": "↩️ Volver al Menú Principal",
+          "next_node": "main_menu"
+        }
+      ]
+    },
+    "evaluacion_habilidades": {
+      "message": "Contamos con una **Evaluación de Habilidades Blandas** interactiva para profesionales de la construcción. Permite diagnosticar competencias de Liderazgo, Comunicación, Negociación y Gestión de Conflictos con retroalimentación inmediata.",
+      "options": [
+        {
+          "label": "🚀 Realizar Evaluación Gratuita",
+          "type": "link",
+          "url": "/PMO/evaluacion-habilidades/"
+        },
+        {
+          "label": "↩️ Volver al Menú Principal",
+          "next_node": "main_menu"
+        }
+      ]
+    },
+    "asesor_whatsapp": {
+      "message": "Puedes comunicarte directamente con nuestro equipo de atención y coordinaciones académicas a través del canal oficial de WhatsApp:",
+      "options": [
+        {
+          "label": "💬 Chatear con Asesor (+51 944 276 649)",
+          "type": "external_link",
+          "url": "https://api.whatsapp.com/send?phone=51944276649"
+        },
+        {
+          "label": "↩️ Volver al Menú Principal",
+          "next_node": "main_menu"
+        }
+      ]
+    },
+    "libro_reclamaciones": {
+      "message": "Conforme a lo establecido en el Código de Protección y Defensa del Consumidor (Ley N° 29571), ponemos a tu disposición nuestro Libro de Reclamaciones Virtual para registrar quejas o reclamos.",
+      "options": [
+        {
+          "label": "📖 Acceder al Libro de Reclamaciones",
+          "type": "link",
+          "url": "/PMO/libro-de-reclamaciones/"
+        },
+        {
+          "label": "↩️ Volver al Menú Principal",
+          "next_node": "main_menu"
+        }
+      ]
+    },
+    "ubicacion_horarios": {
+      "message": "**Sede Corporativa:**\nAv. Javier Prado 757, piso 10 Magdalena, Lima 17, Perú.\n\n**Horario de Atención Comercial:**\nLunes a Viernes: 8:30 AM - 6:30 PM (PET)\n\n**Correo Electrónico:**\ncomercial@pmo-solutions.com\n\n**Teléfono / WhatsApp:**\n+51 944 276 649",
+      "options": [
+        {
+          "label": "✉️ Formulario de Contacto",
+          "type": "link",
+          "url": "/PMO/contacto/"
+        },
+        {
+          "label": "💬 Escribir por WhatsApp",
+          "type": "external_link",
+          "url": "https://api.whatsapp.com/send?phone=51944276649"
+        },
+        {
+          "label": "↩️ Volver al Menú Principal",
+          "next_node": "main_menu"
+        }
+      ]
+    }
+  }
+}
+
