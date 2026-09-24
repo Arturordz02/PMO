@@ -87,7 +87,7 @@
         <!-- Columna Izquierda: Affiche Principal Clickeable -->
         <div class="col-12 col-lg-5">
           <div data-aos="fade-right" data-aos-delay="100" class="card border-0 shadow-lg rounded-4 overflow-hidden position-relative group-hover hvr-box-shadow-outset">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdPOpAucuZBS-Tu97Nusr-E9pGhRVRmAOwPyNgF-ryInobyKw/viewform" target="_blank" rel="noopener noreferrer">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScXwQcpQ2LDvCmFQvElQ2NkOUDe3TGW-Lc_Wn_HQeW2Mgpu9w/viewform" target="_blank" rel="noopener noreferrer">
               <img src="img/controlproyectos.png" alt="Flyer Control de Proyectos con Primavera P6 y Power BI" class="img-fluid w-100 rounded-4 transition-zoom" style="display: block;">
               <div class="card-img-overlay d-flex align-items-end p-3 bg-dark bg-opacity-25 opacity-hover hvr-box-shadow-outset">
                 <span class="btn btn-warning btn-sm fw-bold w-100 shadow text-white hvr-grow"><i class="fas fa-external-link-alt me-2"></i> Clic para Inscripción Directa</span>
@@ -350,7 +350,7 @@
       <!-- Botones de Acción -->
       <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
 
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdPOpAucuZBS-Tu97Nusr-E9pGhRVRmAOwPyNgF-ryInobyKw/viewform" target="_blank" rel="noopener noreferrer" class="btn enrollment-btn-brochure btn-lg px-4 py-3 shadow w-100 w-md-auto hvr-grow">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScXwQcpQ2LDvCmFQvElQ2NkOUDe3TGW-Lc_Wn_HQeW2Mgpu9w/viewform" target="_blank" rel="noopener noreferrer" class="btn enrollment-btn-brochure btn-lg px-4 py-3 shadow w-100 w-md-auto hvr-grow">
           <i class="fas fa-file-pdf me-2"></i> Descargar Brochure & Temario
         </a>
 

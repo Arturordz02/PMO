@@ -276,7 +276,7 @@
       <!-- Botones de Acción -->
       <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
 
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSehW88_KPBJ8OIQsGReXkiwCgnhKEtVujT3Nh_Q_ABpuxryTQ/viewform" target="_blank" rel="noopener noreferrer" class="btn enrollment-btn-brochure btn-lg px-4 py-3 shadow w-100 w-md-auto hvr-grow">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdPOpAucuZBS-Tu97Nusr-E9pGhRVRmAOwPyNgF-ryInobyKw/viewform" target="_blank" rel="noopener noreferrer" class="btn enrollment-btn-brochure btn-lg px-4 py-3 shadow w-100 w-md-auto hvr-grow">
           <i class="fas fa-file-pdf me-2"></i> Descargar Brochure & Temario
         </a>
 
