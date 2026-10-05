@@ -127,12 +127,12 @@
           <div class="card bg-light border-0 rounded-4 p-4 mt-4 shadow-sm border-start border-5 border-primary" data-aos="fade-up">
             <div class="row align-items-center g-3">
               <div class="col-md-3 text-center">
-                <img src="img/LuisRuiz.jpg" alt="DOCENTE ESPECIALISTA EN CONTRATOS NEC4" class="rounded-circle shadow border border-3 border-white" style="width: 110px; height: 110px; object-fit: cover; object-position: top;">
+                <img src="img/ivanbenavides.jpg" alt="ING. IVÁN BENAVIDES" class="rounded-circle shadow border border-3 border-white" style="width: 110px; height: 110px; object-fit: cover; object-position: top;">
               </div>
               <div class="col-md-9">
                 <span class="badge bg-primary text-white mb-2 px-3 py-2 rounded-pill"><i class="fas fa-user-tie me-1"></i> DOCENTE PRINCIPAL</span>
-                <h4 class="fw-bold mb-1 text-dark">DOCENTE ESPECIALISTA EN CONTRATOS NEC4</h4>
-                <p class="small text-primary fw-bold mb-2">Especialista en Gestión de Proyectos, Riesgos y Contratos NEC</p>
+                <h4 class="fw-bold mb-1 text-dark">ING. IVÁN BENAVIDES</h4>
+                <p class="small text-primary fw-bold mb-2">Gestor de Contratos Panamericanos · Gestor de Riesgos Colegios Bicentenario</p>
                 
                 <!-- Resumen Completo y Trayectoria Profesional -->
                 <p class="small text-muted mb-2" style="line-height: 1.6;">

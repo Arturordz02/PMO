@@ -535,7 +535,7 @@
           <div class="docente-card hvr-box-shadow-outset">
             <div>
               <div class="teacher-img-wrap">
-                <img src="img/ivanbenavides.jpg" alt="Félix Valdez-Torero, Ing., PhD(c), MSc, PMP®" loading="lazy">
+                <img src="img/felixvaldez.jpg" alt="Félix Valdez-Torero, Ing., PhD(c), MSc, PMP®" loading="lazy">
               </div>
               <div class="docente-name">FÉLIX VALDEZ-TORERO</div>
               <div class="docente-role">Gestión de Riesgos PMI®</div>
@@ -590,6 +590,28 @@
                 <i class="fas fa-plus-circle me-1"></i> Ver más
               </button>
               <a href="eventos-compensables" class="docente-btn-more">
+                <i class="fas fa-graduation-cap me-1"></i> Ver Curso & Perfil
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Docente 9: Iván Benavides -->
+        <div class="col-12 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="450">
+          <div class="docente-card hvr-box-shadow-outset">
+            <div>
+              <div class="teacher-img-wrap">
+                <img src="img/ivanbenavides.jpg" alt="Ing. Iván Benavides" loading="lazy">
+              </div>
+              <div class="docente-name">ING. IVÁN BENAVIDES</div>
+              <div class="docente-role">Casos de Aplicación NEC4</div>
+              <span class="docente-specialty mb-3">Gestión de Contratos · +16 Años</span>
+            </div>
+            <div class="d-flex flex-column gap-2 mt-2">
+              <button type="button" class="btn btn-outline-primary btn-sm fw-bold rounded-pill w-100 hvr-grow" data-bs-toggle="modal" data-bs-target="#docenteModal_9">
+                <i class="fas fa-plus-circle me-1"></i> Ver más
+              </button>
+              <a href="nec4" class="docente-btn-more">
                 <i class="fas fa-graduation-cap me-1"></i> Ver Curso & Perfil
               </a>
             </div>
@@ -895,7 +917,7 @@
           <div class="row align-items-center g-4">
             <div class="col-12 col-md-5 text-center">
               <div class="rounded-4 overflow-hidden shadow-sm mx-auto border border-2 border-light-subtle" style="max-width: 240px;">
-                <img src="img/ivanbenavides.jpg" alt="Félix Valdez-Torero" class="img-fluid w-100" style="object-fit: cover; max-height: 280px;">
+                <img src="img/felixvaldez.jpg" alt="Félix Valdez-Torero" class="img-fluid w-100" style="object-fit: cover; max-height: 280px;">
               </div>
               <div class="mt-3">
                 <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold">Gestión de Riesgos PMI®</span>
@@ -1027,6 +1049,60 @@
                   <i class="fas fa-file-invoice-dollar me-1"></i> Ver Curso Eventos Compensables
                 </a>
                 <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20consultar%20por%20los%20programas%20a%20cargo%20del%20docente%20Victor%20Cruz" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm fw-bold px-3 py-2 text-white hvr-grow">
+                  <i class="fab fa-whatsapp me-1"></i> Consultar Curso
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 9: Iván Benavides -->
+  <div class="modal fade" id="docenteModal_9" tabindex="-1" aria-labelledby="docenteModalLabel9" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content border-0 shadow-24 rounded-4 overflow-hidden">
+        <div class="modal-header bg-dark text-white p-4 border-0">
+          <div class="d-flex align-items-center gap-3">
+            <div class="bg-white p-2 rounded-circle shadow-sm">
+              <img src="img/LogoPMO.png" alt="PMO Solutions" width="36" height="36" style="object-fit: contain;">
+            </div>
+            <div>
+              <h5 class="modal-title fw-bold mb-0 text-white" id="docenteModalLabel9">Perfil Profesional & Trayectoria</h5>
+              <span class="small text-warning fw-semibold">PMO Solutions Contract Management</span>
+            </div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body p-4 p-md-5">
+          <div class="row align-items-center g-4">
+            <div class="col-12 col-md-5 text-center">
+              <div class="rounded-4 overflow-hidden shadow-sm mx-auto border border-2 border-light-subtle bg-light" style="max-width: 240px;">
+                <img src="img/ivanbenavides.jpg" alt="Ing. Iván Benavides" class="img-fluid w-100" style="object-fit: cover; max-height: 280px;">
+              </div>
+              <div class="mt-3">
+                <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold">Casos de Aplicación NEC4</span>
+              </div>
+            </div>
+            <div class="col-12 col-md-7">
+              <h3 class="fw-bold text-primary mb-1">ING. IVÁN BENAVIDES</h3>
+              <div class="text-muted fw-semibold small mb-3 text-uppercase" style="letter-spacing: 0.05em;">Gestor de Contratos Panamericanos · Gestor de Riesgos Colegios Bicentenario</div>
+              
+              <p class="text-secondary small mb-3 leading-relaxed">
+                Profesional con más de 16 años de experiencia en gestión de proyectos, riesgos, contratos NEC y gestión de la calidad: PEIP-EB, SAVIA PERÚ, PROYECTO ESPECIAL JUEGOS PANAMERICANOS LIMA 2019, PERU PIPING SPOOLS, GRAÑA Y MONTERO, INGENIERÍA Y SERVICIOS TECNOLÓGICOS S.A.C.
+              </p>
+
+              <div class="docente-modal-quote">
+                <i class="fas fa-quote-left me-2 text-warning"></i>
+                "La adecuada administración contractual y la gestión temprana previenen controversias de envergadura."
+              </div>
+
+              <div class="d-flex flex-wrap gap-2 mt-4 pt-2">
+                <a href="nec4" class="btn btn-warning btn-sm fw-bold px-3 py-2 text-white hvr-grow">
+                  <i class="fas fa-handshake me-1"></i> Ver Curso Casos NEC4
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20consultar%20por%20los%20programas%20a%20cargo%20del%20docente%20Ivan%20Benavides" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm fw-bold px-3 py-2 text-white hvr-grow">
                   <i class="fab fa-whatsapp me-1"></i> Consultar Curso
                 </a>
               </div>
