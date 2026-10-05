@@ -256,9 +256,11 @@
 
             <div id="contactFormFeedback" class="mb-3" style="display:none;"></div>
 
-            <form id="contactForm" action="#" onsubmit="return false;" method="POST" novalidate>
-              <!-- CSRF Token de Seguridad -->
-              <input type="hidden" name="csrf_token" value="a57be62f572e5bbdae5c30b6df7cc8de4aabc68ee62e136c91c0d4032d62fec4">
+            <form id="contactForm" action="https://formsubmit.co/ajax/omar.samaniego@gmail.com" method="POST" novalidate>
+              <!-- Configuración FormSubmit -->
+              <input type="hidden" name="_subject" value="Nueva Consulta Web - PMO Solutions">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_captcha" value="false">
 
               <!-- Honeypot anti-spam (invisible para usuarios reales) -->
               <div class="d-none" aria-hidden="true">
@@ -270,7 +272,7 @@
                 <label class="form-label fw-bold small text-secondary" for="contact_nombre">Nombre Completo <span class="text-danger">*</span></label>
                 <div class="input-group">
                   <span class="input-group-text bg-light border-end-0"><i class="fas fa-user text-muted"></i></span>
-                  <input type="text" class="form-control border-start-0 ps-0" id="contact_nombre" name="nombre" placeholder="Ingresa tu nombre y apellido" required disabled>
+                  <input type="text" class="form-control border-start-0 ps-0" id="contact_nombre" name="nombre" placeholder="Ingresa tu nombre y apellido" required>
                 </div>
               </div>
 
@@ -279,7 +281,7 @@
                 <label class="form-label fw-bold small text-secondary" for="contact_telefono">WhatsApp / Teléfono <span class="text-danger">*</span></label>
                 <div class="input-group">
                   <span class="input-group-text bg-light border-end-0"><i class="fab fa-whatsapp text-success"></i></span>
-                  <input type="tel" class="form-control border-start-0 ps-0" id="contact_telefono" name="telefono" placeholder="+51 999 999 999" required disabled>
+                  <input type="tel" class="form-control border-start-0 ps-0" id="contact_telefono" name="telefono" placeholder="+51 999 999 999" required>
                 </div>
               </div>
 
@@ -288,14 +290,14 @@
                 <label class="form-label fw-bold small text-secondary" for="contact_email">Correo Electrónico <span class="text-danger">*</span></label>
                 <div class="input-group">
                   <span class="input-group-text bg-light border-end-0"><i class="fas fa-envelope text-muted"></i></span>
-                  <input type="email" class="form-control border-start-0 ps-0" id="contact_email" name="email" placeholder="ejemplo@empresa.com" required disabled>
+                  <input type="email" class="form-control border-start-0 ps-0" id="contact_email" name="email" placeholder="ejemplo@empresa.com" required>
                 </div>
               </div>
 
               <!-- Asunto / Servicio de Interés -->
               <div class="mb-3">
                 <label class="form-label fw-bold small text-secondary" for="contact_servicio">Servicio de Interés</label>
-                <select class="form-select" id="contact_servicio" name="servicio" disabled>
+                <select class="form-select" id="contact_servicio" name="servicio">
                   <option value="Capacitación Profesional">Capacitación Profesional / Cursos Especializados</option>
                   <option value="Consultoría PMO Corporativa">Consultoría PMO Corporativa</option>
                   <option value="Asesoría Contractual / Peritaje Forense">Asesoría Contractual / Peritaje Forense</option>
@@ -307,16 +309,11 @@
               <!-- Comentario o Consulta -->
               <div class="mb-4">
                 <label class="form-label fw-bold small text-secondary" for="contact_mensaje">Comentario o Consulta <span class="text-danger">*</span></label>
-                <textarea class="form-control" id="contact_mensaje" name="mensaje" rows="4" placeholder="Escribe aquí los detalles de tu consulta sobre cursos, fechas, inscripciones o consultoría..." required disabled></textarea>
+                <textarea class="form-control" id="contact_mensaje" name="mensaje" rows="4" placeholder="Escribe aquí los detalles de tu consulta sobre cursos, fechas, inscripciones o consultoría..." required></textarea>
               </div>
 
               <!-- Botón de Envío Destacado -->
-              
-      <div class="alert alert-info py-2 px-3 mb-3 text-center" style="font-size:14px; border-radius:8px;">
-        <i class="fas fa-info-circle me-2"></i>Función disponible únicamente en el <a href="https://pmo-solutions.com/contacto" target="_blank" rel="noopener" class="alert-link text-decoration-underline fw-bold">sitio oficial</a>.
-      </div>
-    
-<button type="submit" id="contactSubmitBtn" disabled class="btn btn-warning btn-lg w-100 py-3 fw-bold rounded-pill shadow text-white hvr-grow">
+              <button type="submit" id="contactSubmitBtn" class="btn btn-warning btn-lg w-100 py-3 fw-bold rounded-pill shadow text-white hvr-grow">
                 <i class="fas fa-paper-plane me-2"></i> ENVIAR MENSAJE
               </button>
             </form>

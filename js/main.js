@@ -169,19 +169,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || formData.get('csrf_token') || '';
 
+        const isFormSubmit = endpoint.includes('formsubmit.co');
+        const reqHeaders = {
+          'Accept': 'application/json'
+        };
+        if (!isFormSubmit) {
+          reqHeaders['X-Requested-With'] = 'XMLHttpRequest';
+          reqHeaders['Idempotency-Key'] = contactForm._idempotencyKey;
+          if (csrfToken) reqHeaders['X-CSRF-Token'] = csrfToken;
+        }
+
         const response = await fetch(endpoint, {
           method: 'POST',
           body: formData,
-          headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'Idempotency-Key': contactForm._idempotencyKey,
-            ...(csrfToken ? { 'X-CSRF-Token': csrfToken } : {})
-          }
+          headers: reqHeaders
         });
 
         const data = await response.json();
 
-        if (response.ok && data.success) {
+        const isSuccess = response.ok && (data.success === true || data.success === 'true');
+
+        if (isSuccess) {
           showFeedback(
             contactFeedback,
             'success',
@@ -189,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <div class="fs-2 text-success"><i class="fas fa-check-circle"></i></div>
               <div>
                 <h5 class="alert-heading fw-bold mb-1">¡Mensaje Enviado con Éxito!</h5>
-                <p class="mb-0 small">${escapeHtml(data.message)}</p>
+                <p class="mb-0 small">${escapeHtml(data.message || 'Tu consulta ha sido enviada correctamente. Uno de nuestros directores o asesores técnicos se pondrá en contacto a la brevedad.')}</p>
               </div>
             </div>`
           );
