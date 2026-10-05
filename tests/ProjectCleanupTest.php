@@ -495,22 +495,19 @@ require "' . $this->rootDir . '/index.php";
 
         $expectedLinks = [
             'app/Views/pages/courses/analisis-cuantitativo.php' => [
-                'https://docs.google.com/forms/d/e/1FAIpQLSdPOpAucuZBS-Tu97Nusr-E9pGhRVRmAOwPyNgF-ryInobyKw/viewform',
+                'https://docs.google.com/forms/d/e/1FAIpQLSeHQ4g60QDw2-BvvPZeF_LC3-DneCmCI81DjTw9nKR_qK5irQ/viewform',
                 'https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n%20sobre%20el%20curso%20An%C3%A1lisis%20Cuantitativo%20de%20Riesgos'
             ],
             'app/Views/pages/courses/analisis-forense.php' => [
                 'https://docs.google.com/forms/d/e/1FAIpQLSeR3gWqBQP6c1BHrlW0s2MM44HG5uRiNRPYH2R9vweE53Zr9g/viewform',
-                'https://docs.google.com/forms/d/e/1FAIpQLSdPOpAucuZBS-Tu97Nusr-E9pGhRVRmAOwPyNgF-ryInobyKw/viewform',
                 'https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n%20sobre%20el%20curso%20An%C3%A1lisis%20Forense%20de%20Atrasos'
             ],
             'app/Views/pages/courses/compliance.php' => [
                 'https://docs.google.com/forms/d/e/1FAIpQLSdEFpjxGQkRDyFAMb0oqys9dLDm20etfkj_CGeTWrhpZgFX1w/viewform',
-                'https://docs.google.com/forms/d/e/1FAIpQLSdPOpAucuZBS-Tu97Nusr-E9pGhRVRmAOwPyNgF-ryInobyKw/viewform',
                 'https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n%20sobre%20el%20curso%20Compliance%20en%20la%20Construcci%C3%B3n'
             ],
             'app/Views/pages/courses/contratos-estado.php' => [
-                'https://docs.google.com/forms/d/e/1FAIpQLSdAnt9Kowdtr1YN0H1w1x7GI_Aprp7CuE5htHYPG3fdb-ie5w/viewform',
-                'https://docs.google.com/forms/d/e/1FAIpQLSehW88_KPBJ8OIQsGReXkiwCgnhKEtVujT3Nh_Q_ABpuxryTQ/viewform',
+                'https://docs.google.com/forms/d/e/1FAIpQLSeR3gWqBQP6c1BHrlW0s2MM44HG5uRiNRPYH2R9vweE53Zr9g/viewform',
                 'https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n%20sobre%20el%20curso%20Gesti%C3%B3n%20del%20Cambio%20en%20Contratos%20del%20Estado'
             ],
             'app/Views/pages/courses/dab-jrd.php' => [
@@ -518,26 +515,23 @@ require "' . $this->rootDir . '/index.php";
                 'https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n%20sobre%20el%20curso%20Junta%20de%20Resoluci%C3%B3n%20de%20Disputas%20DAB%20-%20JRD'
             ],
             'app/Views/pages/courses/eventos-compensables.php' => [
-                'https://docs.google.com/forms/d/e/1FAIpQLSdPOpAucuZBS-Tu97Nusr-E9pGhRVRmAOwPyNgF-ryInobyKw/viewform',
+                'https://docs.google.com/forms/d/e/1FAIpQLSfqET-6yY5ir4-o9U16vUbmvwhK3Ol-Mzjfv0orjm9_VCi_ig/viewform',
                 'https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n%20sobre%20el%20curso%20Gesti%C3%B3n%20de%20Eventos%20Compensables%20NEC'
             ],
             'app/Views/pages/courses/nec4.php' => [
                 'https://docs.google.com/forms/d/e/1FAIpQLSdPOpAucuZBS-Tu97Nusr-E9pGhRVRmAOwPyNgF-ryInobyKw/viewform',
-                'https://docs.google.com/forms/d/e/1FAIpQLSehW88_KPBJ8OIQsGReXkiwCgnhKEtVujT3Nh_Q_ABpuxryTQ/viewform',
                 'https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n%20sobre%20el%20curso%20Casos%20de%20Aplicaci%C3%B3n%20en%20Contratos%20NEC4'
             ],
             'app/Views/pages/courses/primavera-p6.php' => [
-                'https://docs.google.com/forms/d/e/1FAIpQLSdPOpAucuZBS-Tu97Nusr-E9pGhRVRmAOwPyNgF-ryInobyKw/viewform',
+                'https://docs.google.com/forms/d/e/1FAIpQLScXwQcpQ2LDvCmFQvElQ2NkOUDe3TGW-Lc_Wn_HQeW2Mgpu9w/viewform',
                 'https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n%20sobre%20el%20curso%20Primavera%20P6%20y%20Power%20BI'
             ],
             'app/Views/pages/courses/riesgos-pmi.php' => [
                 'https://docs.google.com/forms/d/e/1FAIpQLSeHQ4g60QDw2-BvvPZeF_LC3-DneCmCI81DjTw9nKR_qK5irQ/viewform',
-                'https://docs.google.com/forms/d/e/1FAIpQLSehW88_KPBJ8OIQsGReXkiwCgnhKEtVujT3Nh_Q_ABpuxryTQ/viewform',
                 'https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n%20sobre%20el%20curso%20Gesti%C3%B3n%20de%20Riesgos%20PMI'
             ],
             'app/Views/pages/courses/vdc-bim.php' => [
                 'https://docs.google.com/forms/d/e/1FAIpQLScwEvk1Kgxn92CyiHnvfqBmhQPmmwyInupOksUtN8ecEV51KQ/viewform',
-                'https://docs.google.com/forms/d/e/1FAIpQLSdPOpAucuZBS-Tu97Nusr-E9pGhRVRmAOwPyNgF-ryInobyKw/viewform',
                 'https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n%20sobre%20el%20curso%20VDC%20-%20BIM'
             ]
         ];

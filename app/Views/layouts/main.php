@@ -88,9 +88,6 @@ $canonicalUrl  = ($trimmedPath === '') ? ($canonicalBase . '/') : ($canonicalBas
     <?= $content ?>
   </main>
 
-  <!-- Toast Emergente de Matrículas 2026 -->
-  <?php View::partial('toast'); ?>
-
   <!-- Pie de Página Global -->
   <?php View::partial('footer'); ?>
 

@@ -387,15 +387,5 @@ document.addEventListener('DOMContentLoaded', () => {
       offset: 80
     });
   }
-
-  // ── TOAST NOTIFICACIÓN AUTOMÁTICA: MATRÍCULAS 2026 ────────────────────────
-  // Aparece de forma no intrusiva a los 4 segundos tras cargar la página
-  setTimeout(() => {
-    const promoToastEl = document.getElementById('promoToast');
-    if (promoToastEl && typeof bootstrap !== 'undefined') {
-      const promoToast = bootstrap.Toast.getOrCreateInstance(promoToastEl);
-      promoToast.show();
-    }
-  }, 4000);
 });
 
