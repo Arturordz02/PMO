@@ -127,21 +127,21 @@
           <div class="card bg-light border-0 rounded-4 p-4 mt-4 shadow-sm border-start border-5 border-primary" data-aos="fade-up">
             <div class="row align-items-center g-3">
               <div class="col-md-3 text-center">
-                <img src="img/victor.png" alt="ING. VÍCTOR" class="rounded-circle shadow border border-3 border-white" style="width: 110px; height: 110px; object-fit: cover; object-position: top;">
+                <img src="img/victor.png" alt="VÍCTOR CRUZ" class="rounded-circle shadow border border-3 border-white" style="width: 110px; height: 110px; object-fit: cover; object-position: top;">
               </div>
               <div class="col-md-9">
                 <span class="badge bg-primary text-white mb-2 px-3 py-2 rounded-pill"><i class="fas fa-user-tie me-1"></i> DOCENTE PRINCIPAL</span>
-                <h4 class="fw-bold mb-1 text-dark">ING. VÍCTOR</h4>
-                <p class="small text-primary fw-bold mb-2">Especialista en Ingeniería de Costos, Valorizaciones & Gestión Contractual NEC</p>
+                <h4 class="fw-bold mb-1 text-dark">VÍCTOR CRUZ, ING. CIVIL, PMP®</h4>
+                <p class="small text-primary fw-bold mb-2">Especialista en Contratos NEC, Gestión Contractual y Eventos Compensables</p>
                 
                 <!-- Resumen Completo y Trayectoria Profesional -->
                 <p class="small text-muted mb-2" style="line-height: 1.6;">
-                  Ingeniero Civil especialista en ingeniería de costos, valorizaciones, administración de contratos colaborativos y sustento de eventos compensables, presupuestos adicionales y liquidación técnica de obras.
+                  Profesional con más de 14 años en proyectos de ingeniería y construcción; con experiencia en dirección de proyectos, residencia y supervisión de obra, administración de contratos, procesos de licitación, gestión de riesgos, reclamos y negociación. Experiencia en contratos NEC, ley de contrataciones del estado (LCE), ley de arbitraje y la ley de obras por impuestos (OXI).
                 </p>
                 
                 <div class="d-flex flex-wrap gap-2 mt-2">
-                  <span class="badge bg-white text-dark border"><i class="fas fa-file-contract text-warning me-1"></i> Especialista Contractual NEC</span>
-                  <span class="badge bg-white text-dark border"><i class="fas fa-briefcase text-info me-1"></i> Casuística Real en Obra</span>
+                  <span class="badge bg-white text-dark border"><i class="fas fa-file-contract text-warning me-1"></i> Especialista Contratos NEC</span>
+                  <span class="badge bg-white text-dark border"><i class="fas fa-briefcase text-info me-1"></i> +14 Años de Experiencia</span>
                 </div>
               </div>
             </div>
@@ -295,59 +295,6 @@
     </div>
   </section>
 
-  <!-- PREGUNTAS FRECUENTES DEL PROGRAMA -->
-  <section class="py-5 bg-white">
-    <div class="container">
-      <div class="text-center mb-4" data-aos="fade-up">
-        <span class="section-badge">Dudas Frecuentes</span>
-        <h3 class="fw-bold text-primary">Preguntas Frecuentes sobre este Curso</h3>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-9" data-aos="fade-up" data-aos-delay="100">
-          <div class="accordion faq-accordion" id="faqCourseAccordion">
-            
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_0">
-                <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_0" aria-expanded="true" aria-controls="faqCourseCol_0">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿Cómo se diferencia una Alerta Temprana de un Evento Compensable?
-                </button>
-              </h3>
-              <div id="faqCourseCol_0" class="accordion-collapse collapse show" aria-labelledby="faqCourseHead_0" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  El curso enseña la interacción entre la cláusula 15 (Early Warning) y la cláusula 60 (Compensation Events), evitando la preclusión de derechos contractuales.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_1">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_1" aria-expanded="false" aria-controls="faqCourseCol_1">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿Cómo se cuantifican los costos bajo el Concepto de Costo Definido?
-                </button>
-              </h3>
-              <div id="faqCourseCol_1" class="accordion-collapse collapse " aria-labelledby="faqCourseHead_1" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  Se profundiza en las Listas de Componentes del Costo (Schedule of Cost Components), tarifas de equipos, mano de obra y porcentaje para subcontratistas y gastos generales.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_2">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_2" aria-expanded="false" aria-controls="faqCourseCol_2">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿Se analizan plazos perentorios de notificación y cotización?
-                </button>
-              </h3>
-              <div id="faqCourseCol_2" class="accordion-collapse collapse " aria-labelledby="faqCourseHead_2" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  Sí, se revisan los plazos de 8 semanas de notificación del contratista, 2 semanas de respuesta del Gerente del Proyecto y 3 semanas para presentar cotizaciones.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
 <!-- Sección de Información y Brochure (CTA Principal) -->
   <section id="seccion-brochure" class="container my-5" data-aos="zoom-in">
     <div class="enrollment-checkout-card">
@@ -391,7 +338,7 @@
         </div>
         <div class="enrollment-trust-item">
           <i class="fas fa-file-invoice text-success"></i>
-          <span>Facturación Electrónica B2B con RUC</span>
+          <span>Emisión de Comprobante / Boleta y Factura</span>
         </div>
       </div>
 

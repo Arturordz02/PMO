@@ -106,7 +106,7 @@
               </p>
               <div class="mt-auto pt-3 border-top border-light-subtle">
                 <a href="dab-jrd" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-info-circle me-2"></i> Ver Detalles e Inscripción
+                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
                 </a>
               </div>
             </div>
@@ -132,7 +132,7 @@
               </p>
               <div class="mt-auto pt-3 border-top border-light-subtle">
                 <a href="analisis-forense" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-info-circle me-2"></i> Ver Detalles e Inscripción
+                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
                 </a>
               </div>
             </div>
@@ -158,7 +158,7 @@
               </p>
               <div class="mt-auto pt-3 border-top border-light-subtle">
                 <a href="nec4" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-info-circle me-2"></i> Ver Detalles e Inscripción
+                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
                 </a>
               </div>
             </div>
@@ -184,7 +184,7 @@
               </p>
               <div class="mt-auto pt-3 border-top border-light-subtle">
                 <a href="vdc-bim" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-info-circle me-2"></i> Ver Detalles e Inscripción
+                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
                 </a>
               </div>
             </div>
@@ -210,7 +210,7 @@
               </p>
               <div class="mt-auto pt-3 border-top border-light-subtle">
                 <a href="contratos-estado" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-info-circle me-2"></i> Ver Detalles e Inscripción
+                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
                 </a>
               </div>
             </div>
@@ -236,7 +236,7 @@
               </p>
               <div class="mt-auto pt-3 border-top border-light-subtle">
                 <a href="compliance" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-info-circle me-2"></i> Ver Detalles e Inscripción
+                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
                 </a>
               </div>
             </div>
@@ -262,7 +262,7 @@
               </p>
               <div class="mt-auto pt-3 border-top border-light-subtle">
                 <a href="primavera-p6" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-info-circle me-2"></i> Ver Detalles e Inscripción
+                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
                 </a>
               </div>
             </div>
@@ -288,7 +288,7 @@
               </p>
               <div class="mt-auto pt-3 border-top border-light-subtle">
                 <a href="riesgos-pmi" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-info-circle me-2"></i> Ver Detalles e Inscripción
+                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
                 </a>
               </div>
             </div>
@@ -314,7 +314,7 @@
               </p>
               <div class="mt-auto pt-3 border-top border-light-subtle">
                 <a href="analisis-cuantitativo" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-info-circle me-2"></i> Ver Detalles e Inscripción
+                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
                 </a>
               </div>
             </div>
@@ -340,7 +340,7 @@
               </p>
               <div class="mt-auto pt-3 border-top border-light-subtle">
                 <a href="eventos-compensables" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-info-circle me-2"></i> Ver Detalles e Inscripción
+                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
                 </a>
               </div>
             </div>
@@ -400,26 +400,6 @@
               Modelos de contratos, matrices de riesgos, hojas de cálculo y documentación técnica listos para implementar de inmediato en obra o gabinete.
             </p>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Banner CTA In-Company -->
-  <section class="container my-5">
-    <div class="cta-banner">
-      <div class="row align-items-center position-relative" style="z-index: 2;">
-        <div class="col-lg-8 mb-4 mb-lg-0">
-          <span class="badge bg-warning text-dark px-3 py-2 fw-bold mb-3">CAPACITACIONES CORPORATIVAS A MEDIDA</span>
-          <h3 class="text-white fw-bold display-6 mb-3">¿Desea capacitar al equipo técnico de su empresa?</h3>
-          <p class="text-white-50 mb-0 fs-5">
-            Adaptamos cualquiera de nuestros programas con casos de estudio propios de su organización o proyecto en ejecución.
-          </p>
-        </div>
-        <div class="col-lg-4 text-lg-end">
-          <a href="contacto" class="btn btn-warning btn-lg fw-bold px-4 py-3 text-dark shadow hvr-grow">
-            <i class="fas fa-briefcase me-2"></i> Cotizar Plan In-Company
-          </a>
         </div>
       </div>
     </div>

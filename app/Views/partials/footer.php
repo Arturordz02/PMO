@@ -20,7 +20,7 @@
           </div>
         </div>
         <p class="text-secondary small mb-4">
-          Tu socio para crear soluciones en gestión de proyectos de construcción. Consultoría estratégica, peritaje técnico y capacitación ejecutiva.
+          Plataforma especializada en capacitación técnica y desarrollo profesional en gestión de proyectos de construcción e ingeniería.
         </p>
         <div class="d-flex gap-3">
           <a href="https://www.facebook.com/people/PMO-Solutions/100070284155015/#" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-secondary rounded-circle text-white d-inline-flex align-items-center justify-content-center" style="width:36px; height:36px;" title="Facebook PMO Solutions">
@@ -35,9 +35,9 @@
         </div>
       </div>
 
-      <!-- Columna 2: Navegación & Servicios -->
+      <!-- Columna 2: Navegación & Programas -->
       <div class="col-12 col-md-6 col-lg-4">
-        <h5>Navegación & Servicios</h5>
+        <h5>Navegación & Programas</h5>
         <ul class="footer-links mb-4">
           <li><a href="/"><i class="fas fa-chevron-right"></i> Inicio (Home)</a></li>
           <li><a href="/capacitaciones"><i class="fas fa-chevron-right"></i> Catálogo de Capacitaciones</a></li>

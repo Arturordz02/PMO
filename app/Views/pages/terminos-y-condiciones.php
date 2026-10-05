@@ -55,12 +55,12 @@ use App\Core\View;
 
     <!-- 3. Objeto y Alcance del Sitio -->
     <section class="mb-4 pb-2">
-      <h2 class="h5 fw-bold text-dark mb-3">3. Objeto y Alcance de los Servicios</h2>
+      <h2 class="h5 fw-bold text-dark mb-3">3. Objeto y Alcance de los Programas de Capacitación</h2>
       <p class="text-secondary leading-relaxed">
-        PMO Solutions ofrece a través de su portal información profesional sobre servicios de consultoría especializada en gestión de proyectos de construcción, Dispute Boards, peritaje de plazos y contratos colaborativos (NEC4), así como la difusión de su catálogo oficial de cursos y capacitaciones ejecutivas.
+        PMO Solutions ofrece a través de su portal información académica y profesional sobre su catálogo oficial de cursos y capacitaciones técnicas en gestión de proyectos de construcción, Dispute Boards, peritaje de atrasos, contratos colaborativos (NEC4), modelado Monte Carlo y metodologías BIM/VDC.
       </p>
       <p class="text-secondary leading-relaxed">
-        Los contenidos publicados en el portal tienen finalidad informativa y de orientación técnica. La formalización de servicios corporativos, consultorías in-house o matrículas en programas formativos se rige por sus respectivas cotizaciones, acuerdos contractuales o formularios específicos.
+        Los contenidos publicados en el portal tienen finalidad de divulgación académica y orientación técnica. El acceso a los programas formativos, descarga de temarios y entrega de brochures se coordina a través de los respectivos formularios en línea y canales de atención autorizados.
       </p>
     </section>
 

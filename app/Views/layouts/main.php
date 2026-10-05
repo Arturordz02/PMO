@@ -26,7 +26,7 @@ $canonicalUrl  = ($trimmedPath === '') ? ($canonicalBase . '/') : ($canonicalBas
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="csrf-token" content="<?= View::e(\App\Core\Csrf::getToken()) ?>">
   <title><?= View::e($pageTitle ?? 'PMO Solutions | Construimos Soluciones') ?></title>
-  <meta name="description" content="<?= View::e($metaDescription ?? 'PMO Solutions: Tu socio estratégico en consultoría y capacitación de alta ingeniería en construcción.') ?>">
+  <meta name="description" content="<?= View::e($metaDescription ?? 'PMO Solutions: Capacitación técnica y programas de especialización en ingeniería y gestión de proyectos de construcción.') ?>">
   <link rel="canonical" href="<?= View::e($canonicalUrl) ?>">
   
   <!-- Open Graph / Meta Tags para Redes Sociales & WhatsApp -->

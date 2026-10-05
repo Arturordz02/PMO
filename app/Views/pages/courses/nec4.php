@@ -111,55 +111,105 @@
               <h5 class="fw-bold text-dark mb-0">Objetivo del Curso</h5>
             </div>
             <p class="text-secondary mb-0" style="line-height: 1.7;">
-              Proporcionar a los participantes los conocimientos de aplicación específica del Contrato NEC4. El curso abordará los términos y definiciones NEC4, las obligaciones del contratista, del Gerente de Proyectos y del Cliente. Se presentarán ejemplos prácticos que cubrirán temas como plazos, revisión del cronograma, pruebas y defectos, condiciones de pago, gestión de riesgos, alertas tempranas, eventos compensables, entre otros.
+              El objetivo de este curso de contratos NEC4 es proporcionar a los participantes los conocimientos de aplicación específica del Contrato NEC4. El curso abordará los términos y definiciones NEC4, las obligaciones del contratista, del Gerente de Proyectos y del Cliente. Se presentarán ejemplos prácticos que cubrirán temas como plazos, revisión del cronograma, pruebas y defectos, condiciones de pago, gestión de riesgos, indemnizaciones, garantías, rescisión del contrato, solución de controversias y la estructuración de la carpeta de información específica.
             </p>
           </div>
 
-          <!-- Resumen de Fundamentos Generales -->
-          <div class="p-3 rounded-4 bg-white border border-light-subtle shadow-sm mb-4">
-            <h6 class="fw-bold text-primary mb-2"><i class="fas fa-book-reader me-2"></i>Fundamentos Generales del Programa:</h6>
-            <div class="row g-2">
-              <div class="col-12 col-md-6">
-                <div class="small text-secondary"><i class="fas fa-check-circle text-success me-1"></i> Procesos de la Gestión de Proyectos de Construcción.</div>
-              </div>
-              <div class="col-12 col-md-6">
-                <div class="small text-secondary"><i class="fas fa-check-circle text-success me-1"></i> Contratos colaborativos y Filosofía NEC.</div>
-              </div>
-              <div class="col-12 col-md-6">
-                <div class="small text-secondary"><i class="fas fa-check-circle text-success me-1"></i> Términos y Definiciones básicos.</div>
-              </div>
-              <div class="col-12 col-md-6">
-                <div class="small text-secondary"><i class="fas fa-check-circle text-success me-1"></i> Obligaciones del contratista y del PM.</div>
-              </div>
-              <div class="col-12">
-                <div class="small text-secondary"><i class="fas fa-check-circle text-success me-1"></i> Estructuración de la Carpeta de Información Específica.</div>
-              </div>
-            </div>
+          <!-- Resumen Ejecutivo -->
+          <div class="mb-4">
+            <h6 class="fw-bold text-dark mb-2"><i class="fas fa-book-reader text-warning me-2"></i>Resumen Ejecutivo</h6>
+            <p class="text-secondary mb-0" style="line-height: 1.7;">
+              El curso abarca los contratos NEC4, sus opciones y cláusulas principales, así como los procesos de gestión de proyectos de construcción. Incluye ejemplos prácticos sobre plazos, revisión del cronograma, pruebas y defectos, condiciones de pago, gestión de riesgos, indemnizaciones, garantías, rescisión del contrato, solución de controversias y la estructuración de la Carpeta de Información Específica.
+            </p>
           </div>
 
           <!-- Ficha del Docente Principal (Panel Ejecutivo Extendido) -->
           <div class="card bg-light border-0 rounded-4 p-4 mt-4 shadow-sm border-start border-5 border-primary" data-aos="fade-up">
             <div class="row align-items-center g-3">
               <div class="col-md-3 text-center">
-                <img src="img/LuisRuiz.jpg" alt="ING. LUIS RUIZ" class="rounded-circle shadow border border-3 border-white" style="width: 110px; height: 110px; object-fit: cover; object-position: top;">
+                <img src="img/LuisRuiz.jpg" alt="DOCENTE ESPECIALISTA EN CONTRATOS NEC4" class="rounded-circle shadow border border-3 border-white" style="width: 110px; height: 110px; object-fit: cover; object-position: top;">
               </div>
               <div class="col-md-9">
                 <span class="badge bg-primary text-white mb-2 px-3 py-2 rounded-pill"><i class="fas fa-user-tie me-1"></i> DOCENTE PRINCIPAL</span>
-                <h4 class="fw-bold mb-1 text-dark">ING. LUIS RUIZ</h4>
-                <p class="small text-primary fw-bold mb-2">Director Académico · Especialista en Dispute Boards (DAB) & Contratos NEC4 / FIDIC</p>
+                <h4 class="fw-bold mb-1 text-dark">DOCENTE ESPECIALISTA EN CONTRATOS NEC4</h4>
+                <p class="small text-primary fw-bold mb-2">Especialista en Gestión de Proyectos, Riesgos y Contratos NEC</p>
                 
                 <!-- Resumen Completo y Trayectoria Profesional -->
                 <p class="small text-muted mb-2" style="line-height: 1.6;">
-                  Ingeniero Civil con más de 25 años de trayectoria en gerencia de proyectos de infraestructura y edificación. Miembro de la Mesa de Resolución de Disputas (DAB) en los Juegos Panamericanos Lima 2019. Especialista en estandarización contractual colaborativa, administración de contratos FIDIC, NEC3/NEC4 y solución preventiva de controversias.
+                  Profesional con más de 16 años de experiencia en gestión de proyectos, riesgos, contratos NEC y gestión de la calidad: PEIP-EB, SAVIA PERÚ, PROYECTO ESPECIAL JUEGOS PANAMERICANOS LIMA 2019, PERU PIPING SPOOLS, GRAÑA Y MONTERO, INGENIERÍA Y SERVICIOS TECNOLÓGICOS S.A.C.
                 </p>
                 
                 <div class="d-flex flex-wrap gap-2 mt-2">
-                  <span class="badge bg-white text-dark border"><i class="fas fa-gavel text-warning me-1"></i> Experto Dispute Boards</span>
-                  <span class="badge bg-white text-dark border"><i class="fas fa-briefcase text-info me-1"></i> Casuística Real en Obra</span>
+                  <span class="badge bg-white text-dark border"><i class="fas fa-handshake text-warning me-1"></i> Especialista NEC4</span>
+                  <span class="badge bg-white text-dark border"><i class="fas fa-briefcase text-info me-1"></i> +16 Años de Experiencia</span>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Estructura Curricular del Programa (19 Temas y Ejercicios Prácticos) -->
+  <section class="py-5 bg-light">
+    <div class="container py-lg-4">
+      <div class="text-center mb-5">
+        <span class="section-badge">Plan de Estudios Integral</span>
+        <h2 class="section-title">CONTENIDO TEMÁTICO Y EJERCICIOS PRÁCTICOS</h2>
+        <p class="section-subtitle">
+          Estructura de 19 temas con casos y talleres aplicados para la administración efectiva de contratos NEC4.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Bloque 1: Temas 1 a 8 -->
+        <div class="col-12 col-md-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4 p-4 bg-white hvr-box-shadow-outset">
+            <h5 class="fw-bold text-primary mb-3"><i class="fas fa-book-open me-2"></i>Fundamentos y Plazos</h5>
+            <ul class="list-unstyled mb-0 d-flex flex-column gap-2 text-secondary small">
+              <li><i class="fas fa-check-circle text-primary me-2"></i><strong>1.</strong> Procesos de la Gestión de Proyectos de Construcción</li>
+              <li><i class="fas fa-check-circle text-primary me-2"></i><strong>2.</strong> Filosofía de los contratos NEC</li>
+              <li><i class="fas fa-check-circle text-primary me-2"></i><strong>3.</strong> Opciones principales</li>
+              <li><i class="fas fa-check-circle text-primary me-2"></i><strong>4.</strong> Términos y Definiciones</li>
+              <li><i class="fas fa-check-circle text-primary me-2"></i><strong>5.</strong> Obligaciones del contratista</li>
+              <li><i class="fas fa-check-circle text-primary me-2"></i><strong>6.</strong> Obligaciones del Gerente de Proyectos y del Cliente</li>
+              <li><i class="fas fa-check-circle text-primary me-2"></i><strong>7.</strong> Plazos</li>
+              <li class="p-2 rounded bg-warning bg-opacity-10 border border-warning border-opacity-25 text-dark fw-bold"><i class="fas fa-laptop-code text-warning me-2"></i><strong>8. Ejercicio Práctico 1</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bloque 2: Temas 9 a 14 -->
+        <div class="col-12 col-md-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4 p-4 bg-white hvr-box-shadow-outset">
+            <h5 class="fw-bold text-primary mb-3"><i class="fas fa-tasks me-2"></i>Control, Pagos y Riesgos</h5>
+            <ul class="list-unstyled mb-0 d-flex flex-column gap-2 text-secondary small">
+              <li><i class="fas fa-check-circle text-primary me-2"></i><strong>9.</strong> Revisión del cronograma</li>
+              <li><i class="fas fa-check-circle text-primary me-2"></i><strong>10.</strong> Pruebas y Defectos</li>
+              <li><i class="fas fa-check-circle text-primary me-2"></i><strong>11.</strong> Condiciones de Pago</li>
+              <li><i class="fas fa-check-circle text-primary me-2"></i><strong>12.</strong> Gestión de Riesgos</li>
+              <li><i class="fas fa-check-circle text-primary me-2"></i><strong>13.</strong> Indemnizaciones</li>
+              <li class="p-2 rounded bg-warning bg-opacity-10 border border-warning border-opacity-25 text-dark fw-bold"><i class="fas fa-laptop-code text-warning me-2"></i><strong>14. Ejercicio Práctico 2</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bloque 3: Temas 15 a 19 -->
+        <div class="col-12 col-md-4">
+          <div class="card h-100 border-0 shadow-sm rounded-4 p-4 bg-white hvr-box-shadow-outset">
+            <h5 class="fw-bold text-primary mb-3"><i class="fas fa-shield-alt me-2"></i>Cierre y Controversias</h5>
+            <ul class="list-unstyled mb-0 d-flex flex-column gap-2 text-secondary small">
+              <li><i class="fas fa-check-circle text-primary me-2"></i><strong>15.</strong> Garantías</li>
+              <li><i class="fas fa-check-circle text-primary me-2"></i><strong>16.</strong> Rescisión del Contrato</li>
+              <li><i class="fas fa-check-circle text-primary me-2"></i><strong>17.</strong> Solución de Controversias</li>
+              <li><i class="fas fa-check-circle text-primary me-2"></i><strong>18.</strong> Estructuración de la Carpeta de Información Específica</li>
+              <li class="p-2 rounded bg-warning bg-opacity-10 border border-warning border-opacity-25 text-dark fw-bold"><i class="fas fa-comments text-warning me-2"></i><strong>19. Ejercicio Práctico 3 (Preguntas y Respuestas)</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
     <!-- GARANTÍA DE APRENDIZAJE & BENEFICIOS CLAVE -->
@@ -196,59 +246,6 @@
             </div>
             <h5 class="fw-bold text-primary mb-2">Plantillas & Casos Reales Editables</h5>
             <p class="text-muted small mb-0">Descarga materiales de trabajo, matrices de cálculo en Excel, modelos de informes periciales y contratos de megaproyectos.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PREGUNTAS FRECUENTES DEL PROGRAMA -->
-  <section class="py-5 bg-white">
-    <div class="container">
-      <div class="text-center mb-4" data-aos="fade-up">
-        <span class="section-badge">Dudas Frecuentes</span>
-        <h3 class="fw-bold text-primary">Preguntas Frecuentes sobre este Curso</h3>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-9" data-aos="fade-up" data-aos-delay="100">
-          <div class="accordion faq-accordion" id="faqCourseAccordion">
-            
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_0">
-                <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_0" aria-expanded="true" aria-controls="faqCourseCol_0">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿Qué opciones principales del contrato NEC4 se abordan?
-                </button>
-              </h3>
-              <div id="faqCourseCol_0" class="accordion-collapse collapse show" aria-labelledby="faqCourseHead_0" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  Se estudian en detalle las Opciones A (Precio Fijo), B (Precios Unitarios), C (Costo Reembolsable con Tarifa Objetivo), E (Cost Reimbursable) y PSC (Professional Services Contract).
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_1">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_1" aria-expanded="false" aria-controls="faqCourseCol_1">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿Cómo se ejercita la gestión de Alertas Tempranas (Early Warnings)?
-                </button>
-              </h3>
-              <div id="faqCourseCol_1" class="accordion-collapse collapse " aria-labelledby="faqCourseHead_1" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  A través de talleres interactivos donde se simulan reuniones de alerta temprana, registro de riesgos y propuestas de mitigación de plazo y costo.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_2">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_2" aria-expanded="false" aria-controls="faqCourseCol_2">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿El curso incluye el manejo del Programa Aceptado?
-                </button>
-              </h3>
-              <div id="faqCourseCol_2" class="accordion-collapse collapse " aria-labelledby="faqCourseHead_2" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  Sí, se enfatiza la vital importancia contractual del Programa Aceptado y sus revisiones periódicas como base para dirimir compensaciones.
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -298,7 +295,7 @@
         </div>
         <div class="enrollment-trust-item">
           <i class="fas fa-file-invoice text-success"></i>
-          <span>Facturación Electrónica B2B con RUC</span>
+          <span>Emisión de Comprobante / Boleta y Factura</span>
         </div>
       </div>
 

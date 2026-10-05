@@ -6,13 +6,13 @@
         <div class="col-12 col-lg-7">
           <div class="mb-2">
             <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-2 hero-badge shadow-sm">
-              <i class="fas fa-headset me-2"></i> COMUNICACIÓN DIRECTA & ASESORÍA TÉCNICA
+              <i class="fas fa-headset me-2"></i> COMUNICACIÓN DIRECTA & ATENCIÓN ACADÉMICA
             </span>
           </div>
           <h1 class="hero-title mb-1 animate__animated animate__fadeInDown">CONTÁCTANOS</h1>
           <h2 class="h5 text-warning fw-bold my-2">"Construimos Soluciones."</h2>
           <p class="hero-subtitle mb-4 animate__animated animate__fadeInUp animate__delay-1s">
-            Ponte en contacto con nuestros consultores y asesores académicos. Estamos listos para atender tus consultas sobre programas in-house, capacitaciones y servicios de consultoría.
+            Ponte en contacto con nuestros coordinadores académicos. Estamos listos para atender tus consultas sobre nuestro catálogo de capacitaciones técnicas y temarios.
           </p>
           
           <div class="hero-actions d-flex flex-wrap gap-2 pt-2">
@@ -28,11 +28,11 @@
           <div class="d-flex flex-wrap gap-3 gap-md-4 mt-4 mt-md-5 pt-3 border-top border-white border-opacity-10 text-white-50">
             <div class="d-flex align-items-center gap-2">
               <i class="fas fa-clock text-warning fs-5"></i>
-              <span class="text-white small fw-semibold">Respuesta Comercial Inmediata</span>
+              <span class="text-white small fw-semibold">Atención Académica Inmediata</span>
             </div>
             <div class="d-flex align-items-center gap-2">
-              <i class="fas fa-user-tie text-info fs-5"></i>
-              <span class="text-white small fw-semibold">Asesoría Técnica Personalizada</span>
+              <i class="fas fa-graduation-cap text-info fs-5"></i>
+              <span class="text-white small fw-semibold">Orientación de Cursos Personalizada</span>
             </div>
             <div class="d-flex align-items-center gap-2">
               <i class="fas fa-building text-success fs-5"></i>
@@ -137,14 +137,15 @@
                 </div>
               </div>
 
-              <!-- Asunto / Servicio de Interés -->
+              <!-- Asunto / Programa de Interés -->
               <div class="mb-3">
-                <label class="form-label fw-bold small text-secondary" for="contact_servicio">Servicio de Interés</label>
+                <label class="form-label fw-bold small text-secondary" for="contact_servicio">Programa de Interés</label>
                 <select class="form-select" id="contact_servicio" name="servicio">
                   <option value="Capacitación Profesional">Capacitación Profesional / Cursos Especializados</option>
-                  <option value="Consultoría PMO Corporativa">Consultoría PMO Corporativa</option>
-                  <option value="Asesoría Contractual / Peritaje Forense">Asesoría Contractual / Peritaje Forense</option>
-                  <option value="Capacitación In-House">Capacitación In-House a Medida</option>
+                  <option value="Contratos NEC4 & FIDIC">Contratos NEC4 & FIDIC</option>
+                  <option value="Dispute Boards DAB/JRD">Dispute Boards (DAB / JRD)</option>
+                  <option value="Control de Proyectos Primavera P6">Control de Proyectos con Primavera P6 & Power BI</option>
+                  <option value="Gestión de Riesgos PMI">Gestión de Riesgos PMI® & Monte Carlo</option>
                   <option value="Otro">Otro Asunto</option>
                 </select>
               </div>
@@ -152,7 +153,7 @@
               <!-- Comentario o Consulta -->
               <div class="mb-4">
                 <label class="form-label fw-bold small text-secondary" for="contact_mensaje">Comentario o Consulta <span class="text-danger">*</span></label>
-                <textarea class="form-control" id="contact_mensaje" name="mensaje" rows="4" placeholder="Escribe aquí los detalles de tu consulta sobre cursos, fechas, inscripciones o consultoría..." required></textarea>
+                <textarea class="form-control" id="contact_mensaje" name="mensaje" rows="4" placeholder="Escribe aquí los detalles de tu consulta sobre los cursos, temarios o acceso a las capacitaciones..." required></textarea>
               </div>
 
               <!-- Botón de Envío Destacado -->

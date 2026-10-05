@@ -123,27 +123,27 @@
 
             <div class="row g-3">
               <div class="col-12">
-                <label class="form-label fw-bold small text-secondary d-block">Tipo de Contratación <span class="text-danger">*</span></label>
+                <label class="form-label fw-bold small text-secondary d-block">Tipo de Adquisición <span class="text-danger">*</span></label>
                 <div class="d-flex flex-wrap gap-4 pt-1">
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="tipo_servicio" id="servCapacitacion" value="Servicio de Capacitación / Curso" checked>
-                    <label class="form-check-label fw-semibold" for="servCapacitacion">Servicio de Capacitación / Curso / Programa Especializado</label>
+                    <label class="form-check-label fw-semibold" for="servCapacitacion">Programa de Capacitación / Curso Especializado</label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="tipo_servicio" id="servConsultoria" value="Consultoría Corporativa">
-                    <label class="form-check-label fw-semibold" for="servConsultoria">Consultoría Corporativa / Asesoría Técnica</label>
+                    <input class="form-check-input" type="radio" name="tipo_servicio" id="servMaterial" value="Material Académico / Taller">
+                    <label class="form-check-label fw-semibold" for="servMaterial">Material Académico / Taller Especializado</label>
                   </div>
                 </div>
               </div>
 
               <div class="col-12">
-                <label class="form-label fw-bold small text-secondary">Nombre del Curso, Taller o Servicio de Consultoría Contratado <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="nombre_servicio" placeholder="Ej. Control de Proyectos con Primavera P6 / Asesoría en JRD / Curso VDC-BIM" required>
+                <label class="form-label fw-bold small text-secondary">Nombre del Curso o Capacitación Técnica Adquirida <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="nombre_servicio" placeholder="Ej. Control de Proyectos con Primavera P6 / Contratos NEC4 / VDC-BIM" required>
               </div>
 
               <div class="col-12">
-                <label class="form-label fw-bold small text-secondary">Detalle del Servicio o Código de Matrícula (Opcional)</label>
-                <textarea class="form-control" rows="2" name="detalle_servicio" placeholder="Código de matrícula, comprobante de pago, fecha de inicio o modalidad contratada..."></textarea>
+                <label class="form-label fw-bold small text-secondary">Detalle de la Capacitación o Comprobante (Opcional)</label>
+                <textarea class="form-control" rows="2" name="detalle_servicio" placeholder="Número de comprobante de pago, fecha de acceso o modalidad..."></textarea>
               </div>
             </div>
           </div>

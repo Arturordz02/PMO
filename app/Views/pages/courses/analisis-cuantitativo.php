@@ -127,21 +127,21 @@
           <div class="card bg-light border-0 rounded-4 p-4 mt-4 shadow-sm border-start border-5 border-primary" data-aos="fade-up">
             <div class="row align-items-center g-3">
               <div class="col-md-3 text-center">
-                <img src="img/ivanbenavides.jpg" alt="ING. IVÁN BENAVIDES" class="rounded-circle shadow border border-3 border-white" style="width: 110px; height: 110px; object-fit: cover; object-position: top;">
+                <img src="img/edwardmarcelo.png" alt="EDWAR MARCELO" class="rounded-circle shadow border border-3 border-white" style="width: 110px; height: 110px; object-fit: cover; object-position: top;">
               </div>
               <div class="col-md-9">
                 <span class="badge bg-primary text-white mb-2 px-3 py-2 rounded-pill"><i class="fas fa-user-tie me-1"></i> DOCENTE PRINCIPAL</span>
-                <h4 class="fw-bold mb-1 text-dark">ING. IVÁN BENAVIDES</h4>
-                <p class="small text-primary fw-bold mb-2">Consultor Senior en Gestión Integral de Riesgos PMI® & Modelado Monte Carlo</p>
+                <h4 class="fw-bold mb-1 text-dark">EDWAR MARCELO, ING., PMP®, PMI-SP®, PMI-RMP®, ECCDA, PRINCE 2</h4>
+                <p class="small text-primary fw-bold mb-2">Especialista en Gestión de Proyectos de Infraestructura & Simulación Monte Carlo</p>
                 
                 <!-- Resumen Completo y Trayectoria Profesional -->
                 <p class="small text-muted mb-2" style="line-height: 1.6;">
-                  Consultor Senior especializado en Gestión Integral de Riesgos bajo los estándares del PMI® y Análisis Cuantitativo de Contingencias de Plazo y Costo. Experto en modelado estocástico con Monte Carlo y tableros de control de incertidumbre.
+                  Más de 15 años de trayectoria con basta experiencia en gestión de proyectos de infraestructura, participando como consultor y constructor.
                 </p>
                 
                 <div class="d-flex flex-wrap gap-2 mt-2">
-                  <span class="badge bg-white text-dark border"><i class="fas fa-calculator text-warning me-1"></i> Especialista Monte Carlo</span>
-                  <span class="badge bg-white text-dark border"><i class="fas fa-briefcase text-info me-1"></i> Casuística Real en Obra</span>
+                  <span class="badge bg-white text-dark border"><i class="fas fa-calculator text-warning me-1"></i> Simulación Monte Carlo</span>
+                  <span class="badge bg-white text-dark border"><i class="fas fa-briefcase text-info me-1"></i> Proyectos de Infraestructura</span>
                 </div>
               </div>
             </div>
@@ -168,16 +168,17 @@
             <div class="quant-icon-box">
               <i class="fas fa-microchip fs-3"></i>
             </div>
-            <h4 class="quant-title">Módulo 1: ANÁLISIS CUANTITATIVO Y SIMULACIÓN</h4>
+            <h4 class="quant-title">Módulo 1: ANÁLISIS CUANTITATIVO</h4>
             <ul class="quant-list">
-              <li>Principios generales de la estimación de contingencias.</li>
-              <li>Valor Monetario Estimado (EMV) y Árbol de Decisiones.</li>
+              <li>Principios Generales de la Estimación de Contingencias.</li>
+              <li>Valor Monetario Estimado (EMV).</li>
+              <li>Árbol de decisiones.</li>
               <li>
                 <strong>Drivers y Simulación de Monte Carlo:</strong>
                 <ul class="quant-sublist">
                   <li>Examinación de las interrelaciones entre riesgos.</li>
                   <li>Selección de distribuciones de probabilidad.</li>
-                  <li>Ejecución de modelo (Pre-mitigación / Post-mitigación).</li>
+                  <li>Ejecución de Modelo (pre-mitigación / post-mitigación).</li>
                 </ul>
               </li>
               <li>Diagrama de Tornado y Análisis de Sensibilidad.</li>
@@ -191,12 +192,10 @@
             <div class="quant-icon-box" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
               <i class="fas fa-file-contract fs-3"></i>
             </div>
-            <h4 class="quant-title">Módulo 2: REPORTE, HALLAZGOS Y MEDIDAS CORRECTIVAS</h4>
+            <h4 class="quant-title">Módulo 2: REPORTE</h4>
             <ul class="quant-list">
-              <li>Estructura del reporte ejecutivo como resultado del análisis cuantitativo para el cronograma y costo.</li>
-              <li>Interpretación de curvas acumuladas de probabilidad (Curvas S estocásticas).</li>
-              <li>Elaboración de recomendaciones estratégicas y medidas correctivas orientadas a la alta dirección.</li>
-              <li>Definición y sustentación de márgenes de contingencia ante comités de proyecto.</li>
+              <li>Estructura del reporte como resultado del análisis cuantitativo para el cronograma y costo.</li>
+              <li>Elaboración de recomendaciones y medidas correctivas.</li>
             </ul>
           </div>
         </div>
@@ -239,59 +238,6 @@
             </div>
             <h5 class="fw-bold text-primary mb-2">Plantillas & Casos Reales Editables</h5>
             <p class="text-muted small mb-0">Descarga materiales de trabajo, matrices de cálculo en Excel, modelos de informes periciales y contratos de megaproyectos.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PREGUNTAS FRECUENTES DEL PROGRAMA -->
-  <section class="py-5 bg-white">
-    <div class="container">
-      <div class="text-center mb-4" data-aos="fade-up">
-        <span class="section-badge">Dudas Frecuentes</span>
-        <h3 class="fw-bold text-primary">Preguntas Frecuentes sobre este Curso</h3>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-9" data-aos="fade-up" data-aos-delay="100">
-          <div class="accordion faq-accordion" id="faqCourseAccordion">
-            
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_0">
-                <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_0" aria-expanded="true" aria-controls="faqCourseCol_0">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿Qué herramientas de simulación se emplean en clase?
-                </button>
-              </h3>
-              <div id="faqCourseCol_0" class="accordion-collapse collapse show" aria-labelledby="faqCourseHead_0" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  Se realizan ejercicios prácticos con Primavera Risk Analysis (Pertmaster) y @RISK, aplicando distribuciones triangulares, beta y uniformes en actividades críticas.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_1">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_1" aria-expanded="false" aria-controls="faqCourseCol_1">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿Cómo se determinan los percentiles P50, P80 y contingencias?
-                </button>
-              </h3>
-              <div id="faqCourseCol_1" class="accordion-collapse collapse " aria-labelledby="faqCourseHead_1" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  Aprenderás a interpretar gráficos de tornado, curvas acumuladas S de probabilidad y a sustentar reservas de contingencia de plazo ante clientes y directivos.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_2">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_2" aria-expanded="false" aria-controls="faqCourseCol_2">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿Es necesario contar con conocimientos previos de estadística?
-                </button>
-              </h3>
-              <div id="faqCourseCol_2" class="accordion-collapse collapse " aria-labelledby="faqCourseHead_2" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  El docente explica los conceptos probabilísticos de forma intuitiva, práctica y 100% orientada a la ingeniería de cronogramas.
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -341,7 +287,7 @@
         </div>
         <div class="enrollment-trust-item">
           <i class="fas fa-file-invoice text-success"></i>
-          <span>Facturación Electrónica B2B con RUC</span>
+          <span>Emisión de Comprobante / Boleta y Factura</span>
         </div>
       </div>
 

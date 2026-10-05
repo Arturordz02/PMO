@@ -188,59 +188,6 @@
     </div>
   </section>
 
-  <!-- PREGUNTAS FRECUENTES DEL PROGRAMA -->
-  <section class="py-5 bg-white">
-    <div class="container">
-      <div class="text-center mb-4" data-aos="fade-up">
-        <span class="section-badge">Dudas Frecuentes</span>
-        <h3 class="fw-bold text-primary">Preguntas Frecuentes sobre este Curso</h3>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-9" data-aos="fade-up" data-aos-delay="100">
-          <div class="accordion faq-accordion" id="faqCourseAccordion">
-            
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_0">
-                <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_0" aria-expanded="true" aria-controls="faqCourseCol_0">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿El contenido está actualizado con la normativa vigente de OSCE?
-                </button>
-              </h3>
-              <div id="faqCourseCol_0" class="accordion-collapse collapse show" aria-labelledby="faqCourseHead_0" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  Sí, revisamos la Ley 30225, su reglamento actualizado, directivas de OSCE y pronunciamientos vinculantes del Tribunal de Contrataciones del Estado.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_1">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_1" aria-expanded="false" aria-controls="faqCourseCol_1">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿Se profundiza en el trámite de adicionales y ampliaciones de plazo?
-                </button>
-              </h3>
-              <div id="faqCourseCol_1" class="accordion-collapse collapse " aria-labelledby="faqCourseHead_1" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  Sí, se detalla el procedimiento riguroso de causales, cuantificación de mayores gastos generales, deductivos vinculados y contingencias de arbitraje.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_2">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_2" aria-expanded="false" aria-controls="faqCourseCol_2">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿Qué documentación y herramientas prácticas incluye la capacitación?
-                </button>
-              </h3>
-              <div id="faqCourseCol_2" class="accordion-collapse collapse " aria-labelledby="faqCourseHead_2" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  Incluye plantillas editables de informes técnicos para adicionales, solicitudes de ampliación de plazo, cálculo de mayores gastos generales y análisis de casos reales bajo la Ley 30225.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
 <!-- Sección de Información y Brochure (CTA Principal) -->
   <section id="seccion-brochure" class="container my-5" data-aos="zoom-in">
     <div class="enrollment-checkout-card">
@@ -284,7 +231,7 @@
         </div>
         <div class="enrollment-trust-item">
           <i class="fas fa-file-invoice text-success"></i>
-          <span>Facturación Electrónica B2B con RUC</span>
+          <span>Emisión de Comprobante / Boleta y Factura</span>
         </div>
       </div>
 

@@ -114,15 +114,15 @@
               <div class="d-flex flex-column gap-2 text-white-50 small">
                 <div class="d-flex align-items-center gap-2">
                   <i class="fas fa-check-circle text-warning"></i>
-                  <span class="text-white">Consultoría Estratégica & Asesoría Técnica</span>
+                  <span class="text-white">Capacitaciones Especializadas 100% Prácticas</span>
                 </div>
                 <div class="d-flex align-items-center gap-2">
                   <i class="fas fa-check-circle text-warning"></i>
-                  <span class="text-white">Capacitación In-Company para Empresas</span>
+                  <span class="text-white">Plana Docente Experta y Casuística Real</span>
                 </div>
               </div>
-              <a href="contacto" class="btn btn-warning btn-sm w-100 fw-bold mt-3 text-white hvr-grow">
-                <i class="fas fa-envelope me-1"></i> Solicitar Asesoría Personalizada
+              <a href="capacitaciones" class="btn btn-warning btn-sm w-100 fw-bold mt-3 text-white hvr-grow">
+                <i class="fas fa-graduation-cap me-1"></i> Explorar Catálogo de Cursos
               </a>
             </div>
 
@@ -146,7 +146,7 @@
 
         <div class="stat-item px-4 py-2" data-aos="fade-up" data-aos-delay="250">
           <div class="stat-number" data-target="80" data-suffix="+">0</div>
-          <div class="stat-label">Proyectos Asesorados</div>
+          <div class="stat-label">Cursos y Talleres Dictados</div>
         </div>
 
         <div class="stat-divider d-none d-lg-block"></div>
@@ -165,9 +165,9 @@
     <div class="container">
       <div class="text-center mb-5">
         <span class="section-badge">Pilares Fundacionales</span>
-        <h2 class="section-title">Nuestra Esencia Corporativa</h2>
+        <h2 class="section-title">Nuestra Esencia Académica</h2>
         <p class="section-subtitle">
-          Estructuramos soluciones de clase mundial en consultoría, entrenamiento especializado y gestión técnica de proyectos de infraestructura y edificación.
+          Estructuramos programas de clase mundial en entrenamiento especializado y formación técnica de proyectos de infraestructura y edificación.
         </p>
       </div>
 
@@ -180,10 +180,10 @@
             </div>
             <h3 class="fw-bold">Quiénes Somos</h3>
             <p>
-              Empresa de consultoría, capacitación y gerencia de proyectos enfocada en promover mejores prácticas.
+              Centro de capacitación y formación técnica de alto nivel enfocado en promover las mejores prácticas en gestión de proyectos.
             </p>
             <div class="pt-3 border-top border-light-subtle mt-auto d-flex align-items-center text-primary fw-semibold small">
-              <i class="fas fa-check-circle me-2"></i> Consultoría & Capacitación Estratégica
+              <i class="fas fa-check-circle me-2"></i> Formación & Capacitación Especializada
             </div>
           </div>
         </div>
@@ -196,7 +196,7 @@
             </div>
             <h3 class="fw-bold">Nuestra Visión</h3>
             <p>
-              Ser reconocidos por proveer asesoría y entrenar en gestión de oficinas de proyectos con soluciones específicas.
+              Ser reconocidos por brindar entrenamiento técnico de élite en gestión de proyectos con soluciones prácticas y aplicables.
             </p>
             <div class="pt-3 border-top border-light-subtle mt-auto d-flex align-items-center text-success fw-semibold small">
               <i class="fas fa-compass me-2"></i> Liderazgo e Innovación Continua
@@ -212,10 +212,10 @@
             </div>
             <h3 class="fw-bold">Nuestra Misión</h3>
             <p>
-              Conectar profesionales de alto nivel con quienes desean desarrollar sus organizaciones.
+              Capacitar a ingenieros y directores de proyectos con metodologías y herramientas aplicables de inmediato.
             </p>
             <div class="pt-3 border-top border-light-subtle mt-auto d-flex align-items-center text-warning fw-semibold small">
-              <i class="fas fa-network-wired me-2"></i> Red de Talento y Excelencia
+              <i class="fas fa-network-wired me-2"></i> Excelencia y Formación Continua
             </div>
           </div>
         </div>
@@ -230,7 +230,7 @@
         <span class="section-badge">Cultura & Compromiso</span>
         <h2 class="section-title">Nuestros Valores</h2>
         <p class="section-subtitle">
-          Los principios intransables que guían cada asesoría técnica, programa formativo e intervención directiva.
+          Los principios fundamentales que guían cada programa formativo y capacitación técnica.
         </p>
       </div>
 
@@ -243,7 +243,7 @@
             </div>
             <h4 class="fw-bold mb-3">Diligencia</h4>
             <p class="text-muted mb-0">
-              Acompañamiento constante y compromiso riguroso en cada hito y consultoría encomendada.
+              Acompañamiento constante y compromiso riguroso en cada programa de capacitación.
             </p>
           </div>
         </div>
@@ -272,184 +272,6 @@
               Rigor técnico, ética profesional y solidez institucional en todos nuestros servicios.
             </p>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Soluciones Estratégicas en Ingeniería y Proyectos -->
-  <section class="py-5 my-lg-4">
-    <div class="container">
-      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-5">
-        <div>
-          <span class="section-badge">Servicios Profesionales & Consultoría</span>
-          <h2 class="section-title">Soluciones Estratégicas en Ingeniería y Proyectos</h2>
-          <p class="section-subtitle ms-0">
-            Acompañamos a empresas constructoras, consorcios y entidades públicas en cada etapa crítica de sus proyectos de infraestructura y edificación.
-          </p>
-        </div>
-        <div class="mt-3 mt-md-0">
-          <a href="contacto" class="btn btn-outline-primary fw-bold px-4 py-2 w-100 w-md-auto hvr-grow">
-            Solicitar Asesoría <i class="fas fa-arrow-right ms-2"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="row g-4">
-        <!-- Servicio 1: Gobernanza & Implementación PMO -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="service-card hvr-box-shadow-outset">
-            <div class="service-icon-box service-pmo">
-              <i class="fas fa-sitemap"></i>
-            </div>
-            <h3 class="service-title">Implementación & Gobernanza PMO</h3>
-            <p class="service-desc">
-              Diseño, estandarización e implementación de Oficinas de Gestión de Proyectos para optimizar el control, plazos y costos organizacionales.
-            </p>
-            <ul class="service-features">
-              <li><i class="fas fa-check-circle"></i> Diagnóstico de madurez y estructura PMO</li>
-              <li><i class="fas fa-check-circle"></i> Tableros de control y KPIs directivos</li>
-              <li><i class="fas fa-check-circle"></i> Estandarización de procesos bajo PMI®</li>
-            </ul>
-            <div class="mt-auto">
-              <a href="contacto" class="btn-service-action hvr-grow">
-                Consultar Servicio <i class="fas fa-chevron-right ms-1"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Servicio 2: Gestión Contractual NEC4 & Pública -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="service-card hvr-box-shadow-outset">
-            <div class="service-icon-box service-contract">
-              <i class="fas fa-file-contract"></i>
-            </div>
-            <h3 class="service-title">Administración & Gestión Contractual</h3>
-            <p class="service-desc">
-              Asesoría preventiva y estratégica en contratos NEC4 (ECC/PSC), modelos FIDIC y Contrataciones del Estado (Ley 30225).
-            </p>
-            <ul class="service-features">
-              <li><i class="fas fa-check-circle"></i> Alertas tempranas y mitigación de riesgos</li>
-              <li><i class="fas fa-check-circle"></i> Sustentación de Eventos Compensables</li>
-              <li><i class="fas fa-check-circle"></i> Gestión de modificaciones y adicionales</li>
-            </ul>
-            <div class="mt-auto">
-              <a href="contacto" class="btn-service-action hvr-grow">
-                Consultar Servicio <i class="fas fa-chevron-right ms-1"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Servicio 3: Peritaje Forense & Delay Claims -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="service-card hvr-box-shadow-outset">
-            <div class="service-icon-box service-claims">
-              <i class="fas fa-microscope"></i>
-            </div>
-            <h3 class="service-title">Peritaje Forense & Delay Claims</h3>
-            <p class="service-desc">
-              Análisis técnico y forense de demoras en cronogramas, disrupción de productividad y sustentación de reclamaciones por mayores costos.
-            </p>
-            <ul class="service-features">
-              <li><i class="fas fa-check-circle"></i> Metodología Time Impact Analysis (TIA)</li>
-              <li><i class="fas fa-check-circle"></i> Cuantificación de atrasos As-Planned vs As-Built</li>
-              <li><i class="fas fa-check-circle"></i> Elaboración de informes periciales sólidos</li>
-            </ul>
-            <div class="mt-auto">
-              <a href="contacto" class="btn-service-action hvr-grow">
-                Consultar Servicio <i class="fas fa-chevron-right ms-1"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Servicio 4: Dispute Boards & DAB / JRD -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="service-card hvr-box-shadow-outset">
-            <div class="service-icon-box service-dab">
-              <i class="fas fa-gavel"></i>
-            </div>
-            <h3 class="service-title">Juntas de Resolución de Disputas (DAB / JRD)</h3>
-            <p class="service-desc">
-              Acompañamiento técnico de expertos para la prevención y resolución eficiente de discrepancias contractuales durante la ejecución de obra.
-            </p>
-            <ul class="service-features">
-              <li><i class="fas fa-check-circle"></i> Asesoría técnica en visitas de obra</li>
-              <li><i class="fas fa-check-circle"></i> Preparación de audiencias y posiciones</li>
-              <li><i class="fas fa-check-circle"></i> Estrategias de prevención de arbitrajes</li>
-            </ul>
-            <div class="mt-auto">
-              <a href="contacto" class="btn-service-action hvr-grow">
-                Consultar Servicio <i class="fas fa-chevron-right ms-1"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Servicio 5: Transformación Digital & VDC-BIM -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="service-card hvr-box-shadow-outset">
-            <div class="service-icon-box service-vdc">
-              <i class="fas fa-cubes"></i>
-            </div>
-            <h3 class="service-title">Transformación Digital VDC - BIM</h3>
-            <p class="service-desc">
-              Implementación de metodología Virtual Design & Construction y modelos BIM para optimizar la constructabilidad y sincronizar 3D, 4D y 5D.
-            </p>
-            <ul class="service-features">
-              <li><i class="fas fa-check-circle"></i> Coordinación interdisciplinaria 3D</li>
-              <li><i class="fas fa-check-circle"></i> Simulación y control de cronogramas 4D</li>
-              <li><i class="fas fa-check-circle"></i> Dinámicas de Ingeniería Concurrente (ICE)</li>
-            </ul>
-            <div class="mt-auto">
-              <a href="contacto" class="btn-service-action hvr-grow">
-                Consultar Servicio <i class="fas fa-chevron-right ms-1"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Servicio 6: Capacitación In-Company Corporativa -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="service-card hvr-box-shadow-outset">
-            <div class="service-icon-box service-incompany">
-              <i class="fas fa-chalkboard-teacher"></i>
-            </div>
-            <h3 class="service-title">Capacitación In-Company a Medida</h3>
-            <p class="service-desc">
-              Entrenamiento de alta especialización adaptado a la tipología contractual, desafíos y casos reales de su empresa u obra.
-            </p>
-            <ul class="service-features">
-              <li><i class="fas fa-check-circle"></i> Talleres prácticos con casos propios</li>
-              <li><i class="fas fa-check-circle"></i> Docentes internacionales de amplia trayectoria</li>
-              <li><i class="fas fa-check-circle"></i> Plantillas y herramientas de aplicación inmediata</li>
-            </ul>
-            <div class="mt-auto">
-              <a href="contacto" class="btn-service-action hvr-grow">
-                Consultar Servicio <i class="fas fa-chevron-right ms-1"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Banner de Transición hacia el Catálogo de Capacitaciones -->
-      <div class="mt-5 p-4 rounded-4 bg-light border border-light-subtle d-flex flex-column flex-lg-row align-items-center justify-content-between gap-3 shadow-sm">
-        <div class="d-flex align-items-center gap-3">
-          <div class="bg-warning p-3 rounded-circle text-white fs-3 d-none d-sm-block">
-            <i class="fas fa-graduation-cap"></i>
-          </div>
-          <div>
-            <h5 class="fw-bold mb-1 text-primary">¿Buscas potenciar las competencias de tu equipo técnico?</h5>
-            <p class="text-muted small mb-0">Explora nuestra oferta académica vigente en contratos NEC4, análisis forense, dispute boards y metodologías BIM.</p>
-          </div>
-        </div>
-        <div class="w-100 w-lg-auto text-center">
-          <a href="capacitaciones" class="btn btn-warning fw-bold px-4 py-2 text-white text-nowrap w-100 w-lg-auto hvr-grow">
-            <i class="fas fa-th-large me-2"></i> Ver Catálogo de Capacitaciones
-          </a>
         </div>
       </div>
     </div>
@@ -708,16 +530,16 @@
           </div>
         </div>
 
-        <!-- Docente 6: Iván Benavides -->
+        <!-- Docente 6: Félix Valdez-Torero -->
         <div class="col-12 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
           <div class="docente-card hvr-box-shadow-outset">
             <div>
               <div class="teacher-img-wrap">
-                <img src="img/ivanbenavides.jpg" alt="Ing. Iván Benavides" loading="lazy">
+                <img src="img/ivanbenavides.jpg" alt="Félix Valdez-Torero, Ing., PhD(c), MSc, PMP®" loading="lazy">
               </div>
-              <div class="docente-name">ING. IVÁN BENAVIDES</div>
-              <div class="docente-role">Gestión de Riesgos</div>
-              <span class="docente-specialty mb-3">Riesgos PMI® & Cuantitativo</span>
+              <div class="docente-name">FÉLIX VALDEZ-TORERO</div>
+              <div class="docente-role">Gestión de Riesgos PMI®</div>
+              <span class="docente-specialty mb-3">PhD(c), MSc, PMP® · +35 Años</span>
             </div>
             <div class="d-flex flex-column gap-2 mt-2">
               <button type="button" class="btn btn-outline-primary btn-sm fw-bold rounded-pill w-100 hvr-grow" data-bs-toggle="modal" data-bs-target="#docenteModal_6">
@@ -752,16 +574,16 @@
           </div>
         </div>
 
-        <!-- Docente 8: Víctor -->
+        <!-- Docente 8: Víctor Cruz -->
         <div class="col-12 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
           <div class="docente-card hvr-box-shadow-outset">
             <div>
               <div class="teacher-img-wrap">
-                <img src="img/victor.png" alt="Ing. Víctor" loading="lazy">
+                <img src="img/victor.png" alt="Víctor Cruz, Ing. Civil, PMP®" loading="lazy">
               </div>
-              <div class="docente-name">ING. VÍCTOR</div>
-              <div class="docente-role">Eventos Compensables</div>
-              <span class="docente-specialty mb-3">Costos & Valorizaciones</span>
+              <div class="docente-name">VÍCTOR CRUZ</div>
+              <div class="docente-role">Eventos Compensables NEC4</div>
+              <span class="docente-specialty mb-3">Ing. Civil, PMP® · +14 Años</span>
             </div>
             <div class="d-flex flex-column gap-2 mt-2">
               <button type="button" class="btn btn-outline-primary btn-sm fw-bold rounded-pill w-100 hvr-grow" data-bs-toggle="modal" data-bs-target="#docenteModal_8">
@@ -807,16 +629,16 @@
               </div>
             </div>
             <div class="col-12 col-md-7">
-              <h3 class="fw-bold text-primary mb-1">ING. LUIS RUIZ</h3>
-              <div class="text-muted fw-semibold small mb-3 text-uppercase" style="letter-spacing: 0.05em;">+25 Años de Experiencia & Miembro DAB Panamericanos Lima 2019</div>
+              <h3 class="fw-bold text-primary mb-1">MBA, ING. CIVIL</h3>
+              <div class="text-muted fw-semibold small mb-3 text-uppercase" style="letter-spacing: 0.05em;">+30 Años de Experiencia · Miembro DAB Panamericanos 2019 & ARCC</div>
               
               <p class="text-secondary small mb-3 leading-relaxed">
-                Ingeniero Civil con más de 25 años de trayectoria en gerencia de proyectos de infraestructura y edificación. Miembro de la Mesa de Resolución de Disputas (DAB) en los Juegos Panamericanos Lima 2019. Especialista en estandarización contractual colaborativa, administración de contratos FIDIC, NEC3/NEC4 y solución preventiva de controversias.
+                Profesional con más de 30 años en gerencia de proyectos y gestión contractual. Miembro de la Junta de Resolución de Disputas (DAB – Dispute Adjudication Board) de los Panamericanos Lima 2019, miembro y presidente de DAB’s en la Autoridad de la Reconstrucción con Cambios (ARCC). Experto en contratos colaborativos NEC y modelos FIDIC.
               </p>
 
               <div class="docente-modal-quote">
                 <i class="fas fa-quote-left me-2 text-warning"></i>
-                "La prevención es la clave del éxito contractual."
+                "La prevención y la gestión temprana son la clave del éxito contractual."
               </div>
 
               <div class="d-flex flex-wrap gap-2 mt-4 pt-2">
@@ -826,8 +648,8 @@
                 <a href="nec4" class="btn btn-primary btn-sm fw-bold px-3 py-2 hvr-grow">
                   <i class="fas fa-file-contract me-1"></i> Ver Curso Casos NEC4
                 </a>
-                <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20consultar%20por%20los%20programas%20a%20cargo%20del%20docente%20Luis%20Ruiz" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm fw-bold px-3 py-2 text-white hvr-grow">
-                  <i class="fab fa-whatsapp me-1"></i> Consultar Asesoría
+                <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20consultar%20por%20el%20curso%20DAB" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm fw-bold px-3 py-2 text-white hvr-grow">
+                  <i class="fab fa-whatsapp me-1"></i> Consultar Curso
                 </a>
               </div>
             </div>
@@ -881,7 +703,7 @@
                   <i class="fas fa-search-plus me-1"></i> Ver Curso Análisis Forense
                 </a>
                 <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20consultar%20por%20los%20programas%20a%20cargo%20del%20docente%20Edwar%20Marcelo" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm fw-bold px-3 py-2 text-white hvr-grow">
-                  <i class="fab fa-whatsapp me-1"></i> Consultar Asesoría
+                  <i class="fab fa-whatsapp me-1"></i> Consultar Curso
                 </a>
               </div>
             </div>
@@ -935,7 +757,7 @@
                   <i class="fas fa-cubes me-1"></i> Ver Curso VDC - BIM
                 </a>
                 <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20consultar%20por%20los%20programas%20a%20cargo%20del%20docente%20Cesar%20Jara" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm fw-bold px-3 py-2 text-white hvr-grow">
-                  <i class="fab fa-whatsapp me-1"></i> Consultar Asesoría
+                  <i class="fab fa-whatsapp me-1"></i> Consultar Curso
                 </a>
               </div>
             </div>
@@ -989,7 +811,7 @@
                   <i class="fas fa-landmark me-1"></i> Ver Curso Contratos Estado
                 </a>
                 <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20consultar%20por%20los%20programas%20a%20cargo%20del%20docente%20Luis%20Condori" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm fw-bold px-3 py-2 text-white hvr-grow">
-                  <i class="fab fa-whatsapp me-1"></i> Consultar Asesoría
+                  <i class="fab fa-whatsapp me-1"></i> Consultar Curso
                 </a>
               </div>
             </div>
@@ -1043,7 +865,7 @@
                   <i class="fas fa-balance-scale me-1"></i> Ver Curso Compliance
                 </a>
                 <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20consultar%20por%20los%20programas%20a%20cargo%20del%20docente%20Renzo%20Valera" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm fw-bold px-3 py-2 text-white hvr-grow">
-                  <i class="fab fa-whatsapp me-1"></i> Consultar Asesoría
+                  <i class="fab fa-whatsapp me-1"></i> Consultar Curso
                 </a>
               </div>
             </div>
@@ -1053,7 +875,7 @@
     </div>
   </div>
 
-  <!-- Modal 6: Iván Benavides -->
+  <!-- Modal 6: Félix Valdez-Torero -->
   <div class="modal fade" id="docenteModal_6" tabindex="-1" aria-labelledby="docenteModalLabel6" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content border-0 shadow-24 rounded-4 overflow-hidden">
@@ -1073,34 +895,31 @@
           <div class="row align-items-center g-4">
             <div class="col-12 col-md-5 text-center">
               <div class="rounded-4 overflow-hidden shadow-sm mx-auto border border-2 border-light-subtle" style="max-width: 240px;">
-                <img src="img/ivanbenavides.jpg" alt="Ing. Iván Benavides" class="img-fluid w-100" style="object-fit: cover; max-height: 280px;">
+                <img src="img/ivanbenavides.jpg" alt="Félix Valdez-Torero" class="img-fluid w-100" style="object-fit: cover; max-height: 280px;">
               </div>
               <div class="mt-3">
-                <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold">Gestión de Riesgos PMI® & Monte Carlo</span>
+                <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold">Gestión de Riesgos PMI®</span>
               </div>
             </div>
             <div class="col-12 col-md-7">
-              <h3 class="fw-bold text-primary mb-1">ING. IVÁN BENAVIDES</h3>
-              <div class="text-muted fw-semibold small mb-3 text-uppercase" style="letter-spacing: 0.05em;">Consultor Senior en Gestión Integral de Riesgos PMI®</div>
+              <h3 class="fw-bold text-primary mb-1">FÉLIX VALDEZ-TORERO</h3>
+              <div class="text-muted fw-semibold small mb-3 text-uppercase" style="letter-spacing: 0.05em;">ING., PhD(c), MSc, PMP® · Especialista Senior en Gestión de Riesgos PMI®</div>
               
               <p class="text-secondary small mb-3 leading-relaxed">
-                Consultor Senior especializado en Gestión Integral de Riesgos bajo los estándares del PMI® y Análisis Cuantitativo de Contingencias de Plazo y Costo. Experto en modelado estocástico con Monte Carlo y tableros de control de incertidumbre.
+                Profesional con más de 35 años de experiencia en gestión de la ingeniería, consultoría y capacitación en gerencia de proyectos para empresas de gran nivel: AFP Horizonte, Antamina, Banco Central de Reserva del Perú, BBVA Banco Continental, BCTS, Belcorp, Buenaventura Ingenieros, Cahua S.A., Certicom, Clinica Internacional, Corporación Aceros Arequipa, Cosapi S.A., Doe Run Perú, ENCANA (Energy Canada), Interbank, JJC Contratistas Generales, Knight Piésold, Occidental Petroleum, Prosac, Roche Peru, Social Capital Group, Tintaya (Xtrata), Toulouse Lautrec.
               </p>
 
               <div class="docente-modal-quote">
                 <i class="fas fa-quote-left me-2 text-warning"></i>
-                "Gestionar el riesgo es asegurar la rentabilidad."
+                "Gestionar el riesgo de forma proactiva es asegurar la rentabilidad del proyecto."
               </div>
 
               <div class="d-flex flex-wrap gap-2 mt-4 pt-2">
                 <a href="riesgos-pmi" class="btn btn-warning btn-sm fw-bold px-3 py-2 text-white hvr-grow">
                   <i class="fas fa-shield-alt me-1"></i> Ver Curso Riesgos PMI
                 </a>
-                <a href="analisis-cuantitativo" class="btn btn-primary btn-sm fw-bold px-3 py-2 hvr-grow">
-                  <i class="fas fa-calculator me-1"></i> Análisis Cuantitativo
-                </a>
-                <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20consultar%20por%20los%20programas%20a%20cargo%20del%20docente%20Ivan%20Benavides" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm fw-bold px-3 py-2 text-white hvr-grow">
-                  <i class="fab fa-whatsapp me-1"></i> Consultar Asesoría
+                <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20consultar%20por%20los%20programas%20a%20cargo%20del%20docente%20Felix%20Valdez" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm fw-bold px-3 py-2 text-white hvr-grow">
+                  <i class="fab fa-whatsapp me-1"></i> Consultar Curso
                 </a>
               </div>
             </div>
@@ -1154,7 +973,7 @@
                   <i class="fas fa-chart-line me-1"></i> Ver Curso Primavera P6
                 </a>
                 <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20consultar%20por%20los%20programas%20a%20cargo%20del%20docente%20Fernando%20Barrero" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm fw-bold px-3 py-2 text-white hvr-grow">
-                  <i class="fab fa-whatsapp me-1"></i> Consultar Asesoría
+                  <i class="fab fa-whatsapp me-1"></i> Consultar Curso
                 </a>
               </div>
             </div>
@@ -1164,7 +983,7 @@
     </div>
   </div>
 
-  <!-- Modal 8: Víctor -->
+  <!-- Modal 8: Víctor Cruz -->
   <div class="modal fade" id="docenteModal_8" tabindex="-1" aria-labelledby="docenteModalLabel8" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content border-0 shadow-24 rounded-4 overflow-hidden">
@@ -1184,18 +1003,18 @@
           <div class="row align-items-center g-4">
             <div class="col-12 col-md-5 text-center">
               <div class="rounded-4 overflow-hidden shadow-sm mx-auto border border-2 border-light-subtle bg-light" style="max-width: 240px;">
-                <img src="img/victor.png" alt="Ing. Víctor" class="img-fluid w-100" style="object-fit: cover; max-height: 280px;">
+                <img src="img/victor.png" alt="Víctor Cruz, Ing. Civil, PMP®" class="img-fluid w-100" style="object-fit: cover; max-height: 280px;">
               </div>
               <div class="mt-3">
                 <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold">Eventos Compensables & Costos</span>
               </div>
             </div>
             <div class="col-12 col-md-7">
-              <h3 class="fw-bold text-primary mb-1">ING. VÍCTOR</h3>
-              <div class="text-muted fw-semibold small mb-3 text-uppercase" style="letter-spacing: 0.05em;">Especialista en Ingeniería de Costos, Valorizaciones & Gestión Contractual NEC</div>
+              <h3 class="fw-bold text-primary mb-1">VÍCTOR CRUZ</h3>
+              <div class="text-muted fw-semibold small mb-3 text-uppercase" style="letter-spacing: 0.05em;">ING. CIVIL, PMP® · Especialista en Contratos NEC4 & Reclamos</div>
               
               <p class="text-secondary small mb-3 leading-relaxed">
-                Ingeniero Civil especialista en ingeniería de costos, valorizaciones, administración de contratos colaborativos y sustento de eventos compensables, presupuestos adicionales y liquidación técnica de obras.
+                Profesional con más de 14 años en proyectos de ingeniería y construcción; con experiencia en dirección de proyectos, residencia y supervisión de obra, administración de contratos, procesos de licitación, gestión de riesgos, reclamos y negociación. Experiencia en contratos NEC, ley de contrataciones del estado (LCE), ley de arbitraje y la ley de obras por impuestos (OXI).
               </p>
 
               <div class="docente-modal-quote">
@@ -1207,8 +1026,8 @@
                 <a href="eventos-compensables" class="btn btn-warning btn-sm fw-bold px-3 py-2 text-white hvr-grow">
                   <i class="fas fa-file-invoice-dollar me-1"></i> Ver Curso Eventos Compensables
                 </a>
-                <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20consultar%20por%20los%20programas%20a%20cargo%20del%20docente%20Victor" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm fw-bold px-3 py-2 text-white hvr-grow">
-                  <i class="fab fa-whatsapp me-1"></i> Consultar Asesoría
+                <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20consultar%20por%20los%20programas%20a%20cargo%20del%20docente%20Victor%20Cruz" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm fw-bold px-3 py-2 text-white hvr-grow">
+                  <i class="fab fa-whatsapp me-1"></i> Consultar Curso
                 </a>
               </div>
             </div>
@@ -1245,7 +1064,7 @@
               </a>
             </div>
             <p class="text-white-50 small mt-3 mb-0">
-              <i class="fas fa-shield-alt me-1 text-warning"></i> Asesoría gratuita y sin compromiso
+              <i class="fas fa-shield-alt me-1 text-warning"></i> Orientación académica inmediata y sin compromiso
             </p>
           </div>
         </div>

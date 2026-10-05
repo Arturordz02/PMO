@@ -70,7 +70,7 @@ use App\Core\View;
       </p>
       <ol class="text-secondary ps-4">
         <li class="mb-2">Absolver consultas técnicas, comerciales o académicas formuladas por los usuarios.</li>
-        <li class="mb-2">Gestionar la inscripción, coordinación y entrega de información sobre los programas de capacitación y consultoría.</li>
+        <li class="mb-2">Gestionar la coordinación y entrega de información, temarios y brochures sobre los programas de capacitación técnica.</li>
         <li class="mb-2">Atender formalmente las quejas o reclamaciones ingresadas a través del Libro de Reclamaciones dentro de los plazos legales.</li>
         <li class="mb-2">Emitir el reporte de evaluación de competencias solicitado por el usuario.</li>
         <li class="mb-2">Garantizar la seguridad operativa y estabilidad del sitio web.</li>

@@ -196,59 +196,6 @@
     </div>
   </section>
 
-  <!-- PREGUNTAS FRECUENTES DEL PROGRAMA -->
-  <section class="py-5 bg-white">
-    <div class="container">
-      <div class="text-center mb-4" data-aos="fade-up">
-        <span class="section-badge">Dudas Frecuentes</span>
-        <h3 class="fw-bold text-primary">Preguntas Frecuentes sobre este Curso</h3>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-9" data-aos="fade-up" data-aos-delay="100">
-          <div class="accordion faq-accordion" id="faqCourseAccordion">
-            
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_0">
-                <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_0" aria-expanded="true" aria-controls="faqCourseCol_0">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿Qué estándares internacionales de integridad se estudian?
-                </button>
-              </h3>
-              <div id="faqCourseCol_0" class="accordion-collapse collapse show" aria-labelledby="faqCourseHead_0" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  Se desarrollan los marcos de ISO 37001 (Sistemas de Gestión Antisoborno), ISO 37301 (Compliance) y las exigencias de la Ley 30424 sobre responsabilidad administrativa de personas jurídicas.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_1">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_1" aria-expanded="false" aria-controls="faqCourseCol_1">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿Cómo se elabora una Matriz de Riesgos de Compliance en obra?
-                </button>
-              </h3>
-              <div id="faqCourseCol_1" class="accordion-collapse collapse " aria-labelledby="faqCourseHead_1" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  Se realizan ejercicios de identificación de riesgos en compras, subcontrataciones, licencias, relación con supervisores y funcionarios públicos.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_2">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_2" aria-expanded="false" aria-controls="faqCourseCol_2">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿A quiénes está dirigido este programa?
-                </button>
-              </h3>
-              <div id="faqCourseCol_2" class="accordion-collapse collapse " aria-labelledby="faqCourseHead_2" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  A directores de proyecto, gerentes legales, oficiales de cumplimiento, auditores internos y miembros de directorios de empresas constructoras y consultoras.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
 <!-- Sección de Información y Brochure (CTA Principal) -->
   <section id="seccion-brochure" class="container my-5" data-aos="zoom-in">
     <div class="enrollment-checkout-card">
@@ -292,7 +239,7 @@
         </div>
         <div class="enrollment-trust-item">
           <i class="fas fa-file-invoice text-success"></i>
-          <span>Facturación Electrónica B2B con RUC</span>
+          <span>Emisión de Comprobante / Boleta y Factura</span>
         </div>
       </div>
 

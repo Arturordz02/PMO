@@ -127,16 +127,16 @@
           <div class="card bg-light border-0 rounded-4 p-4 mt-4 shadow-sm border-start border-5 border-primary" data-aos="fade-up">
             <div class="row align-items-center g-3">
               <div class="col-md-3 text-center">
-                <img src="img/ivanbenavides.jpg" alt="ING. IVÁN BENAVIDES" class="rounded-circle shadow border border-3 border-white" style="width: 110px; height: 110px; object-fit: cover; object-position: top;">
+                <img src="img/ivanbenavides.jpg" alt="FELIX VALDEZ-TORERO" class="rounded-circle shadow border border-3 border-white" style="width: 110px; height: 110px; object-fit: cover; object-position: top;">
               </div>
               <div class="col-md-9">
                 <span class="badge bg-primary text-white mb-2 px-3 py-2 rounded-pill"><i class="fas fa-user-tie me-1"></i> DOCENTE PRINCIPAL</span>
-                <h4 class="fw-bold mb-1 text-dark">ING. IVÁN BENAVIDES</h4>
-                <p class="small text-primary fw-bold mb-2">Consultor Senior en Gestión Integral de Riesgos PMI® & Modelado Monte Carlo</p>
+                <h4 class="fw-bold mb-1 text-dark">FELIX VALDEZ-TORERO</h4>
+                <p class="small text-primary fw-bold mb-2">ING., PhD(c), MSc, PMP® · Especialista Senior en Gestión de Riesgos</p>
                 
                 <!-- Resumen Completo y Trayectoria Profesional -->
                 <p class="small text-muted mb-2" style="line-height: 1.6;">
-                  Consultor Senior especializado en Gestión Integral de Riesgos bajo los estándares del PMI® y Análisis Cuantitativo de Contingencias de Plazo y Costo. Experto en modelado estocástico con Monte Carlo y tableros de control de incertidumbre.
+                  Profesional con más de 35 años de experiencia en gestión de la ingeniería, consultoría y capacitación en gerencia de proyectos para empresas de gran nivel: AFP Horizonte, Antamina, Banco Central de Reserva del Perú, BBVA Banco Continental, BCTS, Belcorp, Buenaventura Ingenieros, Cahua S.A., Certicom, Clinica Internacional, Corporación Aceros Arequipa, Cosapi S.A., Doe Run Perú, ENCANA (Energy Canada), Interbank, JJC Contratistas Generales, Knight Piésold, Occidental Petroleum, Prosac, Roche Peru, Social Capital Group, Tintaya (Xtrata), Toulouse Lautrec.
                 </p>
                 
                 <div class="d-flex flex-wrap gap-2 mt-2">
@@ -188,55 +188,103 @@
     </div>
   </section>
 
-  <!-- PREGUNTAS FRECUENTES DEL PROGRAMA -->
-  <section class="py-5 bg-white">
-    <div class="container">
-      <div class="text-center mb-4" data-aos="fade-up">
-        <span class="section-badge">Dudas Frecuentes</span>
-        <h3 class="fw-bold text-primary">Preguntas Frecuentes sobre este Curso</h3>
+  <!-- 3. Estructura Curricular del Programa (Temario Oficial en 6 Procesos PMI) -->
+  <section id="temario-contenido" class="py-5 bg-white">
+    <div class="container py-lg-4">
+      <div class="text-center mb-5">
+        <span class="section-badge">Plan de Estudios Oficial</span>
+        <h2 class="section-title">CONTENIDO DEL PROGRAMA</h2>
+        <p class="section-subtitle">
+          Procesos estructurados bajo el estándar PMI® para dominar la gestión integral de riesgos en proyectos.
+        </p>
       </div>
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-9" data-aos="fade-up" data-aos-delay="100">
-          <div class="accordion faq-accordion" id="faqCourseAccordion">
-            
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_0">
-                <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_0" aria-expanded="true" aria-controls="faqCourseCol_0">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿Qué estándares del PMI® se aplican en el curso?
-                </button>
-              </h3>
-              <div id="faqCourseCol_0" class="accordion-collapse collapse show" aria-labelledby="faqCourseHead_0" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  Se estructura conforme a la Guía del PMBOK® 7ma edición y el Estándar de Gestión de Riesgos en Proyectos del PMI®, adaptado a la industria de la construcción.
-                </div>
-              </div>
+
+      <div class="row g-4">
+        
+        <!-- Módulo 01 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="module-card hvr-box-shadow-outset">
+            <span class="module-number text-danger">PROCESO 01</span>
+            <div class="module-icon-box">
+              <i class="fas fa-file-signature"></i>
             </div>
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_1">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_1" aria-expanded="false" aria-controls="faqCourseCol_1">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿Cómo se estructura el Registro y Matriz de Riesgos?
-                </button>
-              </h3>
-              <div id="faqCourseCol_1" class="accordion-collapse collapse " aria-labelledby="faqCourseHead_1" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  Aprenderás a ponderar probabilidad e impacto, definir propietarios del riesgo, planes de respuesta (mitigar, transferir, evitar, aceptar) y monitoreo de disparadores (triggers).
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h3 class="accordion-header" id="faqCourseHead_2">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCourseCol_2" aria-expanded="false" aria-controls="faqCourseCol_2">
-                  <i class="fas fa-question-circle faq-icon-bullet"></i> ¿Qué metodología y entregables prácticos desarrolla el curso?
-                </button>
-              </h3>
-              <div id="faqCourseCol_2" class="accordion-collapse collapse " aria-labelledby="faqCourseHead_2" data-bs-parent="#faqCourseAccordion">
-                <div class="accordion-body">
-                  Se desarrollan matrices de riesgos bajo el estándar PMBOK 7ma Edición, incluyendo identificación, análisis cualitativo, planes de mitigación y monitoreo continuo.
-                </div>
-              </div>
-            </div>
+            <h4 class="module-title">PLANIFICAR LA GESTIÓN DE LOS RIESGOS</h4>
+            <p class="module-desc">
+              Se exponen los componentes de esta etapa, tales como el acta de constitución del proyecto y el plan de gestión de proyectos, junto con el empleo de juicio experto para desarrollar el plan de gestión de riesgos.
+            </p>
           </div>
         </div>
+
+        <!-- Módulo 02 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="module-card hvr-box-shadow-outset">
+            <span class="module-number text-danger">PROCESO 02</span>
+            <div class="module-icon-box">
+              <i class="fas fa-search-plus"></i>
+            </div>
+            <h4 class="module-title">IDENTIFICAR LOS RIESGOS</h4>
+            <p class="module-desc">
+              Se detallan los componentes del proceso de detección de riesgos, abordando sus insumos como el plan de gestión de riesgos y acuerdos pertinentes. Se lleva a cabo la recopilación de información, se elabora el registro de riesgos y se generan otras salidas relevantes.
+            </p>
+          </div>
+        </div>
+
+        <!-- Módulo 03 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="module-card hvr-box-shadow-outset">
+            <span class="module-number text-danger">PROCESO 03</span>
+            <div class="module-icon-box">
+              <i class="fas fa-th"></i>
+            </div>
+            <h4 class="module-title">REALIZAR EL ANÁLISIS DE RIESGOS</h4>
+            <p class="module-desc">
+              Se expone el alcance del análisis cualitativo y cuantitativo. Se crea una matriz de frecuencia e impacto, se genera un mapa de calor y se establece la asignación de riesgos, además de los principios básicos del análisis cuantitativo.
+            </p>
+          </div>
+        </div>
+
+        <!-- Módulo 04 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="module-card hvr-box-shadow-outset">
+            <span class="module-number text-danger">PROCESO 04</span>
+            <div class="module-icon-box">
+              <i class="fas fa-chess"></i>
+            </div>
+            <h4 class="module-title">PLANIFICAR LA RESPUESTA A LOS RIESGOS</h4>
+            <p class="module-desc">
+              Se exploran las categorías de respuesta ante los riesgos, utilizando diversas herramientas y estrategias para enfrentar amenazas y oportunidades con el fin de generar solicitudes de cambios.
+            </p>
+          </div>
+        </div>
+
+        <!-- Módulo 05 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="module-card hvr-box-shadow-outset">
+            <span class="module-number text-danger">PROCESO 05</span>
+            <div class="module-icon-box">
+              <i class="fas fa-tasks"></i>
+            </div>
+            <h4 class="module-title">IMPLEMENTAR LA RESPUESTA A LOS RIESGOS</h4>
+            <p class="module-desc">
+              Se exponen las razones detrás de la falta de implementación de las respuestas a riesgos y se presentan enfoques que promueven la ejecución efectiva conforme al plan de gestión de riesgos.
+            </p>
+          </div>
+        </div>
+
+        <!-- Módulo 06 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="module-card hvr-box-shadow-outset">
+            <span class="module-number text-danger">PROCESO 06</span>
+            <div class="module-icon-box">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h4 class="module-title">MONITOREAR LOS RIESGOS</h4>
+            <p class="module-desc">
+              Se detallan los estándares para la supervisión de riesgos, basados en datos de rendimiento laboral y auditorías, para generar informes de rendimiento laboral confiables.
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -284,7 +332,7 @@
         </div>
         <div class="enrollment-trust-item">
           <i class="fas fa-file-invoice text-success"></i>
-          <span>Facturación Electrónica B2B con RUC</span>
+          <span>Emisión de Comprobante / Boleta y Factura</span>
         </div>
       </div>
 
