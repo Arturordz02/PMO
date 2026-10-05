@@ -65,8 +65,8 @@ return [
         'password'    => Env::string('PMO_SMTP_PASSWORD', ''),
         'from_email'  => Env::string('PMO_SMTP_USER', 'comercial@pmo-solutions.com'),
         'from_name'   => 'PMO Solutions - Notificaciones',
-        'admin_email' => 'comercial@pmo-solutions.com',
-        'admin_name'  => 'Administración PMO Solutions',
+        'admin_email' => Env::string('PMO_ADMIN_EMAIL', 'omar.samaniego@gmail.com'),
+        'admin_name'  => 'Omar Samaniego - PMO Solutions',
         'timeout'     => 15,
     ],
 

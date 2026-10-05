@@ -253,8 +253,8 @@ class SmtpMailer {
     }
 
     public function buildContactNotification(array $data): array {
-        $adminEmail = $this->config['admin_email'] ?? 'comercial@pmo-solutions.com';
-        $adminName  = $this->config['admin_name'] ?? 'Administración PMO Solutions';
+        $adminEmail = $this->config['admin_email'] ?? 'omar.samaniego@gmail.com';
+        $adminName  = $this->config['admin_name'] ?? 'Omar Samaniego - PMO Solutions';
         $siteUrl    = $this->appConfig['site_url'] ?? 'https://pmo-solutions.com';
         $subject    = "Nueva Consulta Web: " . ($data['servicio'] ?? 'General') . " - " . ($data['nombre'] ?? '');
 
@@ -359,8 +359,8 @@ class SmtpMailer {
     }
 
     public function buildClaimAdminNotification(array $data): array {
-        $adminEmail = $this->config['admin_email'] ?? 'comercial@pmo-solutions.com';
-        $adminName  = $this->config['admin_name'] ?? 'Administración PMO Solutions';
+        $adminEmail = $this->config['admin_email'] ?? 'omar.samaniego@gmail.com';
+        $adminName  = $this->config['admin_name'] ?? 'Omar Samaniego - PMO Solutions';
         $code       = $data['codigo_reclamacion'] ?? 'REC-2026';
         $tipoReg    = $data['tipo_registro'] ?? 'Reclamo';
         $subject    = "[{$tipoReg} Virtual - {$code}] Hoja de Reclamación: " . ($data['nombre_completo'] ?? '');
