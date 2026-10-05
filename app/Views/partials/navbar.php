@@ -6,14 +6,6 @@ use App\Core\View;
 
 $active = $activeNav ?? '';
 ?>
-<!-- Top Announcement Notification Bar -->
-<div class="announcement-bar">
-  <div class="container d-flex flex-wrap align-items-center justify-content-center">
-    <span class="announcement-badge"><i class="fas fa-bullhorn me-1"></i> Convocatoria 2026</span>
-    <span>Inscripciones abiertas en Programas de Alta Especialización Contractual & Forense.</span>
-    <a href="capacitaciones" class="hvr-grow"><i class="fas fa-arrow-right me-1"></i> Ver Catálogo y Beneficios</a>
-  </div>
-</div>
 
 <!-- Top Utility Bar -->
 <div class="top-bar py-2 d-none d-md-block">

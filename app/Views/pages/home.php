@@ -1280,12 +1280,12 @@
             <div class="accordion-item">
               <h3 class="accordion-header" id="headingFour">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                  <i class="fas fa-credit-card faq-icon-bullet"></i> ¿Qué métodos de pago aceptan para inscripciones individuales y corporativas?
+                  <i class="fas fa-credit-card faq-icon-bullet"></i> ¿Qué métodos de pago aceptan para las capacitaciones individuales y corporativas?
                 </button>
               </h3>
               <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordionIndex">
                 <div class="accordion-body">
-                  Aceptamos transferencias bancarias directas (BCP, BBVA, Interbank), transferencias interbancarias (CCI), billeteras móviles (<strong>Yape y Plin</strong>) y pagos internacionales. Para coordinar tu inscripción y solicitar datos de cuenta bancaria o emisión de Factura Electrónica B2B con RUC, comunícate directamente con nuestro <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20coordinar%20el%20pago%20de%20mi%20matr%C3%ADcula" target="_blank" rel="noopener noreferrer" class="text-success fw-bold"><i class="fab fa-whatsapp me-1"></i>WhatsApp Comercial</a>.
+                  Aceptamos transferencias bancarias directas (BCP, BBVA, Interbank), transferencias interbancarias (CCI), billeteras móviles (<strong>Yape y Plin</strong>) y pagos internacionales. Para coordinar tu participación y solicitar datos de cuenta bancaria o emisión de Factura Electrónica B2B con RUC, comunícate directamente con nuestro <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20coordinar%20mi%20participaci%C3%B3n%20en%20las%20capacitaciones" target="_blank" rel="noopener noreferrer" class="text-success fw-bold"><i class="fab fa-whatsapp me-1"></i>WhatsApp Comercial</a>.
                 </div>
               </div>
             </div>
@@ -1324,7 +1324,7 @@
           <div class="col-12 col-lg-7 mb-4 mb-lg-0 text-center text-lg-start">
             <span class="badge-inscripciones-glow">
           <span class="pulse-dot"></span>
-          <i class="fas fa-rocket"></i> Inscripciones Abiertas 2026
+          <i class="fas fa-graduation-cap"></i> Capacitaciones Especializadas 2026
         </span>
             <h2 class="text-white fw-black display-5 mb-3" style="letter-spacing: -0.03em;">
               ¿Listo para <span style="color: var(--pmo-accent-gold);">elevar</span><br>tu carrera profesional?
@@ -1338,7 +1338,7 @@
               <a href="capacitaciones" class="btn btn-warning btn-lg fw-bold px-4 py-3 rounded-pill shadow hvr-grow text-white">
                 <i class="fas fa-graduation-cap me-2"></i> Ver Capacitaciones
               </a>
-              <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n%20sobre%20inscripci%C3%B3n" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-lg fw-bold px-4 py-3 rounded-pill shadow hvr-grow">
+              <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n%20sobre%20sus%20capacitaciones" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-lg fw-bold px-4 py-3 rounded-pill shadow hvr-grow">
                 <i class="fab fa-whatsapp me-2"></i> Hablar con un Asesor
               </a>
             </div>

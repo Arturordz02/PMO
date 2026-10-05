@@ -17,8 +17,8 @@
             <a href="#temario-contenido" class="btn btn-warning btn-lg fw-bold shadow text-white hvr-grow me-md-2 mb-2 mb-md-0">
               <i class="fas fa-book-open me-2"></i> Ver Temario Completo
             </a>
-            <a href="#seccion-inscripcion" class="btn btn-outline-light btn-lg fw-bold shadow hvr-grow mb-2 mb-md-0">
-              <i class="fas fa-credit-card me-2"></i> Inscripción & Medios de Pago
+            <a href="#seccion-brochure" class="btn btn-outline-light btn-lg fw-bold shadow hvr-grow mb-2 mb-md-0">
+              <i class="fas fa-file-pdf me-2"></i> Solicitar Temario & Brochure
             </a>
           </div>
 
@@ -90,7 +90,7 @@
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScXwQcpQ2LDvCmFQvElQ2NkOUDe3TGW-Lc_Wn_HQeW2Mgpu9w/viewform" target="_blank" rel="noopener noreferrer">
               <img src="img/controlproyectos.png" alt="Flyer Control de Proyectos con Primavera P6 y Power BI" class="img-fluid w-100 rounded-4 transition-zoom" style="display: block;">
               <div class="card-img-overlay d-flex align-items-end p-3 bg-dark bg-opacity-25 opacity-hover hvr-box-shadow-outset">
-                <span class="btn btn-warning btn-sm fw-bold w-100 shadow text-white hvr-grow"><i class="fas fa-external-link-alt me-2"></i> Clic para Inscripción Directa</span>
+                <span class="btn btn-warning btn-sm fw-bold w-100 shadow text-white hvr-grow"><i class="fas fa-file-pdf me-2"></i> Clic para Solicitar Brochure</span>
               </div>
             </a>
           </div>
@@ -241,7 +241,7 @@
     <div class="container">
       <div class="text-center mb-4" data-aos="fade-up">
         <span class="section-badge">Garantía de Excelencia</span>
-        <h3 class="fw-bold text-primary">¿Qué incluye tu Inscripción en este Programa?</h3>
+        <h3 class="fw-bold text-primary">¿Qué incluye este Programa de Capacitación?</h3>
         <p class="text-secondary small">Diseñado para profesionales que buscan aplicación técnica inmediata en obra y oficina técnica.</p>
       </div>
       <div class="row g-4">
@@ -329,15 +329,15 @@
     </div>
   </section>
 
-<!-- 4. Sección de Inscripción e Información (CTA Principal) -->
-  <section id="seccion-inscripcion" class="container my-5" data-aos="zoom-in">
+<!-- Sección de Información y Brochure (CTA Principal) -->
+  <section id="seccion-brochure" class="container my-5" data-aos="zoom-in">
     <div class="enrollment-checkout-card">
       
       <!-- Badge Luminoso -->
       <div class="mb-3">
         <span class="badge-inscripciones-glow">
           <span class="pulse-dot"></span>
-          <i class="fas fa-rocket"></i> Inscripciones Abiertas 2026
+          <i class="fas fa-graduation-cap"></i> Capacitación Especializada 2026
         </span>
       </div>
 
