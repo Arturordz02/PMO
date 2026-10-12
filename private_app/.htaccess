@@ -1,0 +1,13 @@
+# ==============================================================================
+# PMO SOLUTIONS - Acceso Denegado (private_app)
+# ==============================================================================
+# Este directorio contiene código fuente interno, vistas, lógica y almacenamiento.
+# No debe ser accesible vía HTTP bajo ninguna circunstancia.
+
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order deny,allow
+    Deny from all
+</IfModule>

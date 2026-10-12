@@ -1,6 +1,8 @@
 # Entorno y credenciales locales
 .env
 .env.*
+env.php
+!env.example.php
 !.env.example
 
 # Control de versiones e IDEs locales
@@ -16,15 +18,14 @@
 release/
 pmo_temp/
 
-# Almacenamiento y runtime
-storage/logs/*
-storage/cache/*
-storage/reports/*
-storage/outbox/*
-storage/sessions/*
+# Almacenamiento y runtime en private_app
+private_app/storage/logs/*
+private_app/storage/cache/*
+private_app/storage/reports/*
+private_app/storage/outbox/*
+private_app/storage/sessions/*
 
 # Conservar marcadores de estructura y seguridad
-!storage/**/
-!storage/**/.gitkeep
-!storage/**/.htaccess
-
+!private_app/storage/**/
+!private_app/storage/**/.gitkeep
+!private_app/storage/**/.htaccess

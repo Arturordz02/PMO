@@ -1,0 +1,22 @@
+================================================================================
+PMO SOLUTIONS — INSTRUCCIONES DE INSTALACIÓN DE BASE DE DATOS (cPanel / GoDaddy)
+================================================================================
+
+1. INSTALACIÓN NUEVA (RECOMENDADO):
+   a. Ingrese a cPanel -> "Bases de datos MySQL".
+   b. Cree una nueva base de datos (ejemplo: usuario_pmosolutions).
+   c. Cree un usuario MySQL con contraseña segura y asígnele TODOS los privilegios sobre dicha base de datos.
+   d. Abra "phpMyAdmin" desde cPanel y seleccione la base de datos creada.
+   e. Vaya a la pestaña "Importar".
+   f. Seleccione el archivo "schema_v2.sql" de esta carpeta y haga clic en "Continuar".
+   g. El esquema v2 incluye todas las tablas requeridas (contactos, reclamaciones, evaluaciones_habilidades_blandas, etc.) completamente optimizadas.
+
+2. ENTORNO SIN BASE DE DATOS:
+   Si aún no desea activar la base de datos o mientras la configura, PMO Solutions funciona con degradación elegante:
+   En su archivo .env (ubicado en private_app/.env), mantenga PMO_DB_HOST= vacío y el sistema continuará operando de forma segura (los correos se enviarán directamente por SMTP).
+
+3. ACTUALIZACIÓN DESDE BASE EXISTENTE v1.0:
+   Si ya contaba con una instalación previa basada en schema.sql, ejecute secuencialmente en phpMyAdmin:
+   - migrations/001_add_report_access_token_hash.sql
+   - migrations/002_add_idempotency_and_outbox.sql
+
