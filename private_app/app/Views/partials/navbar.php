@@ -48,6 +48,22 @@ $active = $activeNav ?? '';
           </a>
         </li>
 
+        <!-- Asesoría Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle <?= $active === 'asesoria' ? 'active' : '' ?> hvr-underline-from-left" href="#" id="navbarDropdownAsesoria" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-handshake me-1 d-lg-none"></i> ASESORÍA
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownAsesoria">
+            <li><a class="dropdown-item" href="/gestion-de-pmo"><i class="fas fa-sitemap me-2"></i> Gestión de Proyectos & PMO</a></li>
+            <li><a class="dropdown-item" href="/headhunting"><i class="fas fa-user-check me-2"></i> Headhunting</a></li>
+            <li><a class="dropdown-item" href="/gestion-de-riesgos"><i class="fas fa-shield-alt me-2"></i> Gestión de Riesgos</a></li>
+            <li><a class="dropdown-item" href="/riesgo-del-plazo"><i class="fas fa-clock-rotate-left me-2"></i> Evaluación del Riesgo del Cumplimiento del Plazo</a></li>
+            <li><a class="dropdown-item" href="/cronograma-forense"><i class="fas fa-scale-balanced me-2"></i> Análisis Forense del Cronograma</a></li>
+            <li><a class="dropdown-item" href="/gestion-de-la-calidad"><i class="fas fa-check-double me-2"></i> Gestión de la Calidad</a></li>
+            <li><a class="dropdown-item" href="/universidad-corporativa"><i class="fas fa-university me-2"></i> Universidad Corporativa</a></li>
+          </ul>
+        </li>
+
         <!-- Capacitaciones Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle <?= $active === 'capacitaciones' ? 'active' : '' ?> hvr-underline-from-left" href="capacitaciones" id="navbarDropdownCapacitaciones" role="button" data-bs-toggle="dropdown" aria-expanded="false">

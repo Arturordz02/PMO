@@ -4,6 +4,7 @@
 env.php
 !env.example.php
 !.env.example
+!private_app/app/Core/Env.php
 
 # Control de versiones e IDEs locales
 .git/
