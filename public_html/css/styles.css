@@ -2983,3 +2983,26 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* ==============================================================================
+ * UTILIDADES DE DISEÑO PARA ASESORÍAS CORPORATIVAS
+ * ============================================================================== */
+.fw-extrabold {
+  font-weight: 800 !important;
+}
+
+.tracking-wide {
+  letter-spacing: 0.8px;
+}
+
+.heading-line-sm {
+  width: 60px;
+  height: 4px;
+  background: var(--pmo-accent);
+  border-radius: 2px;
+}
+
+.backdrop-blur {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
