@@ -127,6 +127,17 @@ $router->get('/eventos-compensables',  [App\Controllers\CourseController::class,
 $router->get('/curso/{slug}', [App\Controllers\CourseController::class, 'detail']);
 
 // =============================================================================
+// RUTAS DE ASESORÍAS Y SERVICIOS CORPORATIVOS
+// =============================================================================
+$router->get('/gestion-de-pmo',        [App\Controllers\AdvisoryController::class, 'gestionDePmo']);
+$router->get('/headhunting',           [App\Controllers\AdvisoryController::class, 'headhunting']);
+$router->get('/gestion-de-riesgos',    [App\Controllers\AdvisoryController::class, 'gestionDeRiesgos']);
+$router->get('/riesgo-del-plazo',      [App\Controllers\AdvisoryController::class, 'riesgoDelPlazo']);
+$router->get('/cronograma-forense',    [App\Controllers\AdvisoryController::class, 'cronogramaForense']);
+$router->get('/gestion-de-la-calidad', [App\Controllers\AdvisoryController::class, 'gestionDeLaCalidad']);
+$router->get('/universidad-corporativa', [App\Controllers\AdvisoryController::class, 'universidadCorporativa']);
+
+// =============================================================================
 // MÓDULO DE EVALUACIÓN DE HABILIDADES BLANDAS
 // =============================================================================
 $router->get('/evaluacion-habilidades', [App\Controllers\SoftSkillsController::class, 'index']);

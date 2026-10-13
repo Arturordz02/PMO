@@ -9,7 +9,7 @@
     <div class="row g-4 g-lg-5">
       
       <!-- Columna 1: Identidad PMO Solutions -->
-      <div class="col-12 col-md-6 col-lg-4">
+      <div class="col-12 col-md-6 col-lg-3">
         <div class="d-flex align-items-center gap-2 mb-3">
           <div class="footer-brand-circle me-2">
             <img src="/img/LogoPMO.png" alt="Logo PMO Solutions" width="44" height="44" class="d-block" style="object-fit: contain;">
@@ -35,16 +35,16 @@
         </div>
       </div>
 
-      <!-- Columna 2: Navegación & Programas -->
-      <div class="col-12 col-md-6 col-lg-4">
-        <h5>Navegación & Programas</h5>
+      <!-- Columna 2: Navegación & Capacitaciones -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5>Capacitaciones</h5>
         <ul class="footer-links mb-4">
           <li><a href="/"><i class="fas fa-chevron-right"></i> Inicio (Home)</a></li>
-          <li><a href="/capacitaciones"><i class="fas fa-chevron-right"></i> Catálogo de Capacitaciones</a></li>
-          <li><a href="/dab-jrd"><i class="fas fa-chevron-right"></i> Dispute Boards (DAB NEC)</a></li>
-          <li><a href="/analisis-forense"><i class="fas fa-chevron-right"></i> Análisis Forense de Atrasos</a></li>
+          <li><a href="/capacitaciones"><i class="fas fa-chevron-right"></i> Catálogo Completo</a></li>
+          <li><a href="/dab-jrd"><i class="fas fa-chevron-right"></i> Dispute Boards & DAB</a></li>
+          <li><a href="/analisis-forense"><i class="fas fa-chevron-right"></i> Curso Análisis Forense</a></li>
           <li><a href="/nec4"><i class="fas fa-chevron-right"></i> Contratos NEC4</a></li>
-          <li><a href="/contacto"><i class="fas fa-chevron-right"></i> Contacto y Asesoría</a></li>
+          <li><a href="/contacto"><i class="fas fa-chevron-right"></i> Contacto</a></li>
         </ul>
         <div class="mt-2">
           <a href="/libro-de-reclamaciones" class="text-white-50 text-decoration-none small d-inline-flex align-items-center opacity-75 opacity-100-hover" style="font-size: 0.85rem;">
@@ -53,8 +53,22 @@
         </div>
       </div>
 
-      <!-- Columna 3: Contacto Directo Confirmado -->
-      <div class="col-12 col-md-12 col-lg-4">
+      <!-- Columna 3: Asesorías Corporativas -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5>Asesorías</h5>
+        <ul class="footer-links mb-3">
+          <li><a href="/gestion-de-pmo"><i class="fas fa-chevron-right"></i> Gestión de PMO</a></li>
+          <li><a href="/headhunting"><i class="fas fa-chevron-right"></i> Headhunting</a></li>
+          <li><a href="/gestion-de-riesgos"><i class="fas fa-chevron-right"></i> Gestión de Riesgos</a></li>
+          <li><a href="/riesgo-del-plazo"><i class="fas fa-chevron-right"></i> Riesgo del Plazo (90%)</a></li>
+          <li><a href="/cronograma-forense"><i class="fas fa-chevron-right"></i> Cronograma Forense</a></li>
+          <li><a href="/gestion-de-la-calidad"><i class="fas fa-chevron-right"></i> Gestión de Calidad</a></li>
+          <li><a href="/universidad-corporativa"><i class="fas fa-chevron-right"></i> Universidad Corporativa</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 4: Contacto Directo -->
+      <div class="col-12 col-md-6 col-lg-3">
         <h5>Contacto Directo</h5>
         <p class="small text-secondary mb-3">
           <i class="fas fa-map-marker-alt text-warning me-2 fs-6"></i>
@@ -71,8 +85,8 @@
           </a>
         </p>
         <div class="p-3 bg-dark bg-opacity-50 rounded-3 border border-white border-opacity-10">
-          <span class="small text-white-50 d-block mb-1">Horario de Atención Comercial:</span>
-          <span class="small text-white fw-semibold">Lunes a Viernes: 8:30 AM - 6:30 PM (PET)</span>
+          <span class="small text-white-50 d-block mb-1">Atención Comercial:</span>
+          <span class="small text-white fw-semibold">Lun a Vie: 8:30 AM - 6:30 PM</span>
         </div>
       </div>
 
