@@ -43,3 +43,4 @@ PMO-Produccion-GoDaddy/
    - En `private_app/`, renombrar `env.example.php` a `env.php` (o configurar `.env`) con las credenciales de la base de datos de producción y configuración SMTP.
 3. **Base de Datos:**
    - Importar `database_setup/schema.sql` (y las migraciones correspondientes) en la base de datos MySQL de cPanel.
+   Prueba de activación del workflow de GitHub Pages.
