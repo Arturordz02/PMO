@@ -18,6 +18,7 @@ env.php
 *.7z
 release/
 pmo_temp/
+_site/
 
 # Almacenamiento y runtime en private_app
 private_app/storage/logs/*
