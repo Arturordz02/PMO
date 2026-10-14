@@ -223,9 +223,9 @@ function transformHtml(string $html, string $prefix, array $knownSlugs): string 
     );
 
     // 3. Normalizar rutas de assets estáticos (CSS, JS, Imágenes, Módulos)
-    // Coincide con href, src o content que apunten a css, js, img o modules
+    // Coincide con href, src, srcset o content que apunten a css, js, img o modules
     $html = preg_replace_callback(
-        '/(href|src|content)=(["\'])(\/?)(css|js|img|modules)\//',
+        '/(href|src|srcset|content)=(["\'])(\/?)(css|js|img|modules)\//',
         function ($matches) use ($prefix) {
             $attr = $matches[1];
             $quote = $matches[2];
