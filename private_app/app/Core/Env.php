@@ -13,16 +13,30 @@ class Env {
     private static ?array $fileEnv = null;
 
     /**
-     * Carga variables desde un archivo .env si existe y aplica según entorno
+     * Carga la configuración privada desde env.php como fallback y, en
+     * development, mantiene el soporte para el archivo .env.
      */
     public static function load(?string $path = null, bool $force = false): void {
         if (self::$loaded && !$force) {
             return;
         }
 
-        $envFile = $path ?? dirname(__DIR__, 2) . '/.env';
+        $privateRoot = dirname(__DIR__, 2);
+        $envFile = $path ?? $privateRoot . '/.env';
+        $phpEnvFile = $privateRoot . '/env.php';
         self::$loaded = true;
         self::$fileEnv = [];
+        $phpEnvValues = [];
+
+        // env.php está fuera del directorio público y funciona en cualquier entorno.
+        // Sus valores permanecen como fallback: get() consulta primero el entorno real.
+        if (is_file($phpEnvFile) && is_readable($phpEnvFile)) {
+            $phpEnv = require $phpEnvFile;
+            if (is_array($phpEnv)) {
+                $phpEnvValues = $phpEnv;
+                self::$fileEnv = $phpEnvValues;
+            }
+        }
 
         // Cargar .env SOLAMENTE cuando una variable real del sistema indique explícitamente PMO_APP_ENV=development
         $systemEnv = getenv('PMO_APP_ENV');
@@ -57,6 +71,12 @@ class Env {
             $name = trim($name);
             $value = trim($value);
 
+            // env.php tiene prioridad sobre .env y sus claves no deben promoverse
+            // al entorno del proceso desde el archivo de desarrollo.
+            if (array_key_exists($name, $phpEnvValues)) {
+                continue;
+            }
+
             // Eliminar comillas envolventes si existen
             if ((str_starts_with($value, '"') && str_ends_with($value, '"')) ||
                 (str_starts_with($value, "'") && str_ends_with($value, "'"))) {
@@ -79,7 +99,7 @@ class Env {
      * 1. getenv()
      * 2. $_ENV
      * 3. $_SERVER
-     * 4. Archivo .env cargado
+     * 4. Archivo env.php o .env cargado
      * 5. Valor por defecto
      */
     public static function get(string $key, mixed $default = null): mixed {
