@@ -130,31 +130,32 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0.65rem 1rem !important;
   text-transform: uppercase;
   letter-spacing: 0.4px;
-  transition: var(--transition-smooth);
+  transition: color 0.25s ease, box-shadow 0.25s ease;
   position: relative;
+  box-shadow: inset 0 0 0 transparent;
 }
 
+/* Desactivar pseudo-elemento de Hover.css dentro del navbar (evita la línea azul no deseada) */
+.navbar-custom .nav-link::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* Indicación naranja única y discreta (evita colisiones con ::after y caret) */
 .navbar-custom .nav-link:hover,
-.navbar-custom .nav-link.active {
+.navbar-custom .nav-link.active,
+.navbar-custom .dropdown:hover > .nav-link,
+.navbar-custom .dropdown.show > .nav-link {
   color: var(--pmo-accent) !important;
+  box-shadow: inset 0 -3px 0 var(--pmo-accent);
 }
 
-.navbar-custom .nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0%;
-  height: 3px;
-  background-color: var(--pmo-accent);
-  border-radius: 2px;
-  transition: var(--transition-smooth);
-}
-
-.navbar-custom .nav-link:hover::after,
-.navbar-custom .nav-link.active::after {
-  width: 60%;
+.navbar-custom .nav-link:focus-visible {
+  color: var(--pmo-accent) !important;
+  box-shadow: inset 0 -3px 0 var(--pmo-accent);
+  outline: 2px solid var(--pmo-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* ==========================================================================
@@ -164,7 +165,6 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-custom .dropdown-menu {
   margin-top: 0 !important;
   border: 1px solid rgba(0, 80, 158, 0.12);
-  border-top: 3px solid var(--pmo-accent);
   border-radius: 0 0 16px 16px;
   box-shadow: 0 18px 40px rgba(0, 80, 158, 0.14), 0 6px 16px rgba(0, 0, 0, 0.05);
   padding: 0.85rem 0.6rem;
@@ -177,13 +177,15 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.dropdown:hover .dropdown-menu {
-  display: block !important;
-  margin-top: 0 !important;
+@media (min-width: 992px) {
+  .navbar-custom .dropdown:hover > .dropdown-menu {
+    display: block !important;
+    margin-top: 0 !important;
+  }
 }
 
 /* Invisible bridge for flawless mouse hovering */
-.dropdown-menu::before {
+.navbar-custom .dropdown-menu::before {
   content: "";
   position: absolute;
   top: -12px;
@@ -206,16 +208,27 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Dropdown Toggle Chevron Smooth Rotation */
+/* Dropdown Toggle Caret: inline, centrado verticalmente, sin fondo y con rotación limpia */
 .navbar-custom .dropdown-toggle::after {
   display: inline-block;
-  margin-left: 0.45em;
-  vertical-align: 0.15em;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin-left: 0.4em;
+  vertical-align: 0.18em;
+  content: "";
+  border-top: 0.3em solid currentColor;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+  position: static;
+  background: none;
+  width: auto;
+  height: auto;
+  transform: none;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.navbar-custom .dropdown:hover .dropdown-toggle::after,
-.navbar-custom .dropdown.show .dropdown-toggle::after {
+.navbar-custom .dropdown:hover > .dropdown-toggle::after,
+.navbar-custom .dropdown.show > .dropdown-toggle::after,
+.navbar-custom .dropdown-toggle.show::after {
   transform: rotate(180deg);
 }
 
@@ -1379,12 +1392,41 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Responsive adjustments (Mobile First & Tablet) */
 @media (max-width: 991.98px) {
-  .navbar-collapse {
+  .navbar-custom .navbar-collapse {
     background: #ffffff;
     padding: 1.25rem;
     border-radius: 12px;
     box-shadow: var(--pmo-shadow-lg);
     margin-top: 1rem;
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .navbar-custom .dropdown-menu {
+    position: static !important;
+    float: none;
+    min-width: 0 !important;
+    border: 1px solid rgba(0, 80, 158, 0.08);
+    background: rgba(248, 250, 252, 0.95);
+    box-shadow: none;
+    margin-top: 0.5rem;
+    animation: none;
+    transform: none;
+  }
+  .navbar-custom .dropdown-item {
+    display: block !important;
+    white-space: normal !important;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.4;
+    padding: 0.55rem 0.75rem;
+  }
+  .navbar-custom .dropdown-item i {
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: -1px;
+    width: 20px;
+    text-align: center;
   }
   .hero-section {
     padding: 3.8rem 0 3.2rem 0;
