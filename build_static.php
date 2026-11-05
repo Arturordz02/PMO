@@ -225,7 +225,7 @@ function transformHtml(string $html, string $prefix, array $knownSlugs): string 
     // 3. Normalizar rutas de assets estáticos (CSS, JS, Imágenes, Módulos)
     // Coincide con href, src o content que apunten a css, js, img o modules
     $html = preg_replace_callback(
-        '/(href|src|content)=(["\'])(\/?)(css|js|img|modules)\//',
+        '/(href|src|srcset|content)=(["\'])(\/?)(css|js|img|modules)\//',
         function ($matches) use ($prefix) {
             $attr = $matches[1];
             $quote = $matches[2];
@@ -264,6 +264,12 @@ foreach ($routes as $slug => $route) {
             'metaDescription' => 'PMO Solutions: Tu socio estratégico en consultoría, asesoría y capacitación de alta ingeniería en construcción (DAB NEC, Análisis Forense, Contratos NEC4, VDC-BIM).',
             'activeNav'       => 'home',
             'courses'         => $allCourses,
+        ];
+    } elseif ($slug === 'in-house') {
+        $viewData = [
+            'pageTitle'       => 'Capacitaciones In-House | Formación a la Medida para Empresas - PMO Solutions',
+            'metaDescription' => 'Programas de capacitación técnica corporativa in-house diseñados a medida para empresas de ingeniería y construcción. Formación práctica en Contratos NEC4/FIDIC, Dispute Boards, Análisis Forense, VDC-BIM y Gestión de Riesgos.',
+            'activeNav'       => 'in-house',
         ];
     } elseif ($slug === 'capacitaciones') {
         $viewData = [

@@ -9,7 +9,7 @@
     <div class="row g-4 g-lg-5">
       
       <!-- Columna 1: Identidad PMO Solutions -->
-      <div class="col-12 col-md-6 col-lg-4">
+      <div class="col-12 col-md-6 col-lg-3">
         <div class="d-flex align-items-center gap-2 mb-3">
           <div class="footer-brand-circle me-2">
             <img src="/img/LogoPMO.png" alt="Logo PMO Solutions" width="44" height="44" class="d-block" style="object-fit: contain;">
@@ -35,16 +35,17 @@
         </div>
       </div>
 
-      <!-- Columna 2: Navegación & Programas -->
-      <div class="col-12 col-md-6 col-lg-4">
-        <h5>Navegación & Programas</h5>
+      <!-- Columna 2: Navegación & Capacitaciones -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5>Capacitaciones</h5>
         <ul class="footer-links mb-4">
           <li><a href="/"><i class="fas fa-chevron-right"></i> Inicio (Home)</a></li>
-          <li><a href="/capacitaciones"><i class="fas fa-chevron-right"></i> Catálogo de Capacitaciones</a></li>
-          <li><a href="/dab-jrd"><i class="fas fa-chevron-right"></i> Dispute Boards (DAB NEC)</a></li>
-          <li><a href="/analisis-forense"><i class="fas fa-chevron-right"></i> Análisis Forense de Atrasos</a></li>
+          <li><a href="/capacitaciones"><i class="fas fa-chevron-right"></i> Catálogo Completo</a></li>
+          <li><a href="/in-house"><i class="fas fa-chevron-right text-warning"></i> Capacitaciones In-House</a></li>
+          <li><a href="/dab-jrd"><i class="fas fa-chevron-right"></i> Dispute Boards & DAB</a></li>
+          <li><a href="/analisis-forense"><i class="fas fa-chevron-right"></i> Curso Análisis Forense</a></li>
           <li><a href="/nec4"><i class="fas fa-chevron-right"></i> Contratos NEC4</a></li>
-          <li><a href="/contacto"><i class="fas fa-chevron-right"></i> Contacto y Asesoría</a></li>
+          <li><a href="/contacto"><i class="fas fa-chevron-right"></i> Contacto</a></li>
         </ul>
         <div class="mt-2">
           <a href="/libro-de-reclamaciones" class="text-white-50 text-decoration-none small d-inline-flex align-items-center opacity-75 opacity-100-hover" style="font-size: 0.85rem;">
@@ -53,8 +54,22 @@
         </div>
       </div>
 
-      <!-- Columna 3: Contacto Directo Confirmado -->
-      <div class="col-12 col-md-12 col-lg-4">
+      <!-- Columna 3: Asesorías Corporativas -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5>Asesorías</h5>
+        <ul class="footer-links mb-3">
+          <li><a href="/gestion-de-pmo"><i class="fas fa-chevron-right"></i> Gestión de PMO</a></li>
+          <li><a href="/headhunting"><i class="fas fa-chevron-right"></i> Headhunting</a></li>
+          <li><a href="/gestion-de-riesgos"><i class="fas fa-chevron-right"></i> Gestión de Riesgos</a></li>
+          <li><a href="/riesgo-del-plazo"><i class="fas fa-chevron-right"></i> Riesgo del Plazo (90%)</a></li>
+          <li><a href="/cronograma-forense"><i class="fas fa-chevron-right"></i> Cronograma Forense</a></li>
+          <li><a href="/gestion-de-la-calidad"><i class="fas fa-chevron-right"></i> Gestión de Calidad</a></li>
+          <li><a href="/universidad-corporativa"><i class="fas fa-chevron-right"></i> Universidad Corporativa</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 4: Contacto Directo Confirmado -->
+      <div class="col-12 col-md-6 col-lg-3">
         <h5>Contacto Directo</h5>
         <p class="small text-secondary mb-3">
           <i class="fas fa-map-marker-alt text-warning me-2 fs-6"></i>
@@ -93,16 +108,3 @@
     </div>
   </div>
 </footer>
-
-<!-- Botón Flotante de WhatsApp -->
-<div class="floating-wa-container">
-  <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" class="floating-wa-btn shadow-lg" title="Consultar por WhatsApp">
-    <i class="fab fa-whatsapp"></i>
-    <span class="floating-wa-tooltip">¿Consultas? Escríbenos</span>
-  </a>
-</div>
-
-<!-- Botón Volver Arriba -->
-<button type="button" id="backToTop" class="back-to-top-btn" title="Volver arriba" aria-label="Volver arriba">
-  <i class="fas fa-chevron-up"></i>
-</button>

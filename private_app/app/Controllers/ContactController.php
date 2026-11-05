@@ -58,6 +58,23 @@ class ContactController extends Controller {
         // 4. Exigir y validar clave de idempotencia
         $idempKey = Idempotency::requireKey();
 
+        // 4.1. Integración retrocompatible de campos corporativos / In-House al mensaje
+        $corporateDetails = [];
+        if (!empty($input['empresa']) && is_string($input['empresa'])) {
+            $corporateDetails[] = "Empresa: " . Security::cleanString(trim($input['empresa']), 100);
+        }
+        if (!empty($input['area_interes']) && is_string($input['area_interes'])) {
+            $corporateDetails[] = "Área de Interés: " . Security::cleanString(trim($input['area_interes']), 100);
+        }
+        if (!empty($input['participantes']) && is_string($input['participantes'])) {
+            $corporateDetails[] = "Participantes estimados: " . Security::cleanString(trim($input['participantes']), 50);
+        }
+        if (!empty($corporateDetails)) {
+            $prefix = implode(" | ", $corporateDetails) . "\n\n";
+            $rawMensaje = isset($input['mensaje']) && is_string($input['mensaje']) ? trim($input['mensaje']) : '';
+            $input['mensaje'] = $prefix . $rawMensaje;
+        }
+
         // 5. Validar y sanitizar datos de entrada
         $contactModel = new ContactModel();
         $validation = $contactModel->validateAndSanitize($input);

@@ -28,7 +28,7 @@ class ContactModel extends Model {
         }
 
         // 1. Validar tipos de datos escalares (rechazar arrays/objetos)
-        $stringFields = ['nombre', 'telefono', 'email', 'servicio', 'mensaje'];
+        $stringFields = ['nombre', 'telefono', 'email', 'servicio', 'mensaje', 'empresa', 'area_interes', 'participantes'];
         foreach ($stringFields as $field) {
             if (isset($input[$field]) && !is_string($input[$field])) {
                 $errors[$field] = "El campo '{$field}' debe ser una cadena de texto.";

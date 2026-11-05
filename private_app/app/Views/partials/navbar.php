@@ -48,28 +48,52 @@ $active = $activeNav ?? '';
           </a>
         </li>
 
+        <!-- Asesoría Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle <?= $active === 'asesoria' ? 'active' : '' ?> hvr-underline-from-left" href="#" id="navbarDropdownAsesoria" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-handshake me-1 d-lg-none"></i> ASESORÍA
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownAsesoria">
+            <li><a class="dropdown-item" href="/gestion-de-pmo"><i class="fas fa-sitemap me-2"></i> Gestión de Proyectos & PMO</a></li>
+            <li><a class="dropdown-item" href="/headhunting"><i class="fas fa-user-check me-2"></i> Headhunting</a></li>
+            <li><a class="dropdown-item" href="/gestion-de-riesgos"><i class="fas fa-shield-alt me-2"></i> Gestión de Riesgos</a></li>
+            <li><a class="dropdown-item" href="/riesgo-del-plazo"><i class="fas fa-clock-rotate-left me-2"></i> Evaluación del Riesgo del Cumplimiento del Plazo</a></li>
+            <li><a class="dropdown-item" href="/cronograma-forense"><i class="fas fa-scale-balanced me-2"></i> Análisis Forense del Cronograma</a></li>
+            <li><a class="dropdown-item" href="/gestion-de-la-calidad"><i class="fas fa-check-double me-2"></i> Gestión de la Calidad</a></li>
+            <li><a class="dropdown-item" href="/universidad-corporativa"><i class="fas fa-university me-2"></i> Universidad Corporativa</a></li>
+          </ul>
+        </li>
+
+
+        <!-- In-House (Enlace Principal Independiente) -->
+        <li class="nav-item">
+          <a class="nav-link <?= $active === 'in-house' ? 'active' : '' ?> hvr-underline-from-left" href="/in-house">
+            <i class="fas fa-building me-1 d-lg-none"></i> IN-HOUSE
+          </a>
+        </li>
+
         <!-- Capacitaciones Dropdown -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?= $active === 'capacitaciones' ? 'active' : '' ?> hvr-underline-from-left" href="capacitaciones" id="navbarDropdownCapacitaciones" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle <?= $active === 'capacitaciones' ? 'active' : '' ?> hvr-underline-from-left" href="/capacitaciones" id="navbarDropdownCapacitaciones" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fas fa-graduation-cap me-1 d-lg-none"></i> CAPACITACIONES
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownCapacitaciones">
-            <li><a class="dropdown-item fw-bold text-primary border-bottom pb-2 mb-1" href="capacitaciones"><i class="fas fa-th-large me-2"></i> Ver Todo el Catálogo</a></li>
-            <li><a class="dropdown-item" href="dab-jrd"><i class="fas fa-gavel me-2"></i> Dispute Boards & DAB-JRD</a></li>
-            <li><a class="dropdown-item" href="analisis-forense"><i class="fas fa-search-plus me-2"></i> Análisis Forense de Atrasos</a></li>
-            <li><a class="dropdown-item" href="nec4"><i class="fas fa-file-contract me-2"></i> Contratos NEC4 (ECC / PSC)</a></li>
-            <li><a class="dropdown-item" href="vdc-bim"><i class="fas fa-cubes me-2"></i> VDC - BIM Management</a></li>
-            <li><a class="dropdown-item" href="contratos-estado"><i class="fas fa-landmark me-2"></i> Gestión del Cambio & Contratos Estado</a></li>
-            <li><a class="dropdown-item" href="compliance"><i class="fas fa-balance-scale me-2"></i> Compliance en la Construcción</a></li>
-            <li><a class="dropdown-item" href="primavera-p6"><i class="fas fa-chart-line me-2"></i> Primavera P6 & Power BI</a></li>
-            <li><a class="dropdown-item" href="riesgos-pmi"><i class="fas fa-shield-alt me-2"></i> Gestión Integral de Riesgos (PMI®)</a></li>
-            <li><a class="dropdown-item" href="analisis-cuantitativo"><i class="fas fa-calculator me-2"></i> Análisis Cuantitativo de Riesgos</a></li>
-            <li><a class="dropdown-item" href="eventos-compensables"><i class="fas fa-file-invoice-dollar me-2"></i> Eventos Compensables</a></li>
+            <li><a class="dropdown-item fw-bold text-primary border-bottom pb-2 mb-1" href="/capacitaciones"><i class="fas fa-th-large me-2"></i> Ver Todo el Catálogo</a></li>
+            <li><a class="dropdown-item" href="/dab-jrd"><i class="fas fa-gavel me-2"></i> Dispute Boards & DAB-JRD</a></li>
+            <li><a class="dropdown-item" href="/analisis-forense"><i class="fas fa-search-plus me-2"></i> Análisis Forense de Atrasos</a></li>
+            <li><a class="dropdown-item" href="/nec4"><i class="fas fa-file-contract me-2"></i> Contratos NEC4 (ECC / PSC)</a></li>
+            <li><a class="dropdown-item" href="/vdc-bim"><i class="fas fa-cubes me-2"></i> VDC - BIM Management</a></li>
+            <li><a class="dropdown-item" href="/contratos-estado"><i class="fas fa-landmark me-2"></i> Gestión del Cambio & Contratos Estado</a></li>
+            <li><a class="dropdown-item" href="/compliance"><i class="fas fa-balance-scale me-2"></i> Compliance en la Construcción</a></li>
+            <li><a class="dropdown-item" href="/primavera-p6"><i class="fas fa-chart-line me-2"></i> Primavera P6 & Power BI</a></li>
+            <li><a class="dropdown-item" href="/riesgos-pmi"><i class="fas fa-shield-alt me-2"></i> Gestión Integral de Riesgos (PMI®)</a></li>
+            <li><a class="dropdown-item" href="/analisis-cuantitativo"><i class="fas fa-calculator me-2"></i> Análisis Cuantitativo de Riesgos</a></li>
+            <li><a class="dropdown-item" href="/eventos-compensables"><i class="fas fa-file-invoice-dollar me-2"></i> Eventos Compensables</a></li>
           </ul>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link <?= $active === 'contacto' ? 'active' : '' ?> hvr-underline-from-left" href="contacto">
+          <a class="nav-link <?= $active === 'contacto' ? 'active' : '' ?> hvr-underline-from-left" href="/contacto">
             <i class="fas fa-envelope me-1 d-lg-none"></i> CONTACTO
           </a>
         </li>
@@ -83,5 +107,3 @@ $active = $activeNav ?? '';
     </div>
   </div>
 </nav>
-
-
