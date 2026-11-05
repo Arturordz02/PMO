@@ -31,6 +31,17 @@ class CourseController extends Controller {
     }
 
     /**
+     * Muestra la página corporativa de Capacitaciones In-House
+     */
+    public function inHouse(): void {
+        $this->render('in-house', [
+            'pageTitle'       => 'Capacitaciones In-House | Formación a la Medida para Empresas - PMO Solutions',
+            'metaDescription' => 'Programas de capacitación técnica corporativa in-house diseñados a medida para empresas de ingeniería y construcción. Formación práctica en Contratos NEC4/FIDIC, Dispute Boards, Análisis Forense, VDC-BIM y Gestión de Riesgos.',
+            'activeNav'       => 'in-house'
+        ]);
+    }
+
+    /**
      * Muestra la landing de un curso específico por su slug
      */
     public function detail(string $slug): void {
@@ -62,4 +73,3 @@ class CourseController extends Controller {
     public function analisisCuantitativo(): void { $this->detail('analisis-cuantitativo'); }
     public function eventosCompensables(): void { $this->detail('eventos-compensables'); }
 }
-

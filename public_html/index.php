@@ -110,6 +110,7 @@ $router = new App\Core\Router();
 // =============================================================================
 $router->get('/', [App\Controllers\HomeController::class, 'index']);
 $router->get('/capacitaciones', [App\Controllers\CourseController::class, 'index']);
+$router->get('/in-house',       [App\Controllers\CourseController::class, 'inHouse']);
 
 // Rutas de Cursos y Especializaciones Individuales
 $router->get('/dab-jrd',                [App\Controllers\CourseController::class, 'dabJrd']);
@@ -125,6 +126,17 @@ $router->get('/eventos-compensables',  [App\Controllers\CourseController::class,
 
 // Ruta dinámica para cursos (slug arbitrario)
 $router->get('/curso/{slug}', [App\Controllers\CourseController::class, 'detail']);
+
+// =============================================================================
+// RUTAS DE ASESORÍAS Y SERVICIOS CORPORATIVOS
+// =============================================================================
+$router->get('/gestion-de-pmo',         [App\Controllers\AdvisoryController::class, 'gestionDePmo']);
+$router->get('/headhunting',            [App\Controllers\AdvisoryController::class, 'headhunting']);
+$router->get('/gestion-de-riesgos',     [App\Controllers\AdvisoryController::class, 'gestionDeRiesgos']);
+$router->get('/riesgo-del-plazo',       [App\Controllers\AdvisoryController::class, 'riesgoDelPlazo']);
+$router->get('/cronograma-forense',     [App\Controllers\AdvisoryController::class, 'cronogramaForense']);
+$router->get('/gestion-de-la-calidad',  [App\Controllers\AdvisoryController::class, 'gestionDeLaCalidad']);
+$router->get('/universidad-corporativa', [App\Controllers\AdvisoryController::class, 'universidadCorporativa']);
 
 // =============================================================================
 // MÓDULO DE EVALUACIÓN DE HABILIDADES BLANDAS
@@ -163,4 +175,3 @@ $router->setNotFoundHandler([App\Controllers\ErrorController::class, 'notFound']
 
 // 8. Despachar la petición
 $router->dispatch();
-
