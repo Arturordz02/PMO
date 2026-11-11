@@ -88,7 +88,7 @@
         <div class="col-12 col-lg-5">
           <div data-aos="fade-right" data-aos-delay="100" class="card border-0 shadow-lg rounded-4 overflow-hidden position-relative group-hover hvr-box-shadow-outset">
             <a href="https://docs.google.com/forms/d/e/1FAIpQLScXwQcpQ2LDvCmFQvElQ2NkOUDe3TGW-Lc_Wn_HQeW2Mgpu9w/viewform" target="_blank" rel="noopener noreferrer">
-              <img src="img/controlproyectos.png" alt="Flyer Control de Proyectos con Primavera P6 y Power BI" class="img-fluid w-100 rounded-4 transition-zoom" style="display: block;">
+              <img src="/img/controlproyectos.png" alt="Flyer Control de Proyectos con Primavera P6 y Power BI" class="img-fluid w-100 rounded-4 transition-zoom" style="display: block;">
               <div class="card-img-overlay d-flex align-items-end p-3 bg-dark bg-opacity-25 opacity-hover hvr-box-shadow-outset">
                 <span class="btn btn-warning btn-sm fw-bold w-100 shadow text-white hvr-grow"><i class="fas fa-file-pdf me-2"></i> Clic para Solicitar Brochure</span>
               </div>
@@ -127,7 +127,7 @@
           <div class="card bg-light border-0 rounded-4 p-4 mt-4 shadow-sm border-start border-5 border-primary" data-aos="fade-up">
             <div class="row align-items-center g-3">
               <div class="col-md-3 text-center">
-                <img src="img/Persona1.png" alt="ING. FERNANDO BARRERO" class="rounded-circle shadow border border-3 border-white" style="width: 110px; height: 110px; object-fit: cover; object-position: top;">
+                <img src="/img/Persona1.png" alt="ING. FERNANDO BARRERO" class="rounded-circle shadow border border-3 border-white" style="width: 110px; height: 110px; object-fit: cover; object-position: top;">
               </div>
               <div class="col-md-9">
                 <span class="badge bg-primary text-white mb-2 px-3 py-2 rounded-pill"><i class="fas fa-user-tie me-1"></i> DOCENTE PRINCIPAL</span>
@@ -339,14 +339,14 @@
         <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="100">
           <div class="featured-course-card">
             <div class="featured-course-img-wrap">
-              <img src="img/analisiscuantitativo.png" alt="Análisis Cuantitativo de Riesgos" loading="lazy">
+              <img src="/img/analisiscuantitativo.png" alt="Análisis Cuantitativo de Riesgos" loading="lazy">
               <div class="featured-course-overlay"></div>
               <span class="featured-course-category badge bg-primary">Simulación Monte Carlo</span>
             </div>
             <div class="featured-course-body">
               <div class="featured-course-title">Análisis Cuantitativo de Riesgos</div>
               <div class="featured-course-desc">Simulación de riesgos en cronogramas de Primavera P6.</div>
-              <a href="analisis-cuantitativo" class="btn btn-outline-primary btn-sm fw-bold w-100 hvr-grow">
+              <a href="/curso/analisis-cuantitativo" class="btn btn-outline-primary btn-sm fw-bold w-100 hvr-grow">
                 <i class="fas fa-graduation-cap me-1"></i> Ver Programa
               </a>
             </div>
@@ -355,14 +355,14 @@
         <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="200">
           <div class="featured-course-card">
             <div class="featured-course-img-wrap">
-              <img src="img/picture2b_orig.png" alt="Análisis Forense de Atrasos" loading="lazy">
+              <img src="/img/picture2b_orig.png" alt="Análisis Forense de Atrasos" loading="lazy">
               <div class="featured-course-overlay"></div>
               <span class="featured-course-category badge bg-primary">Peritaje Forense</span>
             </div>
             <div class="featured-course-body">
               <div class="featured-course-title">Análisis Forense de Atrasos</div>
               <div class="featured-course-desc">Metodologías de análisis de retrasos e impacto en plazo.</div>
-              <a href="analisis-forense" class="btn btn-outline-primary btn-sm fw-bold w-100 hvr-grow">
+              <a href="/curso/analisis-forense" class="btn btn-outline-primary btn-sm fw-bold w-100 hvr-grow">
                 <i class="fas fa-graduation-cap me-1"></i> Ver Programa
               </a>
             </div>
@@ -371,14 +371,14 @@
         <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="300">
           <div class="featured-course-card">
             <div class="featured-course-img-wrap">
-              <img src="img/picture4b_orig.png" alt="Virtual Design & Construction (VDC)" loading="lazy">
+              <img src="/img/picture4b_orig.png" alt="Virtual Design & Construction (VDC)" loading="lazy">
               <div class="featured-course-overlay"></div>
               <span class="featured-course-category badge bg-primary">BIM & VDC</span>
             </div>
             <div class="featured-course-body">
               <div class="featured-course-title">Virtual Design & Construction (VDC)</div>
               <div class="featured-course-desc">Integración 4D de cronogramas con modelos constructivos.</div>
-              <a href="vdc-bim" class="btn btn-outline-primary btn-sm fw-bold w-100 hvr-grow">
+              <a href="/curso/vdc-bim" class="btn btn-outline-primary btn-sm fw-bold w-100 hvr-grow">
                 <i class="fas fa-graduation-cap me-1"></i> Ver Programa
               </a>
             </div>
@@ -386,7 +386,7 @@
         </div>
       </div>
       <div class="text-center mt-4">
-        <a href="capacitaciones" class="btn btn-link text-primary fw-bold text-decoration-none">
+        <a href="/capacitaciones" class="btn btn-link text-primary fw-bold text-decoration-none">
           <i class="fas fa-th-large me-1"></i> Explorar todo el Catálogo de Cursos
         </a>
       </div>

@@ -28,8 +28,8 @@ $active = $activeNav ?? '';
 <!-- Header & Navigation -->
 <nav class="navbar navbar-expand-lg navbar-custom">
   <div class="container">
-    <a class="navbar-brand" href="./">
-      <img src="img/LogoPMO.png" alt="PMO Solutions Logo" class="brand-logo-img animate__animated animate__bounceIn" width="44" height="44" style="mix-blend-mode: multiply;">
+    <a class="navbar-brand" href="/">
+      <img src="/img/LogoPMO.png" alt="PMO Solutions Logo" class="brand-logo-img animate__animated animate__bounceIn" width="44" height="44" style="mix-blend-mode: multiply;">
       <div class="brand-text-wrapper">
         <span class="brand-title">PMO <span>SOLUTIONS</span></span>
         <span class="brand-subtitle">Construimos Soluciones</span>
@@ -43,7 +43,7 @@ $active = $activeNav ?? '';
     <div class="collapse navbar-collapse" id="navbarPmoNav">
       <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
         <li class="nav-item">
-          <a class="nav-link <?= $active === 'home' ? 'active' : '' ?> hvr-underline-from-left" href="./">
+          <a class="nav-link <?= $active === 'home' ? 'active' : '' ?> hvr-underline-from-left" href="/">
             <i class="fas fa-home me-1 d-lg-none"></i> HOME
           </a>
         </li>

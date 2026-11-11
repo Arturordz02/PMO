@@ -19,7 +19,7 @@ use App\Core\View;
 </header>
 
 <!-- Contenido Legal Formal -->
-<main class="py-5 bg-white">
+<div class="py-5 bg-white">
   <div class="container" style="max-width: 860px;">
     
     <div class="border-bottom pb-3 mb-4 text-muted small d-flex justify-content-between">
@@ -126,4 +126,4 @@ use App\Core\View;
     </section>
 
   </div>
-</main>
+</div>

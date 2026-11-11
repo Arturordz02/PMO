@@ -1,3 +1,25 @@
+<?php
+use App\Core\View;
+
+$coursesList = is_array($courses ?? null) ? $courses : [];
+$totalCourses = count($coursesList);
+
+if (empty($categories) && !empty($coursesList)) {
+    $categories = [];
+    foreach ($coursesList as $item) {
+        $catKey = (string)($item['category'] ?? 'general');
+        if (!isset($categories[$catKey])) {
+            $categories[$catKey] = [
+                'slug'  => $catKey,
+                'label' => (string)($item['category_label'] ?? ucfirst($catKey)),
+                'icon'  => (string)($item['icon'] ?? 'fas fa-folder'),
+                'count' => 0,
+            ];
+        }
+        $categories[$catKey]['count']++;
+    }
+}
+?>
 <!-- 1. Encabezado Hero Estilizado (Ed-Tech Catalog Style) -->
   <header class="hero-section text-center text-lg-start">
     <div class="hero-grid-overlay"></div>
@@ -11,13 +33,13 @@
           </div>
           <h1 class="hero-title animate__animated animate__fadeInDown">CATÁLOGO DE CAPACITACIONES ESPECIALIZADAS</h1>
           <p class="hero-subtitle mb-4 animate__animated animate__fadeInUp animate__delay-1s">
-            Aprende los estándares más exigentes de la industria en juntas de disputas, análisis forense de atrasos, contratos NEC4, VDC-BIM, gestión del cambio y compliance en la construcción.
+            Aprende los estándares más exigentes de la industria en contratos colaborativos NEC3/NEC4 y FIDIC, juntas de disputas (DAB/JRD), análisis forense de atrasos, gestión de calidad, oficina técnica, VDC-BIM y control de proyectos.
           </p>
           <div class="d-flex flex-wrap gap-3">
             <a href="#catalogo-grid" class="btn btn-warning btn-lg fw-bold text-dark hvr-grow">
-              <i class="fas fa-th-large me-2"></i> Explorar Cursos Disponibles
+              <i class="fas fa-th-large me-2"></i> Explorar Cursos Disponibles (<?= View::e((string)$totalCourses) ?>)
             </a>
-            <a href="contacto" class="btn btn-outline-light btn-lg fw-bold hvr-grow">
+            <a href="/contacto" class="btn btn-outline-light btn-lg fw-bold hvr-grow">
               <i class="fas fa-headset me-2"></i> Asesoría Personalizada
             </a>
           </div>
@@ -33,8 +55,8 @@
             <div class="row g-2 text-start">
               <div class="col-6">
                 <div class="bg-dark bg-opacity-50 p-2 rounded border border-white border-opacity-10 text-center">
-                  <div class="text-warning fw-bold fs-5">100%</div>
-                  <div class="text-white-50" style="font-size: 0.72rem;">Virtual Online</div>
+                  <div class="text-warning fw-bold fs-5"><?= View::e((string)$totalCourses) ?></div>
+                  <div class="text-white-50" style="font-size: 0.72rem;">Cursos Activos</div>
                 </div>
               </div>
               <div class="col-6">
@@ -50,306 +72,183 @@
     </div>
   </header>
 
-  <!-- 2. Grid del Catálogo de Cursos con Filtro Interactivo -->
-  <main id="catalogo-grid" class="py-5 my-lg-4">
+  <!-- 2. Grid del Catálogo de Cursos con Filtro Interactivo y Búsqueda -->
+  <section id="catalogo-grid" class="py-5 my-lg-4">
     <div class="container">
-      
+
       <div class="text-center mb-4" data-aos="fade-up">
         <span class="section-badge">Oferta Académica 2026</span>
         <h2 class="section-title">Programas Especializados de Ingeniería y Contratos</h2>
         <p class="section-subtitle">
-          Selecciona una categoría para explorar temarios detallados, plana docente, metodologías de estudio y casos prácticos de aplicación real.
+          Selecciona una categoría o busca por especialidad para explorar temarios detallados, plana docente y casos prácticos de aplicación real.
         </p>
       </div>
 
-      <!-- BOTONES DE FILTRO POR CATEGORÍA -->
+      <!-- BUSCADOR RÁPIDO DEL CATÁLOGO -->
+      <div class="row justify-content-center mb-4">
+        <div class="col-md-7 col-lg-5">
+          <div class="input-group input-group-lg shadow-sm">
+            <span class="input-group-text bg-white border-end-0 text-primary">
+              <i class="fas fa-search"></i>
+            </span>
+            <input
+              type="search"
+              id="catalogSearchInput"
+              class="form-control border-start-0"
+              placeholder="Buscar curso (ej. NEC4, Calidad, Primavera, VDC, Riesgos...)"
+              aria-label="Buscar curso en el catálogo">
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTONES DE FILTRO POR CATEGORÍA (Generados desde CourseModel) -->
       <div class="catalog-filter-container" data-aos="fade-up" data-aos-delay="100">
         <button type="button" class="catalog-filter-btn active" data-filter="all">
-          <i class="fas fa-th-large me-1"></i> Todos los Programas (10)
+          <i class="fas fa-th-large me-1"></i> Todos los Programas (<?= View::e((string)$totalCourses) ?>)
         </button>
-        <button type="button" class="catalog-filter-btn" data-filter="nec-fidic">
-          <i class="fas fa-file-contract me-1"></i> Contratos NEC4 & FIDIC
-        </button>
-        <button type="button" class="catalog-filter-btn" data-filter="dispute-boards">
-          <i class="fas fa-gavel me-1"></i> Dispute Boards & Arbitraje
-        </button>
-        <button type="button" class="catalog-filter-btn" data-filter="forense-claims">
-          <i class="fas fa-search-plus me-1"></i> Peritaje Forense & Riesgos
-        </button>
-        <button type="button" class="catalog-filter-btn" data-filter="bim-software">
-          <i class="fas fa-cubes me-1"></i> BIM / VDC & Software
-        </button>
-        <button type="button" class="catalog-filter-btn" data-filter="estado-publica">
-          <i class="fas fa-landmark me-1"></i> Gestión Estatal & Compliance
-        </button>
+        <?php foreach (($categories ?? []) as $cat): ?>
+          <button type="button" class="catalog-filter-btn" data-filter="<?= View::e($cat['slug']) ?>">
+            <i class="<?= View::e($cat['icon']) ?> me-1"></i> <?= View::e($cat['label']) ?> (<?= View::e((string)$cat['count']) ?>)
+          </button>
+        <?php endforeach; ?>
       </div>
 
-      <!-- GRID DE 10 CURSOS CATEGORIZADOS -->
+      <p class="text-center small text-muted mb-4" id="catalogResultsCounter">
+        Mostrando <strong id="catalogVisibleCount"><?= View::e((string)$totalCourses) ?></strong> de <strong><?= View::e((string)$totalCourses) ?></strong> cursos especializados
+      </p>
+
+      <!-- GRID DINÁMICO DE CURSOS DESDE COURSEMODEL -->
       <div class="row g-4" id="coursesGridContainer">
-        
-        <!-- Curso 1: Dispute Boards (DAB) -->
-        <div class="col-lg-4 col-md-6 catalog-card-col" data-category="dispute-boards">
-          <div data-aos="fade-right" data-aos-delay="100" class="catalog-card hvr-box-shadow-outset">
-            <a href="dab-jrd" class="catalog-card-img-wrapper" title="Ver programa Junta de Resolución de Disputas (DAB) en Contratos NEC">
-              <img src="img/picture1b_orig.png" alt="Junta de Resolución de Disputas (DAB) en Contratos NEC" class="img-fluid rounded-top-4 shadow-sm" loading="lazy">
-              <div class="catalog-card-badge">
-                <span class="badge bg-primary">Dispute Boards</span>
-              </div>
-              <span class="hover-zoom-hint"><i class="fas fa-search-plus me-1"></i> Ver Programa</span>
-            </a>
-            <div class="catalog-card-body">
-              <h3 class="catalog-card-title">
-                <a href="dab-jrd">JUNTA DE RESOLUCIÓN DE DISPUTAS (DAB) EN CONTRATOS NEC</a>
-              </h3>
-              <p class="catalog-card-desc">
-                Mecanismos de prevención y solución temprana de controversias bajo Dispute Boards y normativas de contratos colaborativos estándar.
-              </p>
-              <div class="mt-auto pt-3 border-top border-light-subtle">
-                <a href="dab-jrd" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Curso 2: Análisis Forense de Atrasos -->
-        <div class="col-lg-4 col-md-6 catalog-card-col" data-category="forense-claims">
-          <div data-aos="fade-up" data-aos-delay="200" class="catalog-card hvr-box-shadow-outset">
-            <a href="analisis-forense" class="catalog-card-img-wrapper" title="Ver programa Análisis Forense de Atrasos en el Cronograma">
-              <img src="img/picture2b_orig.png" alt="Análisis Forense de Atrasos en el Cronograma" class="img-fluid rounded-top-4 shadow-sm" loading="lazy">
-              <div class="catalog-card-badge">
-                <span class="badge bg-danger">Forense & Claims</span>
-              </div>
-              <span class="hover-zoom-hint"><i class="fas fa-search-plus me-1"></i> Ver Programa</span>
-            </a>
-            <div class="catalog-card-body">
-              <h3 class="catalog-card-title">
-                <a href="analisis-forense">ANÁLISIS FORENSE DE ATRASOS EN EL CRONOGRAMA</a>
-              </h3>
-              <p class="catalog-card-desc">
-                Metodologías de cuantificación de demoras, Time Impact Analysis (TIA), As-Planned vs As-Built y sustentación pericial de reclamaciones.
-              </p>
-              <div class="mt-auto pt-3 border-top border-light-subtle">
-                <a href="analisis-forense" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Curso 3: Casos de Aplicación en Contratos NEC4 -->
-        <div class="col-lg-4 col-md-6 catalog-card-col" data-category="nec-fidic">
-          <div data-aos="fade-left" data-aos-delay="300" class="catalog-card hvr-box-shadow-outset">
-            <a href="nec4" class="catalog-card-img-wrapper" title="Ver programa Casos de Aplicación en Contratos NEC4">
-              <img src="img/picture3b_orig.png" alt="Casos de Aplicación en Contratos NEC4" class="img-fluid rounded-top-4 shadow-sm" loading="lazy">
-              <div class="catalog-card-badge">
-                <span class="badge bg-warning text-dark">Contratos NEC4</span>
-              </div>
-              <span class="hover-zoom-hint"><i class="fas fa-search-plus me-1"></i> Ver Programa</span>
-            </a>
-            <div class="catalog-card-body">
-              <h3 class="catalog-card-title">
-                <a href="nec4">CASOS DE APLICACIÓN EN CONTRATOS NEC4</a>
-              </h3>
-              <p class="catalog-card-desc">
-                Casos prácticos de administración contractual, gestión de alertas tempranas (Early Warnings), eventos compensables y control de riesgos.
-              </p>
-              <div class="mt-auto pt-3 border-top border-light-subtle">
-                <a href="nec4" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
-                </a>
+        <?php foreach ($coursesList as $course): ?>
+          <?php
+            $cSlug     = (string)$course['slug'];
+            $cTitle    = (string)$course['title'];
+            $cCat      = (string)($course['category'] ?? 'general');
+            $cCatLabel = (string)($course['category_label'] ?? 'Capacitación');
+            $cDesc     = (string)($course['short_description'] ?? ($course['description'] ?? ''));
+            $cBadge    = (string)($course['badge'] ?? $cCatLabel);
+            $cBadgeCls = (string)($course['badge_class'] ?? 'bg-primary text-white');
+            $cImg      = '/' . ltrim((string)($course['image'] ?? 'img/LogoPMO.png'), '/');
+            $cUrl      = '/curso/' . rawurlencode($cSlug);
+            $cDuration = $course['duration'] ?? null;
+            $cInst     = $course['instructor'] ?? null;
+            $isWebp    = str_ends_with(strtolower($cImg), '.webp');
+          ?>
+          <div class="col-lg-4 col-md-6 catalog-card-col"
+               data-category="<?= View::e($cCat) ?>"
+               data-search="<?= View::e(mb_strtolower($cTitle . ' ' . $cCatLabel . ' ' . $cDesc . ' ' . ($cInst ?? ''), 'UTF-8')) ?>">
+            <div class="catalog-card h-100 hvr-box-shadow-outset">
+              <a href="<?= View::e($cUrl) ?>" class="catalog-card-img-wrapper" title="Ver programa <?= View::e($cTitle) ?>">
+                <?php if ($isWebp): ?>
+                  <picture>
+                    <source srcset="<?= View::e($cImg) ?>" type="image/webp">
+                    <img src="<?= View::e($cImg) ?>" alt="<?= View::e($cTitle) ?>" class="img-fluid rounded-top-4 shadow-sm" loading="lazy">
+                  </picture>
+                <?php else: ?>
+                  <img src="<?= View::e($cImg) ?>" alt="<?= View::e($cTitle) ?>" class="img-fluid rounded-top-4 shadow-sm" loading="lazy">
+                <?php endif; ?>
+                <div class="catalog-card-badge">
+                  <span class="badge <?= View::e($cBadgeCls) ?>"><?= View::e($cBadge) ?></span>
+                </div>
+                <span class="hover-zoom-hint"><i class="fas fa-search-plus me-1"></i> Ver Programa</span>
+              </a>
+              <div class="catalog-card-body">
+                <h3 class="catalog-card-title">
+                  <a href="<?= View::e($cUrl) ?>"><?= View::e($cTitle) ?></a>
+                </h3>
+                <p class="catalog-card-desc">
+                  <?= View::e($cDesc) ?>
+                </p>
+                <?php if (!empty($cDuration) || !empty($cInst)): ?>
+                  <div class="d-flex flex-wrap gap-2 small text-muted mb-2">
+                    <?php if (!empty($cDuration)): ?>
+                      <span><i class="fas fa-clock text-primary me-1"></i><?= View::e($cDuration) ?></span>
+                    <?php endif; ?>
+                    <?php if (!empty($cInst)): ?>
+                      <span><i class="fas fa-user-tie text-warning me-1"></i><?= View::e($cInst) ?></span>
+                    <?php endif; ?>
+                  </div>
+                <?php endif; ?>
+                <div class="mt-auto pt-3 border-top border-light-subtle">
+                  <a href="<?= View::e($cUrl) ?>" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
+                    <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        <?php endforeach; ?>
+      </div>
 
-        <!-- Curso 4: Virtual Design & Construction (VDC) -->
-        <div class="col-lg-4 col-md-6 catalog-card-col" data-category="bim-software">
-          <div data-aos="fade-right" data-aos-delay="100" class="catalog-card hvr-box-shadow-outset">
-            <a href="vdc-bim" class="catalog-card-img-wrapper" title="Ver programa Virtual Design & Construction (VDC)">
-              <img src="img/picture4b_orig.png" alt="Virtual Design & Construction VDC" class="img-fluid rounded-top-4 shadow-sm" loading="lazy">
-              <div class="catalog-card-badge">
-                <span class="badge bg-info text-dark">BIM & VDC</span>
-              </div>
-              <span class="hover-zoom-hint"><i class="fas fa-search-plus me-1"></i> Ver Programa</span>
-            </a>
-            <div class="catalog-card-body">
-              <h3 class="catalog-card-title">
-                <a href="vdc-bim">VIRTUAL DESIGN & CONSTRUCTION (VDC)</a>
-              </h3>
-              <p class="catalog-card-desc">
-                Metodología Stanford CIFE: Integración de modelos BIM 3D/4D/5D, ingeniería concurrente (Sesiones ICE) y métricas de producción PPM.
-              </p>
-              <div class="mt-auto pt-3 border-top border-light-subtle">
-                <a href="vdc-bim" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Curso 5: Gestión del Cambio en los Contratos con el Estado -->
-        <div class="col-lg-4 col-md-6 catalog-card-col" data-category="estado-publica">
-          <div data-aos="fade-up" data-aos-delay="200" class="catalog-card hvr-box-shadow-outset">
-            <a href="contratos-estado" class="catalog-card-img-wrapper" title="Ver programa Gestión del Cambio en los Contratos con el Estado">
-              <img src="img/picture5b_orig.png" alt="Gestión del Cambio en Contratos con el Estado" class="img-fluid rounded-top-4 shadow-sm" loading="lazy">
-              <div class="catalog-card-badge">
-                <span class="badge bg-success">Contratación Pública</span>
-              </div>
-              <span class="hover-zoom-hint"><i class="fas fa-search-plus me-1"></i> Ver Programa</span>
-            </a>
-            <div class="catalog-card-body">
-              <h3 class="catalog-card-title">
-                <a href="contratos-estado">GESTIÓN DEL CAMBIO EN LOS CONTRATOS CON EL ESTADO</a>
-              </h3>
-              <p class="catalog-card-desc">
-                Administración de ampliaciones de plazo, adicionales de obra, deductivos y modificaciones contractuales conforme a la Ley de Contrataciones.
-              </p>
-              <div class="mt-auto pt-3 border-top border-light-subtle">
-                <a href="contratos-estado" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Curso 6: Gestión de Compliance en la Construcción -->
-        <div class="col-lg-4 col-md-6 catalog-card-col" data-category="estado-publica">
-          <div data-aos="fade-left" data-aos-delay="300" class="catalog-card hvr-box-shadow-outset">
-            <a href="compliance" class="catalog-card-img-wrapper" title="Ver programa Gestión de Compliance en la Construcción">
-              <img src="img/picture6b_orig.png" alt="Gestión de Compliance en la Construcción" class="img-fluid rounded-top-4 shadow-sm" loading="lazy">
-              <div class="catalog-card-badge">
-                <span class="badge bg-dark">Compliance & ISO</span>
-              </div>
-              <span class="hover-zoom-hint"><i class="fas fa-search-plus me-1"></i> Ver Programa</span>
-            </a>
-            <div class="catalog-card-body">
-              <h3 class="catalog-card-title">
-                <a href="compliance">GESTIÓN DE COMPLIANCE EN LA CONSTRUCCIÓN</a>
-              </h3>
-              <p class="catalog-card-desc">
-                Modelos de prevención penal, sistemas antisoborno ISO 37001, matrices de riesgo y gobernanza corporativa en proyectos de construcción.
-              </p>
-              <div class="mt-auto pt-3 border-top border-light-subtle">
-                <a href="compliance" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Curso 7: Primavera P6 & Power BI -->
-        <div class="col-lg-4 col-md-6 catalog-card-col" data-category="bim-software">
-          <div data-aos="fade-right" data-aos-delay="100" class="catalog-card hvr-box-shadow-outset">
-            <a href="primavera-p6" class="catalog-card-img-wrapper" title="Ver programa Primavera P6 & Power BI">
-              <img src="img/controlproyectos.png" alt="Primavera P6 & Power BI" class="img-fluid rounded-top-4 shadow-sm" loading="lazy">
-              <div class="catalog-card-badge">
-                <span class="badge bg-info text-dark">Software & Control</span>
-              </div>
-              <span class="hover-zoom-hint"><i class="fas fa-search-plus me-1"></i> Ver Programa</span>
-            </a>
-            <div class="catalog-card-body">
-              <h3 class="catalog-card-title">
-                <a href="primavera-p6">CONTROL DE PROYECTOS CON PRIMAVERA P6 & POWER BI</a>
-              </h3>
-              <p class="catalog-card-desc">
-                Planificación avanzada, programación de cronogramas, análisis de ruta crítica, valor ganado y tableros directivos de control en Power BI.
-              </p>
-              <div class="mt-auto pt-3 border-top border-light-subtle">
-                <a href="primavera-p6" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Curso 8: Gestión Integral de Riesgos PMI -->
-        <div class="col-lg-4 col-md-6 catalog-card-col" data-category="forense-claims">
-          <div data-aos="fade-up" data-aos-delay="200" class="catalog-card hvr-box-shadow-outset">
-            <a href="riesgos-pmi" class="catalog-card-img-wrapper" title="Ver programa Gestión Integral de Riesgos PMI">
-              <img src="img/gestionriesgos.png" alt="Gestión Integral de Riesgos PMI" class="img-fluid rounded-top-4 shadow-sm" loading="lazy">
-              <div class="catalog-card-badge">
-                <span class="badge bg-danger">Riesgos PMI®</span>
-              </div>
-              <span class="hover-zoom-hint"><i class="fas fa-search-plus me-1"></i> Ver Programa</span>
-            </a>
-            <div class="catalog-card-body">
-              <h3 class="catalog-card-title">
-                <a href="riesgos-pmi">GESTIÓN INTEGRAL DE RIESGOS EN PROYECTOS (PMI®)</a>
-              </h3>
-              <p class="catalog-card-desc">
-                Identificación, evaluación cualitativa y cuantitativa, planificación de respuestas y monitoreo de riesgos en contratos de infraestructura.
-              </p>
-              <div class="mt-auto pt-3 border-top border-light-subtle">
-                <a href="riesgos-pmi" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Curso 9: Análisis Cuantitativo de Riesgos -->
-        <div class="col-lg-4 col-md-6 catalog-card-col" data-category="forense-claims">
-          <div data-aos="fade-left" data-aos-delay="300" class="catalog-card hvr-box-shadow-outset">
-            <a href="analisis-cuantitativo" class="catalog-card-img-wrapper" title="Ver programa Análisis Cuantitativo de Riesgos">
-              <img src="img/analisiscuantitativo.png" alt="Análisis Cuantitativo de Riesgos" class="img-fluid rounded-top-4 shadow-sm" loading="lazy">
-              <div class="catalog-card-badge">
-                <span class="badge bg-danger">Simulación & Riesgos</span>
-              </div>
-              <span class="hover-zoom-hint"><i class="fas fa-search-plus me-1"></i> Ver Programa</span>
-            </a>
-            <div class="catalog-card-body">
-              <h3 class="catalog-card-title">
-                <a href="analisis-cuantitativo">ANÁLISIS CUANTITATIVO DE RIESGOS EN CRONOGRAMAS</a>
-              </h3>
-              <p class="catalog-card-desc">
-                Simulación probabilística de Monte Carlo con Primavera Risk Analysis y @RISK para determinar reservas de contingencia de plazo y costo.
-              </p>
-              <div class="mt-auto pt-3 border-top border-light-subtle">
-                <a href="analisis-cuantitativo" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Curso 10: Eventos Compensables -->
-        <div class="col-lg-4 col-md-6 catalog-card-col" data-category="nec-fidic">
-          <div data-aos="fade-right" data-aos-delay="100" class="catalog-card hvr-box-shadow-outset">
-            <a href="eventos-compensables" class="catalog-card-img-wrapper" title="Ver programa Eventos Compensables">
-              <img src="img/gestioneventos.png" alt="Eventos Compensables en Contratos NEC4" class="img-fluid rounded-top-4 shadow-sm" loading="lazy">
-              <div class="catalog-card-badge">
-                <span class="badge bg-warning text-dark">Eventos NEC4</span>
-              </div>
-              <span class="hover-zoom-hint"><i class="fas fa-search-plus me-1"></i> Ver Programa</span>
-            </a>
-            <div class="catalog-card-body">
-              <h3 class="catalog-card-title">
-                <a href="eventos-compensables">GESTIÓN DE EVENTOS COMPENSABLES EN CONTRATOS NEC</a>
-              </h3>
-              <p class="catalog-card-desc">
-                Identificación, notificación, cotización, evaluación de impacto en el Costo Definido y Programa de Obra en contratos NEC3 y NEC4.
-              </p>
-              <div class="mt-auto pt-3 border-top border-light-subtle">
-                <a href="eventos-compensables" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                  <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <div id="catalogEmptyState" class="text-center py-5 d-none">
+        <i class="fas fa-search fs-1 text-muted mb-3"></i>
+        <h4 class="fw-bold text-dark">No se encontraron cursos con ese criterio</h4>
+        <p class="text-muted mb-3">Intenta con otro término o selecciona la vista de todos los programas.</p>
+        <button type="button" class="btn btn-outline-primary fw-bold" id="catalogResetFilterBtn">
+          <i class="fas fa-undo me-1"></i> Ver Todos los Cursos
+        </button>
       </div>
     </div>
-  </main>
+  </section>
+
+  <script>
+    (function () {
+      var searchInput = document.getElementById('catalogSearchInput');
+      var resetBtn = document.getElementById('catalogResetFilterBtn');
+      var emptyState = document.getElementById('catalogEmptyState');
+      var visibleCountEl = document.getElementById('catalogVisibleCount');
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.catalog-card-col'));
+      var filterBtns = Array.prototype.slice.call(document.querySelectorAll('.catalog-filter-btn'));
+      var activeCat = 'all';
+
+      function applyCatalogFilters() {
+        var term = searchInput ? searchInput.value.trim().toLowerCase() : '';
+        var visible = 0;
+
+        cards.forEach(function (card) {
+          var cat = card.getAttribute('data-category') || '';
+          var text = card.getAttribute('data-search') || '';
+          var matchCat = (activeCat === 'all' || cat === activeCat);
+          var matchSearch = (!term || text.indexOf(term) !== -1);
+
+          if (matchCat && matchSearch) {
+            card.classList.remove('d-none', 'hide-filter');
+            card.style.display = '';
+            visible++;
+          } else {
+            card.classList.add('d-none');
+            card.style.display = 'none';
+          }
+        });
+
+        if (visibleCountEl) visibleCountEl.textContent = String(visible);
+        if (emptyState) emptyState.classList.toggle('d-none', visible > 0);
+      }
+
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          activeCat = btn.getAttribute('data-filter') || 'all';
+          filterBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          applyCatalogFilters();
+        });
+      });
+
+      if (searchInput) {
+        searchInput.addEventListener('input', applyCatalogFilters);
+      }
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function () {
+          activeCat = 'all';
+          if (searchInput) searchInput.value = '';
+          filterBtns.forEach(function (b) {
+            b.classList.toggle('active', b.getAttribute('data-filter') === 'all');
+          });
+          applyCatalogFilters();
+        });
+      }
+    })();
+  </script>
 
   <!-- 3. Sección de Garantía de Aprendizaje Ejecutivo (3 Pilares) -->
   <section class="values-section py-5">

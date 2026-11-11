@@ -2,7 +2,7 @@
 /**
  * PMO SOLUTIONS - PREVIEW STATIC GENERATOR (GitHub Pages)
  * Compila las vistas del sistema MVC a archivos estáticos HTML para GitHub Pages.
- * 
+ *
  * Este generador permite que el repositorio se previsualice en GitHub Pages
  * sin alterar la estructura MVC ni el funcionamiento de GoDaddy en producción.
  */
@@ -70,13 +70,11 @@ function copyStaticDirectory(string $src, string $dst): void {
         $dstPath = $dst . '/' . $file;
 
         if (is_dir($srcPath)) {
-            // Excluir directorios privados y de backend
             if (in_array($file, ['backend', 'private_app', 'storage', '.git'], true)) {
                 continue;
             }
             copyStaticDirectory($srcPath, $dstPath);
         } else {
-            // Excluir PHP, .htaccess, .env y archivos sensibles
             if (
                 str_ends_with($file, '.php') ||
                 str_ends_with($file, '.htaccess') ||
@@ -104,8 +102,14 @@ if (file_exists($chatbotKnowledgeSrc)) {
 // Crear archivo .nojekyll en el output
 file_put_contents($outputDir . '/.nojekyll', '');
 
-// 4. Descubrir todas las rutas públicas del sistema
+// 4. Descubrir todas las rutas públicas del sistema desde modelos y vistas
 echo "--> [3/5] Descubriendo rutas públicas de PMO...\n";
+
+$courseModel       = new \App\Models\CourseModel();
+$allCourses        = $courseModel->getAll();
+$courseCategories  = $courseModel->getCategories();
+$softSkillsModel   = new \App\Models\SoftSkillsModel();
+$softSkillsCatalog = $softSkillsModel->getCatalog();
 
 $routes = [];
 
@@ -113,7 +117,9 @@ $routes = [];
 $generalFiles = glob($privateAppDir . '/app/Views/pages/*.php') ?: [];
 foreach ($generalFiles as $file) {
     $slug = basename($file, '.php');
-    if ($slug === '.gitkeep') continue;
+    if ($slug === '.gitkeep') {
+        continue;
+    }
     $routes[$slug] = [
         'type'   => 'page',
         'view'   => $slug,
@@ -126,7 +132,9 @@ foreach ($generalFiles as $file) {
 $advisoryFiles = glob($privateAppDir . '/app/Views/pages/advisory/*.php') ?: [];
 foreach ($advisoryFiles as $file) {
     $slug = basename($file, '.php');
-    if ($slug === '.gitkeep') continue;
+    if ($slug === '.gitkeep') {
+        continue;
+    }
     $routes[$slug] = [
         'type'   => 'advisory',
         'view'   => 'advisory/' . $slug,
@@ -135,25 +143,31 @@ foreach ($advisoryFiles as $file) {
     ];
 }
 
-// C. Cursos y especializaciones en Views/pages/courses/ (10 cursos)
-$courseFiles = glob($privateAppDir . '/app/Views/pages/courses/*.php') ?: [];
-foreach ($courseFiles as $file) {
-    $slug = basename($file, '.php');
-    if ($slug === '.gitkeep') continue;
-    $routes[$slug] = [
-        'type'   => 'course',
-        'view'   => 'courses/' . $slug,
-        'slug'   => $slug,
-        'layout' => 'main',
+// C. Cursos oficiales en /curso/{slug} generados dinámicamente desde CourseModel
+foreach ($allCourses as $courseSlug => $courseInfo) {
+    $customViewFile = $privateAppDir . '/app/Views/pages/courses/' . $courseSlug . '.php';
+    $courseView     = is_file($customViewFile) ? ('courses/' . $courseSlug) : 'courses/course-detail';
+    $routeKey       = 'curso/' . $courseSlug;
+
+    $routes[$routeKey] = [
+        'type'        => 'course',
+        'view'        => $courseView,
+        'slug'        => $routeKey,
+        'course_slug' => $courseSlug,
+        'layout'      => 'main',
     ];
+
+    // Conservar rutas heredadas directas para las 10 vistas originales de PMO
+    if (is_file($customViewFile)) {
+        $routes[$courseSlug] = [
+            'type'        => 'course_legacy',
+            'view'        => 'courses/' . $courseSlug,
+            'slug'        => $courseSlug,
+            'course_slug' => $courseSlug,
+            'layout'      => 'main',
+        ];
+    }
 }
-
-// Catálogo de modelos para inyección de datos
-$courseModel = new \App\Models\CourseModel();
-$allCourses  = $courseModel->getAll();
-
-$softSkillsModel   = new \App\Models\SoftSkillsModel();
-$softSkillsCatalog = $softSkillsModel->getCatalog();
 
 // Metadata de las 7 Asesorías Corporativas
 $advisoryMetadata = [
@@ -200,7 +214,7 @@ function transformHtml(string $html, string $prefix, array $knownSlugs): string 
     usort($escapedSlugs, fn($a, $b) => strlen($b) <=> strlen($a));
     $slugPattern = implode('|', $escapedSlugs);
 
-    // Enlaces con barra inicial: href="/slug" o href="/slug#seccion"
+    // Enlaces con barra inicial: href="/slug" o href="/curso/slug"
     $html = preg_replace_callback(
         '/(href=["\'])\/(' . $slugPattern . ')((?:#[a-zA-Z0-9_\-]+|\?[^"\'\s>]*)?)(["\'])/',
         function ($matches) use ($prefix) {
@@ -211,7 +225,7 @@ function transformHtml(string $html, string $prefix, array $knownSlugs): string 
         $html
     );
 
-    // Enlaces relativos sin barra inicial: href="slug" o href="slug#seccion"
+    // Enlaces relativos sin barra inicial: href="slug" o href="curso/slug"
     $html = preg_replace_callback(
         '/(href=["\'])(' . $slugPattern . ')((?:#[a-zA-Z0-9_\-]+|\?[^"\'\s>]*)?)(["\'])/',
         function ($matches) use ($prefix) {
@@ -223,19 +237,18 @@ function transformHtml(string $html, string $prefix, array $knownSlugs): string 
     );
 
     // 3. Normalizar rutas de assets estáticos (CSS, JS, Imágenes, Módulos)
-    // Coincide con href, src o content que apunten a css, js, img o modules
     $html = preg_replace_callback(
         '/(href|src|srcset|content)=(["\'])(\/?)(css|js|img|modules)\//',
         function ($matches) use ($prefix) {
-            $attr = $matches[1];
+            $attr  = $matches[1];
             $quote = $matches[2];
-            $dir = $matches[4];
+            $dir   = $matches[4];
             return "{$attr}={$quote}{$prefix}{$dir}/";
         },
         $html
     );
 
-    // 4. Limpieza de cualquier mención a localhost o rutas absolutas locales en enlaces/recursos
+    // 4. Limpieza de cualquier mención a localhost en enlaces/recursos
     $html = str_replace(
         ['http://localhost', 'https://localhost', 'http://127.0.0.1', 'https://127.0.0.1'],
         'https://arturordz02.github.io/PMO',
@@ -250,60 +263,59 @@ echo "--> [4/5] Compilando vistas de PMO a archivos estáticos...\n";
 
 $renderedCount = 0;
 
-foreach ($routes as $slug => $route) {
-    $slug = (string)$slug;
-    // Configurar REQUEST_URI para cálculos de canónica y SEO
-    $_SERVER['REQUEST_URI'] = ($slug === 'home') ? '/' : ('/' . $slug);
+foreach ($routes as $routePath => $route) {
+    $routePath = (string)$routePath;
+    $_SERVER['REQUEST_URI'] = ($routePath === 'home') ? '/' : ('/' . $routePath);
 
-    // Determinar variables de la vista
     $viewData = [];
 
-    if ($slug === 'home') {
+    if ($routePath === 'home') {
         $viewData = [
             'pageTitle'       => 'PMO Solutions | Construimos Soluciones en Gestión de Proyectos de Construcción',
             'metaDescription' => 'PMO Solutions: Tu socio estratégico en consultoría, asesoría y capacitación de alta ingeniería en construcción (DAB NEC, Análisis Forense, Contratos NEC4, VDC-BIM).',
             'activeNav'       => 'home',
             'courses'         => $allCourses,
         ];
-    } elseif ($slug === 'in-house') {
+    } elseif ($routePath === 'in-house') {
         $viewData = [
             'pageTitle'       => 'Capacitaciones In-House | Formación a la Medida para Empresas - PMO Solutions',
             'metaDescription' => 'Programas de capacitación técnica corporativa in-house diseñados a medida para empresas de ingeniería y construcción. Formación práctica en Contratos NEC4/FIDIC, Dispute Boards, Análisis Forense, VDC-BIM y Gestión de Riesgos.',
             'activeNav'       => 'in-house',
         ];
-    } elseif ($slug === 'capacitaciones') {
+    } elseif ($routePath === 'capacitaciones') {
         $viewData = [
             'pageTitle'       => 'Catálogo de Capacitaciones 2026 | PMO Solutions',
-            'metaDescription' => 'Conoce nuestros programas de especialización ejecutiva e in-house en Contratos NEC4, Juntas de Resolución (DAB), Peritajes Forenses, Primavera P6 y VDC-BIM.',
+            'metaDescription' => 'Conoce nuestros programas de especialización ejecutiva e in-house en Contratos NEC4, Juntas de Resolución (DAB), Peritajes Forenses, Calidad, Oficina Técnica, Primavera P6 y VDC-BIM.',
             'activeNav'       => 'capacitaciones',
             'courses'         => $allCourses,
+            'categories'      => $courseCategories,
         ];
-    } elseif ($route['type'] === 'course') {
-        $courseInfo = $allCourses[$slug] ?? [
-            'slug'        => $slug,
-            'title'       => ucwords(str_replace('-', ' ', $slug)),
-            'description' => 'Programa de especialización técnica y ejecutiva en ' . ucwords(str_replace('-', ' ', $slug)) . ' - PMO Solutions.',
-        ];
-        $viewData = [
-            'pageTitle'       => ($courseInfo['title'] ?? ucwords(str_replace('-', ' ', $slug))) . ' | PMO Solutions',
-            'metaDescription' => $courseInfo['description'] ?? 'Programa técnico especializado en construcción.',
+    } elseif ($route['type'] === 'course' || $route['type'] === 'course_legacy') {
+        $cSlug      = (string)$route['course_slug'];
+        $courseInfo = $allCourses[$cSlug];
+        $viewData   = [
+            'pageTitle'       => $courseInfo['meta_title'] ?? ($courseInfo['title'] . ' | PMO Solutions'),
+            'metaDescription' => $courseInfo['meta_description'] ?? ($courseInfo['short_description'] ?? $courseInfo['description']),
+            'canonical'       => $courseInfo['canonical'] ?? ('https://pmo-solutions.com/curso/' . $cSlug),
+            'ogImage'         => $courseInfo['image'] ?? 'img/LogoPMO.png',
             'activeNav'       => 'capacitaciones',
             'course'          => $courseInfo,
+            'relatedCourses'  => $courseModel->getRelated($cSlug, 3),
         ];
     } elseif ($route['type'] === 'advisory') {
-        $meta = $advisoryMetadata[$slug] ?? [];
+        $meta = $advisoryMetadata[$routePath] ?? [];
         $viewData = [
-            'pageTitle'       => $meta['pageTitle'] ?? (ucwords(str_replace('-', ' ', $slug)) . ' | PMO Solutions'),
+            'pageTitle'       => $meta['pageTitle'] ?? (ucwords(str_replace('-', ' ', $routePath)) . ' | PMO Solutions'),
             'metaDescription' => $meta['metaDescription'] ?? 'Asesoría técnica y consultoría estratégica de alto rendimiento en ingeniería de construcción.',
             'activeNav'       => 'asesoria',
         ];
-    } elseif ($slug === 'contacto') {
+    } elseif ($routePath === 'contacto') {
         $viewData = [
             'pageTitle'       => 'Contacto & Asesoría Corporativa | PMO Solutions',
             'metaDescription' => 'Ponte en contacto con PMO Solutions. Asesoría técnica, consultas sobre cursos in-house, peritajes, capacitaciones y servicios de consultoría en ingeniería.',
             'activeNav'       => 'contacto',
         ];
-    } elseif ($slug === 'evaluacion-habilidades') {
+    } elseif ($routePath === 'evaluacion-habilidades') {
         $viewData = [
             'pageTitle'       => 'Evaluación de Habilidades Blandas | PMO Solutions',
             'metaDescription' => 'Evalúa tus competencias blandas: comunicación, trabajo en equipo, resolución de problemas y adaptabilidad. Recibe un reporte personalizado con recomendaciones.',
@@ -314,25 +326,25 @@ foreach ($routes as $slug => $route) {
                 ['src' => '/js/modules/soft-skills.js', 'type' => 'module'],
             ],
         ];
-    } elseif ($slug === 'libro-de-reclamaciones') {
+    } elseif ($routePath === 'libro-de-reclamaciones') {
         $viewData = [
             'pageTitle'       => 'Libro de Reclamaciones Virtual | PMO Solutions',
             'metaDescription' => 'Libro de Reclamaciones Virtual de PMO Solutions conforme a la Ley N° 29571 (Código de Protección y Defensa del Consumidor) y directivas de INDECOPI.',
             'activeNav'       => 'reclamos',
         ];
-    } elseif ($slug === 'terminos-y-condiciones') {
+    } elseif ($routePath === 'terminos-y-condiciones') {
         $viewData = [
             'pageTitle'       => 'Términos y Condiciones de Uso | PMO Solutions',
             'metaDescription' => 'Términos y Condiciones de Uso de la plataforma digital y servicios formativos y de consultoría de PMO Solutions.',
             'activeNav'       => 'terminos',
         ];
-    } elseif ($slug === 'politica-de-privacidad') {
+    } elseif ($routePath === 'politica-de-privacidad') {
         $viewData = [
             'pageTitle'       => 'Política de Privacidad y Protección de Datos | PMO Solutions',
             'metaDescription' => 'Política de Privacidad y Tratamiento de Datos Personales de PMO Solutions conforme a la legislación aplicable.',
             'activeNav'       => 'privacidad',
         ];
-    } elseif ($slug === '404') {
+    } elseif ($routePath === '404') {
         $viewData = [
             'pageTitle'       => '404: Desvío en la Ruta Crítica | PMO Solutions',
             'metaDescription' => 'Error 404 - Página no encontrada. Ocurrió un desvío no planificado en la obra.',
@@ -341,24 +353,29 @@ foreach ($routes as $slug => $route) {
     }
 
     try {
-        // Renderizar vista usando el motor nativo de PMO
         ob_start();
         \App\Core\View::render($route['view'], $viewData, $route['layout']);
         $rawHtml = (string)ob_get_clean();
 
-        // 1. Generar archivo raíz (ej: _site/gestion-de-pmo.html o _site/index.html)
-        $rootHtml = transformHtml($rawHtml, './', $knownSlugs);
+        $depth      = substr_count($routePath, '/');
+        $rootPrefix = $depth > 0 ? str_repeat('../', $depth) : './';
+        $subPrefix  = str_repeat('../', $depth + 1);
 
-        if ($slug === 'home') {
+        $rootHtml = transformHtml($rawHtml, $rootPrefix, $knownSlugs);
+
+        if ($routePath === 'home') {
             file_put_contents($outputDir . '/index.html', $rootHtml);
-        } elseif ($slug === '404') {
+        } elseif ($routePath === '404') {
             file_put_contents($outputDir . '/404.html', $rootHtml);
         } else {
-            file_put_contents($outputDir . '/' . $slug . '.html', $rootHtml);
+            $htmlFile = $outputDir . '/' . $routePath . '.html';
+            if (!is_dir(dirname($htmlFile))) {
+                mkdir(dirname($htmlFile), 0777, true);
+            }
+            file_put_contents($htmlFile, $rootHtml);
 
-            // 2. Generar carpeta con index.html para URLs limpias (ej: _site/gestion-de-pmo/index.html)
-            $subDirHtml = transformHtml($rawHtml, '../', $knownSlugs);
-            $subDir = $outputDir . '/' . $slug;
+            $subDirHtml = transformHtml($rawHtml, $subPrefix, $knownSlugs);
+            $subDir     = $outputDir . '/' . $routePath;
             if (!is_dir($subDir)) {
                 mkdir($subDir, 0777, true);
             }
@@ -367,13 +384,12 @@ foreach ($routes as $slug => $route) {
 
         $renderedCount++;
         $typeLabel = strtoupper($route['type']);
-        echo "  [OK] ({$typeLabel}) /{$slug}\n";
+        echo "  [OK] ({$typeLabel}) /{$routePath}\n";
     } catch (\Throwable $e) {
-        echo "  [ERROR] Falló al compilar {$slug}: " . $e->getMessage() . "\n";
+        echo "  [ERROR] Falló al compilar {$routePath}: " . $e->getMessage() . "\n";
     }
 }
 
-// Asegurar 404.html en la raíz de output
 if (!file_exists($outputDir . '/404.html')) {
     echo "  [AVISO] Generando 404.html de respaldo...\n";
 }
@@ -382,5 +398,5 @@ echo "\n--> [5/5] Resumen de Generación Estática:\n";
 echo "  - Total de rutas compiladas: {$renderedCount}\n";
 echo "  - Salida generada en: {$outputDir}\n";
 echo "  - .nojekyll: OK\n";
-echo "  - Compatibilidad: URLs .html y subcarpetas /slug/index.html\n";
+echo "  - Compatibilidad: URLs .html y subcarpetas /curso/{slug}/index.html\n";
 echo "\n¡Compilación estática completada exitosamente!\n";

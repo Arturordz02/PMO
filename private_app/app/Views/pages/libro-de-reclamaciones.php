@@ -15,7 +15,7 @@
           <div class="col-12 col-md-6">
             <div class="d-flex align-items-center gap-3">
               <div class="bg-white p-2 rounded-circle shadow-sm border">
-                <img src="img/LogoPMO.png" alt="Logo PMO Solutions" width="45" height="45" style="object-fit: contain;">
+                <img src="/img/LogoPMO.png" alt="Logo PMO Solutions" width="45" height="45" style="object-fit: contain;">
               </div>
               <div>
                 <span class="fw-bold fs-5 text-primary d-block">PMO SOLUTIONS</span>
@@ -41,7 +41,7 @@
   </header>
 
   <!-- B. Formulario Simplificado en 3 Bloques (B2B / Ejecutivo) -->
-  <main class="container my-5">
+  <div class="container my-5">
     <div class="row justify-content-center">
       <div class="col-12 col-lg-10">
         
@@ -241,6 +241,6 @@
 
       </div>
     </div>
-  </main>
+  </div>
 
   <!-- Footer Corporativo de PMO Solutions -->
