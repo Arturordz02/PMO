@@ -29,6 +29,7 @@ class CourseController extends Controller {
             'activeNav'       => 'capacitaciones',
             'courses'         => $courses,
             'categories'      => $categories,
+            'extraJs'         => ['/js/courses-filter.js'],
         ]);
     }
 

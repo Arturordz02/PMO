@@ -1,5 +1,6 @@
 <?php
 use App\Core\View;
+use App\Models\CourseModel;
 
 $coursesList = is_array($courses ?? null) ? $courses : [];
 $totalCourses = count($coursesList);
@@ -73,52 +74,78 @@ if (empty($categories) && !empty($coursesList)) {
   </header>
 
   <!-- 2. Grid del Catálogo de Cursos con Filtro Interactivo y Búsqueda -->
-  <section id="catalogo-grid" class="py-5 my-lg-4">
+  <section id="catalogo-grid" class="py-5 my-lg-4" data-courses-catalog>
     <div class="container">
 
       <div class="text-center mb-4" data-aos="fade-up">
         <span class="section-badge">Oferta Académica 2026</span>
         <h2 class="section-title">Programas Especializados de Ingeniería y Contratos</h2>
         <p class="section-subtitle">
-          Selecciona una categoría o busca por especialidad para explorar temarios detallados, plana docente y casos prácticos de aplicación real.
+          Selecciona un área académica o busca por título, docente o palabra clave para explorar temarios detallados, plana docente y casos prácticos de aplicación real.
         </p>
       </div>
 
-      <!-- BUSCADOR RÁPIDO DEL CATÁLOGO -->
-      <div class="row justify-content-center mb-4">
-        <div class="col-md-7 col-lg-5">
-          <div class="input-group input-group-lg shadow-sm">
-            <span class="input-group-text bg-white border-end-0 text-primary">
-              <i class="fas fa-search"></i>
-            </span>
-            <input
-              type="search"
-              id="catalogSearchInput"
-              class="form-control border-start-0"
-              placeholder="Buscar curso (ej. NEC4, Calidad, Primavera, VDC, Riesgos...)"
-              aria-label="Buscar curso en el catálogo">
+      <!-- BARRA DE BÚSQUEDA Y ACCIONES DEL CATÁLOGO -->
+      <div class="catalog-search-toolbar mb-4">
+        <div class="row justify-content-center align-items-end g-2">
+          <div class="col-12 col-md-8 col-lg-6">
+            <label for="catalogSearchInput" class="form-label fw-semibold text-dark small mb-1">
+              Buscar curso por título, docente o especialidad
+            </label>
+            <div class="input-group input-group-lg shadow-sm catalog-search-group">
+              <span class="input-group-text bg-white border-end-0 text-primary" aria-hidden="true">
+                <i class="fas fa-search"></i>
+              </span>
+              <input
+                type="search"
+                id="catalogSearchInput"
+                class="form-control border-start-0"
+                autocomplete="off"
+                placeholder="Ej. NEC4, Primavera, Riesgos, VDC, Calidad, Edwar...">
+              <button
+                type="button"
+                id="catalogClearSearchBtn"
+                class="btn btn-outline-secondary d-none"
+                aria-label="Limpiar texto de búsqueda"
+                title="Limpiar búsqueda">
+                <i class="fas fa-times" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-12 col-md-auto text-center text-md-start">
+            <button
+              type="button"
+              id="catalogToolbarResetBtn"
+              class="btn btn-outline-primary btn-lg fw-semibold catalog-reset-btn d-none"
+              hidden>
+              <i class="fas fa-undo me-1" aria-hidden="true"></i> Limpiar filtros
+            </button>
           </div>
         </div>
       </div>
 
-      <!-- BOTONES DE FILTRO POR CATEGORÍA (Generados desde CourseModel) -->
-      <div class="catalog-filter-container" data-aos="fade-up" data-aos-delay="100">
-        <button type="button" class="catalog-filter-btn active" data-filter="all">
-          <i class="fas fa-th-large me-1"></i> Todos los Programas (<?= View::e((string)$totalCourses) ?>)
+      <!-- BOTONES DE FILTRO POR CATEGORÍA (Generados dinámicamente desde CourseModel) -->
+      <div class="catalog-filter-container"
+           role="group"
+           aria-label="Filtrar cursos por área académica"
+           data-aos="fade-up"
+           data-aos-delay="100">
+        <button type="button" class="catalog-filter-btn active" data-filter="all" aria-pressed="true">
+          <i class="fas fa-th-large me-1" aria-hidden="true"></i> Todos los cursos (<?= View::e((string)$totalCourses) ?>)
         </button>
         <?php foreach (($categories ?? []) as $cat): ?>
-          <button type="button" class="catalog-filter-btn" data-filter="<?= View::e($cat['slug']) ?>">
-            <i class="<?= View::e($cat['icon']) ?> me-1"></i> <?= View::e($cat['label']) ?> (<?= View::e((string)$cat['count']) ?>)
+          <button type="button" class="catalog-filter-btn" data-filter="<?= View::e($cat['slug']) ?>" aria-pressed="false">
+            <i class="<?= View::e($cat['icon']) ?> me-1" aria-hidden="true"></i> <?= View::e($cat['label']) ?> (<?= View::e((string)$cat['count']) ?>)
           </button>
         <?php endforeach; ?>
       </div>
 
-      <p class="text-center small text-muted mb-4" id="catalogResultsCounter">
-        Mostrando <strong id="catalogVisibleCount"><?= View::e((string)$totalCourses) ?></strong> de <strong><?= View::e((string)$totalCourses) ?></strong> cursos especializados
+      <p class="text-center small text-muted mb-4" id="catalogResultsCounter" aria-live="polite" aria-atomic="true">
+        Mostrando <strong id="catalogVisibleCount"><?= View::e((string)$totalCourses) ?></strong> de <strong><?= View::e((string)$totalCourses) ?></strong> cursos
       </p>
 
       <!-- GRID DINÁMICO DE CURSOS DESDE COURSEMODEL -->
-      <div class="row g-4" id="coursesGridContainer">
+      <div class="row g-4" id="coursesGridContainer" data-visible-courses="<?= View::e((string)$totalCourses) ?>">
         <?php foreach ($coursesList as $course): ?>
           <?php
             $cSlug     = (string)$course['slug'];
@@ -132,11 +159,13 @@ if (empty($categories) && !empty($coursesList)) {
             $cUrl      = '/curso/' . rawurlencode($cSlug);
             $cDuration = $course['duration'] ?? null;
             $cInst     = $course['instructor'] ?? null;
+            $cSearch   = (string)($course['search_text'] ?? CourseModel::buildSearchText($course));
             $isWebp    = str_ends_with(strtolower($cImg), '.webp');
           ?>
           <div class="col-lg-4 col-md-6 catalog-card-col"
+               data-course-card
                data-category="<?= View::e($cCat) ?>"
-               data-search="<?= View::e(mb_strtolower($cTitle . ' ' . $cCatLabel . ' ' . $cDesc . ' ' . ($cInst ?? ''), 'UTF-8')) ?>">
+               data-search="<?= View::e($cSearch) ?>">
             <div class="catalog-card h-100 hvr-box-shadow-outset">
               <a href="<?= View::e($cUrl) ?>" class="catalog-card-img-wrapper" title="Ver programa <?= View::e($cTitle) ?>">
                 <?php if ($isWebp): ?>
@@ -150,7 +179,7 @@ if (empty($categories) && !empty($coursesList)) {
                 <div class="catalog-card-badge">
                   <span class="badge <?= View::e($cBadgeCls) ?>"><?= View::e($cBadge) ?></span>
                 </div>
-                <span class="hover-zoom-hint"><i class="fas fa-search-plus me-1"></i> Ver Programa</span>
+                <span class="hover-zoom-hint"><i class="fas fa-search-plus me-1" aria-hidden="true"></i> Ver Programa</span>
               </a>
               <div class="catalog-card-body">
                 <h3 class="catalog-card-title">
@@ -162,16 +191,16 @@ if (empty($categories) && !empty($coursesList)) {
                 <?php if (!empty($cDuration) || !empty($cInst)): ?>
                   <div class="d-flex flex-wrap gap-2 small text-muted mb-2">
                     <?php if (!empty($cDuration)): ?>
-                      <span><i class="fas fa-clock text-primary me-1"></i><?= View::e($cDuration) ?></span>
+                      <span><i class="fas fa-clock text-primary me-1" aria-hidden="true"></i><?= View::e($cDuration) ?></span>
                     <?php endif; ?>
                     <?php if (!empty($cInst)): ?>
-                      <span><i class="fas fa-user-tie text-warning me-1"></i><?= View::e($cInst) ?></span>
+                      <span><i class="fas fa-user-tie text-warning me-1" aria-hidden="true"></i><?= View::e($cInst) ?></span>
                     <?php endif; ?>
                   </div>
                 <?php endif; ?>
                 <div class="mt-auto pt-3 border-top border-light-subtle">
                   <a href="<?= View::e($cUrl) ?>" class="btn btn-primary w-100 mt-2 fw-bold hvr-grow">
-                    <i class="fas fa-book-open me-2"></i> Ver Temario & Detalles
+                    <i class="fas fa-book-open me-2" aria-hidden="true"></i> Ver Temario & Detalles
                   </a>
                 </div>
               </div>
@@ -180,75 +209,16 @@ if (empty($categories) && !empty($coursesList)) {
         <?php endforeach; ?>
       </div>
 
-      <div id="catalogEmptyState" class="text-center py-5 d-none">
-        <i class="fas fa-search fs-1 text-muted mb-3"></i>
-        <h4 class="fw-bold text-dark">No se encontraron cursos con ese criterio</h4>
-        <p class="text-muted mb-3">Intenta con otro término o selecciona la vista de todos los programas.</p>
+      <div id="catalogEmptyState" class="text-center py-5 d-none" role="status" aria-live="polite" hidden>
+        <i class="fas fa-search fs-1 text-muted mb-3" aria-hidden="true"></i>
+        <h3 class="h4 fw-bold text-dark">No encontramos cursos con los filtros seleccionados.</h3>
+        <p class="text-muted mb-3">Prueba con otra palabra clave o restablece los filtros para explorar los <?= View::e((string)$totalCourses) ?> cursos disponibles.</p>
         <button type="button" class="btn btn-outline-primary fw-bold" id="catalogResetFilterBtn">
-          <i class="fas fa-undo me-1"></i> Ver Todos los Cursos
+          <i class="fas fa-undo me-1" aria-hidden="true"></i> Limpiar filtros
         </button>
       </div>
     </div>
   </section>
-
-  <script>
-    (function () {
-      var searchInput = document.getElementById('catalogSearchInput');
-      var resetBtn = document.getElementById('catalogResetFilterBtn');
-      var emptyState = document.getElementById('catalogEmptyState');
-      var visibleCountEl = document.getElementById('catalogVisibleCount');
-      var cards = Array.prototype.slice.call(document.querySelectorAll('.catalog-card-col'));
-      var filterBtns = Array.prototype.slice.call(document.querySelectorAll('.catalog-filter-btn'));
-      var activeCat = 'all';
-
-      function applyCatalogFilters() {
-        var term = searchInput ? searchInput.value.trim().toLowerCase() : '';
-        var visible = 0;
-
-        cards.forEach(function (card) {
-          var cat = card.getAttribute('data-category') || '';
-          var text = card.getAttribute('data-search') || '';
-          var matchCat = (activeCat === 'all' || cat === activeCat);
-          var matchSearch = (!term || text.indexOf(term) !== -1);
-
-          if (matchCat && matchSearch) {
-            card.classList.remove('d-none', 'hide-filter');
-            card.style.display = '';
-            visible++;
-          } else {
-            card.classList.add('d-none');
-            card.style.display = 'none';
-          }
-        });
-
-        if (visibleCountEl) visibleCountEl.textContent = String(visible);
-        if (emptyState) emptyState.classList.toggle('d-none', visible > 0);
-      }
-
-      filterBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          activeCat = btn.getAttribute('data-filter') || 'all';
-          filterBtns.forEach(function (b) { b.classList.remove('active'); });
-          btn.classList.add('active');
-          applyCatalogFilters();
-        });
-      });
-
-      if (searchInput) {
-        searchInput.addEventListener('input', applyCatalogFilters);
-      }
-      if (resetBtn) {
-        resetBtn.addEventListener('click', function () {
-          activeCat = 'all';
-          if (searchInput) searchInput.value = '';
-          filterBtns.forEach(function (b) {
-            b.classList.toggle('active', b.getAttribute('data-filter') === 'all');
-          });
-          applyCatalogFilters();
-        });
-      }
-    })();
-  </script>
 
   <!-- 3. Sección de Garantía de Aprendizaje Ejecutivo (3 Pilares) -->
   <section class="values-section py-5">

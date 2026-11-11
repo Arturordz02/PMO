@@ -2947,28 +2947,50 @@ h1, h2, h3, h4, h5, h6 {
    CATALOG INTERACTIVE FILTER TABS (capacitaciones.html)
    ========================================================================== */
 
+.catalog-search-toolbar {
+  max-width: 100%;
+}
+
+.catalog-search-group .form-control:focus {
+  box-shadow: none;
+  border-color: var(--pmo-primary);
+}
+
+.catalog-search-group:focus-within {
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0 0.25rem rgba(0, 80, 158, 0.2) !important;
+}
+
+.catalog-reset-btn {
+  min-height: 48px;
+  white-space: nowrap;
+}
+
 .catalog-filter-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.6rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
+  max-width: 100%;
 }
 
 .catalog-filter-btn {
   border: 1.5px solid #cbd5e1;
   background: #ffffff;
-  color: #475569;
+  color: #334155;
   font-weight: 700;
   font-size: 0.86rem;
-  padding: 0.55rem 1.25rem;
+  min-height: 44px;
+  padding: 0.55rem 1.15rem;
   border-radius: 30px;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  white-space: nowrap;
 }
 
 .catalog-filter-btn:hover {
@@ -2976,6 +2998,14 @@ h1, h2, h3, h4, h5, h6 {
   border-color: #94a3b8;
   color: var(--pmo-primary-dark);
   transform: translateY(-2px);
+}
+
+.catalog-filter-btn:focus-visible,
+.catalog-reset-btn:focus-visible,
+#catalogClearSearchBtn:focus-visible,
+#catalogResetFilterBtn:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 2px;
 }
 
 .catalog-filter-btn.active {
@@ -2987,15 +3017,48 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .catalog-card-col {
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.catalog-card-col.hide-filter {
+.catalog-card-col.hide-filter,
+.catalog-card-col.is-filtered-out,
+.catalog-card-col[hidden] {
   display: none !important;
 }
 
 .catalog-card-col.fade-in-filter {
-  animation: filterFadeIn 0.4s ease forwards;
+  animation: filterFadeIn 0.3s ease forwards;
+}
+
+@media (max-width: 767.98px) {
+  .catalog-filter-container {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.25rem 0.15rem 0.65rem;
+    scrollbar-width: thin;
+  }
+
+  .catalog-filter-btn {
+    flex: 0 0 auto;
+    font-size: 0.84rem;
+    padding: 0.55rem 1rem;
+  }
+
+  .catalog-reset-btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalog-filter-btn,
+  .catalog-card-col,
+  .catalog-card-col.fade-in-filter {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
 }
 
 @keyframes filterFadeIn {

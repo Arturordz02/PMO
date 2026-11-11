@@ -11,8 +11,261 @@ use App\Core\Model;
  */
 class CourseModel extends Model {
 
-    private const CACHE_KEY = 'courses_catalog_v2';
+    public const CACHE_KEY = 'courses_catalog_v3';
     private const CANONICAL_BASE = 'https://pmo-solutions.com/curso/';
+
+    /**
+     * Taxonomía académica normalizada (7 áreas reales que cubren exactamente los 43 cursos).
+     */
+    private const CATEGORY_META = [
+        'contratos-disputas' => [
+            'label' => 'Contratos, Claims y Disputas',
+            'icon'  => 'fas fa-file-contract',
+        ],
+        'proyectos-pmo' => [
+            'label' => 'Gestión de Proyectos, Lean y PMO',
+            'icon'  => 'fas fa-project-diagram',
+        ],
+        'bim-tecnologia' => [
+            'label' => 'BIM, VDC y Analítica de Datos',
+            'icon'  => 'fas fa-cubes',
+        ],
+        'oficina-tecnica' => [
+            'label' => 'Oficina Técnica y Control de Obra',
+            'icon'  => 'fas fa-drafting-compass',
+        ],
+        'riesgos' => [
+            'label' => 'Gestión de Riesgos',
+            'icon'  => 'fas fa-shield-alt',
+        ],
+        'calidad' => [
+            'label' => 'Calidad',
+            'icon'  => 'fas fa-award',
+        ],
+        'estado-compliance' => [
+            'label' => 'Contratación Pública y Compliance',
+            'icon'  => 'fas fa-balance-scale',
+        ],
+    ];
+
+    /**
+     * Asignación centralizada de categoría única y palabras clave verificadas por slug.
+     */
+    private const COURSE_TAXONOMY = [
+        // 1. Calidad (4 cursos)
+        'gerencia-de-calidad' => [
+            'category' => 'calidad',
+            'keywords' => ['calidad', 'construccion', 'last planner', 'indicadores', 'ia', 'inteligencia artificial', 'pmi'],
+        ],
+        'iso-9001' => [
+            'category' => 'calidad',
+            'keywords' => ['iso 9001', 'calidad', 'sistema de gestion de calidad', 'sgc', 'auditoria', 'ia', 'inteligencia artificial'],
+        ],
+        'control-de-calidad-en-tuneleria' => [
+            'category' => 'calidad',
+            'keywords' => ['tuneleria', 'tuneles', 'obras subterraneas', 'control de calidad', 'concreto lanzado', 'shotcrete'],
+        ],
+        'direccion-calidad-enfoque-pmi' => [
+            'category' => 'calidad',
+            'keywords' => ['calidad', 'pmi', 'pmbok', 'direccion de proyectos', 'aseguramiento', 'control de calidad'],
+        ],
+
+        // 2. Oficina Técnica y Control de Obra (6 cursos)
+        'oficina-tecnica-edificaciones-panel-control' => [
+            'category' => 'oficina-tecnica',
+            'keywords' => ['oficina tecnica', 'edificaciones', 'panel de control', 'real time', 'metrados', 'valorizaciones', 'presupuestos'],
+        ],
+        'oficina-tecnica-hospitales-edificaciones' => [
+            'category' => 'oficina-tecnica',
+            'keywords' => ['oficina tecnica', 'hospitales', 'edificaciones', 'infraestructura hospitalaria', 'instalaciones'],
+        ],
+        'oficina-tecnica-obras-viales' => [
+            'category' => 'oficina-tecnica',
+            'keywords' => ['oficina tecnica', 'obras viales', 'carreteras', 'movimiento de tierras', 'pavimentos', 'valorizaciones'],
+        ],
+        'oficina-tecnica-infraestructura-minera' => [
+            'category' => 'oficina-tecnica',
+            'keywords' => ['oficina tecnica', 'mineria', 'infraestructura minera', 'pads', 'presas de relave', 'geosinteticos'],
+        ],
+        'resultado-operativo-obra' => [
+            'category' => 'oficina-tecnica',
+            'keywords' => ['resultado operativo', 'ro', 'costos', 'margen', 'rentabilidad', 'control economico', 'obra'],
+        ],
+        'control-proyectos-construccion' => [
+            'category' => 'oficina-tecnica',
+            'keywords' => ['control de proyectos', 'construccion', 'programacion', 'cronograma', 'costos', 'avances'],
+        ],
+
+        // 3. Contratos, Claims y Disputas (13 cursos)
+        'dab-jrd' => [
+            'category' => 'contratos-disputas',
+            'keywords' => ['dab', 'jrd', 'junta de resolucion de disputas', 'dispute boards', 'osce', 'fidic', 'controversias'],
+        ],
+        'nec4' => [
+            'category' => 'contratos-disputas',
+            'keywords' => ['nec4', 'nec 4', 'ecc', 'psc', 'servicios profesionales', 'contratos colaborativos'],
+        ],
+        'eventos-compensables' => [
+            'category' => 'contratos-disputas',
+            'keywords' => ['eventos compensables', 'compensation events', 'nec4', 'clausula 60', 'quotations', 'alertas tempranas', 'early warning'],
+        ],
+        'analisis-forense' => [
+            'category' => 'contratos-disputas',
+            'keywords' => ['analisis forense', 'delay claims', 'reclamos de plazo', 'atrasos', 'peritaje', 'ruta critica', 'cpm'],
+        ],
+        'analisis-forense-cronograma-primavera-p6' => [
+            'category' => 'contratos-disputas',
+            'keywords' => ['analisis forense', 'cronograma', 'primavera p6', 'oracle primavera', 'aace 29r-03', 'scl', 'delay claims', 'peritaje'],
+        ],
+        'contratos-colaborativos-nec3-f' => [
+            'category' => 'contratos-disputas',
+            'keywords' => ['nec3', 'nec3 opcion f', 'nec3-f', 'contratos colaborativos', 'management contract'],
+        ],
+        'contrato-nec4' => [
+            'category' => 'contratos-disputas',
+            'keywords' => ['nec4', 'nec 4', 'fundamentos', 'administracion contractual', 'contratos colaborativos'],
+        ],
+        'casos-practicos-contratos-nec3-f' => [
+            'category' => 'contratos-disputas',
+            'keywords' => ['nec3', 'opcion f', 'management contract', 'casos practicos', 'contratos colaborativos'],
+        ],
+        'junta-resolucion-disputas-dab' => [
+            'category' => 'contratos-disputas',
+            'keywords' => ['jrd', 'dab', 'junta de resolucion de disputas', 'dispute boards', 'controversias', 'obras'],
+        ],
+        'contrato-colaborativo-nec-3-4' => [
+            'category' => 'contratos-disputas',
+            'keywords' => ['nec3', 'nec4', 'nec 3/4', 'contrato colaborativo', 'reconstruccion'],
+        ],
+        'contratos-fidic-epc-construccion' => [
+            'category' => 'contratos-disputas',
+            'keywords' => ['fidic', 'epc', 'libro rojo', 'libro amarillo', 'libro plata', 'contratos internacionales'],
+        ],
+        'gestion-reclamos-nec-fidic' => [
+            'category' => 'contratos-disputas',
+            'keywords' => ['reclamos', 'claims', 'nec', 'nec4', 'fidic', 'controversias', 'disputas'],
+        ],
+        'gestion-contractual-megaproyectos-mineros' => [
+            'category' => 'contratos-disputas',
+            'keywords' => ['gestion contractual', 'megaproyectos', 'mineria', 'mineros', 'claims', 'administracion de contratos'],
+        ],
+
+        // 4. Gestión de Riesgos (5 cursos)
+        'riesgos-pmi' => [
+            'category' => 'riesgos',
+            'keywords' => ['riesgos', 'pmi', 'pmbok', 'pmi-rmp', 'matriz de riesgos', 'mitigacion'],
+        ],
+        'analisis-cuantitativo' => [
+            'category' => 'riesgos',
+            'keywords' => ['analisis cuantitativo', 'monte carlo', 'riesgos', 'curvas s', 'p50', 'p80', 'contingencia'],
+        ],
+        'riesgos-tecnicos' => [
+            'category' => 'riesgos',
+            'keywords' => ['riesgos tecnicos', 'pmi', 'estandar pmi 2024', 'construccion', 'riesgos'],
+        ],
+        'gestion-de-riesgos' => [
+            'category' => 'riesgos',
+            'keywords' => ['riesgos', 'cambios', 'reclamos', 'plazo', 'alcance', 'construccion'],
+        ],
+        'riesgos-cadena-produccion' => [
+            'category' => 'riesgos',
+            'keywords' => ['riesgos', 'cadena de produccion', 'iso 31000', 'bim', 'suministros'],
+        ],
+
+        // 5. Gestión de Proyectos, Lean y PMO (7 cursos)
+        'gestion-proyectos-pmi' => [
+            'category' => 'proyectos-pmo',
+            'keywords' => ['gestion de proyectos', 'pmi', 'pmbok', 'pmp', 'direccion de proyectos'],
+        ],
+        'gestion-pmo-vmo' => [
+            'category' => 'proyectos-pmo',
+            'keywords' => ['pmo', 'vmo', 'oficina de gestion de proyectos', 'value management office', 'gobernanza'],
+        ],
+        'brightline-initiative' => [
+            'category' => 'proyectos-pmo',
+            'keywords' => ['brightline', 'pmi', 'estrategia', 'transformacion', 'ejecucion estrategica'],
+        ],
+        'gruas-torre' => [
+            'category' => 'proyectos-pmo',
+            'keywords' => ['gruas torre', 'productividad', 'izaje', 'logistica de obra', 'planificacion'],
+        ],
+        'lean-construction-edificaciones' => [
+            'category' => 'proyectos-pmo',
+            'keywords' => ['lean construction', 'edificaciones', 'last planner', 'productividad', 'trenes de trabajo', 'lookahead'],
+        ],
+        'lean-construction-infraestructura' => [
+            'category' => 'proyectos-pmo',
+            'keywords' => ['lean construction', 'infraestructura', 'last planner', 'productividad', 'obras civiles'],
+        ],
+        'liderazgo-construccion' => [
+            'category' => 'proyectos-pmo',
+            'keywords' => ['liderazgo', 'habilidades blandas', 'equipos de obra', 'gestion de personas', 'construccion'],
+        ],
+
+        // 6. BIM, VDC y Analítica de Datos (6 cursos)
+        'vdc-bim' => [
+            'category' => 'bim-tecnologia',
+            'keywords' => ['vdc', 'bim', 'virtual design and construction', 'ice', 'ppm', 'stanford'],
+        ],
+        'vdc' => [
+            'category' => 'bim-tecnologia',
+            'keywords' => ['vdc', 'stanford', 'ice', 'bim', 'ppm', 'virtual design and construction', 'cife'],
+        ],
+        'primavera-p6' => [
+            'category' => 'bim-tecnologia',
+            'keywords' => ['primavera p6', 'oracle primavera', 'power bi', 'cronograma', 'linea base', 'valor ganado'],
+        ],
+        'valor-ganado-ms-project-power-bi' => [
+            'category' => 'bim-tecnologia',
+            'keywords' => ['valor ganado', 'evm', 'ms project', 'microsoft project', 'power bi', 'cpi', 'spi'],
+        ],
+        'costos-edificaciones-power-bi' => [
+            'category' => 'bim-tecnologia',
+            'keywords' => ['costos', 'edificaciones', 'power bi', 'presupuestos', 'control de costos', 'dashboards'],
+        ],
+        'control-proyectos-bim-power-bi' => [
+            'category' => 'bim-tecnologia',
+            'keywords' => ['control de proyectos', 'bim', 'power bi', 'tableros', 'dashboards', 'metrados'],
+        ],
+
+        // 7. Contratación Pública y Compliance (2 cursos)
+        'contratos-estado' => [
+            'category' => 'estado-compliance',
+            'keywords' => ['contrataciones del estado', 'obras publicas', 'osce', 'ley de contrataciones', 'adicionales', 'ampliaciones de plazo'],
+        ],
+        'compliance' => [
+            'category' => 'estado-compliance',
+            'keywords' => ['compliance', 'iso 37001', 'antisoborno', 'cumplimiento legal', 'etica corporativa', 'construccion'],
+        ],
+    ];
+
+    /**
+     * Construye el texto unificado de búsqueda para un curso a partir de sus metadatos reales.
+     */
+    public static function buildSearchText(array $course): string {
+        $parts = [
+            (string)($course['title'] ?? ''),
+            (string)($course['short_description'] ?? ($course['description'] ?? '')),
+            (string)($course['category_label'] ?? ''),
+            (string)($course['category'] ?? ''),
+            str_replace('-', ' ', (string)($course['category'] ?? '')),
+            (string)($course['instructor'] ?? ''),
+            (string)($course['instructor_title'] ?? ''),
+            (string)($course['slug'] ?? ''),
+            str_replace('-', ' ', (string)($course['slug'] ?? '')),
+            (string)($course['badge'] ?? ''),
+        ];
+
+        if (!empty($course['keywords']) && is_array($course['keywords'])) {
+            foreach ($course['keywords'] as $kw) {
+                $parts[] = (string)$kw;
+            }
+        }
+
+        $joined = implode(' ', array_filter($parts, static fn($v) => trim($v) !== ''));
+        $collapsed = preg_replace('/\s+/u', ' ', trim($joined)) ?? $joined;
+        return mb_strtolower($collapsed, 'UTF-8');
+    }
 
     /**
      * Retorna el listado completo de cursos indexado por slug (cacheado en disco).
@@ -32,40 +285,19 @@ class CourseModel extends Model {
     }
 
     /**
-     * Retorna las categorías disponibles dinámicamente con etiqueta e ícono.
+     * Retorna las categorías disponibles dinámicamente con etiqueta, ícono y conteo real.
      */
     public function getCategories(): array {
-        $meta = [
-            'contratos' => [
-                'label' => 'Contratos & Dispute Boards',
-                'icon'  => 'fas fa-file-contract',
-            ],
-            'riesgos' => [
-                'label' => 'Riesgos & Forense',
-                'icon'  => 'fas fa-shield-alt',
-            ],
-            'gestion-proyectos' => [
-                'label' => 'Gestión de Proyectos, BIM & Control',
-                'icon'  => 'fas fa-cubes',
-            ],
-            'calidad' => [
-                'label' => 'Calidad',
-                'icon'  => 'fas fa-award',
-            ],
-            'oficina-tecnica' => [
-                'label' => 'Oficina Técnica',
-                'icon'  => 'fas fa-drafting-compass',
-            ],
-        ];
-
         $counts = [];
         foreach ($this->getAll() as $course) {
-            $cat = $course['category'];
-            $counts[$cat] = ($counts[$cat] ?? 0) + 1;
+            $cat = (string)($course['category'] ?? '');
+            if ($cat !== '') {
+                $counts[$cat] = ($counts[$cat] ?? 0) + 1;
+            }
         }
 
         $result = [];
-        foreach ($meta as $key => $info) {
+        foreach (self::CATEGORY_META as $key => $info) {
             if (!empty($counts[$key])) {
                 $result[$key] = [
                     'slug'  => $key,
@@ -522,7 +754,31 @@ class CourseModel extends Model {
         ];
 
         $migrated = require dirname(__DIR__) . '/Data/migrated_courses.php';
+        $merged = array_merge($pmoOriginals, $migrated);
 
-        return array_merge($pmoOriginals, $migrated);
+        foreach ($merged as $slug => &$course) {
+            $meta = self::COURSE_TAXONOMY[$slug] ?? null;
+            if ($meta !== null) {
+                $catSlug = $meta['category'];
+                $course['category'] = $catSlug;
+                $course['category_label'] = self::CATEGORY_META[$catSlug]['label'];
+                $course['category_icon'] = self::CATEGORY_META[$catSlug]['icon'];
+                $course['keywords'] = $meta['keywords'];
+            } else {
+                $fallbackCat = (string)($course['category'] ?? 'proyectos-pmo');
+                if (!isset(self::CATEGORY_META[$fallbackCat])) {
+                    $fallbackCat = 'proyectos-pmo';
+                }
+                $course['category'] = $fallbackCat;
+                $course['category_label'] = self::CATEGORY_META[$fallbackCat]['label'];
+                $course['category_icon'] = self::CATEGORY_META[$fallbackCat]['icon'];
+                $course['keywords'] = $course['keywords'] ?? [];
+            }
+
+            $course['search_text'] = self::buildSearchText($course);
+        }
+        unset($course);
+
+        return $merged;
     }
 }

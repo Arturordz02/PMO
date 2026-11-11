@@ -289,6 +289,7 @@ foreach ($routes as $routePath => $route) {
             'activeNav'       => 'capacitaciones',
             'courses'         => $allCourses,
             'categories'      => $courseCategories,
+            'extraJs'         => ['/js/courses-filter.js'],
         ];
     } elseif ($route['type'] === 'course' || $route['type'] === 'course_legacy') {
         $cSlug      = (string)$route['course_slug'];

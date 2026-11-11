@@ -66,35 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     statNumbers.forEach(el => observer.observe(el));
   }
 
-  // ── CATALOG INTERACTIVE CATEGORY FILTER (capacitaciones.html) ───────────────
-  const filterBtns = document.querySelectorAll('.catalog-filter-btn');
-  const courseCards = document.querySelectorAll('.catalog-card-col');
-
-  if (filterBtns.length > 0 && courseCards.length > 0) {
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // Toggle active button state
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const selectedCategory = btn.getAttribute('data-filter');
-
-        courseCards.forEach(card => {
-          const cardCategory = card.getAttribute('data-category');
-          card.classList.remove('fade-in-filter');
-
-          if (selectedCategory === 'all' || cardCategory === selectedCategory) {
-            card.classList.remove('hide-filter');
-            // Trigger reflow to restart animation
-            void card.offsetWidth;
-            card.classList.add('fade-in-filter');
-          } else {
-            card.classList.add('hide-filter');
-          }
-        });
-      });
-    });
-  }
+  // Nota: El filtrado dinámico e indexado de /capacitaciones reside exclusivamente en /js/courses-filter.js.
 
   /**
    * Genera una clave de idempotencia de alta entropía (32-48 caracteres) usando Web Crypto API exclusivamente
