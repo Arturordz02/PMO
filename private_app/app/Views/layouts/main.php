@@ -10,13 +10,18 @@ use App\Core\Env;
 
 // Cálculo seguro de URL canónica dinámica (SEO & Open Graph)
 $canonicalBase = rtrim(Env::string('PMO_SITE_URL', 'https://pmo-solutions.com'), '/');
-$rawRequestUri = $_SERVER['REQUEST_URI'] ?? '/';
-$requestPath   = parse_url($rawRequestUri, PHP_URL_PATH);
-if ($requestPath === null || $requestPath === false || $requestPath === '') {
-    $requestPath = '/';
+if (!empty($canonical)) {
+    $canonicalUrl = (string)$canonical;
+} else {
+    $rawRequestUri = $_SERVER['REQUEST_URI'] ?? '/';
+    $requestPath   = parse_url($rawRequestUri, PHP_URL_PATH);
+    if ($requestPath === null || $requestPath === false || $requestPath === '') {
+        $requestPath = '/';
+    }
+    $trimmedPath   = trim((string)$requestPath, '/');
+    $canonicalUrl  = ($trimmedPath === '') ? ($canonicalBase . '/') : ($canonicalBase . '/' . $trimmedPath);
 }
-$trimmedPath   = trim((string)$requestPath, '/');
-$canonicalUrl  = ($trimmedPath === '') ? ($canonicalBase . '/') : ($canonicalBase . '/' . $trimmedPath);
+$metaImageRel = '/' . ltrim((string)($ogImage ?? 'img/LogoPMO.png'), '/');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -34,11 +39,11 @@ $canonicalUrl  = ($trimmedPath === '') ? ($canonicalBase . '/') : ($canonicalBas
   <meta property="og:url" content="<?= View::e($canonicalUrl) ?>">
   <meta property="og:title" content="<?= View::e($pageTitle ?? 'PMO Solutions') ?>">
   <meta property="og:description" content="<?= View::e($metaDescription ?? '') ?>">
-  <meta property="og:image" content="img/LogoPMO.png">
+  <meta property="og:image" content="<?= View::e($metaImageRel) ?>">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="<?= View::e($pageTitle ?? 'PMO Solutions') ?>">
   <meta name="twitter:description" content="<?= View::e($metaDescription ?? '') ?>">
-  <meta name="twitter:image" content="img/LogoPMO.png">
+  <meta name="twitter:image" content="<?= View::e($metaImageRel) ?>">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="<?= View::asset('/img/LogoPMO.png') ?>">
