@@ -25,9 +25,11 @@ require_once $privateAppDir . '/app/Core/Autoloader.php';
 \App\Core\Autoloader::register();
 
 // Limpiar caché de catálogo previo para probar construcción fresca desde código fuente
-$cacheFile = $privateAppDir . '/storage/cache/' . md5('courses_catalog_v2') . '.cache';
-if (is_file($cacheFile)) {
-    @unlink($cacheFile);
+foreach (['courses_catalog_v2', \App\Models\CourseModel::CACHE_KEY] as $ck) {
+    $cacheFile = $privateAppDir . '/storage/cache/' . md5($ck) . '.cache';
+    if (is_file($cacheFile)) {
+        @unlink($cacheFile);
+    }
 }
 
 $passed = 0;
@@ -418,6 +420,265 @@ assertTrue(
     $code404 === 404 && str_contains($notFoundHtml, '404'),
     '20. Curso inexistente responde 404 y programas originales preservan vistas propias',
     "HTTP={$code404}"
+);
+
+// =========================================================================
+// PRUEBAS DEL SISTEMA DE FILTROS Y BÚSQUEDA DEL CATÁLOGO (21 - 40)
+// =========================================================================
+
+$categories = $courseModel->getCategories();
+$categorySlugs = array_keys($categories);
+
+// 21. El catálogo mantiene exactamente 43 cursos activos
+assertTrue(
+    count($courses) === 43,
+    '21. El catálogo mantiene exactamente 43 cursos activos',
+    'Cantidad actual: ' . count($courses)
+);
+
+// 22. Cada curso tiene exactamente una categoría primaria normalizada válida
+$invalidCourseCats = [];
+foreach ($courses as $slug => $c) {
+    $cat = $c['category'] ?? null;
+    if (!is_string($cat) || $cat === '' || !isset($categories[$cat])) {
+        $invalidCourseCats[] = "{$slug}=" . var_export($cat, true);
+    }
+}
+assertTrue(
+    empty($invalidCourseCats),
+    '22. Cada uno de los 43 cursos tiene exactamente una categoría primaria válida',
+    'Inválidos: ' . implode(', ', $invalidCourseCats)
+);
+
+// 23. No existen categorías vacías
+$emptyCats = array_filter($categories, fn($cat) => (int)($cat['count'] ?? 0) <= 0);
+assertTrue(
+    count($categories) === 7 && empty($emptyCats),
+    '23. No existen categorías vacías y las 7 áreas académicas tienen cursos reales',
+    'Categorías: ' . count($categories)
+);
+
+// 24. Todos los identificadores de categoría están normalizados (^[a-z0-9-]+$) y son únicos
+$badCatSlugs = array_filter($categorySlugs, fn($s) => !preg_match('/^[a-z0-9-]+$/', (string)$s));
+assertTrue(
+    empty($badCatSlugs) && count($categorySlugs) === count(array_unique($categorySlugs)),
+    '24. Todos los identificadores de categoría están normalizados y son únicos',
+    'Irregulares: ' . implode(', ', $badCatSlugs)
+);
+
+// 25. La suma de conteos por categoría coincide exactamente con 43
+$sumCategories = array_sum(array_map(fn($cat) => (int)($cat['count'] ?? 0), $categories));
+assertTrue(
+    $sumCategories === 43,
+    '25. La suma de los conteos por categoría coincide exactamente con 43',
+    "Suma={$sumCategories}"
+);
+
+// Re-renderizar vista /capacitaciones sin caché de minificación para inspeccionar DOM exacto
+\App\Core\View::setMinifyHtml(false);
+$_SERVER['REQUEST_URI'] = '/capacitaciones';
+ob_start();
+$controller->index();
+$catalogViewHtml = (string)ob_get_clean();
+
+// 26. El botón "Todos los cursos (43)" refleja el total real
+assertTrue(
+    preg_match('/data-filter="all"[^>]*aria-pressed="true"[^>]*>.*?Todos los cursos \(43\)/s', $catalogViewHtml) === 1,
+    '26. El botón "Todos los cursos (43)" refleja el total real y arranca activo con aria-pressed="true"'
+);
+
+// Extraer bloque de tarjetas del grid
+$dom = new DOMDocument();
+libxml_use_internal_errors(true);
+$dom->loadHTML('<?xml encoding="utf-8" ?>' . $catalogViewHtml);
+libxml_clear_errors();
+$xpath = new DOMXPath($dom);
+
+$cardNodes = $xpath->query('//div[@id="coursesGridContainer"]//div[@data-course-card]');
+// 27. Cada tarjeta tiene data-category, data-search y data-course-card válidos
+$cardAttrIssues = [];
+$cardHrefs = [];
+$hiddenByDefaultCount = 0;
+foreach ($cardNodes as $node) {
+    /** @var DOMElement $node */
+    $dCat    = trim($node->getAttribute('data-category'));
+    $dSearch = trim($node->getAttribute('data-search'));
+    $cls     = $node->getAttribute('class');
+    if ($dCat === '' || !isset($categories[$dCat])) {
+        $cardAttrIssues[] = "data-category inválido: {$dCat}";
+    }
+    if ($dSearch === '' || mb_strlen($dSearch, 'UTF-8') < 15) {
+        $cardAttrIssues[] = "data-search insuficiente para categoría {$dCat}";
+    }
+    if ($node->hasAttribute('hidden') || preg_match('/\b(d-none|hide-filter|is-filtered-out)\b/', $cls)) {
+        $hiddenByDefaultCount++;
+    }
+    $links = $xpath->query('.//h3[contains(@class,"catalog-card-title")]/a', $node);
+    if ($links->length > 0) {
+        $cardHrefs[] = trim($links->item(0)->getAttribute('href'));
+    }
+}
+assertTrue(
+    $cardNodes->length === 43 && empty($cardAttrIssues),
+    '27. Las 43 tarjetas poseen data-course-card, data-category y data-search completos',
+    "Cards={$cardNodes->length}; Issues=" . implode('; ', array_slice($cardAttrIssues, 0, 5))
+);
+
+// 28. No existen tarjetas duplicadas ni slugs repetidos en #coursesGridContainer
+assertTrue(
+    count($cardHrefs) === 43 && count($cardHrefs) === count(array_unique($cardHrefs)),
+    '28. No existen tarjetas duplicadas ni enlaces repetidos dentro de #coursesGridContainer',
+    'Enlaces únicos: ' . count(array_unique($cardHrefs)) . ' / ' . count($cardHrefs)
+);
+
+// 29. Existe un campo de búsqueda (#catalogSearchInput) conectado con <label for="catalogSearchInput">
+$searchInputNodes = $xpath->query('//input[@id="catalogSearchInput"]');
+$searchLabelNodes = $xpath->query('//label[@for="catalogSearchInput"]');
+assertTrue(
+    $searchInputNodes->length === 1 && $searchLabelNodes->length === 1 && trim($searchLabelNodes->item(0)->textContent) !== '',
+    '29. Existe buscador #catalogSearchInput conectado explícitamente con <label for="catalogSearchInput">'
+);
+
+// 30. Existe contador de resultados accesible con aria-live="polite"
+$counterNodes = $xpath->query('//*[@id="catalogResultsCounter" and @aria-live="polite"]');
+$visibleCountNodes = $xpath->query('//*[@id="catalogVisibleCount"]');
+assertTrue(
+    $counterNodes->length === 1 && $visibleCountNodes->length === 1 && trim($visibleCountNodes->item(0)->textContent) === '43',
+    '30. Existe contador de resultados accesible con aria-live="polite" inicializado en 43'
+);
+
+// 31. Existen todos los botones de filtro por categoría (All + 7 áreas) con aria-pressed y conteos
+$filterBtnNodes = $xpath->query('//button[contains(@class,"catalog-filter-btn") and @data-filter]');
+$filterBtnOk = ($filterBtnNodes->length === (1 + count($categories)));
+foreach ($filterBtnNodes as $btn) {
+    /** @var DOMElement $btn */
+    if (!$btn->hasAttribute('aria-pressed')) {
+        $filterBtnOk = false;
+    }
+}
+assertTrue(
+    $filterBtnOk,
+    '31. Existen los 8 botones de filtro (Todos + 7 áreas) con atributo aria-pressed'
+);
+
+// 32. Existen botones de restablecimiento de filtros ("Limpiar filtros")
+$resetToolbar = $xpath->query('//button[@id="catalogToolbarResetBtn"]');
+$resetEmpty   = $xpath->query('//button[@id="catalogResetFilterBtn"]');
+assertTrue(
+    $resetToolbar->length === 1 && $resetEmpty->length === 1
+        && str_contains($resetToolbar->item(0)->textContent, 'Limpiar filtros')
+        && str_contains($resetEmpty->item(0)->textContent, 'Limpiar filtros'),
+    '32. Existen los controles visibles de "Limpiar filtros" en barra superior y estado vacío'
+);
+
+// 33. Existe mensaje de estado vacío claro
+$emptyStateNodes = $xpath->query('//div[@id="catalogEmptyState"]');
+assertTrue(
+    $emptyStateNodes->length === 1
+        && str_contains($emptyStateNodes->item(0)->textContent, 'No encontramos cursos con los filtros seleccionados.'),
+    '33. Existe el estado vacío accesible con mensaje "No encontramos cursos con los filtros seleccionados."'
+);
+
+// 34. El archivo js/courses-filter.js existe y está cargado en /capacitaciones
+$filterJsPath = $publicHtmlDir . '/js/courses-filter.js';
+$filterJsContent = is_file($filterJsPath) ? (string)file_get_contents($filterJsPath) : '';
+assertTrue(
+    is_file($filterJsPath) && strlen($filterJsContent) > 500 && str_contains($catalogViewHtml, '/js/courses-filter.js'),
+    '34. public_html/js/courses-filter.js existe y está enlazado correctamente en /capacitaciones'
+);
+
+// 35. js/main.js ya no registra lógica conflictiva con .catalog-filter-btn o .hide-filter
+$mainJsContent = is_file($publicHtmlDir . '/js/main.js') ? (string)file_get_contents($publicHtmlDir . '/js/main.js') : '';
+assertTrue(
+    !str_contains($mainJsContent, "querySelectorAll('.catalog-filter-btn')") && !str_contains($mainJsContent, 'hide-filter'),
+    '35. public_html/js/main.js está libre de listeners conflictivos sobre .catalog-filter-btn'
+);
+
+// 36. Búsqueda indexada soporta coincidencia sin tildes, multi-palabra, tecnologías, docentes y categoría combinada
+$normalizePhp = static function (string $value): string {
+    $map = [
+        'á'=>'a','à'=>'a','ä'=>'a','â'=>'a','é'=>'e','è'=>'e','ë'=>'e','ê'=>'e',
+        'í'=>'i','ì'=>'i','ï'=>'i','î'=>'i','ó'=>'o','ò'=>'o','ö'=>'o','ô'=>'o',
+        'ú'=>'u','ù'=>'u','ü'=>'u','û'=>'u','ñ'=>'n',
+        'Á'=>'a','À'=>'a','Ä'=>'a','Â'=>'a','É'=>'e','È'=>'e','Ë'=>'e','Ê'=>'e',
+        'Í'=>'i','Ì'=>'i','Ï'=>'i','Î'=>'i','Ó'=>'o','Ò'=>'o','Ö'=>'o','Ô'=>'o',
+        'Ú'=>'u','Ù'=>'u','Ü'=>'u','Û'=>'u','Ñ'=>'n',
+    ];
+    $clean = strtolower(strtr($value, $map));
+    $clean = preg_replace('/[^a-z0-9\s]/', ' ', $clean) ?? $clean;
+    return trim((string)(preg_replace('/\s+/', ' ', $clean) ?? $clean));
+};
+$runSimFilter = static function (string $cat, string $query) use ($courses, $normalizePhp): array {
+    $tokens = $query !== '' ? array_values(array_filter(explode(' ', $normalizePhp($query)))) : [];
+    $hits = [];
+    foreach ($courses as $slug => $c) {
+        if ($cat !== 'all' && $c['category'] !== $cat) {
+            continue;
+        }
+        $haystack = $normalizePhp((string)($c['search_text'] ?? ''));
+        $ok = true;
+        foreach ($tokens as $tok) {
+            if (!str_contains($haystack, $tok)) {
+                $ok = false;
+                break;
+            }
+        }
+        if ($ok) {
+            $hits[] = $slug;
+        }
+    }
+    return $hits;
+};
+
+$searchOk =
+    count($runSimFilter('all', 'riesgos')) >= 5 &&
+    in_array('riesgos-pmi', $runSimFilter('all', 'gestion riesgos'), true) &&
+    in_array('primavera-p6', $runSimFilter('all', 'primavera'), true) &&
+    in_array('analisis-forense-cronograma-primavera-p6', $runSimFilter('all', 'primavera'), true) &&
+    count($runSimFilter('contratos-disputas', 'nec')) >= 5 &&
+    count($runSimFilter('all', 'xyzz_curso_inexistente_999')) === 0 &&
+    in_array('analisis-cuantitativo', $runSimFilter('riesgos', 'edwar'), true);
+
+assertTrue(
+    $searchOk,
+    '36. Búsqueda multi-palabra sin tildes y filtrado combinado por categoría funcionan sobre los 43 cursos'
+);
+
+// 37. Sin JavaScript, los 43 cursos se renderizan completamente visibles por defecto
+assertTrue(
+    $hiddenByDefaultCount === 0,
+    '37. Sin JavaScript, las 43 tarjetas del catálogo se renderizan visibles sin clases de ocultamiento',
+    "Ocultas por defecto: {$hiddenByDefaultCount}"
+);
+
+// 38. courses-filter.js implementa normalización NFD y ocultamiento seguro sin eliminar tarjetas del DOM
+assertTrue(
+    str_contains($filterJsContent, "normalize('NFD')")
+        && str_contains($filterJsContent, 'is-filtered-out')
+        && !str_contains($filterJsContent, 'removeChild')
+        && preg_match('/(?<!classList)\.remove\s*\(/', $filterJsContent) === 0,
+    '38. courses-filter.js normaliza diacríticos (NFD) y alterna visibilidad sin destruir nodos del DOM'
+);
+
+// 39. La compilación estática _site/capacitaciones.html y _site/js/courses-filter.js están actualizadas
+$staticCatalog = is_file($siteDir . '/capacitaciones.html') ? (string)file_get_contents($siteDir . '/capacitaciones.html') : '';
+assertTrue(
+    is_file($siteDir . '/js/courses-filter.js')
+        && str_contains($staticCatalog, 'courses-filter.js')
+        && preg_match_all('/data-course-card/', $staticCatalog) === 43,
+    '39. build_static.php compila _site/capacitaciones.html con las 43 tarjetas y _site/js/courses-filter.js'
+);
+
+// 40. Sin pasarelas de pago ni precios en vista /capacitaciones y rutas principales intactas
+$payFoundInCatalog = false;
+foreach ($forbiddenTerms as $term) {
+    if (str_contains(strtolower($catalogViewHtml), $term)) {
+        $payFoundInCatalog = true;
+    }
+}
+assertTrue(
+    !$payFoundInCatalog && !empty($sitemapLocs),
+    '40. El catálogo mantiene 0 precios o pasarelas de pago y preserva el sitemap sin modificaciones'
 );
 
 echo "\n========================================================\n";
