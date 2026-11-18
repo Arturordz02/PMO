@@ -251,14 +251,14 @@
         <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="100">
           <div class="featured-course-card">
             <div class="featured-course-img-wrap">
-              <img src="/img/picture6b_orig.png" alt="Compliance en la Construcción" loading="lazy">
+              <img src="/img/picture2b_orig.png" alt="Análisis Forense de Atrasos" loading="lazy">
               <div class="featured-course-overlay"></div>
-              <span class="featured-course-category badge bg-primary">Compliance & ISO</span>
+              <span class="featured-course-category badge bg-primary">Reclamos & Plazos</span>
             </div>
             <div class="featured-course-body">
-              <div class="featured-course-title">Compliance en la Construcción</div>
-              <div class="featured-course-desc">Sistemas antisoborno ISO 37001 y prevención de riesgos legales en obras públicas.</div>
-              <a href="/curso/compliance" class="btn btn-outline-primary btn-sm fw-bold w-100 hvr-grow">
+              <div class="featured-course-title">Análisis Forense de Atrasos</div>
+              <div class="featured-course-desc">Metodologías periciales (Time Impact) para sustentar ampliaciones de plazo y costos.</div>
+              <a href="/curso/analisis-forense" class="btn btn-outline-primary btn-sm fw-bold w-100 hvr-grow">
                 <i class="fas fa-graduation-cap me-1"></i> Ver Programa
               </a>
             </div>

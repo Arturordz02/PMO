@@ -118,7 +118,6 @@ $router->get('/analisis-forense',       [App\Controllers\CourseController::class
 $router->get('/nec4',                   [App\Controllers\CourseController::class, 'nec4']);
 $router->get('/vdc-bim',               [App\Controllers\CourseController::class, 'vdcBim']);
 $router->get('/contratos-estado',       [App\Controllers\CourseController::class, 'contratosEstado']);
-$router->get('/compliance',             [App\Controllers\CourseController::class, 'compliance']);
 $router->get('/primavera-p6',           [App\Controllers\CourseController::class, 'primaveraP6']);
 $router->get('/riesgos-pmi',            [App\Controllers\CourseController::class, 'riesgosPmi']);
 $router->get('/analisis-cuantitativo', [App\Controllers\CourseController::class, 'analisisCuantitativo']);

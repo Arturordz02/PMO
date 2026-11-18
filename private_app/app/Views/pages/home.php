@@ -383,7 +383,7 @@
         <div class="col-12 col-md-6 col-lg-4" data-aos="fade-left" data-aos-delay="300">
           <div class="featured-course-card">
             <div class="featured-course-img-wrap">
-              <img src="img/picture6b_orig.png" alt="Contratos del Estado" loading="lazy">
+              <img src="img/picture5b_orig.png" alt="Contratos del Estado" loading="lazy">
               <div class="featured-course-overlay"></div>
               <span class="featured-course-category badge bg-secondary">Contratación Pública</span>
             </div>
@@ -523,8 +523,8 @@
               <button type="button" class="btn btn-outline-primary btn-sm fw-bold rounded-pill w-100 hvr-grow" data-bs-toggle="modal" data-bs-target="#docenteModal_5">
                 <i class="fas fa-plus-circle me-1"></i> Ver más
               </button>
-              <a href="compliance" class="docente-btn-more">
-                <i class="fas fa-graduation-cap me-1"></i> Ver Curso & Perfil
+              <a href="/capacitaciones" class="docente-btn-more">
+                <i class="fas fa-graduation-cap me-1"></i> Ver Capacitaciones
               </a>
             </div>
           </div>
@@ -883,8 +883,8 @@
               </div>
 
               <div class="d-flex flex-wrap gap-2 mt-4 pt-2">
-                <a href="compliance" class="btn btn-secondary btn-sm fw-bold px-3 py-2 text-white hvr-grow">
-                  <i class="fas fa-balance-scale me-1"></i> Ver Curso Compliance
+                <a href="/capacitaciones" class="btn btn-secondary btn-sm fw-bold px-3 py-2 text-white hvr-grow">
+                  <i class="fas fa-graduation-cap me-1"></i> Ver Capacitaciones
                 </a>
                 <a href="https://api.whatsapp.com/send?phone=51944276649&text=Hola%20PMO%20Solutions,%20deseo%20consultar%20por%20los%20programas%20a%20cargo%20del%20docente%20Renzo%20Valera" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm fw-bold px-3 py-2 text-white hvr-grow">
                   <i class="fab fa-whatsapp me-1"></i> Consultar Curso

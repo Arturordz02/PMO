@@ -84,7 +84,6 @@ $active = $activeNav ?? '';
             <li><a class="dropdown-item" href="/nec4"><i class="fas fa-file-contract me-2"></i> Contratos NEC4 (ECC / PSC)</a></li>
             <li><a class="dropdown-item" href="/vdc-bim"><i class="fas fa-cubes me-2"></i> VDC - BIM Management</a></li>
             <li><a class="dropdown-item" href="/contratos-estado"><i class="fas fa-landmark me-2"></i> Gestión del Cambio & Contratos Estado</a></li>
-            <li><a class="dropdown-item" href="/compliance"><i class="fas fa-balance-scale me-2"></i> Compliance en la Construcción</a></li>
             <li><a class="dropdown-item" href="/primavera-p6"><i class="fas fa-chart-line me-2"></i> Primavera P6 & Power BI</a></li>
             <li><a class="dropdown-item" href="/riesgos-pmi"><i class="fas fa-shield-alt me-2"></i> Gestión Integral de Riesgos (PMI®)</a></li>
             <li><a class="dropdown-item" href="/analisis-cuantitativo"><i class="fas fa-calculator me-2"></i> Análisis Cuantitativo de Riesgos</a></li>

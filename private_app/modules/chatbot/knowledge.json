@@ -87,11 +87,6 @@
           "url": "/eventos-compensables"
         },
         {
-          "label": "🤝 Compliance en Construcción",
-          "type": "link",
-          "url": "/compliance"
-        },
-        {
           "label": "↩️ Volver al Menú Principal",
           "next_node": "main_menu"
         }

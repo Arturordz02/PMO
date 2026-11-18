@@ -616,7 +616,7 @@ class SoftSkillsModel extends Model {
 
         if ($level === 'Sobresaliente') {
             $recs[] = 'Tu perfil evidencia un sólido liderazgo técnico y solvencia en la toma de decisiones directivas en proyectos de infraestructura.';
-            $recs[] = 'Para consolidar tu perfil directivo y gobernanza contractual de alta gerencia, te recomendamos los programas ejecutivos de Compliance Técnico y Legal en la Construcción y Gestión del Cambio en Contratos del Estado.';
+            $recs[] = 'Para consolidar tu perfil directivo y gobernanza contractual de alta gerencia, te recomendamos el programa ejecutivo de Gestión del Cambio en Contratos del Estado.';
             $recs[] = 'Te sugerimos especializarte como miembro de Dispute Boards o perito de parte cursando Juntas de Resolución de Disputas (DAB - JRD) y Análisis Forense de Atrasos.';
         } elseif ($level === 'Competente') {
             $recs[] = 'Demuestras un nivel competente y equilibrado; cerrar brechas puntuales acelerará tu proyección hacia roles de Gerencia de Proyecto o Dirección Técnica.';
