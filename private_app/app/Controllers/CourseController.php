@@ -78,7 +78,6 @@ class CourseController extends Controller {
     public function nec4(): void { $this->detail('nec4'); }
     public function vdcBim(): void { $this->detail('vdc-bim'); }
     public function contratosEstado(): void { $this->detail('contratos-estado'); }
-    public function compliance(): void { $this->detail('compliance'); }
     public function primaveraP6(): void { $this->detail('primavera-p6'); }
     public function riesgosPmi(): void { $this->detail('riesgos-pmi'); }
     public function analisisCuantitativo(): void { $this->detail('analisis-cuantitativo'); }

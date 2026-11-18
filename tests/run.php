@@ -58,7 +58,6 @@ $pmoOriginals = [
     'nec4',
     'vdc-bim',
     'contratos-estado',
-    'compliance',
     'primavera-p6',
     'riesgos-pmi',
     'analisis-cuantitativo',
@@ -99,29 +98,27 @@ $legacySlugsExcluded = [
     'resolucion-controversias-jrd',
 ];
 
-// 1. Exactamente 43 cursos
+// 1. Exactamente 42 cursos
 assertTrue(
-    count($courses) === 43,
-    '1. Catálogo PMO contiene exactamente 43 cursos (10 originales + 33 migrados)',
+    count($courses) === 42,
+    '1. Catálogo PMO contiene exactamente 42 cursos (9 originales + 33 migrados)',
     'Actual: ' . count($courses)
 );
 
-// 2. Se conservan los 10 programas existentes de PMO
+// 2. Se conservan los 9 programas existentes de PMO
 $missingOriginals = array_values(array_diff($pmoOriginals, array_keys($courses)));
 assertTrue(
     empty($missingOriginals),
-    '2. Conserva los 10 programas originales de PMO',
+    '2. Conserva los 9 programas originales de PMO',
     'Faltantes: ' . implode(', ', $missingOriginals)
 );
 
-// 3. compliance permanece intacto
-$compliance = $courses['compliance'] ?? null;
+// 3. Retiro controlado y reversible del curso compliance
+$complianceInCatalog = isset($courses['compliance']);
+$complianceViewFileExists = is_file($privateAppDir . '/app/Views/pages/courses/compliance.php');
 assertTrue(
-    is_array($compliance)
-        && ($compliance['migration_status'] ?? '') === 'pmo_original'
-        && ($compliance['hours'] ?? '') === '24 Horas Lectivas'
-        && is_file($privateAppDir . '/app/Views/pages/courses/compliance.php'),
-    '3. Programa exclusivo compliance permanece intacto'
+    !$complianceInCatalog && $complianceViewFileExists,
+    '3. Curso compliance no figura en catálogo público pero su vista original se preserva para reversibilidad'
 );
 
 // 4. Están representados los 39 Curso de Quality (33 nuevos/propios + 5 exactos + #03 absorbido en #05 = 39)
@@ -181,7 +178,7 @@ assertTrue(
 $emptyTitles = array_filter($courses, fn($c) => trim((string)($c['title'] ?? '')) === '');
 assertTrue(
     empty($emptyTitles),
-    '9. Todos los 43 cursos poseen título no vacío'
+    '9. Todos los 42 cursos poseen título no vacío'
 );
 
 // 10. Canonical emitida en vistas HTML apunta a https://pmo-solutions.com/curso/{slug}
@@ -210,7 +207,7 @@ foreach ($pmoOriginals as $origSlug) {
 }
 assertTrue(
     empty($canonicalFailures),
-    '10. La canonical de los 43 cursos y 10 alias heredados apunta exactamente a https://pmo-solutions.com/curso/{slug}',
+    '10. La canonical de los 42 cursos y 9 alias heredados apunta exactamente a https://pmo-solutions.com/curso/{slug}',
     'Fallos: ' . implode(', ', $canonicalFailures)
 );
 
@@ -250,7 +247,7 @@ if ($xmlObj !== false) {
 $sitemapNoDupes = $xmlObj !== false && count($sitemapLocs) === count(array_unique($sitemapLocs));
 $sitemapCourseUrls = array_values(array_filter($sitemapLocs, fn($u) => str_contains($u, '/curso/')));
 $expectedSitemapCourses = array_map(fn($s) => 'https://pmo-solutions.com/curso/' . $s, array_keys($courses));
-$sitemapMatchesCourses = empty(array_diff($expectedSitemapCourses, $sitemapCourseUrls)) && count($sitemapCourseUrls) === 43;
+$sitemapMatchesCourses = empty(array_diff($expectedSitemapCourses, $sitemapCourseUrls)) && count($sitemapCourseUrls) === 42;
 $sitemapNoLegacyRootCourses = true;
 foreach ($pmoOriginals as $origSlug) {
     if (in_array('https://pmo-solutions.com/' . $origSlug, $sitemapLocs, true)) {
@@ -262,7 +259,7 @@ assertTrue(
     '12. Ausencia de duplicados de rutas en router (método+ruta) y sitemap.xml'
 );
 
-// 13. El catálogo general (capacitaciones.php) renderiza dinámicamente las 43 tarjetas desde CourseModel
+// 13. El catálogo general (capacitaciones.php) renderiza dinámicamente las 42 tarjetas desde CourseModel
 $_SERVER['REQUEST_URI'] = '/capacitaciones';
 ob_start();
 $controller->index();
@@ -275,16 +272,16 @@ foreach (array_keys($courses) as $slug) {
     }
 }
 assertTrue(
-    $cardMatches === 43 && empty($missingCourseLinksInCatalog),
-    '13. Vista capacitaciones renderiza dinámicamente las 43 tarjetas con enlace /curso/{slug}',
+    $cardMatches === 42 && empty($missingCourseLinksInCatalog),
+    '13. Vista capacitaciones renderiza dinámicamente las 42 tarjetas con enlace /curso/{slug}',
     "Tarjetas: {$cardMatches}; faltantes: " . implode(', ', $missingCourseLinksInCatalog)
 );
 assertTrue(
-    $xmlObj !== false && $sitemapMatchesCourses && $sitemapNoLegacyRootCourses && count($sitemapLocs) === 58,
-    '14. sitemap.xml válido con 58 URLs únicas (43 cursos bajo /curso/{slug} + 15 institucionales)'
+    $xmlObj !== false && $sitemapMatchesCourses && $sitemapNoLegacyRootCourses && count($sitemapLocs) === 57,
+    '14. sitemap.xml válido con 57 URLs únicas (42 cursos bajo /curso/{slug} + 15 institucionales)'
 );
 
-// 15. build_static.php generó páginas estáticas válidas sin errores para los 43 cursos + institucionales
+// 15. build_static.php generó páginas estáticas válidas sin errores para los 42 cursos + institucionales
 $missingStatic = [];
 foreach (array_keys($courses) as $slug) {
     if (!is_file($siteDir . '/curso/' . $slug . '.html') || !is_file($siteDir . '/curso/' . $slug . '/index.html')) {
@@ -301,7 +298,7 @@ if (file_exists($siteDir . '/curso/calidad-y-pmi.html') || file_exists($siteDir 
 }
 assertTrue(
     empty($missingStatic) && is_file($siteDir . '/index.html') && is_file($siteDir . '/capacitaciones.html'),
-    '15. build_static.php genera las 43 páginas /curso/{slug} y páginas institucionales sin seminarios ni #03',
+    '15. build_static.php genera las 42 páginas /curso/{slug} y páginas institucionales sin seminarios ni #03',
     'Anomalías: ' . implode(', ', $missingStatic)
 );
 
@@ -408,18 +405,25 @@ assertTrue(
     'Fallos: ' . implode(', ', $routeFailures)
 );
 
-// 20. 404 para slug inexistente y preservación de títulos/identidad de los 10 programas originales
-$_SERVER['REQUEST_URI'] = '/curso/slug-inexistente-pmo';
+// 20. 404 para slug inexistente o retirado (compliance) y preservación de vistas originales
+$_SERVER['REQUEST_URI'] = '/curso/compliance';
 http_response_code(200);
+ob_start();
+$controller->detail('compliance');
+$notFoundComplianceHtml = (string)ob_get_clean();
+$codeCompliance404 = http_response_code();
+http_response_code(200);
+
+$_SERVER['REQUEST_URI'] = '/curso/slug-inexistente-pmo';
 ob_start();
 $controller->detail('slug-inexistente-pmo');
 $notFoundHtml = (string)ob_get_clean();
 $code404 = http_response_code();
 http_response_code(200);
 assertTrue(
-    $code404 === 404 && str_contains($notFoundHtml, '404'),
-    '20. Curso inexistente responde 404 y programas originales preservan vistas propias',
-    "HTTP={$code404}"
+    $code404 === 404 && $codeCompliance404 === 404 && str_contains($notFoundComplianceHtml, '404') && str_contains($notFoundHtml, '404'),
+    '20. Curso inexistente y curso retirado (compliance) responden 404 correctamente',
+    "HTTP={$code404}, ComplianceHTTP={$codeCompliance404}"
 );
 
 // =========================================================================
@@ -429,10 +433,10 @@ assertTrue(
 $categories = $courseModel->getCategories();
 $categorySlugs = array_keys($categories);
 
-// 21. El catálogo mantiene exactamente 43 cursos activos
+// 21. El catálogo mantiene exactamente 42 cursos activos
 assertTrue(
-    count($courses) === 43,
-    '21. El catálogo mantiene exactamente 43 cursos activos',
+    count($courses) === 42,
+    '21. El catálogo mantiene exactamente 42 cursos activos',
     'Cantidad actual: ' . count($courses)
 );
 
@@ -446,7 +450,7 @@ foreach ($courses as $slug => $c) {
 }
 assertTrue(
     empty($invalidCourseCats),
-    '22. Cada uno de los 43 cursos tiene exactamente una categoría primaria válida',
+    '22. Cada uno de los 42 cursos tiene exactamente una categoría primaria válida',
     'Inválidos: ' . implode(', ', $invalidCourseCats)
 );
 
@@ -466,11 +470,11 @@ assertTrue(
     'Irregulares: ' . implode(', ', $badCatSlugs)
 );
 
-// 25. La suma de conteos por categoría coincide exactamente con 43
+// 25. La suma de conteos por categoría coincide exactamente con 42
 $sumCategories = array_sum(array_map(fn($cat) => (int)($cat['count'] ?? 0), $categories));
 assertTrue(
-    $sumCategories === 43,
-    '25. La suma de los conteos por categoría coincide exactamente con 43',
+    $sumCategories === 42,
+    '25. La suma de los conteos por categoría coincide exactamente con 42',
     "Suma={$sumCategories}"
 );
 
@@ -481,10 +485,10 @@ ob_start();
 $controller->index();
 $catalogViewHtml = (string)ob_get_clean();
 
-// 26. El botón "Todos los cursos (43)" refleja el total real
+// 26. El botón "Todos los cursos (42)" refleja el total real
 assertTrue(
-    preg_match('/data-filter="all"[^>]*aria-pressed="true"[^>]*>.*?Todos los cursos \(43\)/s', $catalogViewHtml) === 1,
-    '26. El botón "Todos los cursos (43)" refleja el total real y arranca activo con aria-pressed="true"'
+    preg_match('/data-filter="all"[^>]*aria-pressed="true"[^>]*>.*?Todos los cursos \(42\)/s', $catalogViewHtml) === 1,
+    '26. El botón "Todos los cursos (42)" refleja el total real y arranca activo con aria-pressed="true"'
 );
 
 // Extraer bloque de tarjetas del grid
@@ -519,14 +523,14 @@ foreach ($cardNodes as $node) {
     }
 }
 assertTrue(
-    $cardNodes->length === 43 && empty($cardAttrIssues),
-    '27. Las 43 tarjetas poseen data-course-card, data-category y data-search completos',
+    $cardNodes->length === 42 && empty($cardAttrIssues),
+    '27. Las 42 tarjetas poseen data-course-card, data-category y data-search completos',
     "Cards={$cardNodes->length}; Issues=" . implode('; ', array_slice($cardAttrIssues, 0, 5))
 );
 
 // 28. No existen tarjetas duplicadas ni slugs repetidos en #coursesGridContainer
 assertTrue(
-    count($cardHrefs) === 43 && count($cardHrefs) === count(array_unique($cardHrefs)),
+    count($cardHrefs) === 42 && count($cardHrefs) === count(array_unique($cardHrefs)),
     '28. No existen tarjetas duplicadas ni enlaces repetidos dentro de #coursesGridContainer',
     'Enlaces únicos: ' . count(array_unique($cardHrefs)) . ' / ' . count($cardHrefs)
 );
@@ -543,8 +547,8 @@ assertTrue(
 $counterNodes = $xpath->query('//*[@id="catalogResultsCounter" and @aria-live="polite"]');
 $visibleCountNodes = $xpath->query('//*[@id="catalogVisibleCount"]');
 assertTrue(
-    $counterNodes->length === 1 && $visibleCountNodes->length === 1 && trim($visibleCountNodes->item(0)->textContent) === '43',
-    '30. Existe contador de resultados accesible con aria-live="polite" inicializado en 43'
+    $counterNodes->length === 1 && $visibleCountNodes->length === 1 && trim($visibleCountNodes->item(0)->textContent) === '42',
+    '30. Existe contador de resultados accesible con aria-live="polite" inicializado en 42'
 );
 
 // 31. Existen todos los botones de filtro por categoría (All + 7 áreas) con aria-pressed y conteos
@@ -641,13 +645,13 @@ $searchOk =
 
 assertTrue(
     $searchOk,
-    '36. Búsqueda multi-palabra sin tildes y filtrado combinado por categoría funcionan sobre los 43 cursos'
+    '36. Búsqueda multi-palabra sin tildes y filtrado combinado por categoría funcionan sobre los 42 cursos'
 );
 
-// 37. Sin JavaScript, los 43 cursos se renderizan completamente visibles por defecto
+// 37. Sin JavaScript, los 42 cursos se renderizan completamente visibles por defecto
 assertTrue(
     $hiddenByDefaultCount === 0,
-    '37. Sin JavaScript, las 43 tarjetas del catálogo se renderizan visibles sin clases de ocultamiento',
+    '37. Sin JavaScript, las 42 tarjetas del catálogo se renderizan visibles sin clases de ocultamiento',
     "Ocultas por defecto: {$hiddenByDefaultCount}"
 );
 
@@ -665,8 +669,8 @@ $staticCatalog = is_file($siteDir . '/capacitaciones.html') ? (string)file_get_c
 assertTrue(
     is_file($siteDir . '/js/courses-filter.js')
         && str_contains($staticCatalog, 'courses-filter.js')
-        && preg_match_all('/data-course-card/', $staticCatalog) === 43,
-    '39. build_static.php compila _site/capacitaciones.html con las 43 tarjetas y _site/js/courses-filter.js'
+        && preg_match_all('/data-course-card/', $staticCatalog) === 42,
+    '39. build_static.php compila _site/capacitaciones.html con las 42 tarjetas y _site/js/courses-filter.js'
 );
 
 // 40. Sin pasarelas de pago ni precios en vista /capacitaciones y rutas principales intactas
