@@ -44,7 +44,7 @@ ErrorDocument 500 /index.php
     RewriteRule .* - [F,L]
 
     # Bloquear acceso a directorios protegidos o internos
-    RewriteCond %{REQUEST_URI} ^/(private_app|app|backend|storage|config|tests|artisan|\.git|\.env)(/.*)?$ [NC]
+    RewriteCond %{REQUEST_URI} ^/(private_app|app|backend|storage|config|tests|database_setup|artisan|\.git|\.env)(/.*)?$ [NC]
     RewriteRule ^ - [F,L]
 
     # Redireccionar URLs con .html a URLs limpias (SEO 301)
@@ -70,7 +70,7 @@ ErrorDocument 500 /index.php
 # 3. SEGURIDAD Y BLOQUEO DE ARCHIVOS SENSIBLES
 # ==============================================================================
 # Bloquear extensiones críticas, backups, bases de datos, logs, comprimidos y configs
-<FilesMatch "(^\.env|\.env(\..+)?$|^\.git|^\.htaccess|^\.antigravityrules|schema.*\.sql|\.sql$|\.bak$|\.backup$|\.dump$|\.old$|\.tmp$|\.zip$|\.rar$|\.7z$|\.tar$|\.gz$|config.*\.php|SecurityTest\.php|\.log$|\.md$|\.cache$)">
+<FilesMatch "(^\.env|\.env(\..+)?$|^env\.php$|^\.git|^\.htaccess|^\.antigravityrules|schema.*\.sql|\.sql$|\.bak$|\.backup$|\.dump$|\.old$|\.tmp$|\.zip$|\.rar$|\.7z$|\.tar$|\.gz$|config.*\.php|SecurityTest\.php|\.log$|\.md$|\.cache$)">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>
@@ -98,6 +98,7 @@ RedirectMatch 403 ^/backend(/.*)?$
 RedirectMatch 403 ^/storage(/.*)?$
 RedirectMatch 403 ^/config(/.*)?$
 RedirectMatch 403 ^/tests(/.*)?$
+RedirectMatch 403 ^/database_setup(/.*)?$
 RedirectMatch 403 ^/artisan(/.*)?$
 RedirectMatch 403 ^/\.git(/.*)?$
 
@@ -126,7 +127,8 @@ RedirectMatch 403 ^/\.git(/.*)?$
     Header append Vary "Accept"
 
     # Ocultar cabeceras de servidor
-    Header always set X-Powered-By "PMO Solutions"
+    Header always unset X-Powered-By
+    Header unset X-Powered-By
     Header unset Server
 </IfModule>
 

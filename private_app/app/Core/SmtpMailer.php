@@ -63,6 +63,10 @@ class SmtpMailer {
         $fromName   = $this->config['from_name'] ?? 'PMO Solutions';
         $timeout    = (int)($this->config['timeout'] ?? 15);
 
+        $fromEmail    = trim(str_replace(["\r", "\n", "\0"], '', $fromEmail));
+        $toEmail      = trim(str_replace(["\r", "\n", "\0"], '', $toEmail));
+        $replyToEmail = trim(str_replace(["\r", "\n", "\0"], '', $replyToEmail));
+
         // Si faltan parámetros esenciales o contraseña cuando auth está habilitado
         if (empty($host) || ($auth && (empty($username) || empty($password)))) {
             $this->lastError = "Credenciales o configuración SMTP incompleta.";
@@ -105,7 +109,8 @@ class SmtpMailer {
         try {
             $this->expectResponse($socket, 220);
 
-            $heloHost = !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'localhost';
+            $rawHeloHost = !empty($_SERVER['SERVER_NAME']) ? (string)$_SERVER['SERVER_NAME'] : 'localhost';
+            $heloHost = preg_replace('/[^a-zA-Z0-9.\-]/', '', $rawHeloHost) ?: 'localhost';
             $this->sendCommand($socket, "EHLO {$heloHost}");
             $this->expectResponse($socket, 250);
 
@@ -216,7 +221,7 @@ class SmtpMailer {
         if (!empty($replyToEmail)) {
             $headers[] = "Reply-To: {$replyToEmail}";
         }
-        $headers[] = "X-Mailer: PHP/" . phpversion();
+        $headers[] = "X-Mailer: PMO Solutions Mailer v1.0";
 
         $toHeader = !empty($toName) ? "=?UTF-8?B?" . base64_encode($toName) . "?= <{$toEmail}>" : $toEmail;
 

@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Core\Csrf;
 use App\Core\Security;
 
 /**
@@ -52,6 +53,8 @@ class AuthController extends Controller {
             $this->json(false, 'Cuerpo de la solicitud JSON inválido o corrupto.', [], 400);
         }
 
+        Csrf::requireValidRequest($data, $this->config['security']['allowed_origins'] ?? []);
+
         $username = trim((string)($data['username'] ?? ''));
         $password = (string)($data['password'] ?? '');
 
@@ -85,6 +88,9 @@ class AuthController extends Controller {
     public function logout(): void {
         Security::initHeaders($this->config['security']['allowed_origins'] ?? []);
         Security::requireMethod('POST');
+
+        $data = Security::getRequestData(4096, 3);
+        Csrf::requireValidRequest($data, $this->config['security']['allowed_origins'] ?? []);
 
         Security::logout();
 

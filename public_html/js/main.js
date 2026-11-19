@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
           numDocInput.classList.add('is-invalid');
           if (docLookupFeedback) {
             docLookupFeedback.className = 'small mt-1 text-danger d-block';
-            docLookupFeedback.innerHTML = '<i class="fas fa-times-circle me-1"></i> ' + (result.message || 'El número de documento ingresado no es válido.');
+            docLookupFeedback.innerHTML = '<i class="fas fa-times-circle me-1"></i> ' + escapeHtml(result.message || 'El número de documento ingresado no es válido.');
           }
         }
       } catch (err) {

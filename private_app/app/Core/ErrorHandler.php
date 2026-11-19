@@ -12,7 +12,13 @@ class ErrorHandler
     public static function register(array $config = []): void
     {
         self::$config = $config;
-        
+
+        if (!self::isDebugMode()) {
+            @ini_set('display_errors', '0');
+            @ini_set('display_startup_errors', '0');
+        }
+        @ini_set('log_errors', '1');
+
         set_error_handler(fn($errno, $errstr, $errfile, $errline) => self::handleError($errno, $errstr, $errfile, $errline));
         set_exception_handler(fn(\Throwable $e) => self::handleException($e));
         register_shutdown_function(fn() => self::handleShutdown());
@@ -60,10 +66,15 @@ class ErrorHandler
 
         self::rotateLogIfNeeded($logFile);
 
+        $safeMessage = EmailOutbox::sanitizeError($message);
+        if (isset($context['trace']) && is_string($context['trace'])) {
+            $context['trace'] = EmailOutbox::sanitizeError($context['trace']);
+        }
+
         $logEntry = json_encode([
             'timestamp' => date('c'),
             'level' => $level,
-            'message' => $message,
+            'message' => $safeMessage,
             'context' => $context,
         ]) . PHP_EOL;
 
@@ -72,12 +83,17 @@ class ErrorHandler
 
     private static function isDebugMode(): bool
     {
-        return self::$config['debug'] ?? false;
+        $env = self::$config['app']['environment'] ?? (self::$config['environment'] ?? 'production');
+        if ($env === 'production') {
+            return false;
+        }
+        return (bool)(self::$config['app']['debug'] ?? (self::$config['debug'] ?? false));
     }
 
     private static function sendGracefulResponse(\Throwable $e): void
     {
         if (!headers_sent()) {
+            header_remove('X-Powered-By');
             if ($e instanceof CircuitOpenException) {
                 header('HTTP/1.1 503 Service Unavailable', true, 503);
                 header('Retry-After: 30');
@@ -90,7 +106,9 @@ class ErrorHandler
                   || (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false);
 
         if ($isAjax) {
-            header('Content-Type: application/json');
+            if (!headers_sent()) {
+                header('Content-Type: application/json; charset=utf-8');
+            }
             echo json_encode([
                 'error' => true,
                 'message' => self::isDebugMode() ? $e->getMessage() : 'An unexpected error occurred.',
@@ -101,8 +119,8 @@ class ErrorHandler
 
         if (self::isDebugMode()) {
             echo "<h1>Exception</h1>";
-            echo "<p><strong>" . htmlspecialchars($e->getMessage()) . "</strong></p>";
-            echo "<pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>";
+            echo "<p><strong>" . htmlspecialchars($e->getMessage(), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . "</strong></p>";
+            echo "<pre>" . htmlspecialchars($e->getTraceAsString(), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . "</pre>";
         } else {
             echo "<h1>Something went wrong</h1>";
             echo "<p>We are experiencing technical difficulties. Please try again later.</p>";

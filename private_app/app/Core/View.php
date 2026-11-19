@@ -33,11 +33,15 @@ class View {
      * @param string|null $layout Nombre del layout maestro (default 'main', null = sin layout)
      */
     public static function render(string $view, array $data = [], ?string $layout = 'main'): void {
+        if (str_contains($view, '..') || str_contains($view, "\0") || str_contains($view, '\\')) {
+            throw new \InvalidArgumentException('Ruta de vista inválida.');
+        }
+
         $baseDir  = dirname(__DIR__) . '/Views/';
         $viewFile = $baseDir . 'pages/' . ltrim($view, '/') . '.php';
 
         if (!file_exists($viewFile)) {
-            throw new \Exception("La vista '{$view}' no existe en '{$viewFile}'.");
+            throw new \Exception("La vista solicitada no existe.");
         }
 
         // Inyectar versión de assets y utilidades de View
@@ -54,9 +58,12 @@ class View {
 
         // ── Renderizar layout maestro ─────────────────────────────────────────
         if ($layout) {
+            if (str_contains($layout, '..') || str_contains($layout, "\0") || str_contains($layout, '\\') || str_contains($layout, '/')) {
+                throw new \InvalidArgumentException('Nombre de layout inválido.');
+            }
             $layoutFile = $baseDir . 'layouts/' . $layout . '.php';
             if (!file_exists($layoutFile)) {
-                throw new \Exception("El layout '{$layout}' no existe en '{$layoutFile}'.");
+                throw new \Exception("El layout solicitado no existe.");
             }
 
             ob_start();
@@ -81,6 +88,9 @@ class View {
      * @param array  $data    Datos adicionales para el parcial
      */
     public static function partial(string $partial, array $data = []): void {
+        if (str_contains($partial, '..') || str_contains($partial, "\0") || str_contains($partial, '\\')) {
+            return;
+        }
         $baseDir     = dirname(__DIR__) . '/Views/';
         $partialFile = $baseDir . 'partials/' . ltrim($partial, '/') . '.php';
 
