@@ -18,14 +18,21 @@ class Security {
      * Configura cabeceras de respuesta segura y gestiona CORS
      */
     public static function initHeaders(array $allowedOrigins = []): void {
-        header('Content-Type: application/json; charset=utf-8');
-        header('X-Content-Type-Options: nosniff');
-        header('X-Frame-Options: SAMEORIGIN');
-        header('X-XSS-Protection: 1; mode=block');
-        header('Referrer-Policy: strict-origin-when-cross-origin');
-        header("Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net data:; img-src 'self' data: https:; connect-src 'self'; frame-src 'self' https://www.google.com https://maps.google.com; frame-ancestors 'self'; form-action 'self'; base-uri 'self'; object-src 'none';");
-        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0, private');
-        header('Pragma: no-cache');
+        if (!headers_sent()) {
+            header_remove('X-Powered-By');
+            header('Content-Type: application/json; charset=utf-8');
+            header('X-Content-Type-Options: nosniff');
+            header('X-Frame-Options: SAMEORIGIN');
+            header('X-XSS-Protection: 1; mode=block');
+            header('Referrer-Policy: strict-origin-when-cross-origin');
+            header('Permissions-Policy: camera=(), microphone=(), geolocation=()');
+            header("Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net data:; img-src 'self' data: https:; connect-src 'self'; frame-src 'self' https://www.google.com https://maps.google.com; frame-ancestors 'self'; form-action 'self'; base-uri 'self'; object-src 'none';");
+            header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0, private');
+            header('Pragma: no-cache');
+            if (self::isHttps()) {
+                header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
+            }
+        }
 
         $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
         if ($origin && strtolower(trim($origin)) !== 'null') {
@@ -397,22 +404,49 @@ class Security {
     }
 
     /**
+     * Detecta de forma segura si la petición actual se recibió sobre HTTPS.
+     * Solo considera X-Forwarded-Proto cuando REMOTE_ADDR pertenece a trusted_proxies.
+     */
+    public static function isHttps(): bool {
+        if (!empty($_SERVER['HTTPS']) && strtolower((string)$_SERVER['HTTPS']) !== 'off') {
+            return true;
+        }
+
+        if (!empty($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443) {
+            return true;
+        }
+
+        $remoteAddr = $_SERVER['REMOTE_ADDR'] ?? '';
+        if ($remoteAddr !== '' && !empty($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+            $configFile = dirname(__DIR__) . '/Config/config.php';
+            $trustedProxies = [];
+            if (file_exists($configFile)) {
+                $conf = require $configFile;
+                $trustedProxies = $conf['security']['trusted_proxies'] ?? [];
+            }
+
+            if (in_array($remoteAddr, $trustedProxies, true)) {
+                $protoList = explode(',', (string)$_SERVER['HTTP_X_FORWARDED_PROTO']);
+                if (strtolower(trim($protoList[0])) === 'https') {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Inicia una sesión PHP segura con directivas de hardening
      */
     public static function startSecureSession(): void {
         if (session_status() === PHP_SESSION_NONE) {
-            $sessName = session_name();
-            if (!empty($_COOKIE[$sessName]) && is_string($_COOKIE[$sessName]) && preg_match('/^[a-zA-Z0-9,-]{1,128}$/', $_COOKIE[$sessName])) {
-                @session_id($_COOKIE[$sessName]);
-            }
-
-            $isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-                || (!empty($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443)
-                || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
+            $isHttps = self::isHttps();
 
             if (!headers_sent()) {
-                ini_set('session.use_strict_mode', '1');
-                ini_set('session.use_trans_sid', '0');
+                @ini_set('session.use_strict_mode', '1');
+                @ini_set('session.use_only_cookies', '1');
+                @ini_set('session.use_trans_sid', '0');
 
                 session_set_cookie_params([
                     'lifetime' => 0,
@@ -499,15 +533,14 @@ class Security {
         if (session_status() === PHP_SESSION_ACTIVE) {
             if (ini_get("session.use_cookies") && !headers_sent()) {
                 $params = session_get_cookie_params();
-                @setcookie(
-                    session_name(),
-                    '',
-                    time() - 42000,
-                    $params["path"],
-                    $params["domain"],
-                    $params["secure"],
-                    $params["httponly"]
-                );
+                @setcookie(session_name(), '', [
+                    'expires'  => time() - 42000,
+                    'path'     => $params['path'] ?? '/',
+                    'domain'   => $params['domain'] ?? '',
+                    'secure'   => (bool)($params['secure'] ?? self::isHttps()),
+                    'httponly' => (bool)($params['httponly'] ?? true),
+                    'samesite' => $params['samesite'] ?? 'Lax',
+                ]);
             }
             @session_destroy();
         }

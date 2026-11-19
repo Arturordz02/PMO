@@ -60,7 +60,7 @@ class Cache
         $driver = self::getDriver();
         if ($driver === 'redis') {
             $value = self::$redis->get($key);
-            return $value !== false ? unserialize($value) : null;
+            return $value !== false ? @unserialize($value, ['allowed_classes' => false]) : null;
         }
 
         if ($driver === 'apcu') {
@@ -91,7 +91,12 @@ class Cache
             return null;
         }
 
-        return unserialize(base64_decode($data['data']));
+        $decoded = base64_decode($data['data'], true);
+        if ($decoded === false) {
+            return null;
+        }
+
+        return @unserialize($decoded, ['allowed_classes' => false]);
     }
 
     public static function set(string $key, mixed $value, int $ttl = 3600): bool

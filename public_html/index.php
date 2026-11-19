@@ -9,6 +9,9 @@
  */
 
 // 1. Constantes canónicas de seguridad y rutas
+if (!headers_sent()) {
+    header_remove('X-Powered-By');
+}
 if (!defined('PMO_APP_ACCESS')) {
     define('PMO_APP_ACCESS', true);
 }
