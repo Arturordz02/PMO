@@ -2934,7 +2934,7 @@ Programa enfocado en la gestión de frentes extendidos, variabilidad climática 
         'icon' => 'fas fa-project-diagram',
         'badge' => 'Gestión de Proyectos, BIM & Control',
         'badge_class' => 'bg-primary text-white',
-        'hours' => '12 horas netas',
+        'hours' => '8 horas netas',
         'description' => 'Desarrollo de competencias de liderazgo directivo, transformacional y ágil (Management 3.0) en entornos de obra: comunicación asertiva, escucha empática, negociación, autoridad informal y feedback constructivo.',
         'short_description' => 'Desarrollo de competencias de liderazgo directivo, transformacional y ágil (Management 3.0) en entornos de obra: comunicación asertiva, escucha empática, negociación, autoridad informal y feedback constructivo.',
         'full_description' => 'Presentar a los participantes los conceptos y metodologías concernientes a liderazgo, sus estilos y su aplicación en la construcción, fortaleciendo sus capacidades de conducción de equipos multidisciplinarios.
@@ -2956,7 +2956,7 @@ Programa modular orientado al fortalecimiento de competencias humanas y de gesti
             'Práctica Profesional: Aplicación de técnicas cognitivo-conductuales para resolución de conflictos y habilidades blandas en equipos de proyectos.',
         ],
         'instructor_image' => 'img/capacitaciones/docentes/docente-isabel-alvarez.webp',
-        'duration' => '12 horas netas',
+        'duration' => '8 horas netas',
         'schedule' => null,
         'modality' => 'Online Asíncrono / Material y Grabación Digital',
         'image' => 'img/capacitaciones/liderazgo-construccion.webp',
