@@ -55,6 +55,11 @@ $related        = is_array($relatedCourses ?? null) ? $relatedCourses : [];
           <?php endif; ?>
 
           <div class="hero-actions d-flex flex-wrap gap-2 pt-2">
+            <?php if (\App\Controllers\PaymentController::isAllowedCourse($slug)): ?>
+              <a href="/pagar-curso?curso=<?= View::e($slug) ?>" class="btn btn-warning btn-lg fw-bold shadow text-dark hvr-grow me-md-2 mb-2 mb-md-0">
+                <i class="fas fa-credit-card me-2"></i> Inscríbete en la primera clase desde S/10 — US$3
+              </a>
+            <?php endif; ?>
             <?php if (!empty($syllabus)): ?>
               <a href="#temario-contenido" class="btn btn-warning btn-lg fw-bold shadow text-dark hvr-grow me-md-2 mb-2 mb-md-0">
                 <i class="fas fa-book-open me-2"></i> Ver Temario Completo
@@ -127,6 +132,33 @@ $related        = is_array($relatedCourses ?? null) ? $relatedCourses : [];
       </div>
     </div>
   </header>
+
+  <?php if (\App\Controllers\PaymentController::isAllowedCourse($slug)): ?>
+    <!-- Banner Niubiz: Inscripción por Clase -->
+    <section class="py-4 bg-dark text-white border-top border-bottom border-warning" style="background: #0b1a30 !important;">
+      <div class="container">
+        <div class="row align-items-center g-3">
+          <div class="col-12 col-lg-8">
+            <span class="badge bg-warning text-dark px-3 py-1 rounded-pill fw-bold mb-2">
+              <i class="fas fa-credit-card me-1"></i> Inscripción por Clase Disponible
+            </span>
+            <h2 class="h4 fw-bold text-white mb-1">Inscríbete en la primera clase desde S/10 — US$3</h2>
+            <p class="text-white-50 mb-0 small">
+              ¿Deseas llevar el curso completo? Obtén un descuento especial comunicándote con PMO.
+            </p>
+          </div>
+          <div class="col-12 col-lg-4 text-lg-end">
+            <a href="/pagar-curso?curso=<?= View::e($slug) ?>" class="btn btn-warning text-dark fw-bold btn-lg shadow-sm me-2 mb-2 mb-sm-0">
+              <i class="fas fa-arrow-right me-1"></i> Inscribirme Ahora
+            </a>
+            <a href="https://api.whatsapp.com/send?phone=51993463118&text=Hola%20PMO,%20deseo%20informaci%C3%B3n%20con%20descuento%20especial%20del%20curso%20completo%20de%20<?= urlencode($title) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-lg fw-bold">
+              <i class="fab fa-whatsapp me-1"></i> Curso Completo
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  <?php endif; ?>
 
   <!-- 2. Imagen del Programa, Objetivo y Perfil Docente -->
   <section class="py-5 my-lg-3">
