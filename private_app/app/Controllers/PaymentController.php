@@ -201,7 +201,7 @@ class PaymentController extends Controller {
 
     /**
      * Muestra la pantalla de selección de clase y pago Niubiz
-     * GET /pagar-curso?curso={slug}
+     * GET /pagar-curso?curso={slug}&clase={1..8}
      */
     public function showCheckout(): void {
         $rawSlug = (string)($_GET['curso'] ?? '');
@@ -220,10 +220,17 @@ class PaymentController extends Controller {
             return;
         }
 
-        $initialClass = (int)($_GET['clase'] ?? 1);
-        if ($initialClass < 1 || $initialClass > 8) {
-            $initialClass = 1;
+        // Validación estricta de la clase: solo enteros del 1 al 8, default Clase 1
+        $rawClass = $_GET['clase'] ?? 1;
+        $validatedClass = filter_var($rawClass, FILTER_VALIDATE_INT);
+        if ($validatedClass === false || $validatedClass < 1 || $validatedClass > 8) {
+            $selectedClass = 1;
+        } else {
+            $selectedClass = $validatedClass;
         }
+
+        // Resolver montos siempre desde la tabla inmutable CLASS_PRICES (ignorar cualquier monto en query)
+        $currentPrice = self::CLASS_PRICES[$selectedClass];
 
         $this->render('pagar-curso', [
             'pageTitle'       => 'Inscripción y Pago por Clase | ' . ($course['title'] ?? 'Capacitación'),
@@ -231,7 +238,9 @@ class PaymentController extends Controller {
             'activeNav'       => 'capacitaciones',
             'course'          => $course,
             'courseSlug'      => $canonicalSlug,
-            'initialClass'    => $initialClass,
+            'selectedClass'   => $selectedClass,
+            'initialClass'    => $selectedClass,
+            'currentPrice'    => $currentPrice,
             'classPrices'     => self::CLASS_PRICES,
             'niubizUrl'       => self::NIUBIZ_URL,
             'allowedCourses'  => self::ALLOWED_COURSES,
