@@ -130,6 +130,14 @@ $router->get('/eventos-compensables',  [App\Controllers\CourseController::class,
 $router->get('/curso/{slug}', [App\Controllers\CourseController::class, 'detail']);
 
 // =============================================================================
+// RUTAS DE PAGO E INSCRIPCIÓN POR CLASE VÍA NIUBIZ (7 CURSOS AUTORIZADOS)
+// =============================================================================
+$router->get('/pagar-curso',            [App\Controllers\PaymentController::class, 'showCheckout']);
+$router->get('/registro-pago',          [App\Controllers\PaymentController::class, 'showRegister']);
+$router->post('/registro-pago/submit',  [App\Controllers\PaymentController::class, 'submit']);
+$router->get('/pago-exitoso',           [App\Controllers\PaymentController::class, 'success']);
+
+// =============================================================================
 // RUTAS DE ASESORÍAS Y SERVICIOS CORPORATIVOS
 // =============================================================================
 $router->get('/gestion-de-pmo',         [App\Controllers\AdvisoryController::class, 'gestionDePmo']);

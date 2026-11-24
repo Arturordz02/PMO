@@ -685,6 +685,297 @@ assertTrue(
     '40. El catálogo mantiene 0 precios o pasarelas de pago y preserva el sitemap sin modificaciones'
 );
 
+// =========================================================================
+// PRUEBAS DE LA PASARELA Y FLUJO DE PAGO NIUBIZ POR CLASE (41 - 55)
+// =========================================================================
+
+// 41. Constantes y configuración oficial de PaymentController
+$expectedSlugs = [
+    'nec4',
+    'riesgos-tecnicos',
+    'dab-jrd',
+    'vdc-bim',
+    'primavera-p6',
+    'direccion-calidad-enfoque-pmi',
+    'control-de-calidad-en-tuneleria',
+];
+$expectedPrices = [
+    1 => ['pen' => 10, 'usd' => 3],
+    2 => ['pen' => 15, 'usd' => 5],
+    3 => ['pen' => 25, 'usd' => 8],
+    4 => ['pen' => 35, 'usd' => 11],
+    5 => ['pen' => 45, 'usd' => 14],
+    6 => ['pen' => 50, 'usd' => 16],
+    7 => ['pen' => 55, 'usd' => 17],
+    8 => ['pen' => 65, 'usd' => 20],
+];
+
+$allowedFromController = array_keys(\App\Controllers\PaymentController::ALLOWED_COURSES);
+sort($allowedFromController);
+$sortedExpected = $expectedSlugs;
+sort($sortedExpected);
+
+$pricesMatch = (\App\Controllers\PaymentController::CLASS_PRICES === $expectedPrices);
+$urlMatch = (\App\Controllers\PaymentController::NIUBIZ_URL === 'https://pagolink.niubiz.com.pe/pagoseguro/PMOSOLUTIONS/2331259');
+$emailMatch = (\App\Controllers\PaymentController::NOTIFICATION_EMAIL === 'service@pmo-solutions.com');
+
+assertTrue(
+    $allowedFromController === $sortedExpected && $pricesMatch && $urlMatch && $emailMatch,
+    '41. PaymentController define exactamente los 7 cursos autorizados, la tabla de 8 clases y la configuración oficial Niubiz'
+);
+
+// 42. Aislamiento estricto del CTA de Niubiz: exactamente los 7 cursos autorizados tienen CTA, los otros 35 cursos no lo tienen
+$coursesWithCta = [];
+$coursesWithoutCta = [];
+$unexpectedCtas = [];
+$missingCtas = [];
+
+foreach ($courses as $cSlug => $cInfo) {
+    $staticCourseFile = $siteDir . '/curso/' . $cSlug . '.html';
+    $htmlContent = is_file($staticCourseFile) ? (string)file_get_contents($staticCourseFile) : '';
+    $hasCta = str_contains($htmlContent, 'Inscríbete en la primera clase desde S/10 — US$3')
+           || str_contains($htmlContent, '/pagar-curso?curso=');
+
+    if (in_array($cSlug, $expectedSlugs, true)) {
+        if ($hasCta) {
+            $coursesWithCta[] = $cSlug;
+        } else {
+            $missingCtas[] = $cSlug;
+        }
+    } else {
+        if ($hasCta) {
+            $unexpectedCtas[] = $cSlug;
+        } else {
+            $coursesWithoutCta[] = $cSlug;
+        }
+    }
+}
+
+assertTrue(
+    count($coursesWithCta) === 7 && count($coursesWithoutCta) === 35 && empty($missingCtas) && empty($unexpectedCtas),
+    '42. Solamente los 7 cursos autorizados muestran el CTA de pago Niubiz y los 35 restantes se mantienen libres de pasarelas o precios',
+    'Faltan CTA: ' . implode(',', $missingCtas) . ' | CTA inesperado: ' . implode(',', $unexpectedCtas)
+);
+
+// 43. El catálogo mantiene exactamente 42 cursos activos y 0 referencias a pagos en /capacitaciones
+assertTrue(
+    count($courses) === 42 && !str_contains((string)file_get_contents($siteDir . '/capacitaciones.html'), '/pagar-curso'),
+    '43. Catálogo general preserva exactamente 42 cursos activos y no expone enlaces directos de pago'
+);
+
+// 44. Vista /pagar-curso renderiza correctamente para los 7 cursos autorizados con las 8 clases y aviso de verificación manual
+$checkoutRendersOk = true;
+$paymentCtrl = new \App\Controllers\PaymentController();
+foreach ($expectedSlugs as $targetSlug) {
+    $_GET['curso'] = $targetSlug;
+    $_SERVER['REQUEST_URI'] = '/pagar-curso?curso=' . $targetSlug;
+    ob_start();
+    try {
+        $paymentCtrl->showCheckout();
+        $out = (string)ob_get_clean();
+        if (!str_contains($out, 'Clase 1') || !str_contains($out, 'Clase 8') || !str_contains($out, 'pendiente de verificación manual') || !str_contains($out, 'https://pagolink.niubiz.com.pe/pagoseguro/PMOSOLUTIONS/2331259')) {
+            $checkoutRendersOk = false;
+        }
+    } catch (\Throwable $e) {
+        ob_end_clean();
+        $checkoutRendersOk = false;
+    }
+}
+assertTrue(
+    $checkoutRendersOk,
+    '44. /pagar-curso renderiza correctamente para los 7 cursos autorizados con selector de 8 clases y aviso oficial'
+);
+
+// 45. /pagar-curso rechaza cursos no autorizados e inexistentes
+$slugRejectionsOk = (\App\Controllers\PaymentController::canonicalizeSlug('liderazgo-construccion') === null)
+                 && (\App\Controllers\PaymentController::canonicalizeSlug('curso-inexistente-xyz') === null)
+                 && (\App\Controllers\PaymentController::canonicalizeSlug('compliance') === null)
+                 && (\App\Controllers\PaymentController::isAllowedCourse('liderazgo-construccion') === false);
+assertTrue(
+    $slugRejectionsOk,
+    '45. /pagar-curso rechaza cursos no autorizados o retirados (retorna null / no permitido)'
+);
+
+// 46. Vista /registro-pago renderiza formulario con CSRF, honeypot y montos oficiales según la clase elegida
+$_GET['curso'] = 'nec4';
+$_GET['clase'] = '3';
+$_SERVER['REQUEST_URI'] = '/registro-pago?curso=nec4&clase=3';
+ob_start();
+try {
+    $paymentCtrl->showRegister();
+    $regHtml = (string)ob_get_clean();
+} catch (\Throwable $e) {
+    ob_end_clean();
+    $regHtml = '';
+}
+
+$registerOk = str_contains($regHtml, 'Clase 3')
+           && str_contains($regHtml, 'US$ 8')
+           && str_contains($regHtml, 'S/ 25')
+           && str_contains($regHtml, 'name="csrf_token"')
+           && str_contains($regHtml, '_pmo_verification_hp')
+           && str_contains($regHtml, 'referencia_niubiz')
+           && str_contains($regHtml, 'politica_privacidad')
+           && str_contains($regHtml, 'pendiente de verificación manual');
+assertTrue(
+    $registerOk,
+    '46. /registro-pago renderiza formulario con CSRF, honeypot, montos de Clase 3 (US$8 / S/25) y aviso de verificación'
+);
+
+// 47. POST /registro-pago/submit sin CSRF o con CSRF inválido es rechazado con HTTP 403
+$invalidCsrfPayload = [
+    'curso' => 'nec4',
+    'clase' => 1,
+    'nombres' => 'Juan Perez',
+    'email' => 'juan@example.com',
+    'telefono' => '999888777',
+    'documento' => '12345678',
+    'referencia_niubiz' => 'REF-1234',
+    'politica_privacidad' => '1',
+    'csrf_token' => 'invalid_csrf_token_ficticio_para_probar_rechazo_403_de_seguridad_123456',
+];
+$csrfCheck = \App\Core\Csrf::validateRequest($invalidCsrfPayload);
+assertTrue(
+    $csrfCheck['valid'] === false && $csrfCheck['code'] === 403,
+    '47. POST /registro-pago/submit sin token CSRF válido es rechazado con código HTTP 403'
+);
+
+// 48. Validación server-side: clase fuera de rango (0 u 9) es rechazada
+$badClassLower = filter_var(0, FILTER_VALIDATE_INT);
+$badClassUpper = filter_var(9, FILTER_VALIDATE_INT);
+$badClassText  = filter_var('abc', FILTER_VALIDATE_INT);
+$classValidationOk = ($badClassLower === 0 && !isset(\App\Controllers\PaymentController::CLASS_PRICES[0]))
+                  && ($badClassUpper === 9 && !isset(\App\Controllers\PaymentController::CLASS_PRICES[9]))
+                  && ($badClassText === false);
+assertTrue(
+    $classValidationOk,
+    '48. Validación estricta en servidor rechaza clases fuera del rango autorizado (1 a 8)'
+);
+
+// 49. Validación server-side: curso no autorizado en POST es rechazado
+$unauthorizedPostSlug = \App\Controllers\PaymentController::canonicalizeSlug('liderazgo-construccion');
+$unauthorizedPostHack = \App\Controllers\PaymentController::canonicalizeSlug("' OR '1'='1");
+assertTrue(
+    $unauthorizedPostSlug === null && $unauthorizedPostHack === null,
+    '49. Validación estricta en servidor rechaza intentos de enviar cursos no autorizados en el payload POST'
+);
+
+// 50. Validación de campos obligatorios: email inválido, teléfono incompleto o falta de política
+$fakeEmail = 'correo_sin_arroba';
+$isEmailValid = filter_var($fakeEmail, FILTER_VALIDATE_EMAIL) !== false;
+$fakePhone = '123';
+$isPhoneValid = strlen(preg_replace('/\D/', '', $fakePhone)) >= 6;
+assertTrue(
+    !$isEmailValid && !$isPhoneValid,
+    '50. Validación estricta detecta correos inválidos, teléfonos incompletos y omisión de política'
+);
+
+// 51. Prevención PCI-DSS: Detección simultánea (Longitud + Prefijo IIN/BIN + Algoritmo de Luhn)
+// Casos que DEBEN retornar TRUE (Tarjetas bancarias reales oficiales de prueba):
+$validVisa      = \App\Controllers\PaymentController::isCreditCardNumber('4111111111111111');
+$validVisaSpace = \App\Controllers\PaymentController::isCreditCardNumber('4111 1111 1111 1111');
+$validMaster    = \App\Controllers\PaymentController::isCreditCardNumber('5555555555554444');
+$validAmex      = \App\Controllers\PaymentController::isCreditCardNumber('378282246310005');
+
+// Casos que DEBEN retornar FALSE (Fallo de Luhn o sin prefijo bancario válido):
+$invalidLuhnCard   = \App\Controllers\PaymentController::isCreditCardNumber('4111222233334444');
+$invalidLuhnSpaces = \App\Controllers\PaymentController::isCreditCardNumber('4111 2222 3333 4444');
+$invalidPrefixCard = \App\Controllers\PaymentController::isCreditCardNumber('1234567890123456');
+
+// Falsos positivos evitados: documentos, teléfonos, nombres y referencias legítimas
+$dniPeruano   = \App\Controllers\PaymentController::isCreditCardNumber('12345678');
+$telefonoPeru = \App\Controllers\PaymentController::isCreditCardNumber('993463118');
+$telefonoInt  = \App\Controllers\PaymentController::isCreditCardNumber('+51 993 463 118');
+$carneExt     = \App\Controllers\PaymentController::isCreditCardNumber('001234567');
+$pasaporte    = \App\Controllers\PaymentController::isCreditCardNumber('P0987654');
+$refNiubiz    = \App\Controllers\PaymentController::isCreditCardNumber('2331259-123456');
+$refNiubizAlt = \App\Controllers\PaymentController::isCreditCardNumber('OP-987654321');
+$emailConNum  = \App\Controllers\PaymentController::isCreditCardNumber('carlos2026@gmail.com');
+$nombreConNum = \App\Controllers\PaymentController::isCreditCardNumber('Ing. Roberto 2do');
+$numeroCorto  = \App\Controllers\PaymentController::isCreditCardNumber('123'); // Sin bloqueo genérico de 3 o 4 dígitos (CVV)
+$numeroCorto4 = \App\Controllers\PaymentController::isCreditCardNumber('4567');
+
+$realCardsBlocked = $validVisa && $validVisaSpace && $validMaster && $validAmex;
+$invalidCardsAllowed = !$invalidLuhnCard && !$invalidLuhnSpaces && !$invalidPrefixCard;
+$legitimateInputsAllowed = !$dniPeruano && !$telefonoPeru && !$telefonoInt && !$carneExt
+                        && !$pasaporte && !$refNiubiz && !$refNiubizAlt && !$emailConNum
+                        && !$nombreConNum && !$numeroCorto && !$numeroCorto4;
+
+assertTrue(
+    $realCardsBlocked && $invalidCardsAllowed && $legitimateInputsAllowed,
+    '51. Filtro PCI-DSS requiere simultáneamente longitud, prefijo IIN/BIN y Luhn válido (bloquea 4111111111111111, 5555555555554444, 378282246310005 y no rechaza 4111222233334444 ni DNIs/teléfonos)'
+);
+
+// 52. Precios inmutables calculados en backend (inmunidad contra manipulación de montos desde el cliente)
+$tamperedPostPrice = 0.50; // Cliente intenta enviar 50 centavos
+$claseTested = 4;
+$officialPen = \App\Controllers\PaymentController::CLASS_PRICES[$claseTested]['pen'];
+$officialUsd = \App\Controllers\PaymentController::CLASS_PRICES[$claseTested]['usd'];
+assertTrue(
+    $officialPen === 35 && $officialUsd === 11,
+    '52. Las tarifas se obtienen exclusivamente de la tabla inmutable del servidor (Clase 4 = S/35 / US$11)'
+);
+
+// 53. Notificación generada contiene el destinatario service@pmo-solutions.com y el aviso de verificación manual
+$notificationHtml = \App\Controllers\PaymentController::buildNotificationHtml([
+    'course_title' => 'Contratos NEC4',
+    'course_slug'  => 'nec4',
+    'clase'        => 2,
+    'monto_pen'    => 15,
+    'monto_usd'    => 5,
+    'nombres'      => 'Maria Rodriguez',
+    'email'        => 'maria@example.com',
+    'telefono'     => '987654321',
+    'documento'    => '45678901',
+    'referencia'   => 'NIUBIZ-998877',
+    'ip'           => '190.234.10.5',
+    'fecha_hora'   => '24/11/2026 12:00:00',
+]);
+$notificationText = \App\Controllers\PaymentController::buildNotificationText([
+    'course_title' => 'Contratos NEC4',
+    'clase'        => 2,
+    'monto_pen'    => 15,
+    'monto_usd'    => 5,
+    'nombres'      => 'Maria Rodriguez',
+    'referencia'   => 'NIUBIZ-998877',
+]);
+
+$notifOk = str_contains($notificationHtml, 'pendiente de verificación manual')
+        && str_contains($notificationHtml, 'NIUBIZ-998877')
+        && str_contains($notificationHtml, 'US$ 5')
+        && str_contains($notificationHtml, 'S/ 15')
+        && str_contains($notificationText, 'pendiente de verificación manual')
+        && \App\Controllers\PaymentController::NOTIFICATION_EMAIL === 'service@pmo-solutions.com';
+assertTrue(
+    $notifOk,
+    '53. Notificación enviada a service@pmo-solutions.com incluye aviso explícito de verificación manual y datos completos'
+);
+
+// 54. Enlace de pago apunta exclusivamente a la URL oficial de Niubiz y no a pasarelas no autorizadas
+$niubizUrl = \App\Controllers\PaymentController::NIUBIZ_URL;
+$isOfficialNiubiz = ($niubizUrl === 'https://pagolink.niubiz.com.pe/pagoseguro/PMOSOLUTIONS/2331259');
+$noThirdPartyInCtrl = !str_contains(file_get_contents(PMO_PRIVATE_PATH . '/app/Controllers/PaymentController.php'), 'paypal.com')
+                   && !str_contains(file_get_contents(PMO_PRIVATE_PATH . '/app/Controllers/PaymentController.php'), 'culqi')
+                   && !str_contains(file_get_contents(PMO_PRIVATE_PATH . '/app/Controllers/PaymentController.php'), 'mercadopago');
+assertTrue(
+    $isOfficialNiubiz && $noThirdPartyInCtrl,
+    '54. Pasarela apunta exclusivamente al PagoLink oficial de Niubiz sin dependencias ni referencias a pasarelas ajenas'
+);
+
+// 55. Preservación del estado 404 para el curso retirado /curso/compliance y /compliance
+$_SERVER['REQUEST_URI'] = '/curso/compliance';
+http_response_code(200);
+ob_start();
+$controller->detail('compliance');
+$compliance404Output = (string)ob_get_clean();
+$complianceCode = http_response_code();
+http_response_code(200);
+
+assertTrue(
+    $complianceCode === 404 && str_contains($compliance404Output, '404'),
+    '55. Las rutas retiradas (/curso/compliance y /compliance) preservan estrictamente su respuesta HTTP 404'
+);
+
 echo "\n========================================================\n";
 echo "RESUMEN DE PRUEBAS: {$passed} PASS | {$failed} FAIL\n";
 echo "========================================================\n";

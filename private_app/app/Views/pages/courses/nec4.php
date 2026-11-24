@@ -14,7 +14,10 @@
             Aprende la aplicación práctica de los términos, obligaciones del Gerente de Proyectos, Contratista y Cliente mediante ejercicios reales sobre plazos, pruebas, eventos compensables y cierre contractual.
           </p>
           <div class="hero-actions d-flex flex-wrap gap-2 pt-2">
-            <a href="#temario-contenido" class="btn btn-warning btn-lg fw-bold shadow text-white hvr-grow me-md-2 mb-2 mb-md-0">
+            <a href="/pagar-curso?curso=nec4" class="btn btn-warning btn-lg fw-bold shadow text-dark hvr-grow me-md-2 mb-2 mb-md-0">
+              <i class="fas fa-credit-card me-2"></i> Inscríbete en la primera clase desde S/10 — US$3
+            </a>
+            <a href="#temario-contenido" class="btn btn-outline-light btn-lg fw-bold shadow hvr-grow me-md-2 mb-2 mb-md-0">
               <i class="fas fa-book-open me-2"></i> Ver Temario Completo
             </a>
             <a href="#seccion-brochure" class="btn btn-outline-light btn-lg fw-bold shadow hvr-grow mb-2 mb-md-0">
@@ -42,7 +45,7 @@
         <div class="col-12 col-lg-5">
           <!-- Grid de 3 tarjetas de valor ejecutivo dentro del Hero -->
           <div class="d-flex flex-column gap-3">
-            
+
             <div class="risk-metric-box d-flex align-items-start gap-3 text-white shadow-sm">
               <div class="p-3 rounded-3 bg-warning text-dark fs-4">
                 <i class="fas fa-file-contract"></i>
@@ -79,11 +82,36 @@
     </div>
   </header>
 
+  <!-- Banner Niubiz: Inscripción por Clase -->
+  <section class="py-4 bg-dark text-white border-top border-bottom border-warning" style="background: #0b1a30 !important;">
+    <div class="container">
+      <div class="row align-items-center g-3">
+        <div class="col-12 col-lg-8">
+          <span class="badge bg-warning text-dark px-3 py-1 rounded-pill fw-bold mb-2">
+            <i class="fas fa-credit-card me-1"></i> Inscripción por Clase Disponible
+          </span>
+          <h2 class="h4 fw-bold text-white mb-1">Inscríbete en la primera clase desde S/10 — US$3</h2>
+          <p class="text-white-50 mb-0 small">
+            ¿Deseas llevar el curso completo? Obtén un descuento especial comunicándote con PMO.
+          </p>
+        </div>
+        <div class="col-12 col-lg-4 text-lg-end">
+          <a href="/pagar-curso?curso=nec4" class="btn btn-warning text-dark fw-bold btn-lg shadow-sm me-2 mb-2 mb-sm-0">
+            <i class="fas fa-arrow-right me-1"></i> Inscribirme Ahora
+          </a>
+          <a href="https://api.whatsapp.com/send?phone=51993463118&text=Hola%20PMO,%20deseo%20informaci%C3%B3n%20con%20descuento%20especial%20del%20curso%20completo%20de%20Contratos%20NEC4" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-lg fw-bold">
+            <i class="fab fa-whatsapp me-1"></i> Curso Completo
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 2. Presentación del Curso (Flyer Clickeable + Objetivo + Resumen + Docente) -->
   <section class="py-5 my-lg-4">
     <div class="container">
       <div class="row g-4 g-lg-5 align-items-center">
-        
+
         <!-- Columna Izquierda: Flyer Clickeable -->
         <div class="col-12 col-lg-5">
           <div data-aos="fade-right" data-aos-delay="100" class="card border-0 shadow-lg rounded-4 overflow-hidden position-relative group-hover hvr-box-shadow-outset">
@@ -103,7 +131,7 @@
         <div class="col-12 col-lg-7">
           <span class="section-badge">Metodología 100% Práctica</span>
           <h2 class="section-title mb-3">Dominio Operativo de los Contratos NEC4 en Obra</h2>
-          
+
           <!-- Objetivo del Curso (Card Técnica con Borde Naranja) -->
           <div class="p-4 rounded-4 bg-light border-start border-4 border-warning mb-4 shadow-sm">
             <div class="d-flex align-items-center gap-2 mb-2">
@@ -133,12 +161,12 @@
                 <span class="badge bg-primary text-white mb-2 px-3 py-2 rounded-pill"><i class="fas fa-user-tie me-1"></i> DOCENTE PRINCIPAL</span>
                 <h4 class="fw-bold mb-1 text-dark">ING. IVÁN BENAVIDES</h4>
                 <p class="small text-primary fw-bold mb-2">Gestor de Contratos Panamericanos · Gestor de Riesgos Colegios Bicentenario</p>
-                
+
                 <!-- Resumen Completo y Trayectoria Profesional -->
                 <p class="small text-muted mb-2" style="line-height: 1.6;">
                   Profesional con más de 16 años de experiencia en gestión de proyectos, riesgos, contratos NEC y gestión de la calidad: PEIP-EB, SAVIA PERÚ, PROYECTO ESPECIAL JUEGOS PANAMERICANOS LIMA 2019, PERU PIPING SPOOLS, GRAÑA Y MONTERO, INGENIERÍA Y SERVICIOS TECNOLÓGICOS S.A.C.
                 </p>
-                
+
                 <div class="d-flex flex-wrap gap-2 mt-2">
                   <span class="badge bg-white text-dark border"><i class="fas fa-handshake text-warning me-1"></i> Especialista NEC4</span>
                   <span class="badge bg-white text-dark border"><i class="fas fa-briefcase text-info me-1"></i> +16 Años de Experiencia</span>
@@ -255,7 +283,7 @@
 <!-- Sección de Información y Brochure (CTA Principal) -->
   <section id="seccion-brochure" class="container my-5" data-aos="zoom-in">
     <div class="enrollment-checkout-card">
-      
+
       <!-- Badge Luminoso -->
       <div class="mb-3">
         <span class="badge-inscripciones-glow">
@@ -311,7 +339,7 @@
         <p class="text-secondary small">Potencia tu perfil técnico con otros programas de alta demanda en el sector.</p>
       </div>
       <div class="row g-4">
-        
+
         <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="100">
           <div class="featured-course-card">
             <div class="featured-course-img-wrap">

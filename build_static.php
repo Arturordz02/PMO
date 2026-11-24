@@ -345,6 +345,43 @@ foreach ($routes as $routePath => $route) {
             'metaDescription' => 'Política de Privacidad y Tratamiento de Datos Personales de PMO Solutions conforme a la legislación aplicable.',
             'activeNav'       => 'privacidad',
         ];
+    } elseif ($routePath === 'pagar-curso') {
+        $sampleCourse = $allCourses['nec4'] ?? reset($allCourses);
+        $viewData = [
+            'pageTitle'       => 'Inscripción y Pago por Clase | ' . ($sampleCourse['title'] ?? 'Capacitación'),
+            'metaDescription' => 'Inscripción y pago por clase para ' . ($sampleCourse['title'] ?? '') . ' vía Niubiz. PMO Solutions.',
+            'activeNav'       => 'capacitaciones',
+            'course'          => $sampleCourse,
+            'courseSlug'      => 'nec4',
+            'initialClass'    => 1,
+            'classPrices'     => \App\Controllers\PaymentController::CLASS_PRICES,
+            'niubizUrl'       => \App\Controllers\PaymentController::NIUBIZ_URL,
+            'allowedCourses'  => \App\Controllers\PaymentController::ALLOWED_COURSES,
+        ];
+    } elseif ($routePath === 'registro-pago') {
+        $sampleCourse = $allCourses['nec4'] ?? reset($allCourses);
+        $viewData = [
+            'pageTitle'       => 'Registro de Inscripción y Pago | ' . ($sampleCourse['title'] ?? 'Capacitación'),
+            'metaDescription' => 'Registro de pago por clase. PMO Solutions.',
+            'activeNav'       => 'capacitaciones',
+            'course'          => $sampleCourse,
+            'courseSlug'      => 'nec4',
+            'selectedClass'   => 1,
+            'classPrices'     => \App\Controllers\PaymentController::CLASS_PRICES,
+            'currentPrices'   => \App\Controllers\PaymentController::CLASS_PRICES[1],
+            'niubizUrl'       => \App\Controllers\PaymentController::NIUBIZ_URL,
+        ];
+    } elseif ($routePath === 'pago-exitoso') {
+        $sampleCourse = $allCourses['nec4'] ?? reset($allCourses);
+        $viewData = [
+            'pageTitle'       => 'Registro Exitoso | PMO Solutions',
+            'metaDescription' => 'Confirmación de recepción de registro de pago por clase. PMO Solutions.',
+            'activeNav'       => 'capacitaciones',
+            'courseTitle'     => $sampleCourse['title'] ?? 'Contratos NEC4: ECC y Servicios Profesionales',
+            'courseSlug'      => 'nec4',
+            'clase'           => 1,
+            'prices'          => \App\Controllers\PaymentController::CLASS_PRICES[1],
+        ];
     } elseif ($routePath === '404') {
         $viewData = [
             'pageTitle'       => '404: Desvío en la Ruta Crítica | PMO Solutions',
