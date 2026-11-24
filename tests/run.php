@@ -976,6 +976,151 @@ assertTrue(
     '55. Las rutas retiradas (/curso/compliance y /compliance) preservan estrictamente su respuesta HTTP 404'
 );
 
+// =========================================================================
+// PRUEBAS DE HOTFIX: SELECTOR DE CLASES Y MEJORA PROGRESIVA (56 - 64)
+// =========================================================================
+
+// 56. Sin parámetro ?clase se selecciona por defecto Clase 1
+$_GET = ['curso' => 'dab-jrd'];
+$_SERVER['REQUEST_URI'] = '/pagar-curso?curso=dab-jrd';
+ob_start();
+try {
+    $paymentCtrl->showCheckout();
+    $checkoutDefaultHtml = (string)ob_get_clean();
+} catch (\Throwable $e) {
+    ob_end_clean();
+    $checkoutDefaultHtml = '';
+}
+$test56Ok = str_contains($checkoutDefaultHtml, 'Clase 1')
+         && str_contains($checkoutDefaultHtml, 'S/ 10 — US$ 3')
+         && str_contains($checkoutDefaultHtml, 'href="/registro-pago?curso=dab-jrd&clase=1"')
+         && str_contains($checkoutDefaultHtml, 'data-class-num="1"')
+         && preg_match('/<a[^>]*class="[^"]*class-select-btn[^"]*active-class[^"]*"[^>]*aria-pressed="true"[^>]*data-class-num="1"/s', $checkoutDefaultHtml) === 1;
+
+assertTrue(
+    $test56Ok,
+    '56. Sin parámetro de clase se selecciona Clase 1 por defecto (S/10, US$3, enlace a clase=1)'
+);
+
+// 57. ?clase=4 renderiza en servidor Clase 4 seleccionada, S/35 y US$11
+$_GET = ['curso' => 'dab-jrd', 'clase' => '4'];
+$_SERVER['REQUEST_URI'] = '/pagar-curso?curso=dab-jrd&clase=4';
+ob_start();
+try {
+    $paymentCtrl->showCheckout();
+    $checkoutClass4Html = (string)ob_get_clean();
+} catch (\Throwable $e) {
+    ob_end_clean();
+    $checkoutClass4Html = '';
+}
+$test57Ok = str_contains($checkoutClass4Html, 'Clase 4')
+         && str_contains($checkoutClass4Html, 'S/ 35 — US$ 11')
+         && str_contains($checkoutClass4Html, 'US$ 11')
+         && str_contains($checkoutClass4Html, 'href="/registro-pago?curso=dab-jrd&clase=4"')
+         && preg_match('/<a[^>]*class="[^"]*class-select-btn[^"]*active-class[^"]*"[^>]*aria-pressed="true"[^>]*data-class-num="4"/s', $checkoutClass4Html) === 1
+         && preg_match('/<a[^>]*class="[^"]*class-select-btn[^"]*btn-outline-light[^"]*"[^>]*aria-pressed="false"[^>]*data-class-num="1"/s', $checkoutClass4Html) === 1;
+
+assertTrue(
+    $test57Ok,
+    '57. ?clase=4 renderiza Clase 4, S/35 y US$11 desde el servidor con enlace de registro a clase=4'
+);
+
+// 58. ?clase=8 renderiza en servidor Clase 8 seleccionada, S/65 y US$20
+$_GET = ['curso' => 'dab-jrd', 'clase' => '8'];
+$_SERVER['REQUEST_URI'] = '/pagar-curso?curso=dab-jrd&clase=8';
+ob_start();
+try {
+    $paymentCtrl->showCheckout();
+    $checkoutClass8Html = (string)ob_get_clean();
+} catch (\Throwable $e) {
+    ob_end_clean();
+    $checkoutClass8Html = '';
+}
+$test58Ok = str_contains($checkoutClass8Html, 'Clase 8')
+         && str_contains($checkoutClass8Html, 'S/ 65 — US$ 20')
+         && str_contains($checkoutClass8Html, 'US$ 20')
+         && str_contains($checkoutClass8Html, 'href="/registro-pago?curso=dab-jrd&clase=8"')
+         && preg_match('/<a[^>]*class="[^"]*class-select-btn[^"]*active-class[^"]*"[^>]*aria-pressed="true"[^>]*data-class-num="8"/s', $checkoutClass8Html) === 1;
+
+assertTrue(
+    $test58Ok,
+    '58. ?clase=8 renderiza Clase 8, S/65 y US$20 desde el servidor con enlace de registro a clase=8'
+);
+
+// 59. Valores inválidos o fuera de rango (0, 9, negativos, texto) se normalizan a Clase 1
+$invalidInputs = ['0', '9', '-1', 'texto', '4.5', "' OR '1'='1"];
+$normalizedOk = true;
+foreach ($invalidInputs as $bad) {
+    $_GET = ['curso' => 'dab-jrd', 'clase' => $bad];
+    $_SERVER['REQUEST_URI'] = '/pagar-curso?curso=dab-jrd&clase=' . urlencode($bad);
+    ob_start();
+    try {
+        $paymentCtrl->showCheckout();
+        $badHtml = (string)ob_get_clean();
+        if (!str_contains($badHtml, 'Clase 1') || !str_contains($badHtml, 'S/ 10 — US$ 3') || !str_contains($badHtml, 'href="/registro-pago?curso=dab-jrd&clase=1"')) {
+            $normalizedOk = false;
+        }
+    } catch (\Throwable $e) {
+        ob_end_clean();
+        $normalizedOk = false;
+    }
+}
+assertTrue(
+    $normalizedOk,
+    '59. Clase 0, 9, texto o valores manipulados no son aceptados y se normalizan a Clase 1'
+);
+
+// 60. Precios manipulados por query string son ignorados y se resuelven exclusivamente desde el servidor
+$_GET = ['curso' => 'dab-jrd', 'clase' => '4', 'pen' => '1', 'usd' => '1', 'monto' => '0.10'];
+$_SERVER['REQUEST_URI'] = '/pagar-curso?curso=dab-jrd&clase=4&pen=1&usd=1&monto=0.10';
+ob_start();
+try {
+    $paymentCtrl->showCheckout();
+    $tamperedHtml = (string)ob_get_clean();
+} catch (\Throwable $e) {
+    ob_end_clean();
+    $tamperedHtml = '';
+}
+$test60Ok = str_contains($tamperedHtml, 'S/ 35 — US$ 11')
+         && str_contains($tamperedHtml, 'US$ 11')
+         && !str_contains($tamperedHtml, 'S/ 1 — US$ 1');
+assertTrue(
+    $test60Ok,
+    '60. Los precios enviados por URL son ignorados y prevalece la tarifa inmutable del servidor'
+);
+
+// 61. Ausencia total de JavaScript inline en private_app/app/Views/pages/pagar-curso.php
+$pagarViewSource = (string)file_get_contents(PMO_PRIVATE_PATH . '/app/Views/pages/pagar-curso.php');
+$hasInlineScript = preg_match('/<script(?![^>]*src=)[^>]*>.*?<\/script>/is', $pagarViewSource) === 1;
+assertTrue(
+    !$hasInlineScript,
+    '61. No queda JavaScript inline en pagar-curso.php (cumplimiento estricto de CSP)'
+);
+
+// 62. Carga del script externo local con cache busting via filemtime
+$hasExternalScript = str_contains($pagarViewSource, "View::asset('/js/niubiz-checkout.js')")
+                  || str_contains($checkoutDefaultHtml, '/js/niubiz-checkout.js?v=');
+$jsFileExists = file_exists(PMO_PUBLIC_PATH . '/js/niubiz-checkout.js');
+assertTrue(
+    $hasExternalScript && $jsFileExists,
+    '62. Se carga el archivo externo local public_html/js/niubiz-checkout.js con versionado de caché'
+);
+
+// 63. El enlace de registro post-pago conserva siempre el curso autorizado y la clase seleccionada
+$hasRegisterHref = str_contains($checkoutClass4Html, 'href="/registro-pago?curso=dab-jrd&clase=4"')
+                && str_contains($checkoutClass8Html, 'href="/registro-pago?curso=dab-jrd&clase=8"');
+assertTrue(
+    $hasRegisterHref,
+    '63. El enlace de registro conserva fielmente el curso y la clase seleccionada'
+);
+
+// 64. Los 8 controles de clase implementan mejora progresiva (enlaces semánticos funcionales con rol de botón y accesibilidad)
+$matchesLinks = preg_match_all('/<a\s+[^>]*href="\/pagar-curso\?curso=[^"&]+&clase=(\d)"[^>]*role="button"[^>]*>/', $checkoutDefaultHtml, $linkMatches);
+assertTrue(
+    $matchesLinks === 8 && count(array_unique($linkMatches[1])) === 8,
+    '64. Los 8 controles de clase cuentan con navegación funcional de mejora progresiva y atributos accesibles'
+);
+
 echo "\n========================================================\n";
 echo "RESUMEN DE PRUEBAS: {$passed} PASS | {$failed} FAIL\n";
 echo "========================================================\n";

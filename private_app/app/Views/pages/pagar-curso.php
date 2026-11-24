@@ -4,12 +4,12 @@ use App\Core\View;
 
 $courseTitle = (string)($course['title'] ?? 'Capacitación Profesional');
 $slug = (string)($courseSlug ?? 'nec4');
-$initialClassNum = (int)($initialClass ?? 1);
-if ($initialClassNum < 1 || $initialClassNum > 8) {
-    $initialClassNum = 1;
+$selectedClassNum = (int)($selectedClass ?? $initialClass ?? 1);
+if ($selectedClassNum < 1 || $selectedClassNum > 8) {
+    $selectedClassNum = 1;
 }
 $prices = $classPrices ?? \App\Controllers\PaymentController::CLASS_PRICES;
-$currentPrice = $prices[$initialClassNum] ?? ['pen' => 10, 'usd' => 3];
+$currentPrice = $prices[$selectedClassNum] ?? ['pen' => 10, 'usd' => 3];
 $niubizLink = (string)($niubizUrl ?? \App\Controllers\PaymentController::NIUBIZ_URL);
 ?>
 
@@ -50,20 +50,22 @@ $niubizLink = (string)($niubizUrl ?? \App\Controllers\PaymentController::NIUBIZ_
                 <i class="fas fa-calendar-check me-1"></i> Paso 1: Selecciona la Clase a la que deseas inscribirte
               </label>
 
-              <div class="row g-2 g-md-3" id="classSelectorGrid">
+              <div class="row g-2 g-md-3" id="classSelectorGrid" data-course-slug="<?= View::e($slug) ?>">
                 <?php foreach ($prices as $cNum => $p): ?>
-                  <?php $isSelected = ($cNum === $initialClassNum); ?>
+                  <?php $isSelected = ($cNum === $selectedClassNum); ?>
                   <div class="col-6 col-md-3">
-                    <button type="button"
-                            class="btn w-100 p-3 rounded-3 text-start class-select-btn <?= $isSelected ? 'btn-warning text-dark active-class' : 'btn-outline-light' ?>"
-                            data-class-num="<?= $cNum ?>"
-                            data-pen="<?= $p['pen'] ?>"
-                            data-usd="<?= $p['usd'] ?>"
-                            style="transition: all 0.2s ease;">
+                    <a href="/pagar-curso?curso=<?= View::e($slug) ?>&clase=<?= $cNum ?>"
+                       role="button"
+                       class="btn w-100 p-3 rounded-3 text-start class-select-btn <?= $isSelected ? 'btn-warning text-dark active-class' : 'btn-outline-light' ?>"
+                       aria-pressed="<?= $isSelected ? 'true' : 'false' ?>"
+                       data-class-num="<?= $cNum ?>"
+                       data-pen="<?= (int)$p['pen'] ?>"
+                       data-usd="<?= (int)$p['usd'] ?>"
+                       style="transition: all 0.2s ease;">
                       <div class="small fw-bold text-uppercase opacity-75">Clase <?= $cNum ?></div>
-                      <div class="fs-5 fw-extrabold my-1">US$ <?= $p['usd'] ?></div>
-                      <div class="small opacity-75">S/ <?= $p['pen'] ?></div>
-                    </button>
+                      <div class="fs-5 fw-extrabold my-1">US$ <?= (int)$p['usd'] ?></div>
+                      <div class="small opacity-75">S/ <?= (int)$p['pen'] ?></div>
+                    </a>
                   </div>
                 <?php endforeach; ?>
               </div>
@@ -74,7 +76,7 @@ $niubizLink = (string)($niubizUrl ?? \App\Controllers\PaymentController::NIUBIZ_
               <div class="row align-items-center gy-3">
                 <div class="col-12 col-md-7">
                   <div class="small text-white-50 text-uppercase fw-semibold mb-1">Sesión seleccionada:</div>
-                  <h3 class="h4 text-warning fw-bold mb-1" id="selectedClassTitle">Clase <?= $initialClassNum ?></h3>
+                  <h3 class="h4 text-warning fw-bold mb-1" id="selectedClassTitle">Clase <?= $selectedClassNum ?></h3>
                   <div class="text-white small">
                     Monto autorizado: <strong class="text-white" id="selectedPriceSummary">S/ <?= $currentPrice['pen'] ?> — US$ <?= $currentPrice['usd'] ?></strong>
                   </div>
@@ -112,7 +114,7 @@ $niubizLink = (string)($niubizUrl ?? \App\Controllers\PaymentController::NIUBIZ_
               </a>
 
               <!-- Siguiente Paso: Registro de Datos -->
-              <a href="/registro-pago?curso=<?= View::e($slug) ?>&clase=<?= $initialClassNum ?>"
+              <a href="/registro-pago?curso=<?= View::e($slug) ?>&clase=<?= $selectedClassNum ?>"
                  id="btnGoRegister"
                  class="btn btn-outline-light btn-lg w-100 py-3 fw-bold text-center">
                 <i class="fas fa-user-check me-2"></i> Ya realicé el pago — Completar mis datos
@@ -145,41 +147,4 @@ $niubizLink = (string)($niubizUrl ?? \App\Controllers\PaymentController::NIUBIZ_
   </div>
 </section>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const buttons = document.querySelectorAll('.class-select-btn');
-  const classTitle = document.getElementById('selectedClassTitle');
-  const priceSummary = document.getElementById('selectedPriceSummary');
-  const displayUsd = document.getElementById('displayUsd');
-  const displayPen = document.getElementById('displayPen');
-  const instructionUsd = document.getElementById('instructionUsd');
-  const btnPayAmount = document.getElementById('btnPayAmount');
-  const btnGoRegister = document.getElementById('btnGoRegister');
-  const courseSlug = <?= json_encode($slug) ?>;
-
-  buttons.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      buttons.forEach(function(b) {
-        b.classList.remove('btn-warning', 'text-dark', 'active-class');
-        b.classList.add('btn-outline-light');
-      });
-      btn.classList.remove('btn-outline-light');
-      btn.classList.add('btn-warning', 'text-dark', 'active-class');
-
-      const classNum = btn.getAttribute('data-class-num');
-      const pen = btn.getAttribute('data-pen');
-      const usd = btn.getAttribute('data-usd');
-
-      if (classTitle) classTitle.textContent = 'Clase ' + classNum;
-      if (priceSummary) priceSummary.textContent = 'S/ ' + pen + ' — US$ ' + usd;
-      if (displayUsd) displayUsd.textContent = 'US$ ' + usd;
-      if (displayPen) displayPen.textContent = pen;
-      if (instructionUsd) instructionUsd.textContent = 'US$ ' + usd;
-      if (btnPayAmount) btnPayAmount.textContent = 'US$ ' + usd;
-      if (btnGoRegister) {
-        btnGoRegister.href = '/registro-pago?curso=' + encodeURIComponent(courseSlug) + '&clase=' + classNum;
-      }
-    });
-  });
-});
-</script>
+<script src="<?= View::asset('/js/niubiz-checkout.js') ?>" defer></script>
